@@ -1,0 +1,163 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Media.ProfilePhotoViewerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Name="OpenApplicationPanelAnimation">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationPanel">
+                    <EasingDoubleKeyFrame x:Name="OpenApplicationPanelAnimationStartKeyFrame" KeyTime="0" Value="60"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ApplicationPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Visible"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Name="CloseApplicationPanelAnimation">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ApplicationPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame x:Name="CloseApplicationPanelAnimationStopKeyFrame" KeyTime="0:0:0.20" Value="-60">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ApplicationPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ApplicationPanel">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.20" Value="Collapsed"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            
+            <DataTemplate x:Name="PhotoTemplate">
+                <Grid VerticalAlignment="Center">
+                    <Image Source="{Binding Self, Converter={StaticResource DefaultPhotoConverter}, ConverterParameter='160_Background'}"/>
+                    <Image Source="{Binding Self, Converter={StaticResource DefaultPhotoConverter}, ConverterParameter='640_Background'}"/>
+                    <Image Source="{Binding Self, Converter={StaticResource ProfileBigPhotoConverter}}"/>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+
+    <Grid>
+        <Grid
+            Background="Transparent"
+            ManipulationStarted="ImagesGrid_OnManipulationStarted"
+            ManipulationDelta="ImagesGrid_OnManipulationDelta"
+            ManipulationCompleted="ImagesGrid_OnManipulationCompleted"
+            Tap="ImagesGrid_OnTap">
+            <Grid x:Name="BackgroundBorder" IsHitTestVisible="False" HorizontalAlignment="Center" Background="Black" Margin="0,0,0,-1" CacheMode="BitmapCache" Width="480"/>
+            <Grid x:Name="ImagesGrid" IsHitTestVisible="True" Background="Transparent" Margin="-498,0" Width="1476">
+                <Grid.RenderTransform>
+                    <CompositeTransform/>
+                </Grid.RenderTransform>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="Item3" Grid.Column="0" VerticalAlignment="Center" Width="480" Margin="6,0">
+                    <ContentControl 
+                    x:Name="Control3" 
+                    CacheMode="BitmapCache"
+                    Content="{Binding NextItem}" 
+                    ContentTemplate="{StaticResource PhotoTemplate}"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                </Grid>
+
+                <Grid x:Name="Item2" Grid.Column="1" VerticalAlignment="Center" Width="480" Margin="6,0">
+                    <ContentControl 
+                    x:Name="Control2" 
+                    CacheMode="BitmapCache"
+                    Content="{Binding CurrentItem}" 
+                    ContentTemplate="{StaticResource PhotoTemplate}"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <ContentControl.RenderTransform>
+                            <CompositeTransform/>
+                        </ContentControl.RenderTransform>
+                    </ContentControl>
+                </Grid>
+
+                <Grid x:Name="Item1" Grid.Column="2" VerticalAlignment="Center" Width="480" Margin="6,0">
+                    <ContentControl 
+                    x:Name="Control1" 
+                    CacheMode="BitmapCache"
+                    Content="{Binding PreviousItem}" 
+                    ContentTemplate="{StaticResource PhotoTemplate}"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <Grid VerticalAlignment="Bottom" x:Name="ApplicationPanel" CacheMode="BitmapCache" Margin="0,0,0,-72">
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="ApplicationPanelTransform" TranslateY="140"/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="3" Background="Black" Opacity="0.3"/>
+
+            <!--<Canvas x:Name="Canvas" Grid.Row="0" Height="68" IsHitTestVisible="False" Visibility="{Binding GroupedItems.Count, Converter={StaticResource CountMoreThanToVisibilityConverter}, ConverterParameter=0}">
+                <controls:RibbonControl x:Name="Ribbon" ItemsSource="{Binding GroupedItems}" Margin="240,6,0,6">
+                    <controls:RibbonControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:RibbonImageControl
+                                Width="40"
+                                CacheMode="BitmapCache"
+                                PhotoWidth="{Binding Converter={StaticResource PhotoToDimensionConverter}, ConverterParameter=Width, FallbackValue=40}"
+                                PhotoHeight="{Binding Converter={StaticResource PhotoToDimensionConverter}, ConverterParameter=Height, FallbackValue=60}"
+                                Source="{Binding Self, Converter={StaticResource DefaultPhotoConverter}, ConverterParameter='160_Background'}"/>
+                        </DataTemplate>
+                    </controls:RibbonControl.ItemTemplate>
+                </controls:RibbonControl>
+            </Canvas>-->
+            <Grid Grid.Row="1" x:Name="AppBarPlaceholder" Height="72"/>
+            <Grid Grid.Row="2" x:Name="AppBarPlaceholder2" Height="72"/>
+        </Grid>
+    </Grid>
+
+
+</views:TelegramViewBase>

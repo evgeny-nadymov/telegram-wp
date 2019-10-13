@@ -1,0 +1,142 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.ProxyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True" 
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.Proxy, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Image HorizontalAlignment="Right" x:Name="ShareMenuIcon" Source="/Images/W10M/ic_share_2x.png" Grid.Row="0" Width="32" Height="32" Margin="18,51,18,21" VerticalAlignment="Top" Tap="ShareIcon_OnTap"/>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="6,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton GroupName="ProxyTypeGroup" IsChecked="{Binding IsSocks5Proxy, Mode=TwoWay}" Content="{Binding Resources.Socks5, Source={StaticResource Strings}}"/>
+                <RadioButton GroupName="ProxyTypeGroup" IsChecked="{Binding IsSocks5Proxy, Converter={StaticResource InvertBooleanConverter}}" Content="{Binding Resources.MTProto, Source={StaticResource Strings}}"/>
+                <TextBlock Margin="12,18,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Connection, Source={StaticResource Strings}}"/>
+                <controls1:LabeledTextBox InputScope="Url" x:Name="ServerLabel" KeyDown="ServerLabel_OnKeyDown" MaxLength="255" Label="{Binding Resources.Server, Source={StaticResource Strings}}" Text="{Binding Server, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:UpdateLabeledTextBindingBehavior/>
+                    </i:Interaction.Behaviors>
+                </controls1:LabeledTextBox>
+                <controls1:LabeledTextBox InputScope="Number" x:Name="PortLabel" KeyDown="PortLabel_OnKeyDown" MaxLength="5" Label="{Binding Resources.Port, Source={StaticResource Strings}}" Text="{Binding Port, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:UpdateLabeledTextBindingBehavior/>
+                    </i:Interaction.Behaviors>
+                </controls1:LabeledTextBox>
+                <StackPanel Visibility="{Binding IsSocks5Proxy, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}">
+                    <controls1:LabeledTextBox InputScope="Url" x:Name="SecretLabel" KeyDown="Done_OnKeyDown" MaxLength="255" Label="{Binding Resources.Secret, Source={StaticResource Strings}}" Text="{Binding Secret, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateLabeledTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <TextBlock Margin="12,18,12,0" Text="{Binding Resources.UseTelegramProxyHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding IsSocks5Proxy, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Margin="12,24,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.CredentionalsOptional, Source={StaticResource Strings}}"/>
+                    <controls1:LabeledTextBox InputScope="Default" x:Name="UsernameLabel" KeyDown="Username_OnKeyDown" MaxLength="255" Label="{Binding Resources.Username, Source={StaticResource Strings}}" Text="{Binding Username, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateLabeledTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <controls1:LabeledTextBox InputScope="Password" x:Name="PasswordLabel" KeyDown="Done_OnKeyDown" MaxLength="255" Label="{Binding Resources.Password, Source={StaticResource Strings}}" Text="{Binding Password, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateLabeledTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <TextBlock Margin="12,18,12,0" Text="{Binding Resources.UseProxyHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Border x:Name="MorePanel" Grid.Row="1" Visibility="Collapsed" CacheMode="BitmapCache" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <CompositeTransform/>
+            </Border.RenderTransform>
+        </Border>
+        <Grid x:Name="Bar" Grid.Row="1">
+            <Grid.RenderTransform>
+                <TranslateTransform/>
+            </Grid.RenderTransform>
+            <controls1:TelegramApplicationBar
+                x:Name="AppBar"
+                VerticalAlignment="Bottom"
+                MorePanel="{Binding ElementName=MorePanel}">
+                <controls1:TelegramApplicationBar.Buttons>
+                    <controls1:TelegramAppBarButton
+                        IsEnabled="True"
+                        Grid.Column="3" 
+                        Tap="DoneButton_OnClick"
+                        ImageSource="/Images/W10M/ic_done_2x.png"
+                        Text="{Binding Resources.Done, Source={StaticResource Strings}}"/>
+                </controls1:TelegramApplicationBar.Buttons>
+            </controls1:TelegramApplicationBar>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

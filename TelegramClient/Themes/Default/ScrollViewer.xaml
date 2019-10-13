@@ -1,0 +1,113 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="ScrollViewer">
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer" >
+                    <Grid Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="Grid.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="00:00:01.5" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+                                        <DoubleAnimation Duration="00:00:01.5" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ScrollStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Scrolling">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="NotScrolling"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="VerticalCompression">
+                                <VisualState x:Name="NoVerticalCompression"/>
+                                <VisualState x:Name="CompressionTop"/>
+                                <VisualState x:Name="CompressionBottom"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="HorizontalCompression">
+                                <VisualState x:Name="NoHorizontalCompression"/>
+                                <VisualState x:Name="CompressionLeft"/>
+                                <VisualState x:Name="CompressionRight"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                        <ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+                        <ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ScrollViewerInverseStyle" TargetType="ScrollViewer">
+    	<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+    	<Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+    	<Setter Property="Background" Value="Transparent"/>
+    	<Setter Property="Padding" Value="0"/>
+    	<Setter Property="BorderThickness" Value="0"/>
+    	<Setter Property="BorderBrush" Value="Transparent"/>
+    	<Setter Property="Template">
+    		<Setter.Value>
+    			<ControlTemplate TargetType="ScrollViewer" >
+    				<Grid Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+    					<Grid.Triggers>
+    						<EventTrigger RoutedEvent="Canvas.Loaded">
+    							<BeginStoryboard>
+    								<Storyboard>
+    									<DoubleAnimation Duration="00:00:01.5" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+    									<DoubleAnimation Duration="00:00:01.5" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+    								</Storyboard>
+    							</BeginStoryboard>
+    						</EventTrigger>
+    					</Grid.Triggers>
+    					<VisualStateManager.VisualStateGroups>
+    						<VisualStateGroup x:Name="ScrollStates">
+    							<VisualStateGroup.Transitions>
+    								<VisualTransition GeneratedDuration="00:00:00.5"/>
+    							</VisualStateGroup.Transitions>
+    							<VisualState x:Name="Scrolling">
+    								<Storyboard>
+    									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+    									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+    								</Storyboard>
+    							</VisualState>
+    							<VisualState x:Name="NotScrolling"/>
+    						</VisualStateGroup>
+    						<VisualStateGroup x:Name="VerticalCompression">
+    							<VisualState x:Name="NoVerticalCompression"/>
+    							<VisualState x:Name="CompressionTop"/>
+    							<VisualState x:Name="CompressionBottom"/>
+    						</VisualStateGroup>
+    						<VisualStateGroup x:Name="HorizontalCompression">
+    							<VisualState x:Name="NoHorizontalCompression"/>
+    							<VisualState x:Name="CompressionLeft"/>
+    							<VisualState x:Name="CompressionRight"/>
+    						</VisualStateGroup>
+    					</VisualStateManager.VisualStateGroups>
+    					<ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+    					<ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Left" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+    					<ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Top" Width="Auto"/>
+    				</Grid>
+    			</ControlTemplate>
+    		</Setter.Value>
+    	</Setter>
+    </Style>
+</ResourceDictionary>
+
+

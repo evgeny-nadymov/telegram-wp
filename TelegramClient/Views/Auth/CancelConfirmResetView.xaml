@@ -1,0 +1,145 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Auth.CancelConfirmResetView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:chats="clr-namespace:TelegramClient.Views.Chats"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    micro:Message.Attach="[Event BackKeyPress] = [Action OnBackKeyPress]"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" >
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" CacheMode="BitmapCache">
+        <i:Interaction.Behaviors>
+            <ec:DataStateBehavior Binding="{Binding IsWorking}" Value="True" TrueState="Working" FalseState="Normal"/>
+        </i:Interaction.Behaviors>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MainGroup">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Working">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="Code">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="Confirm">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,80,12,23">
+            <TextBlock Text="{Binding Resources.CancelAccountReset, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Margin="12,0,12,-5" Text="{Binding Resources.Code, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <TextBox x:Name="Code" MaxLength="{Binding CodeLength}" Style="{StaticResource SignInTextBoxStyle}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:UpdateTextBindingBehavior/>
+                    </i:Interaction.Behaviors>
+                    <TextBox.InputScope>
+                        <InputScope>
+                            <InputScopeName NameValue="Number"/>
+                        </InputScope>
+                    </TextBox.InputScope>
+                </TextBox>
+                <RichTextBox Margin="0,25,0,0" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" chats:ConvertToSupergroupView.FormattedText="{Binding Subtitle}" FontFamily="{StaticResource PhoneFontFamilyNormal}">
+                    <RichTextBox.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </RichTextBox.RenderTransform>
+                </RichTextBox>
+
+                <TextBlock Margin="12,12,12,0" Text="{Binding TimeCounterString}" Style="{StaticResource PhoneTextSubtleStyle}">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <RichTextBox Margin="0,12,0,0" Foreground="{StaticResource PhoneAccentBrush}" Visibility="{Binding ResendCodeVisibility}">
+                    <RichTextBox.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </RichTextBox.RenderTransform>
+                    <Paragraph>
+                        <Hyperlink Click="ResendCode_OnClick">
+                            <Run Text="{Binding Resources.HaveNotReceivedCode, Source={StaticResource Strings}}"/>
+                        </Hyperlink>
+                    </Paragraph>
+                </RichTextBox>
+                <TextBlock x:Name="DebugString" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
+                <StackPanel Margin="0,30,0,0">
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </StackPanel.RenderTransform>
+                    <Button x:Name="Confirm" Width="204" Content="{Binding Resources.Next, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" HorizontalAlignment="Left"/>
+                    <!--<RichTextBox Margin="0,0,0,0" Visibility="{Binding HelpVisibility}">
+                        <Paragraph>
+                            <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.RegistrationProblemDescription, Source={StaticResource Strings}}"/>
+                            <Hyperlink Click="Hyperlink_OnClick" FontSize="{StaticResource PhoneFontSizeMedium}">
+                                <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Email}"></Run>
+                            </Hyperlink>
+                            <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="."/>
+                        </Paragraph>
+                    </RichTextBox>-->
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!--<views:DebugView Grid.Row="2" DataContext="{Binding Debug}"/>-->
+    </Grid>
+
+</views:TelegramViewBase>

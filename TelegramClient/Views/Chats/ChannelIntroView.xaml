@@ -1,0 +1,28 @@
+﻿<navigation:AnimatedBasePage
+    x:Class="TelegramClient.Views.Chats.ChannelIntroView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <StackPanel VerticalAlignment="Center">
+            <Image Margin="0,64,0,0" Source="{Binding ImageSource}" Width="240"/>
+            <TextBlock Margin="48,64,48,0" TextAlignment="Center" Text="{Binding Resources.WhatIsChannel, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}" />
+            <TextBlock Margin="48,24,48,64" TextAlignment="Center" Text="{Binding Resources.WhatIsChannelDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" />
+            <Button x:Name="CreateChannel" HorizontalAlignment="Center" Padding="60,2,60,6" Content="{Binding Resources.Create, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+        </StackPanel>
+    </Grid>
+
+</navigation:AnimatedBasePage>

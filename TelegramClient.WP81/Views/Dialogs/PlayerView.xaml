@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.PlayerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="72" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="InputBorderBrushLight" Color="#FFDEE3EA"/>
+        <SolidColorBrush x:Key="InputBorderBrushDark" Color="#CC5D5D5D"/>
+
+        <Storyboard x:Name="OpenStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.0">
+                        <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Visible</Visibility>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="CloseStoryboard" Completed="CloseStoryboard_OnCompleted">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-90">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn" Exponent="3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                        <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Collapsed</Visibility>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid x:Name="UserActionLabel">
+        <Grid.RenderTransform>
+            <TranslateTransform/>
+        </Grid.RenderTransform>
+
+        <Border Background="{StaticResource PhoneBackgroundBrush}" Tap="Message_OnTap" Opacity="1.0" Margin="0,-2,0,0" MinHeight="72"/>
+        <Border x:Name="Border" VerticalAlignment="Bottom" Height="2"/>
+
+        <Grid MaxWidth="480">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ToggleButton
+                Visibility="Visible"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                x:Name="PlayerToggleButton" VerticalAlignment="Center" IsChecked="True"
+                Click="PlayerToggleButton_OnClick"
+                Foreground="{StaticResource PhoneForegroundBrush}"
+                Style="{StaticResource DialogPlayerToggleButtonStyle}"/>
+
+            <TextBlock Grid.Column="1" x:Name="Title" Margin="0,0,0,0" Text="" MaxWidth="200" TextTrimming="WordEllipsis" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" x:Name="Subtitle" Margin="12,0,0,0" Opacity="0.7" Text="" VerticalAlignment="Center"/>
+            
+            <Border Grid.Column="3" Background="Transparent" Tap="CloseButton_OnClick">
+                <Image Source="/Images/W10M/ic_cancel_2x.png" Width="32" Height="32" Margin="20"/>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

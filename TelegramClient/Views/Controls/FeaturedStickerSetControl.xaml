@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.FeaturedStickerSetControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid x:Name="MainItemGrid" Margin="0,6,12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ListBoxItem Grid.Column="1" VerticalAlignment="Center" Margin="14,-2,0,0" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OpenStickerSet_OnTap">
+                <Grid Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,-6,2,0" VerticalAlignment="Center" Text="•" Visibility="{Binding Unread, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextLargeStyle}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="2"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,-6,0,0" Text="{Binding Title}" MaxHeight="42.56" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="1,-4,0,0" Text="{Binding Converter={StaticResource StickerSetToCountStringConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </ListBoxItem>
+            <Button Grid.Column="2" Click="AddStickerSet_OnClick" toolkit:TiltEffect.IsTiltEnabled="True" Visibility="{Binding Installed, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}" Content="{Binding Resources.Add, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" VerticalAlignment="Center" Margin="0,0,-12,0" Padding="18,5,18,7" FontSize="17.667" BorderThickness="2"/>
+            <Button Grid.Column="2" IsEnabled="False" MinWidth="95" Visibility="{Binding Installed, Converter={StaticResource BooleanToVisibilityConverter}}" Content="" VerticalAlignment="Center" Margin="0,0,-12,0" Padding="18,5,18,7" FontSize="17.667" Opacity="0" BorderThickness="2" FontFamily="Segoe UI Symbol"/>
+        </Grid>
+    </Grid>
+</UserControl>

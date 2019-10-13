@@ -1,0 +1,1094 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FCB4C15-FE40-496F-87D6-84220F3F07F8}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EmojiPanel</RootNamespace>
+    <AssemblyName>EmojiPanel</AssemblyName>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>EmojiPanel_$(Configuration)_$(Platform).xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>EmojiPanel.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget />
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget />
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget />
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget />
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Emoji\EmojiControl.xaml.cs">
+      <DependentUpon>EmojiControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Emoji\EmojiData.cs" />
+    <Compile Include="Controls\Emoji\EmojiSpriteItem.cs" />
+    <Compile Include="Controls\Utilites\Helpers.cs" />
+    <Compile Include="Controls\Utilites\MyListItemBase.cs" />
+    <Compile Include="Controls\Utilites\DelayedExecutor.cs" />
+    <Compile Include="Controls\Utilites\VirtSegment.cs" />
+    <Compile Include="Controls\Utilites\MyVirtualizingPanel.cs" />
+    <Compile Include="Controls\Utilites\VListItemBase.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\Emoji\EmojiControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\AppBarIcons\appbar.smile.png" />
+    <Content Include="Assets\emoji.abc-720p.png" />
+    <Content Include="Assets\emoji.abc-WVGA.png" />
+    <Content Include="Assets\emoji.abc-WXGA.png" />
+    <Content Include="Assets\emoji.backspace-720p.png" />
+    <Content Include="Assets\emoji.backspace-WVGA.png" />
+    <Content Include="Assets\emoji.backspace-WXGA.png" />
+    <Content Include="Assets\emoji.category.1-720p.png" />
+    <Content Include="Assets\emoji.category.1-WVGA.png" />
+    <Content Include="Assets\emoji.category.1-WXGA.png" />
+    <Content Include="Assets\emoji.category.2-720p.png" />
+    <Content Include="Assets\emoji.category.2-WVGA.png" />
+    <Content Include="Assets\emoji.category.2-WXGA.png" />
+    <Content Include="Assets\emoji.category.3-720p.png" />
+    <Content Include="Assets\emoji.category.3-WVGA.png" />
+    <Content Include="Assets\emoji.category.3-WXGA.png" />
+    <Content Include="Assets\emoji.category.4-720p.png" />
+    <Content Include="Assets\emoji.category.4-WVGA.png" />
+    <Content Include="Assets\emoji.category.4-WXGA.png" />
+    <Content Include="Assets\emoji.category.5-720p.png" />
+    <Content Include="Assets\emoji.category.5-WVGA.png" />
+    <Content Include="Assets\emoji.category.5-WXGA.png" />
+    <Content Include="Assets\emoji.recent-720p.png" />
+    <Content Include="Assets\emoji.recent-WVGA.png" />
+    <Content Include="Assets\emoji.recent-WXGA.png" />
+    <Content Include="Assets\Emoji\Separated\0023-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0030-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0031-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0032-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0033-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0034-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0035-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0036-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0037-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0038-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\0039-fe0f-20e3.png" />
+    <Content Include="Assets\Emoji\Separated\00a9.png" />
+    <Content Include="Assets\Emoji\Separated\00ae.png" />
+    <Content Include="Assets\Emoji\Separated\1f004-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\1f0cf.png" />
+    <Content Include="Assets\Emoji\Separated\1f170.png" />
+    <Content Include="Assets\Emoji\Separated\1f171.png" />
+    <Content Include="Assets\Emoji\Separated\1f17e.png" />
+    <Content Include="Assets\Emoji\Separated\1f17f-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\1f18e.png" />
+    <Content Include="Assets\Emoji\Separated\1f191.png" />
+    <Content Include="Assets\Emoji\Separated\1f192.png" />
+    <Content Include="Assets\Emoji\Separated\1f193.png" />
+    <Content Include="Assets\Emoji\Separated\1f194.png" />
+    <Content Include="Assets\Emoji\Separated\1f195.png" />
+    <Content Include="Assets\Emoji\Separated\1f196.png" />
+    <Content Include="Assets\Emoji\Separated\1f197.png" />
+    <Content Include="Assets\Emoji\Separated\1f198.png" />
+    <Content Include="Assets\Emoji\Separated\1f199.png" />
+    <Content Include="Assets\Emoji\Separated\1f19a.png" />
+    <Content Include="Assets\Emoji\Separated\1f1e8-1f1f3.png" />
+    <Content Include="Assets\Emoji\Separated\1f1e9-1f1ea.png" />
+    <Content Include="Assets\Emoji\Separated\1f1ea-1f1f8.png" />
+    <Content Include="Assets\Emoji\Separated\1f1eb-1f1f7.png" />
+    <Content Include="Assets\Emoji\Separated\1f1ec-1f1e7.png" />
+    <Content Include="Assets\Emoji\Separated\1f1ee-1f1f9.png" />
+    <Content Include="Assets\Emoji\Separated\1f1ef-1f1f5.png" />
+    <Content Include="Assets\Emoji\Separated\1f1f0-1f1f7.png" />
+    <Content Include="Assets\Emoji\Separated\1f1f7-1f1fa.png" />
+    <Content Include="Assets\Emoji\Separated\1f1fa-1f1f8.png" />
+    <Content Include="Assets\Emoji\Separated\1f201.png" />
+    <Content Include="Assets\Emoji\Separated\1f202.png" />
+    <Content Include="Assets\Emoji\Separated\1f21a-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\1f22f-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\1f232.png" />
+    <Content Include="Assets\Emoji\Separated\1f233.png" />
+    <Content Include="Assets\Emoji\Separated\1f234.png" />
+    <Content Include="Assets\Emoji\Separated\1f235.png" />
+    <Content Include="Assets\Emoji\Separated\1f236.png" />
+    <Content Include="Assets\Emoji\Separated\1f237.png" />
+    <Content Include="Assets\Emoji\Separated\1f238.png" />
+    <Content Include="Assets\Emoji\Separated\1f239.png" />
+    <Content Include="Assets\Emoji\Separated\1f23a.png" />
+    <Content Include="Assets\Emoji\Separated\1f250.png" />
+    <Content Include="Assets\Emoji\Separated\1f251.png" />
+    <Content Include="Assets\Emoji\Separated\1f300.png" />
+    <Content Include="Assets\Emoji\Separated\1f301.png" />
+    <Content Include="Assets\Emoji\Separated\1f302.png" />
+    <Content Include="Assets\Emoji\Separated\1f303.png" />
+    <Content Include="Assets\Emoji\Separated\1f304.png" />
+    <Content Include="Assets\Emoji\Separated\1f305.png" />
+    <Content Include="Assets\Emoji\Separated\1f306.png" />
+    <Content Include="Assets\Emoji\Separated\1f307.png" />
+    <Content Include="Assets\Emoji\Separated\1f308.png" />
+    <Content Include="Assets\Emoji\Separated\1f309.png" />
+    <Content Include="Assets\Emoji\Separated\1f30a.png" />
+    <Content Include="Assets\Emoji\Separated\1f30b.png" />
+    <Content Include="Assets\Emoji\Separated\1f30c.png" />
+    <Content Include="Assets\Emoji\Separated\1f30d.png" />
+    <Content Include="Assets\Emoji\Separated\1f30e.png" />
+    <Content Include="Assets\Emoji\Separated\1f30f.png" />
+    <Content Include="Assets\Emoji\Separated\1f310.png" />
+    <Content Include="Assets\Emoji\Separated\1f311.png" />
+    <Content Include="Assets\Emoji\Separated\1f312.png" />
+    <Content Include="Assets\Emoji\Separated\1f313.png" />
+    <Content Include="Assets\Emoji\Separated\1f314.png" />
+    <Content Include="Assets\Emoji\Separated\1f315.png" />
+    <Content Include="Assets\Emoji\Separated\1f316.png" />
+    <Content Include="Assets\Emoji\Separated\1f317.png" />
+    <Content Include="Assets\Emoji\Separated\1f318.png" />
+    <Content Include="Assets\Emoji\Separated\1f319.png" />
+    <Content Include="Assets\Emoji\Separated\1f31a.png" />
+    <Content Include="Assets\Emoji\Separated\1f31b.png" />
+    <Content Include="Assets\Emoji\Separated\1f31c.png" />
+    <Content Include="Assets\Emoji\Separated\1f31d.png" />
+    <Content Include="Assets\Emoji\Separated\1f31e.png" />
+    <Content Include="Assets\Emoji\Separated\1f31f.png" />
+    <Content Include="Assets\Emoji\Separated\1f320.png" />
+    <Content Include="Assets\Emoji\Separated\1f330.png" />
+    <Content Include="Assets\Emoji\Separated\1f331.png" />
+    <Content Include="Assets\Emoji\Separated\1f332.png" />
+    <Content Include="Assets\Emoji\Separated\1f333.png" />
+    <Content Include="Assets\Emoji\Separated\1f334.png" />
+    <Content Include="Assets\Emoji\Separated\1f335.png" />
+    <Content Include="Assets\Emoji\Separated\1f337.png" />
+    <Content Include="Assets\Emoji\Separated\1f338.png" />
+    <Content Include="Assets\Emoji\Separated\1f339.png" />
+    <Content Include="Assets\Emoji\Separated\1f33a.png" />
+    <Content Include="Assets\Emoji\Separated\1f33b.png" />
+    <Content Include="Assets\Emoji\Separated\1f33c.png" />
+    <Content Include="Assets\Emoji\Separated\1f33d.png" />
+    <Content Include="Assets\Emoji\Separated\1f33e.png" />
+    <Content Include="Assets\Emoji\Separated\1f33f.png" />
+    <Content Include="Assets\Emoji\Separated\1f340.png" />
+    <Content Include="Assets\Emoji\Separated\1f341.png" />
+    <Content Include="Assets\Emoji\Separated\1f342.png" />
+    <Content Include="Assets\Emoji\Separated\1f343.png" />
+    <Content Include="Assets\Emoji\Separated\1f344.png" />
+    <Content Include="Assets\Emoji\Separated\1f345.png" />
+    <Content Include="Assets\Emoji\Separated\1f346.png" />
+    <Content Include="Assets\Emoji\Separated\1f347.png" />
+    <Content Include="Assets\Emoji\Separated\1f348.png" />
+    <Content Include="Assets\Emoji\Separated\1f349.png" />
+    <Content Include="Assets\Emoji\Separated\1f34a.png" />
+    <Content Include="Assets\Emoji\Separated\1f34b.png" />
+    <Content Include="Assets\Emoji\Separated\1f34c.png" />
+    <Content Include="Assets\Emoji\Separated\1f34d.png" />
+    <Content Include="Assets\Emoji\Separated\1f34e.png" />
+    <Content Include="Assets\Emoji\Separated\1f34f.png" />
+    <Content Include="Assets\Emoji\Separated\1f350.png" />
+    <Content Include="Assets\Emoji\Separated\1f351.png" />
+    <Content Include="Assets\Emoji\Separated\1f352.png" />
+    <Content Include="Assets\Emoji\Separated\1f353.png" />
+    <Content Include="Assets\Emoji\Separated\1f354.png" />
+    <Content Include="Assets\Emoji\Separated\1f355.png" />
+    <Content Include="Assets\Emoji\Separated\1f356.png" />
+    <Content Include="Assets\Emoji\Separated\1f357.png" />
+    <Content Include="Assets\Emoji\Separated\1f358.png" />
+    <Content Include="Assets\Emoji\Separated\1f359.png" />
+    <Content Include="Assets\Emoji\Separated\1f35a.png" />
+    <Content Include="Assets\Emoji\Separated\1f35b.png" />
+    <Content Include="Assets\Emoji\Separated\1f35c.png" />
+    <Content Include="Assets\Emoji\Separated\1f35d.png" />
+    <Content Include="Assets\Emoji\Separated\1f35e.png" />
+    <Content Include="Assets\Emoji\Separated\1f35f.png" />
+    <Content Include="Assets\Emoji\Separated\1f360.png" />
+    <Content Include="Assets\Emoji\Separated\1f361.png" />
+    <Content Include="Assets\Emoji\Separated\1f362.png" />
+    <Content Include="Assets\Emoji\Separated\1f363.png" />
+    <Content Include="Assets\Emoji\Separated\1f364.png" />
+    <Content Include="Assets\Emoji\Separated\1f365.png" />
+    <Content Include="Assets\Emoji\Separated\1f366.png" />
+    <Content Include="Assets\Emoji\Separated\1f367.png" />
+    <Content Include="Assets\Emoji\Separated\1f368.png" />
+    <Content Include="Assets\Emoji\Separated\1f369.png" />
+    <Content Include="Assets\Emoji\Separated\1f36a.png" />
+    <Content Include="Assets\Emoji\Separated\1f36b.png" />
+    <Content Include="Assets\Emoji\Separated\1f36c.png" />
+    <Content Include="Assets\Emoji\Separated\1f36d.png" />
+    <Content Include="Assets\Emoji\Separated\1f36e.png" />
+    <Content Include="Assets\Emoji\Separated\1f36f.png" />
+    <Content Include="Assets\Emoji\Separated\1f370.png" />
+    <Content Include="Assets\Emoji\Separated\1f371.png" />
+    <Content Include="Assets\Emoji\Separated\1f372.png" />
+    <Content Include="Assets\Emoji\Separated\1f373.png" />
+    <Content Include="Assets\Emoji\Separated\1f374.png" />
+    <Content Include="Assets\Emoji\Separated\1f375.png" />
+    <Content Include="Assets\Emoji\Separated\1f376.png" />
+    <Content Include="Assets\Emoji\Separated\1f377.png" />
+    <Content Include="Assets\Emoji\Separated\1f378.png" />
+    <Content Include="Assets\Emoji\Separated\1f379.png" />
+    <Content Include="Assets\Emoji\Separated\1f37a.png" />
+    <Content Include="Assets\Emoji\Separated\1f37b.png" />
+    <Content Include="Assets\Emoji\Separated\1f37c.png" />
+    <Content Include="Assets\Emoji\Separated\1f380.png" />
+    <Content Include="Assets\Emoji\Separated\1f381.png" />
+    <Content Include="Assets\Emoji\Separated\1f382.png" />
+    <Content Include="Assets\Emoji\Separated\1f383.png" />
+    <Content Include="Assets\Emoji\Separated\1f384.png" />
+    <Content Include="Assets\Emoji\Separated\1f385.png" />
+    <Content Include="Assets\Emoji\Separated\1f386.png" />
+    <Content Include="Assets\Emoji\Separated\1f387.png" />
+    <Content Include="Assets\Emoji\Separated\1f388.png" />
+    <Content Include="Assets\Emoji\Separated\1f389.png" />
+    <Content Include="Assets\Emoji\Separated\1f38a.png" />
+    <Content Include="Assets\Emoji\Separated\1f38b.png" />
+    <Content Include="Assets\Emoji\Separated\1f38c.png" />
+    <Content Include="Assets\Emoji\Separated\1f38d.png" />
+    <Content Include="Assets\Emoji\Separated\1f38e.png" />
+    <Content Include="Assets\Emoji\Separated\1f38f.png" />
+    <Content Include="Assets\Emoji\Separated\1f390.png" />
+    <Content Include="Assets\Emoji\Separated\1f391.png" />
+    <Content Include="Assets\Emoji\Separated\1f392.png" />
+    <Content Include="Assets\Emoji\Separated\1f393.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a0.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a1.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a2.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a3.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a4.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a5.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a6.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a7.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a8.png" />
+    <Content Include="Assets\Emoji\Separated\1f3a9.png" />
+    <Content Include="Assets\Emoji\Separated\1f3aa.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ab.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ac.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ad.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ae.png" />
+    <Content Include="Assets\Emoji\Separated\1f3af.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b0.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b1.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b2.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b3.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b4.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b5.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b6.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b7.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b8.png" />
+    <Content Include="Assets\Emoji\Separated\1f3b9.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ba.png" />
+    <Content Include="Assets\Emoji\Separated\1f3bb.png" />
+    <Content Include="Assets\Emoji\Separated\1f3bc.png" />
+    <Content Include="Assets\Emoji\Separated\1f3bd.png" />
+    <Content Include="Assets\Emoji\Separated\1f3be.png" />
+    <Content Include="Assets\Emoji\Separated\1f3bf.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c0.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c1.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c2.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c3.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c4.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c6.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c7.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c8.png" />
+    <Content Include="Assets\Emoji\Separated\1f3c9.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ca.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e0.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e1.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e2.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e3.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e4.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e5.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e6.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e7.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e8.png" />
+    <Content Include="Assets\Emoji\Separated\1f3e9.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ea.png" />
+    <Content Include="Assets\Emoji\Separated\1f3eb.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ec.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ed.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ee.png" />
+    <Content Include="Assets\Emoji\Separated\1f3ef.png" />
+    <Content Include="Assets\Emoji\Separated\1f3f0.png" />
+    <Content Include="Assets\Emoji\Separated\1f400.png" />
+    <Content Include="Assets\Emoji\Separated\1f401.png" />
+    <Content Include="Assets\Emoji\Separated\1f402.png" />
+    <Content Include="Assets\Emoji\Separated\1f403.png" />
+    <Content Include="Assets\Emoji\Separated\1f404.png" />
+    <Content Include="Assets\Emoji\Separated\1f405.png" />
+    <Content Include="Assets\Emoji\Separated\1f406.png" />
+    <Content Include="Assets\Emoji\Separated\1f407.png" />
+    <Content Include="Assets\Emoji\Separated\1f408.png" />
+    <Content Include="Assets\Emoji\Separated\1f409.png" />
+    <Content Include="Assets\Emoji\Separated\1f40a.png" />
+    <Content Include="Assets\Emoji\Separated\1f40b.png" />
+    <Content Include="Assets\Emoji\Separated\1f40c.png" />
+    <Content Include="Assets\Emoji\Separated\1f40d.png" />
+    <Content Include="Assets\Emoji\Separated\1f40e.png" />
+    <Content Include="Assets\Emoji\Separated\1f40f.png" />
+    <Content Include="Assets\Emoji\Separated\1f410.png" />
+    <Content Include="Assets\Emoji\Separated\1f411.png" />
+    <Content Include="Assets\Emoji\Separated\1f412.png" />
+    <Content Include="Assets\Emoji\Separated\1f413.png" />
+    <Content Include="Assets\Emoji\Separated\1f414.png" />
+    <Content Include="Assets\Emoji\Separated\1f415.png" />
+    <Content Include="Assets\Emoji\Separated\1f416.png" />
+    <Content Include="Assets\Emoji\Separated\1f417.png" />
+    <Content Include="Assets\Emoji\Separated\1f418.png" />
+    <Content Include="Assets\Emoji\Separated\1f419.png" />
+    <Content Include="Assets\Emoji\Separated\1f41a.png" />
+    <Content Include="Assets\Emoji\Separated\1f41b.png" />
+    <Content Include="Assets\Emoji\Separated\1f41c.png" />
+    <Content Include="Assets\Emoji\Separated\1f41d.png" />
+    <Content Include="Assets\Emoji\Separated\1f41e.png" />
+    <Content Include="Assets\Emoji\Separated\1f41f.png" />
+    <Content Include="Assets\Emoji\Separated\1f420.png" />
+    <Content Include="Assets\Emoji\Separated\1f421.png" />
+    <Content Include="Assets\Emoji\Separated\1f422.png" />
+    <Content Include="Assets\Emoji\Separated\1f423.png" />
+    <Content Include="Assets\Emoji\Separated\1f424.png" />
+    <Content Include="Assets\Emoji\Separated\1f425.png" />
+    <Content Include="Assets\Emoji\Separated\1f426.png" />
+    <Content Include="Assets\Emoji\Separated\1f427.png" />
+    <Content Include="Assets\Emoji\Separated\1f428.png" />
+    <Content Include="Assets\Emoji\Separated\1f429.png" />
+    <Content Include="Assets\Emoji\Separated\1f42a.png" />
+    <Content Include="Assets\Emoji\Separated\1f42b.png" />
+    <Content Include="Assets\Emoji\Separated\1f42c.png" />
+    <Content Include="Assets\Emoji\Separated\1f42d.png" />
+    <Content Include="Assets\Emoji\Separated\1f42e.png" />
+    <Content Include="Assets\Emoji\Separated\1f42f.png" />
+    <Content Include="Assets\Emoji\Separated\1f430.png" />
+    <Content Include="Assets\Emoji\Separated\1f431.png" />
+    <Content Include="Assets\Emoji\Separated\1f432.png" />
+    <Content Include="Assets\Emoji\Separated\1f433.png" />
+    <Content Include="Assets\Emoji\Separated\1f434.png" />
+    <Content Include="Assets\Emoji\Separated\1f435.png" />
+    <Content Include="Assets\Emoji\Separated\1f436.png" />
+    <Content Include="Assets\Emoji\Separated\1f437.png" />
+    <Content Include="Assets\Emoji\Separated\1f438.png" />
+    <Content Include="Assets\Emoji\Separated\1f439.png" />
+    <Content Include="Assets\Emoji\Separated\1f43a.png" />
+    <Content Include="Assets\Emoji\Separated\1f43b.png" />
+    <Content Include="Assets\Emoji\Separated\1f43c.png" />
+    <Content Include="Assets\Emoji\Separated\1f43d.png" />
+    <Content Include="Assets\Emoji\Separated\1f43e.png" />
+    <Content Include="Assets\Emoji\Separated\1f440.png" />
+    <Content Include="Assets\Emoji\Separated\1f442.png" />
+    <Content Include="Assets\Emoji\Separated\1f443.png" />
+    <Content Include="Assets\Emoji\Separated\1f444.png" />
+    <Content Include="Assets\Emoji\Separated\1f445.png" />
+    <Content Include="Assets\Emoji\Separated\1f446.png" />
+    <Content Include="Assets\Emoji\Separated\1f447.png" />
+    <Content Include="Assets\Emoji\Separated\1f448.png" />
+    <Content Include="Assets\Emoji\Separated\1f449.png" />
+    <Content Include="Assets\Emoji\Separated\1f44a.png" />
+    <Content Include="Assets\Emoji\Separated\1f44b.png" />
+    <Content Include="Assets\Emoji\Separated\1f44c.png" />
+    <Content Include="Assets\Emoji\Separated\1f44d.png" />
+    <Content Include="Assets\Emoji\Separated\1f44e.png" />
+    <Content Include="Assets\Emoji\Separated\1f44f.png" />
+    <Content Include="Assets\Emoji\Separated\1f450.png" />
+    <Content Include="Assets\Emoji\Separated\1f451.png" />
+    <Content Include="Assets\Emoji\Separated\1f452.png" />
+    <Content Include="Assets\Emoji\Separated\1f453.png" />
+    <Content Include="Assets\Emoji\Separated\1f454.png" />
+    <Content Include="Assets\Emoji\Separated\1f455.png" />
+    <Content Include="Assets\Emoji\Separated\1f456.png" />
+    <Content Include="Assets\Emoji\Separated\1f457.png" />
+    <Content Include="Assets\Emoji\Separated\1f458.png" />
+    <Content Include="Assets\Emoji\Separated\1f459.png" />
+    <Content Include="Assets\Emoji\Separated\1f45a.png" />
+    <Content Include="Assets\Emoji\Separated\1f45b.png" />
+    <Content Include="Assets\Emoji\Separated\1f45c.png" />
+    <Content Include="Assets\Emoji\Separated\1f45d.png" />
+    <Content Include="Assets\Emoji\Separated\1f45e.png" />
+    <Content Include="Assets\Emoji\Separated\1f45f.png" />
+    <Content Include="Assets\Emoji\Separated\1f460.png" />
+    <Content Include="Assets\Emoji\Separated\1f461.png" />
+    <Content Include="Assets\Emoji\Separated\1f462.png" />
+    <Content Include="Assets\Emoji\Separated\1f463.png" />
+    <Content Include="Assets\Emoji\Separated\1f464.png" />
+    <Content Include="Assets\Emoji\Separated\1f465.png" />
+    <Content Include="Assets\Emoji\Separated\1f466.png" />
+    <Content Include="Assets\Emoji\Separated\1f467.png" />
+    <Content Include="Assets\Emoji\Separated\1f468.png" />
+    <Content Include="Assets\Emoji\Separated\1f469.png" />
+    <Content Include="Assets\Emoji\Separated\1f46a.png" />
+    <Content Include="Assets\Emoji\Separated\1f46b.png" />
+    <Content Include="Assets\Emoji\Separated\1f46c.png" />
+    <Content Include="Assets\Emoji\Separated\1f46d.png" />
+    <Content Include="Assets\Emoji\Separated\1f46e.png" />
+    <Content Include="Assets\Emoji\Separated\1f46f.png" />
+    <Content Include="Assets\Emoji\Separated\1f470.png" />
+    <Content Include="Assets\Emoji\Separated\1f471.png" />
+    <Content Include="Assets\Emoji\Separated\1f472.png" />
+    <Content Include="Assets\Emoji\Separated\1f473.png" />
+    <Content Include="Assets\Emoji\Separated\1f474.png" />
+    <Content Include="Assets\Emoji\Separated\1f475.png" />
+    <Content Include="Assets\Emoji\Separated\1f476.png" />
+    <Content Include="Assets\Emoji\Separated\1f477.png" />
+    <Content Include="Assets\Emoji\Separated\1f478.png" />
+    <Content Include="Assets\Emoji\Separated\1f479.png" />
+    <Content Include="Assets\Emoji\Separated\1f47a.png" />
+    <Content Include="Assets\Emoji\Separated\1f47b.png" />
+    <Content Include="Assets\Emoji\Separated\1f47c.png" />
+    <Content Include="Assets\Emoji\Separated\1f47d.png" />
+    <Content Include="Assets\Emoji\Separated\1f47e.png" />
+    <Content Include="Assets\Emoji\Separated\1f47f.png" />
+    <Content Include="Assets\Emoji\Separated\1f480.png" />
+    <Content Include="Assets\Emoji\Separated\1f481.png" />
+    <Content Include="Assets\Emoji\Separated\1f482.png" />
+    <Content Include="Assets\Emoji\Separated\1f483.png" />
+    <Content Include="Assets\Emoji\Separated\1f484.png" />
+    <Content Include="Assets\Emoji\Separated\1f485.png" />
+    <Content Include="Assets\Emoji\Separated\1f486.png" />
+    <Content Include="Assets\Emoji\Separated\1f487.png" />
+    <Content Include="Assets\Emoji\Separated\1f488.png" />
+    <Content Include="Assets\Emoji\Separated\1f489.png" />
+    <Content Include="Assets\Emoji\Separated\1f48a.png" />
+    <Content Include="Assets\Emoji\Separated\1f48b.png" />
+    <Content Include="Assets\Emoji\Separated\1f48c.png" />
+    <Content Include="Assets\Emoji\Separated\1f48d.png" />
+    <Content Include="Assets\Emoji\Separated\1f48e.png" />
+    <Content Include="Assets\Emoji\Separated\1f48f.png" />
+    <Content Include="Assets\Emoji\Separated\1f490.png" />
+    <Content Include="Assets\Emoji\Separated\1f491.png" />
+    <Content Include="Assets\Emoji\Separated\1f492.png" />
+    <Content Include="Assets\Emoji\Separated\1f493.png" />
+    <Content Include="Assets\Emoji\Separated\1f494.png" />
+    <Content Include="Assets\Emoji\Separated\1f495.png" />
+    <Content Include="Assets\Emoji\Separated\1f496.png" />
+    <Content Include="Assets\Emoji\Separated\1f497.png" />
+    <Content Include="Assets\Emoji\Separated\1f498.png" />
+    <Content Include="Assets\Emoji\Separated\1f499.png" />
+    <Content Include="Assets\Emoji\Separated\1f49a.png" />
+    <Content Include="Assets\Emoji\Separated\1f49b.png" />
+    <Content Include="Assets\Emoji\Separated\1f49c.png" />
+    <Content Include="Assets\Emoji\Separated\1f49d.png" />
+    <Content Include="Assets\Emoji\Separated\1f49e.png" />
+    <Content Include="Assets\Emoji\Separated\1f49f.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a0.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a1.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a2.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a3.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a4.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a5.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a6.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a7.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a8.png" />
+    <Content Include="Assets\Emoji\Separated\1f4a9.png" />
+    <Content Include="Assets\Emoji\Separated\1f4aa.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ab.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ac.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ad.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ae.png" />
+    <Content Include="Assets\Emoji\Separated\1f4af.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b0.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b1.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b2.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b3.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b4.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b5.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b6.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b7.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b8.png" />
+    <Content Include="Assets\Emoji\Separated\1f4b9.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ba.png" />
+    <Content Include="Assets\Emoji\Separated\1f4bb.png" />
+    <Content Include="Assets\Emoji\Separated\1f4bc.png" />
+    <Content Include="Assets\Emoji\Separated\1f4bd.png" />
+    <Content Include="Assets\Emoji\Separated\1f4be.png" />
+    <Content Include="Assets\Emoji\Separated\1f4bf.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c0.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c1.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c2.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c3.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c4.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c5.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c6.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c7.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c8.png" />
+    <Content Include="Assets\Emoji\Separated\1f4c9.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ca.png" />
+    <Content Include="Assets\Emoji\Separated\1f4cb.png" />
+    <Content Include="Assets\Emoji\Separated\1f4cc.png" />
+    <Content Include="Assets\Emoji\Separated\1f4cd.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ce.png" />
+    <Content Include="Assets\Emoji\Separated\1f4cf.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d0.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d1.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d2.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d3.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d4.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d5.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d6.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d7.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d8.png" />
+    <Content Include="Assets\Emoji\Separated\1f4d9.png" />
+    <Content Include="Assets\Emoji\Separated\1f4da.png" />
+    <Content Include="Assets\Emoji\Separated\1f4db.png" />
+    <Content Include="Assets\Emoji\Separated\1f4dc.png" />
+    <Content Include="Assets\Emoji\Separated\1f4dd.png" />
+    <Content Include="Assets\Emoji\Separated\1f4de.png" />
+    <Content Include="Assets\Emoji\Separated\1f4df.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e0.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e1.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e2.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e3.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e4.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e5.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e6.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e7.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e8.png" />
+    <Content Include="Assets\Emoji\Separated\1f4e9.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ea.png" />
+    <Content Include="Assets\Emoji\Separated\1f4eb.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ec.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ed.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ee.png" />
+    <Content Include="Assets\Emoji\Separated\1f4ef.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f0.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f1.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f2.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f3.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f4.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f5.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f6.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f7.png" />
+    <Content Include="Assets\Emoji\Separated\1f4f9.png" />
+    <Content Include="Assets\Emoji\Separated\1f4fa.png" />
+    <Content Include="Assets\Emoji\Separated\1f4fb.png" />
+    <Content Include="Assets\Emoji\Separated\1f4fc.png" />
+    <Content Include="Assets\Emoji\Separated\1f500.png" />
+    <Content Include="Assets\Emoji\Separated\1f501.png" />
+    <Content Include="Assets\Emoji\Separated\1f502.png" />
+    <Content Include="Assets\Emoji\Separated\1f503.png" />
+    <Content Include="Assets\Emoji\Separated\1f504.png" />
+    <Content Include="Assets\Emoji\Separated\1f505.png" />
+    <Content Include="Assets\Emoji\Separated\1f506.png" />
+    <Content Include="Assets\Emoji\Separated\1f507.png" />
+    <Content Include="Assets\Emoji\Separated\1f508.png" />
+    <Content Include="Assets\Emoji\Separated\1f509.png" />
+    <Content Include="Assets\Emoji\Separated\1f50a.png" />
+    <Content Include="Assets\Emoji\Separated\1f50b.png" />
+    <Content Include="Assets\Emoji\Separated\1f50c.png" />
+    <Content Include="Assets\Emoji\Separated\1f50d.png" />
+    <Content Include="Assets\Emoji\Separated\1f50e.png" />
+    <Content Include="Assets\Emoji\Separated\1f50f.png" />
+    <Content Include="Assets\Emoji\Separated\1f510.png" />
+    <Content Include="Assets\Emoji\Separated\1f511.png" />
+    <Content Include="Assets\Emoji\Separated\1f512.png" />
+    <Content Include="Assets\Emoji\Separated\1f513.png" />
+    <Content Include="Assets\Emoji\Separated\1f514.png" />
+    <Content Include="Assets\Emoji\Separated\1f515.png" />
+    <Content Include="Assets\Emoji\Separated\1f516.png" />
+    <Content Include="Assets\Emoji\Separated\1f517.png" />
+    <Content Include="Assets\Emoji\Separated\1f518.png" />
+    <Content Include="Assets\Emoji\Separated\1f519.png" />
+    <Content Include="Assets\Emoji\Separated\1f51a.png" />
+    <Content Include="Assets\Emoji\Separated\1f51b.png" />
+    <Content Include="Assets\Emoji\Separated\1f51c.png" />
+    <Content Include="Assets\Emoji\Separated\1f51d.png" />
+    <Content Include="Assets\Emoji\Separated\1f51e.png" />
+    <Content Include="Assets\Emoji\Separated\1f51f.png" />
+    <Content Include="Assets\Emoji\Separated\1f520.png" />
+    <Content Include="Assets\Emoji\Separated\1f521.png" />
+    <Content Include="Assets\Emoji\Separated\1f522.png" />
+    <Content Include="Assets\Emoji\Separated\1f523.png" />
+    <Content Include="Assets\Emoji\Separated\1f524.png" />
+    <Content Include="Assets\Emoji\Separated\1f525.png" />
+    <Content Include="Assets\Emoji\Separated\1f526.png" />
+    <Content Include="Assets\Emoji\Separated\1f527.png" />
+    <Content Include="Assets\Emoji\Separated\1f528.png" />
+    <Content Include="Assets\Emoji\Separated\1f529.png" />
+    <Content Include="Assets\Emoji\Separated\1f52a.png" />
+    <Content Include="Assets\Emoji\Separated\1f52b.png" />
+    <Content Include="Assets\Emoji\Separated\1f52c.png" />
+    <Content Include="Assets\Emoji\Separated\1f52d.png" />
+    <Content Include="Assets\Emoji\Separated\1f52e.png" />
+    <Content Include="Assets\Emoji\Separated\1f52f.png" />
+    <Content Include="Assets\Emoji\Separated\1f530.png" />
+    <Content Include="Assets\Emoji\Separated\1f531.png" />
+    <Content Include="Assets\Emoji\Separated\1f532.png" />
+    <Content Include="Assets\Emoji\Separated\1f533.png" />
+    <Content Include="Assets\Emoji\Separated\1f534.png" />
+    <Content Include="Assets\Emoji\Separated\1f535.png" />
+    <Content Include="Assets\Emoji\Separated\1f536.png" />
+    <Content Include="Assets\Emoji\Separated\1f537.png" />
+    <Content Include="Assets\Emoji\Separated\1f538.png" />
+    <Content Include="Assets\Emoji\Separated\1f539.png" />
+    <Content Include="Assets\Emoji\Separated\1f53a.png" />
+    <Content Include="Assets\Emoji\Separated\1f53b.png" />
+    <Content Include="Assets\Emoji\Separated\1f53c.png" />
+    <Content Include="Assets\Emoji\Separated\1f53d.png" />
+    <Content Include="Assets\Emoji\Separated\1f550.png" />
+    <Content Include="Assets\Emoji\Separated\1f551.png" />
+    <Content Include="Assets\Emoji\Separated\1f552.png" />
+    <Content Include="Assets\Emoji\Separated\1f553.png" />
+    <Content Include="Assets\Emoji\Separated\1f554.png" />
+    <Content Include="Assets\Emoji\Separated\1f555.png" />
+    <Content Include="Assets\Emoji\Separated\1f556.png" />
+    <Content Include="Assets\Emoji\Separated\1f557.png" />
+    <Content Include="Assets\Emoji\Separated\1f558.png" />
+    <Content Include="Assets\Emoji\Separated\1f559.png" />
+    <Content Include="Assets\Emoji\Separated\1f55a.png" />
+    <Content Include="Assets\Emoji\Separated\1f55b.png" />
+    <Content Include="Assets\Emoji\Separated\1f55c.png" />
+    <Content Include="Assets\Emoji\Separated\1f55d.png" />
+    <Content Include="Assets\Emoji\Separated\1f55e.png" />
+    <Content Include="Assets\Emoji\Separated\1f55f.png" />
+    <Content Include="Assets\Emoji\Separated\1f560.png" />
+    <Content Include="Assets\Emoji\Separated\1f561.png" />
+    <Content Include="Assets\Emoji\Separated\1f562.png" />
+    <Content Include="Assets\Emoji\Separated\1f563.png" />
+    <Content Include="Assets\Emoji\Separated\1f564.png" />
+    <Content Include="Assets\Emoji\Separated\1f565.png" />
+    <Content Include="Assets\Emoji\Separated\1f566.png" />
+    <Content Include="Assets\Emoji\Separated\1f567.png" />
+    <Content Include="Assets\Emoji\Separated\1f5fb.png" />
+    <Content Include="Assets\Emoji\Separated\1f5fc.png" />
+    <Content Include="Assets\Emoji\Separated\1f5fd.png" />
+    <Content Include="Assets\Emoji\Separated\1f5fe.png" />
+    <Content Include="Assets\Emoji\Separated\1f5ff.png" />
+    <Content Include="Assets\Emoji\Separated\1f600.png" />
+    <Content Include="Assets\Emoji\Separated\1f601.png" />
+    <Content Include="Assets\Emoji\Separated\1f602.png" />
+    <Content Include="Assets\Emoji\Separated\1f603.png" />
+    <Content Include="Assets\Emoji\Separated\1f604.png" />
+    <Content Include="Assets\Emoji\Separated\1f605.png" />
+    <Content Include="Assets\Emoji\Separated\1f606.png" />
+    <Content Include="Assets\Emoji\Separated\1f607.png" />
+    <Content Include="Assets\Emoji\Separated\1f608.png" />
+    <Content Include="Assets\Emoji\Separated\1f609.png" />
+    <Content Include="Assets\Emoji\Separated\1f60a.png" />
+    <Content Include="Assets\Emoji\Separated\1f60b.png" />
+    <Content Include="Assets\Emoji\Separated\1f60c.png" />
+    <Content Include="Assets\Emoji\Separated\1f60d.png" />
+    <Content Include="Assets\Emoji\Separated\1f60e.png" />
+    <Content Include="Assets\Emoji\Separated\1f60f.png" />
+    <Content Include="Assets\Emoji\Separated\1f610.png" />
+    <Content Include="Assets\Emoji\Separated\1f611.png" />
+    <Content Include="Assets\Emoji\Separated\1f612.png" />
+    <Content Include="Assets\Emoji\Separated\1f613.png" />
+    <Content Include="Assets\Emoji\Separated\1f614.png" />
+    <Content Include="Assets\Emoji\Separated\1f615.png" />
+    <Content Include="Assets\Emoji\Separated\1f616.png" />
+    <Content Include="Assets\Emoji\Separated\1f617.png" />
+    <Content Include="Assets\Emoji\Separated\1f618.png" />
+    <Content Include="Assets\Emoji\Separated\1f619.png" />
+    <Content Include="Assets\Emoji\Separated\1f61a.png" />
+    <Content Include="Assets\Emoji\Separated\1f61b.png" />
+    <Content Include="Assets\Emoji\Separated\1f61c.png" />
+    <Content Include="Assets\Emoji\Separated\1f61d.png" />
+    <Content Include="Assets\Emoji\Separated\1f61e.png" />
+    <Content Include="Assets\Emoji\Separated\1f61f.png" />
+    <Content Include="Assets\Emoji\Separated\1f620.png" />
+    <Content Include="Assets\Emoji\Separated\1f621.png" />
+    <Content Include="Assets\Emoji\Separated\1f622.png" />
+    <Content Include="Assets\Emoji\Separated\1f623.png" />
+    <Content Include="Assets\Emoji\Separated\1f624.png" />
+    <Content Include="Assets\Emoji\Separated\1f625.png" />
+    <Content Include="Assets\Emoji\Separated\1f626.png" />
+    <Content Include="Assets\Emoji\Separated\1f627.png" />
+    <Content Include="Assets\Emoji\Separated\1f628.png" />
+    <Content Include="Assets\Emoji\Separated\1f629.png" />
+    <Content Include="Assets\Emoji\Separated\1f62a.png" />
+    <Content Include="Assets\Emoji\Separated\1f62b.png" />
+    <Content Include="Assets\Emoji\Separated\1f62c.png" />
+    <Content Include="Assets\Emoji\Separated\1f62d.png" />
+    <Content Include="Assets\Emoji\Separated\1f62e.png" />
+    <Content Include="Assets\Emoji\Separated\1f62f.png" />
+    <Content Include="Assets\Emoji\Separated\1f630.png" />
+    <Content Include="Assets\Emoji\Separated\1f631.png" />
+    <Content Include="Assets\Emoji\Separated\1f632.png" />
+    <Content Include="Assets\Emoji\Separated\1f633.png" />
+    <Content Include="Assets\Emoji\Separated\1f634.png" />
+    <Content Include="Assets\Emoji\Separated\1f635.png" />
+    <Content Include="Assets\Emoji\Separated\1f636.png" />
+    <Content Include="Assets\Emoji\Separated\1f637.png" />
+    <Content Include="Assets\Emoji\Separated\1f638.png" />
+    <Content Include="Assets\Emoji\Separated\1f639.png" />
+    <Content Include="Assets\Emoji\Separated\1f63a.png" />
+    <Content Include="Assets\Emoji\Separated\1f63b.png" />
+    <Content Include="Assets\Emoji\Separated\1f63c.png" />
+    <Content Include="Assets\Emoji\Separated\1f63d.png" />
+    <Content Include="Assets\Emoji\Separated\1f63e.png" />
+    <Content Include="Assets\Emoji\Separated\1f63f.png" />
+    <Content Include="Assets\Emoji\Separated\1f640.png" />
+    <Content Include="Assets\Emoji\Separated\1f645.png" />
+    <Content Include="Assets\Emoji\Separated\1f646.png" />
+    <Content Include="Assets\Emoji\Separated\1f647.png" />
+    <Content Include="Assets\Emoji\Separated\1f648.png" />
+    <Content Include="Assets\Emoji\Separated\1f649.png" />
+    <Content Include="Assets\Emoji\Separated\1f64a.png" />
+    <Content Include="Assets\Emoji\Separated\1f64b.png" />
+    <Content Include="Assets\Emoji\Separated\1f64c.png" />
+    <Content Include="Assets\Emoji\Separated\1f64d.png" />
+    <Content Include="Assets\Emoji\Separated\1f64e.png" />
+    <Content Include="Assets\Emoji\Separated\1f64f.png" />
+    <Content Include="Assets\Emoji\Separated\1f680.png" />
+    <Content Include="Assets\Emoji\Separated\1f681.png" />
+    <Content Include="Assets\Emoji\Separated\1f682.png" />
+    <Content Include="Assets\Emoji\Separated\1f683.png" />
+    <Content Include="Assets\Emoji\Separated\1f684.png" />
+    <Content Include="Assets\Emoji\Separated\1f685.png" />
+    <Content Include="Assets\Emoji\Separated\1f686.png" />
+    <Content Include="Assets\Emoji\Separated\1f687.png" />
+    <Content Include="Assets\Emoji\Separated\1f688.png" />
+    <Content Include="Assets\Emoji\Separated\1f689.png" />
+    <Content Include="Assets\Emoji\Separated\1f68a.png" />
+    <Content Include="Assets\Emoji\Separated\1f68b.png" />
+    <Content Include="Assets\Emoji\Separated\1f68c.png" />
+    <Content Include="Assets\Emoji\Separated\1f68d.png" />
+    <Content Include="Assets\Emoji\Separated\1f68e.png" />
+    <Content Include="Assets\Emoji\Separated\1f68f.png" />
+    <Content Include="Assets\Emoji\Separated\1f690.png" />
+    <Content Include="Assets\Emoji\Separated\1f691.png" />
+    <Content Include="Assets\Emoji\Separated\1f692.png" />
+    <Content Include="Assets\Emoji\Separated\1f693.png" />
+    <Content Include="Assets\Emoji\Separated\1f694.png" />
+    <Content Include="Assets\Emoji\Separated\1f695.png" />
+    <Content Include="Assets\Emoji\Separated\1f696.png" />
+    <Content Include="Assets\Emoji\Separated\1f697.png" />
+    <Content Include="Assets\Emoji\Separated\1f698.png" />
+    <Content Include="Assets\Emoji\Separated\1f699.png" />
+    <Content Include="Assets\Emoji\Separated\1f69a.png" />
+    <Content Include="Assets\Emoji\Separated\1f69b.png" />
+    <Content Include="Assets\Emoji\Separated\1f69c.png" />
+    <Content Include="Assets\Emoji\Separated\1f69d.png" />
+    <Content Include="Assets\Emoji\Separated\1f69e.png" />
+    <Content Include="Assets\Emoji\Separated\1f69f.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a0.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a1.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a2.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a3.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a4.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a5.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a6.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a7.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a8.png" />
+    <Content Include="Assets\Emoji\Separated\1f6a9.png" />
+    <Content Include="Assets\Emoji\Separated\1f6aa.png" />
+    <Content Include="Assets\Emoji\Separated\1f6ab.png" />
+    <Content Include="Assets\Emoji\Separated\1f6ac.png" />
+    <Content Include="Assets\Emoji\Separated\1f6ad.png" />
+    <Content Include="Assets\Emoji\Separated\1f6ae.png" />
+    <Content Include="Assets\Emoji\Separated\1f6af.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b0.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b1.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b2.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b3.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b4.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b5.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b6.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b7.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b8.png" />
+    <Content Include="Assets\Emoji\Separated\1f6b9.png" />
+    <Content Include="Assets\Emoji\Separated\1f6ba.png" />
+    <Content Include="Assets\Emoji\Separated\1f6bb.png" />
+    <Content Include="Assets\Emoji\Separated\1f6bc.png" />
+    <Content Include="Assets\Emoji\Separated\1f6bd.png" />
+    <Content Include="Assets\Emoji\Separated\1f6be.png" />
+    <Content Include="Assets\Emoji\Separated\1f6bf.png" />
+    <Content Include="Assets\Emoji\Separated\1f6c0.png" />
+    <Content Include="Assets\Emoji\Separated\1f6c1.png" />
+    <Content Include="Assets\Emoji\Separated\1f6c2.png" />
+    <Content Include="Assets\Emoji\Separated\1f6c3.png" />
+    <Content Include="Assets\Emoji\Separated\1f6c4.png" />
+    <Content Include="Assets\Emoji\Separated\1f6c5.png" />
+    <Content Include="Assets\Emoji\Separated\203c-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2049-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2122.png" />
+    <Content Include="Assets\Emoji\Separated\2139-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2194-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2195-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2196-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2197-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2198-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2199-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\21a9-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\21aa-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\231a-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\231b-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\23e9.png" />
+    <Content Include="Assets\Emoji\Separated\23ea.png" />
+    <Content Include="Assets\Emoji\Separated\23eb.png" />
+    <Content Include="Assets\Emoji\Separated\23ec.png" />
+    <Content Include="Assets\Emoji\Separated\23f0.png" />
+    <Content Include="Assets\Emoji\Separated\23f3.png" />
+    <Content Include="Assets\Emoji\Separated\24c2-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25aa-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25ab-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25b6-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25c0-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25fb-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25fc-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25fd-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\25fe-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2600-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2601-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\260e-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2611-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2614-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2615-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\261d-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\263a-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2648-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2649-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\264a-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\264b-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\264c-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\264d-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\264e-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\264f-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2650-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2651-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2652-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2653-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2660-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2663-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2665-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2666-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2668-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\267b-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\267f-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2693-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26a0-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26a1-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26aa-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26ab-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26bd-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26be-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26c4-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26c5-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26ce.png" />
+    <Content Include="Assets\Emoji\Separated\26d4-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26ea-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26f2-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26f3-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26f5-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26fa-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\26fd-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2702-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2705.png" />
+    <Content Include="Assets\Emoji\Separated\2708-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2709-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\270a.png" />
+    <Content Include="Assets\Emoji\Separated\270b.png" />
+    <Content Include="Assets\Emoji\Separated\270c-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\270f-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2712-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2714-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2716-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2728.png" />
+    <Content Include="Assets\Emoji\Separated\2733-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2734-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2744-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2747-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\274c.png" />
+    <Content Include="Assets\Emoji\Separated\274e.png" />
+    <Content Include="Assets\Emoji\Separated\2753.png" />
+    <Content Include="Assets\Emoji\Separated\2754.png" />
+    <Content Include="Assets\Emoji\Separated\2755.png" />
+    <Content Include="Assets\Emoji\Separated\2757-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2764-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2795.png" />
+    <Content Include="Assets\Emoji\Separated\2796.png" />
+    <Content Include="Assets\Emoji\Separated\2797.png" />
+    <Content Include="Assets\Emoji\Separated\27a1-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\27b0.png" />
+    <Content Include="Assets\Emoji\Separated\27bf.png" />
+    <Content Include="Assets\Emoji\Separated\2934-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2935-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b05-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b06-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b07-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b1b-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b1c-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b50-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\2b55-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\3030.png" />
+    <Content Include="Assets\Emoji\Separated\303d-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\3297-fe0f.png" />
+    <Content Include="Assets\Emoji\Separated\3299-fe0f.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part5.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part5.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part6.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat3_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat3_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat3_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part5.png" />
+    <Content Include="Assets\Sounds\KbdFunction.wav" />
+    <Content Include="Assets\Sounds\KbdKeyTap.wav" />
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 с пакетом обновления 1 %28SP1%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\VirtualizedView\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>

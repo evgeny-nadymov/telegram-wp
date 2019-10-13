@@ -1,0 +1,302 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.OpenPhotoPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Name="Self"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="LightThemeBackgroundBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="DarkThemeBackgroundBrush" Color="#FF2B2B2B"/>
+        
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#FFFFFFFF"/>
+        
+        <controls:PhotoConverter x:Key="BackgroundPhotoConverter"/>
+        <converters:CountToVisibilityConverter Type="Equals" x:Key="EmptyListToVisibilityConverter"/>
+        <Style x:Key="LongListSelectorStyle1" TargetType="phone:LongListSelector">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="phone:LongListSelector">
+                        <Grid Background="{TemplateBinding Background}" d:DesignWidth="480" d:DesignHeight="800">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ScrollStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Scrolling">
+                                        <Storyboard>
+                                            <!--<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>-->
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="NotScrolling"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ViewportControl x:Name="ViewportControl" HorizontalContentAlignment="Stretch" VerticalAlignment="Top"/>
+                                <!--<ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Grid.Column="0" Margin="0,0,0,0" Opacity="0" Orientation="Vertical" Visibility="Collapsed"/>-->
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+            <Setter Property="Padding" Value="6,5,6,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ButtonBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" Margin="{StaticResource PhoneTouchTargetOverhang}">
+                                <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollViewerStyle1" TargetType="ScrollViewer">
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer" >
+                        <Grid Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="Canvas.Loaded">
+                                    <BeginStoryboard>
+                                        <!--<Storyboard>
+                                            <DoubleAnimation Duration="00:00:01.5" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+                                            <DoubleAnimation Duration="00:00:01.5" From="1" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+                                        </Storyboard>-->
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ScrollStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Scrolling">
+                                        <!--<Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                    <VisualState x:Name="NotScrolling"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="VerticalCompression">
+                                    <VisualState x:Name="NoVerticalCompression"/>
+                                    <VisualState x:Name="CompressionTop"/>
+                                    <VisualState x:Name="CompressionBottom"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="HorizontalCompression">
+                                    <VisualState x:Name="NoHorizontalCompression"/>
+                                    <VisualState x:Name="CompressionLeft"/>
+                                    <VisualState x:Name="CompressionRight"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                            <ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+                            <ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Width="146" Height="146" x:Name="CameraPreview" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <!--<Border Background="{StaticResource PhoneChromeBrush}" Margin="0,292,0,0"/>-->
+        <phone:LongListSelector 
+            x:Name="Photos" 
+            ManipulationStarted="Photos_OnManipulationStarted"
+            ManipulationDelta="Photos_OnManipulationDelta"
+            ManipulationCompleted="Photos_OnManipulationCompleted"
+            Style="{StaticResource LongListSelectorStyle1}">
+            <phone:LongListSelector.RenderTransform>
+                <TranslateTransform/>
+            </phone:LongListSelector.RenderTransform>
+
+            <phone:LongListSelector.ListHeader>
+                <Grid Height="300" Background="Transparent" Tap="UIElement_OnTap">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ListBox
+                        x:Name="Folders"
+                        Width="480"
+                        Grid.Row="1"
+                        Margin="0,-1,0,-1"
+                        Background="{StaticResource BackgroundBrush}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        ItemContainerStyle="{StaticResource W10MPivotHeaderItemStyle}"
+                        SelectionChanged="Folders_OnSelectionChanged"
+                        Tap="Folders_OnTap">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="ListBox">
+                                <ScrollViewer x:Name="ScrollViewer" Style="{StaticResource ScrollViewerStyle1}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter Margin="0,0,18,0"/>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.RenderTransform>
+                            <TranslateTransform x:Name="FoldersTransform"/>
+                        </ListBox.RenderTransform>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="Transparent" Tap="Album_OnTap">
+                                    <TextBlock Foreground="{StaticResource PhoneForegroundBrush}" Margin="18,18,0,0" Text="{Binding Name, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Border Tap="Folders_OnTap" Grid.Row="2" MinHeight="18" VerticalAlignment="Bottom" Background="{StaticResource BackgroundBrush}">
+                        <TextBlock Text="{Binding Resources.NoMediaHere, Source={StaticResource Strings}}" Margin="18,12,18,0" Foreground="{StaticResource PhoneForegroundBrush}" Visibility="{Binding ItemsSource.Count, ElementName=Photos, Converter={StaticResource EmptyListToVisibilityConverter}, ConverterParameter='0', FallbackValue=Collapsed}" FontSize="27"/>
+                    </Border>
+                </Grid>
+            </phone:LongListSelector.ListHeader>
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="{StaticResource BackgroundBrush}" Height="151" Margin="0,-1,0,-1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="18"/>
+                        </Grid.ColumnDefinitions>
+
+                        <controls:PhotoControl
+                            Grid.Column="1"
+                            File="{Binding File1}"
+                            Source="{Binding File1.Self, Converter={StaticResource BackgroundPhotoConverter}}"
+                            Index="{Binding File1.Index}"
+                            IsSelected="{Binding File1.IsSelected, FallbackValue=false}"
+                            MouseEnter="PhotoControl_OnMouseEnter" Tap="PhotoControl_OnTap"
+                            Margin="0,0,0,3"/>
+
+                        <controls:PhotoControl
+                            Grid.Column="3"
+                            File="{Binding File2}"
+                            Source="{Binding File2.Self, Converter={StaticResource BackgroundPhotoConverter}}"
+                            Index="{Binding File2.Index}"
+                            IsSelected="{Binding File2.IsSelected, FallbackValue=false}"
+                            MouseEnter="PhotoControl_OnMouseEnter" Tap="PhotoControl_OnTap"
+                            Margin="0,0,0,3"/>
+
+                        <controls:PhotoControl
+                            Grid.Column="5"
+                            File="{Binding File3}"
+                            Source="{Binding File3.Self, Converter={StaticResource BackgroundPhotoConverter}}"
+                            Index="{Binding File3.Index}"
+                            IsSelected="{Binding File3.IsSelected, FallbackValue=false}"
+                            MouseEnter="PhotoControl_OnMouseEnter" Tap="PhotoControl_OnTap"
+                            Margin="0,0,0,3"/>
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+            <phone:LongListSelector.ListFooterTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent">
+                        <Border Height="800" Margin="0,0,0,-784" VerticalAlignment="Bottom" Background="{StaticResource BackgroundBrush}"/>
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.ListFooterTemplate>
+        </phone:LongListSelector>
+
+        <Border x:Name="MorePanel" Grid.Row="0" Visibility="Collapsed" CacheMode="BitmapCache" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <CompositeTransform/>
+            </Border.RenderTransform>
+        </Border>
+        <Grid x:Name="Bar" Grid.Row="1">
+            <Grid.RenderTransform>
+                <TranslateTransform/>
+            </Grid.RenderTransform>
+            <controls:TelegramApplicationBar
+                x:Name="AppBar"
+                VerticalAlignment="Bottom"
+                MorePanel="{Binding ElementName=MorePanel}">
+                <controls:TelegramApplicationBar.Buttons>
+                    <controls:TelegramAppBarButton
+                        IsEnabled="False"
+                        Grid.Column="3" 
+                        Tap="ChooseButton_OnClick"
+                        ImageSource="/Images/W10M/ic_send_2x.png"
+                        Text="{Binding Resources.Attach, Source={StaticResource Strings}}"
+                        LabelForeground="{StaticResource TelegramBadgeAccentBrush}"/>
+                </controls:TelegramApplicationBar.Buttons>
+            </controls:TelegramApplicationBar>
+        </Grid>
+    </Grid>
+</UserControl>

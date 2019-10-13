@@ -1,0 +1,114 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.SnapshotsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="TELEGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="snapshots" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTelegramTitle1Style}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="12,0,-12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="1" Text="{Binding State.Seq, StringFormat='Seq \{0\}'}"/>
+                <TextBlock Grid.Row="2" Text="{Binding State.Pts, StringFormat='Pts \{0\}'}"/>
+                <TextBlock Grid.Row="3" Text="{Binding State.Qts, StringFormat='Qts \{0\}'}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding State.UnreadCount, StringFormat='UnreadCount \{0\}'}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding State.Date, StringFormat='Date \{0\}', Converter={StaticResource MessageDateTimeConverter}}"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Difference.Count, StringFormat='Difference \{0\}'}"/>
+
+            </Grid>
+            <ListBox x:Name="Items" Grid.Row="1" Margin="12,0,-12,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Items}">
+                                    <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Delete($DataContext)]" Header="{Binding Resources.Delete, Source={StaticResource Strings}}"/>
+                                    <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Apply($DataContext)]" Header="{Binding Resources.Set, Source={StaticResource Strings}}"/>
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                            <TextBlock Grid.Row="1" Text="{Binding State.Seq, StringFormat='Seq \{0\}'}"/>
+                            <TextBlock Grid.Row="2" Text="{Binding State.Pts, StringFormat='Pts \{0\}'}"/>
+                            <TextBlock Grid.Row="3" Text="{Binding State.Qts, StringFormat='Qts \{0\}'}"/>
+                            <TextBlock Grid.Row="4" Text="{Binding State.UnreadCount, StringFormat='UnreadCount \{0\}'}"/>
+                            <TextBlock Grid.Row="5" Text="{Binding State.Date, StringFormat='Date \{0\}', Converter={StaticResource MessageDateTimeConverter}}"/>
+                            <TextBlock Grid.Row="6" Text="{Binding DifferenceString, StringFormat='Difference \{0\}'}" Foreground="Red"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

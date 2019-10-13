@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.DialogControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="146" d:DesignWidth="72">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" IsHitTestVisible="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <views:ConversationTileControl
+            x:Name="Tile"
+            Size="72" Margin="0,18,0,12" Grid.Row="0"
+            IsHitTestVisible="False"/>
+        
+        <TextBlock 
+            IsHitTestVisible="True" 
+            Grid.Row="1" 
+            x:Name="Title" 
+            Margin="-9,-10,-9,2"
+            MaxHeight="48"
+            Text=""
+            TextAlignment="Center" 
+            TextWrapping="Wrap" 
+            TextTrimming="WordEllipsis" 
+            Foreground="{StaticResource PhoneForegroundBrush}"
+            FontSize="18"/>
+
+        <Grid Width="72">
+            <controls:SelectionControl 
+                RenderTransformOrigin="0.5,0.5" 
+                x:Name="SelectionControl" 
+                SuppressAnimation="True" 
+                Margin="-6,6" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top" 
+                IsHitTestVisible="False">
+                <controls:SelectionControl.RenderTransform>
+                    <ScaleTransform ScaleX="0.875" ScaleY="0.875"/>
+                </controls:SelectionControl.RenderTransform>
+            </controls:SelectionControl>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush Color="#3F83B1" x:Key="TelegramBrush"/>
+    <SolidColorBrush Color="#1989CD" x:Key="TelegramAccentBrush"/>
+    <SolidColorBrush Color="#BEC2C7" x:Key="TelegramBadgeSubtleBrush"/>
+    <SolidColorBrush Color="#29B6F6" x:Key="TelegramBadgeAccentBrush"/>
+    <SolidColorBrush Color="#1E93DA" x:Key="TelegramTextAccentBrush"/>
+    <SolidColorBrush Color="#E94652" x:Key="TelegramTextRedBrush"/>
+    
+
+    <!--<system:Int32 x:Key="TelegramFontSizeNormal">23</system:Int32>
+    <system:Int32 x:Key="TelegramFontSizeSmall">20</system:Int32>-->
+</ResourceDictionary>

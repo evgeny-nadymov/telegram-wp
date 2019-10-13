@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.StickerPreviewMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+
+
+        <Storyboard x:Name="OpenStoryboard" Completed="OpenStoryboard_OnCompleted">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                        <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Visible</Visibility>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="CloseStoryboard" Completed="CloseStoryboard_OnCompleted">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="90">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn" Exponent="3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.25">
+                        <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Collapsed</Visibility>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <Grid.Projection>
+            <PlaneProjection/>
+        </Grid.Projection>
+        <Grid Margin="12,25,12,25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListBoxItem Tap="Send_OnTap">
+                <TextBlock Margin="12,0,12,12" Text="{Binding Resources.Send, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextLargeStyle}" />
+            </ListBoxItem>
+            <ListBoxItem Grid.Row="1" x:Name="OpenPackButton" Tap="OpenPack_OnTap">
+                <TextBlock Margin="12,0,12,12" Text="{Binding Resources.Pack, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextLargeStyle}" />
+            </ListBoxItem>
+            <ListBoxItem Grid.Row="2" Tap="ChangeFaved_OnTap">
+                <TextBlock x:Name="SwitchFavedStickerLabel" Margin="12,0,12,12" Text="{Binding Resources.AddToFavorites, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextLargeStyle}" />
+            </ListBoxItem>
+            <!--<ListBoxItem Grid.Row="2" Tap="Cancel_OnTap">
+                <TextBlock Margin="12,0,12,12" Text="{Binding Resources.Cancel, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextLargeStyle}" />
+            </ListBoxItem>-->
+        </Grid>
+    </Grid>
+</UserControl>

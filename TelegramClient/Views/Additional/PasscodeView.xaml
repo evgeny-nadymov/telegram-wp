@@ -1,0 +1,117 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.PasscodeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True" d:DesignHeight="768" d:DesignWidth="480">
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.Passcode, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="6,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <toolkit:ToggleSwitch Margin="0,18,-29,-21" Grid.Row="0" IsChecked="{Binding PasscodeEnabled, Mode=TwoWay}" Header="{Binding Resources.Passcode, Source={StaticResource Strings}}">
+                <i:Interaction.Behaviors>
+                    <behaviors:ToggleSwitchLocalizedContentBehavior
+                                OnContent="{Binding Resources.On, Source={StaticResource Strings}}"
+                                OffContent="{Binding Resources.Off, Source={StaticResource Strings}}"/>
+                </i:Interaction.Behaviors>
+            </toolkit:ToggleSwitch>
+            <TextBlock Grid.Row="1" Margin="12,11,12,0" Text="{Binding Resources.ChangePasscodeHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+
+            <Grid Grid.Row="2" Visibility="{Binding PasscodeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Margin="0,22,0,0" x:Name="ChangePasscode" Padding="12,2,12,6 " HorizontalAlignment="Left" Content="{Binding Resources.ChangePasscode, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+
+                <StackPanel Grid.Row="1" Margin="0,24,0,0">
+                    <toolkit:ListPicker
+                        ExpansionMode="FullScreenOnly"
+                        Header="{Binding Resources.Autolock, Source={StaticResource Strings}}"
+                        Margin="12,-10,12,0"
+                        ItemsSource="{Binding AutolockSpans}"
+                        SelectedItem="{Binding SelectedAutolockSpan, Mode=TwoWay}"
+                        FullModeHeader="{Binding Resources.Autolock, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}">
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description, Converter={StaticResource Lowercase}}"/>
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,12" Text="{Binding Description, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
+                    </toolkit:ListPicker>
+                </StackPanel>
+                <TextBlock Grid.Row="2" Margin="12,11,12,0" Text="{Binding Resources.PasscodeAutolockHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+
+
+                <!--<toolkit:ToggleSwitch Margin="0,37,-29,-21" Grid.Row="1" IsChecked="{Binding StateService.IsSimplePasscode, Mode=TwoWay}" Header="{Binding Resources.SimplePasscode, Source={StaticResource Strings}}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:ToggleSwitchLocalizedContentBehavior
+                                OnContent="{Binding Resources.On, Source={StaticResource Strings}}"
+                                OffContent="{Binding Resources.Off, Source={StaticResource Strings}}"/>
+                    </i:Interaction.Behaviors>
+                </toolkit:ToggleSwitch>
+                <TextBlock Grid.Row="2" Margin="12,43,12,0" Text="{Binding Resources.SimplePasscodeHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>-->
+            </Grid>
+        </Grid>
+    </Grid>
+</views:TelegramViewBase>

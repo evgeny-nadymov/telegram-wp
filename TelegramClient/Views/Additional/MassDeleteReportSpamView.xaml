@@ -1,0 +1,24 @@
+﻿<UserControl
+    x:Class="TelegramClient.Views.Additional.MassDeleteReportSpamView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False" d:DesignHeight="800" d:DesignWidth="480">
+
+    <Grid x:Name="ContentPanel" Background="{StaticResource PhoneChromeBrush}">
+        <ItemsControl Margin="0,0,0,0">
+            <CheckBox IsChecked="{Binding DeleteMessages, Mode=TwoWay}" Background="Transparent" Content="{Binding Resources.DeleteMessages, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+            <CheckBox IsChecked="{Binding BanUser, Mode=TwoWay}" Background="Transparent" Content="{Binding Resources.BanUser, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+            <CheckBox IsChecked="{Binding ReportSpam, Mode=TwoWay}" Background="Transparent" Content="{Binding Resources.ReportSpam, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+            <CheckBox IsChecked="{Binding DeleteAllMessages, Mode=TwoWay}" Background="Transparent" Content="{Binding DeleteAllFromString}"/>
+        </ItemsControl>
+    </Grid>
+</UserControl>

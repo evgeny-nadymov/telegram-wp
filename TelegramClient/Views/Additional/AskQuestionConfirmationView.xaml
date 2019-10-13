@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="TelegramClient.Views.Additional.AskQuestionConfirmationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Name="OpenStoryboard">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="ContentPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-90"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                            <DiscreteObjectKeyFrame.Value>
+                                <Visibility>Visible</Visibility>
+                            </DiscreteObjectKeyFrame.Value>
+                        </DiscreteObjectKeyFrame>
+                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Name="CloseStoryboard">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="ContentPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="90">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseIn" Exponent="3"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                            <DiscreteObjectKeyFrame.Value>
+                                <Visibility>Collapsed</Visibility>
+                            </DiscreteObjectKeyFrame.Value>
+                        </DiscreteObjectKeyFrame>
+                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
+    <Grid Background="#99000000" x:Name="LayoutRoot" Visibility="Collapsed" Tap="LayoutRoot_OnTap">
+        <i:Interaction.Triggers>
+            <ec:DataTrigger Binding="{Binding IsOpen}" Value="True" Comparison="Equal">
+                <eim:ControlStoryboardAction Storyboard="{StaticResource OpenStoryboard}"/>
+            </ec:DataTrigger>
+            <ec:DataTrigger Binding="{Binding IsOpen}" Value="False" Comparison="Equal">
+                <eim:ControlStoryboardAction Storyboard="{StaticResource CloseStoryboard}"/>
+            </ec:DataTrigger>
+        </i:Interaction.Triggers>
+        
+        <Grid x:Name="ContentPanel" VerticalAlignment="Top" Tap="ContentPanel_OnTap" Background="{StaticResource PhoneChromeBrush}">
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
+            <Grid Margin="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RichTextBox Grid.ColumnSpan="2" Margin="0,40" Padding="0" IsReadOnly="True">
+                    <Paragraph>
+                        <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.AskAQuestionPart1, Source={StaticResource Strings}}"/>
+                        <Hyperlink NavigateUri="{Binding TelegramFaq}" TargetName="_blank" Foreground="{StaticResource PhoneAccentBrush}">
+                            <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.AskAQuestionPart2, Source={StaticResource Strings}}"/>
+                        </Hyperlink>
+                        <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.AskAQuestionPart3, Source={StaticResource Strings}}"/>
+                        <Hyperlink NavigateUri="{Binding TelegramTroubleshooting}" TargetName="_blank">
+                            <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.AskAQuestionPart4, Source={StaticResource Strings}}"/>
+                        </Hyperlink>
+                        <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.AskAQuestionPart5, Source={StaticResource Strings}}"/>
+                    </Paragraph>
+                </RichTextBox>
+
+                <Button Grid.Row="1" Grid.Column="0" Click="OkButton_OnClick" Content="{Binding Resources.Ok, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+                <Button Grid.Row="1" Grid.Column="1" Click="CancelButton_OnClick" Content="{Binding Resources.Cancel, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,214 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.ProxyListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    xmlns:cal="http://www.caliburnproject.org"
+    xmlns:additional="clr-namespace:TelegramClient.Views.Additional"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Main"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True" 
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <views:TelegramViewBase.Resources>
+        <additional:ProxyToForegroundConverter 
+            x:Key="ProxyToForegroundConverter"
+            AccentBrush="{StaticResource TelegramBadgeAccentBrush}"
+            AvailableBrush="ForestGreen"
+            UnavailableBrush="#FFB2362E"
+            RegularBrush="{StaticResource PhoneSubtleBrush}"/>
+        <additional:ProxyToStatusConverter
+            x:Key="ProxyToStatusConverter"/>
+        <additional:ProxyTypeToStringConverter x:Key="ProxyTypeToStringConverter"/>
+    </views:TelegramViewBase.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.Proxy, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Image HorizontalAlignment="Right" x:Name="ShareMenuIcon" Source="/Images/W10M/ic_share_2x.png" Grid.Row="0" Width="32" Height="32" Margin="18,51,18,21" VerticalAlignment="Top" Tap="ShareIcon_OnTap"/>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <longListSelector:LongListSelector
+                toolkit:TiltEffect.SuppressTilt="True"
+                Margin="6,0,0,0" 
+                ItemsSource="{Binding Items}"
+                Background="Transparent"
+                IsFlatList="True">
+                <longListSelector:LongListSelector.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel VirtualizationMode="Recycling"/>
+                    </ItemsPanelTemplate>
+                </longListSelector:LongListSelector.ItemsPanel>
+                <longListSelector:LongListSelector.ListHeaderTemplate>
+                    <DataTemplate>
+                        <Grid DataContext="{Binding DataContext, ElementName=Main}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <toolkit:ToggleSwitch Margin="0,12,-24,0" IsChecked="{Binding IsEnabled, Mode=TwoWay}" Header="">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:ToggleSwitchLocalizedContentBehavior
+                                        OnContent="{Binding Resources.UseProxy, Source={StaticResource Strings}}"
+                                        OffContent="{Binding Resources.UseProxy, Source={StaticResource Strings}}"/>
+                                </i:Interaction.Behaviors>
+                            </toolkit:ToggleSwitch>
+
+                            <TextBlock Grid.Row="1" Margin="12,0,-12,14" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Connections, Source={StaticResource Strings}}"/>
+                            <!--<TextBlock Grid.Row="2" Margin="6,0,0,14" Text="{Binding Status}" Visibility="{Binding Status, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>-->
+                        </Grid>
+                    </DataTemplate>
+                </longListSelector:LongListSelector.ListHeaderTemplate>
+                <longListSelector:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <ListBoxItem toolkit:TiltEffect.SuppressTilt="False">
+                            <Grid Margin="0,12">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=Main}">
+                                        <toolkit:MenuItem cal:Message.Attach="[Event Click] = [Action Delete($DataContext)]" Header="{Binding Resources.Delete, Source={StaticResource Strings}}" />                                   
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid  
+                                    Margin="12,0,0,0"
+                                    Background="Transparent" 
+                                    cal:Message.Attach="[Event Tap] = [Action Select($DataContext)]">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Margin="0" TextTrimming="WordEllipsis" Text="{Binding About, Converter={StaticResource NonBreakingStringConverter}}" FontSize="27"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Margin="0" Text="{Binding Self, Converter={StaticResource ProxyToStatusConverter}}" Foreground="{Binding Self, Converter={StaticResource ProxyToForegroundConverter}}" FontSize="20"/>
+                                        <TextBlock Grid.Column="1" Margin="0" Text="{Binding Converter={StaticResource ProxyTypeToStringConverter}, StringFormat=' (\{0\}'}" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="20"/>
+                                        <TextBlock Grid.Column="2" Margin="0" Text="{Binding Ping, StringFormat=', ping: \{0\} ms'}" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="20"/>
+                                        <TextBlock Grid.Column="3" Margin="0" Text=")" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="20"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Column="1"
+                                    Background="Transparent"
+                                    cal:Message.Attach="[Event Tap] = [Action Open($DataContext)]">
+                                    <Border
+                                        Width="32" 
+                                        Height="32" Margin="18,16,18,16" 
+                                        Background="{StaticResource PhoneForegroundBrush}">
+                                        <Border.OpacityMask>
+                                            <ImageBrush ImageSource="/Images/W10M/ic_bio_2x.png"/>
+                                        </Border.OpacityMask>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </ListBoxItem>
+                    </DataTemplate>
+                </longListSelector:LongListSelector.ItemTemplate>
+                <longListSelector:LongListSelector.ListFooterTemplate>
+                    <DataTemplate>
+                        <StackPanel DataContext="{Binding DataContext, ElementName=Main}" Margin="0,0,0,72">
+                            <Button toolkit:TiltEffect.SuppressTilt="False" Margin="-6,-6,-12,0" Tap="Add_OnTap" Style="{StaticResource ProfileButtonStyle}" Visibility="{Binding Converter={StaticResource WP8VisibilityConverter}}">
+                                <TextBlock Margin="12,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.AddProxy, Source={StaticResource Strings}}"/>
+                            </Button>
+                            <toolkit:ToggleSwitch Margin="0,0,-24,0" IsChecked="{Binding UseForCalls, Mode=TwoWay}" Header="">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:ToggleSwitchLocalizedContentBehavior
+                                        OnContent="{Binding Resources.UseProxyForCalls, Source={StaticResource Strings}}"
+                                        OffContent="{Binding Resources.UseProxyForCalls, Source={StaticResource Strings}}"/>
+                                </i:Interaction.Behaviors>
+                            </toolkit:ToggleSwitch>
+                            <TextBlock Margin="12,0,12,0" Text="{Binding Resources.UseProxyForCallsHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </longListSelector:LongListSelector.ListFooterTemplate>
+            </longListSelector:LongListSelector>
+        </Grid>
+
+        <Border x:Name="MorePanel" Grid.Row="1" Visibility="Collapsed" CacheMode="BitmapCache" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <CompositeTransform/>
+            </Border.RenderTransform>
+        </Border>
+        <Grid x:Name="Bar" Grid.Row="1" Visibility="Collapsed">
+            <Grid.RenderTransform>
+                <TranslateTransform/>
+            </Grid.RenderTransform>
+            <controls1:TelegramApplicationBar
+                x:Name="AppBar"
+                VerticalAlignment="Bottom"
+                MorePanel="{Binding ElementName=MorePanel}">
+                <controls1:TelegramApplicationBar.Buttons>
+                    <controls1:TelegramAppBarButton
+                        IsEnabled="True"
+                        Grid.Column="3" 
+                        Tap="DoneButton_OnClick"
+                        ImageSource="/Images/W10M/ic_done_2x.png"
+                        Text="{Binding Resources.Done, Source={StaticResource Strings}}"/>
+                </controls1:TelegramApplicationBar.Buttons>
+            </controls1:TelegramApplicationBar>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

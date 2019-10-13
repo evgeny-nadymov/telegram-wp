@@ -1,0 +1,347 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.ShareMessagePicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    xmlns:controls1="clr-namespace:Telegram.Controls;assembly=Telegram.Controls"
+    xmlns:telegramClient="clr-namespace:TelegramClient"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Name="Self"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="LightThemeBackgroundBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="DarkThemeBackgroundBrush" Color="#FF2B2B2B"/>
+
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="TransaprentBackgroundBrush" Color="#66000000"/>
+
+        <controls:PhotoConverter x:Key="BackgroundPhotoConverter"/>
+        <converters:CountToVisibilityConverter Type="Equals" x:Key="EmptyListToVisibilityConverter"/>
+        <Style x:Key="LongListSelectorStyle1" TargetType="phone:LongListSelector">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="phone:LongListSelector">
+                        <Grid Background="{TemplateBinding Background}" d:DesignWidth="480" d:DesignHeight="800">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ScrollStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Scrolling">
+                                        <Storyboard>
+                                            <!--<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>-->
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="NotScrolling"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ViewportControl x:Name="ViewportControl" HorizontalContentAlignment="Stretch" VerticalAlignment="Top"/>
+                                <!--<ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Grid.Column="0" Margin="0,0,0,0" Opacity="0" Orientation="Vertical" Visibility="Collapsed"/>-->
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="WatermarkedTextBoxStyle1" TargetType="controls1:WatermarkedTextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontSize" Value="23"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="SelectionBackground" Value="Transparent"/>
+            <Setter Property="SelectionForeground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="18,12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls1:WatermarkedTextBox">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ReadOnly">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DisabledOrReadonlyContent">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxReadOnlyBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="EnabledBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="EnabledBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="EnabledBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="0">
+                                <Grid>
+                                    <ContentControl x:Name="WatermarkContent" Background="Transparent" Content="{TemplateBinding Watermark}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" Opacity="0.5" Style="{TemplateBinding WatermarkStyle}"/>
+                                    <ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
+                                </Grid>
+                            </Border>
+                            <Border x:Name="DisabledOrReadonlyBorder" BorderBrush="{StaticResource PhoneDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed">
+                                <TextBox x:Name="DisabledOrReadonlyContent" Background="Transparent" Foreground="{StaticResource PhoneDisabledBrush}" FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" IsReadOnly="True" SelectionForeground="{TemplateBinding SelectionForeground}" SelectionBackground="{TemplateBinding SelectionBackground}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" Text="{TemplateBinding Text}" Template="{StaticResource PhoneDisabledTextBoxTemplate}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <telegramClient:LongListSelectorEx
+            x:Name="Dialogs"
+            LayoutMode="List"
+            IsGroupingEnabled="True"
+            Margin="0,32,0,0"
+            ViewportChanged="Dialogs_OnViewportChanged"
+            ManipulationStarted="Photos_OnManipulationStarted"
+            ManipulationDelta="Dialogs_OnManipulationDelta"
+            ManipulationCompleted="Photos_OnManipulationCompleted"
+            CloseToEnd="Dialogs_OnCloseToEnd"
+            Style="{StaticResource LongListSelectorStyle1}">
+            <phone:LongListSelector.RenderTransform>
+                <TranslateTransform/>
+            </phone:LongListSelector.RenderTransform>
+            <phone:LongListSelector.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Grid VerticalAlignment="Bottom" Background="{StaticResource BackgroundBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Border Grid.Row="2" Height="2" Background="#77ACAFB3" Margin="0,0,0,0"/>
+                        <Border Grid.Row="3" Visibility="{Binding Rows.Count, ElementName=Self, Converter={StaticResource EmptyListToVisibilityConverter}, ConverterParameter='0', FallbackValue=Collapsed}">
+                            <TextBlock Text="{Binding Resources.NoResults, Source={StaticResource Strings}}" Margin="18,12,18,0" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="27"/>
+                        </Border>
+
+                        <controls1:WatermarkedTextBox Tag="Search" Style="{StaticResource WatermarkedTextBoxStyle1}" Grid.Row="1" GotFocus="UIElement_OnGotFocus" LostFocus="UIElement_OnLostFocus" Text="{Binding Text, ElementName=Self, Mode=TwoWay}" Watermark="{Binding Resources.Search, Source={StaticResource Strings}, StringFormat='\{0\}...'}">
+                            <controls1:WatermarkedTextBox.CaretBrush>
+                                <SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
+                            </controls1:WatermarkedTextBox.CaretBrush>
+                            <controls1:WatermarkedTextBox.InputScope>
+                                <InputScope>
+                                    <InputScopeName NameValue="Search"/>
+                                </InputScope>
+                            </controls1:WatermarkedTextBox.InputScope>
+                            <i:Interaction.Behaviors>
+                                <behaviors:UpdateTextBindingBehavior/>
+                            </i:Interaction.Behaviors>
+                        </controls1:WatermarkedTextBox>
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.GroupHeaderTemplate>
+            <phone:LongListSelector.ListHeader>
+                <Grid Height="300" Background="Transparent" Tap="ListHeader_OnTap"/>
+            </phone:LongListSelector.ListHeader>
+            <phone:LongListSelector.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="MainGrid" Background="{StaticResource BackgroundBrush}" Margin="0,-1,0,-1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="18"/>
+                        </Grid.ColumnDefinitions>
+
+                        <controls:DialogControl 
+                            Grid.Column="1" 
+                            DataContext="{Binding Dialog1}"
+                            Object="{Binding Dialog.With}"
+                            Fill="{Binding Dialog.With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                            Text="{Binding Dialog.With, Converter={StaticResource PlaceholderDefaultTextConverter}}"
+                            Source="{Binding Dialog.With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                            ShortName="{Binding Dialog.With.FullName}"
+                            IsSelected="{Binding IsSelected, FallbackValue=false}"
+                            Tap="DialogControl_OnTap"
+                            MouseEnter="DialogControl_OnMouseEnter"
+                            SelectedBorderBrush="White"
+                            UnselectedBorderBrush="Transparent" />
+
+                        <controls:DialogControl Grid.Column="3" 
+                            DataContext="{Binding Dialog2}"
+                            Object="{Binding Dialog.With}"
+                            Fill="{Binding Dialog.With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                            Text="{Binding Dialog.With, Converter={StaticResource PlaceholderDefaultTextConverter}}"
+                            Source="{Binding Dialog.With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                            ShortName="{Binding Dialog.With.FullName}"
+                            IsSelected="{Binding IsSelected, FallbackValue=false}"
+                            Tap="DialogControl_OnTap"
+                            MouseEnter="DialogControl_OnMouseEnter"
+                            SelectedBorderBrush="White"
+                            UnselectedBorderBrush="Transparent" />
+
+                        <controls:DialogControl Grid.Column="5" 
+                            DataContext="{Binding Dialog3}"
+                            Object="{Binding Dialog.With}"
+                            Fill="{Binding Dialog.With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                            Text="{Binding Dialog.With, Converter={StaticResource PlaceholderDefaultTextConverter}}"
+                            Source="{Binding Dialog.With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                            ShortName="{Binding Dialog.With.FullName}"
+                            IsSelected="{Binding IsSelected, FallbackValue=false}"
+                            Tap="DialogControl_OnTap"
+                            MouseEnter="DialogControl_OnMouseEnter"
+                            SelectedBorderBrush="White"
+                            UnselectedBorderBrush="Transparent" />
+
+                        <controls:DialogControl Grid.Column="7" 
+                            DataContext="{Binding Dialog4}"
+                            Object="{Binding Dialog.With}"
+                            Fill="{Binding Dialog.With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                            Text="{Binding Dialog.With, Converter={StaticResource PlaceholderDefaultTextConverter}}"
+                            Source="{Binding Dialog.With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                            ShortName="{Binding Dialog.With.FullName}"
+                            IsSelected="{Binding IsSelected, FallbackValue=false}"
+                            Tap="DialogControl_OnTap"
+                            MouseEnter="DialogControl_OnMouseEnter"
+                            SelectedBorderBrush="White"
+                            UnselectedBorderBrush="Transparent" />
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.ItemTemplate>
+            <phone:LongListSelector.ListFooterTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent">
+                        <Border Height="800" Margin="0,0,0,-784" VerticalAlignment="Bottom" Background="{StaticResource BackgroundBrush}"/>
+                    </Grid>
+                </DataTemplate>
+            </phone:LongListSelector.ListFooterTemplate>
+        </telegramClient:LongListSelectorEx>
+        <TextBlock x:Name="Debug" Margin="0,100,0,0" Foreground="Green" Visibility="Collapsed" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <Grid x:Name="CommentGrid" Visibility="Collapsed" Margin="0,32,0,0" Grid.Row="0" VerticalAlignment="Bottom" Background="{StaticResource BackgroundBrush}">
+            <Grid.RenderTransform>
+                <TranslateTransform/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Height="2" Background="#77ACAFB3" Margin="0,0,0,0"/>
+            <controls1:WatermarkedTextBox Style="{StaticResource WatermarkedTextBoxStyle1}" Grid.Row="1" GotFocus="UIElement_OnGotFocus" LostFocus="UIElement_OnLostFocus" Text="{Binding Comment, ElementName=Self, Mode=TwoWay}" Watermark="{Binding Resources.CommentNominativeSingular, Source={StaticResource Strings}, StringFormat='\{0\}...'}">
+                <controls1:WatermarkedTextBox.CaretBrush>
+                    <SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
+                </controls1:WatermarkedTextBox.CaretBrush>
+                <controls1:WatermarkedTextBox.InputScope>
+                    <InputScope>
+                        <InputScopeName NameValue="Text"/>
+                    </InputScope>
+                </controls1:WatermarkedTextBox.InputScope>
+                <i:Interaction.Behaviors>
+                    <behaviors:UpdateTextBindingBehavior/>
+                </i:Interaction.Behaviors>
+            </controls1:WatermarkedTextBox>
+            <Border Grid.Row="2" x:Name="KeyboardPlaceholder"/>
+        </Grid>
+
+        <Border x:Name="MorePanel" Grid.Row="0" Visibility="Collapsed" CacheMode="BitmapCache" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <CompositeTransform/>
+            </Border.RenderTransform>
+            <StackPanel x:Name="CopyLinkMenuItem" Visibility="Collapsed">
+                <Border Height="2" Background="#77ACAFB3" Margin="0,0,0,0"/>
+                <ListBoxItem Tap="CopyLink_OnTap" Padding="18" Content="{Binding Resources.CopyLink, Source={StaticResource Strings}}" FontSize="23"/>
+            </StackPanel>
+        </Border>
+        <Grid x:Name="Bar" Grid.Row="1">
+            <Grid.RenderTransform>
+                <TranslateTransform/>
+            </Grid.RenderTransform>
+            <controls:TelegramApplicationBar
+                x:Name="AppBar"
+                VerticalAlignment="Bottom"
+                MorePanel="{Binding ElementName=MorePanel}">
+                <controls:TelegramApplicationBar.Buttons>
+                    <controls:TelegramAppBarButton
+                        IsEnabled="False"
+                        Grid.Column="3" 
+                        Tap="ChooseButton_OnClick"
+                        ImageSource="/Images/W10M/ic_send_2x.png"
+                        Text="{Binding Resources.Share, Source={StaticResource Strings}}"
+                        LabelForeground="{StaticResource TelegramBadgeAccentBrush}"/>
+                </controls:TelegramApplicationBar.Buttons>
+            </controls:TelegramApplicationBar>
+        </Grid>
+    </Grid>
+</UserControl>

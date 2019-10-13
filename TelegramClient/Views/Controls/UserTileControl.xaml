@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.UserTileControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid x:Name="MainItemGrid" Margin="0,0,0,0" Width="104" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,12,0,12" Grid.Row="0" Height="62" Width="62">
+            <Border Background="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}"/>
+            <TextBlock FontSize="27" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+            <Image Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"/>
+        </Grid>
+        <TextBlock Grid.Row="1" Text="{Binding ShortName}" Height="27" Margin="3,0" LineStackingStrategy="BlockLineHeight" LineHeight="22" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+    </Grid>
+</UserControl>

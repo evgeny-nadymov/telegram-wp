@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.MessageStatusControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    FlowDirection="LeftToRight"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Viewbox x:Name="ContentPanel">
+        <Grid>
+            <Grid x:Name="Clock" HorizontalAlignment="Right" Visibility="{Binding TopMessage.Status, Converter={StaticResource StringEqualsToVisibilityConverter}, ConverterParameter=Sending, FallbackValue=Collapsed}">
+                <Ellipse Margin="0,2,0,-2" StrokeThickness="2" Width="22" Height="22" Stroke="{Binding MuteIconBackground}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Polyline Margin="0,2,0,-2" Points="11.5,4 11.5,11.5 16,11.5" Stroke="{Binding MuteIconBackground}" StrokeThickness="2"/>
+            </Grid>
+            <Grid HorizontalAlignment="Right" Visibility="{Binding TopMessage.Status, Converter={StaticResource StringEqualsToVisibilityConverter}, ConverterParameter=Read, FallbackValue=Collapsed}">
+                <Polyline Points="2,12 9,19 21,6 23,8 9,23 0,14" Fill="{Binding MuteIconBackground}" Margin="7,0,0,0">
+                    <Polyline.RenderTransform>
+                        <TranslateTransform X="-7"/>
+                    </Polyline.RenderTransform>
+                </Polyline>
+                <Polyline VerticalAlignment="Stretch" Points="0,21 14,6 16,8 2,23" Fill="{Binding MuteIconBackground}" HorizontalAlignment="Right">
+                    <Polyline.RenderTransform>
+                        <TranslateTransform X="0"/>
+                    </Polyline.RenderTransform>
+                </Polyline>
+            </Grid>
+            <Polyline HorizontalAlignment="Right" Visibility="{Binding TopMessage.Status, Converter={StaticResource StringEqualsToVisibilityConverter}, ConverterParameter='Confirmed', FallbackValue=Collapsed}" Points="2,12 9,19 21,6 23,8 9,23 0,14" Fill="{Binding MuteIconBackground}">
+                <Polyline.RenderTransform>
+                    <TranslateTransform X="0"/>
+                </Polyline.RenderTransform>
+            </Polyline>
+        </Grid>
+    </Viewbox>
+</UserControl>

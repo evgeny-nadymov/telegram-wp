@@ -1,0 +1,165 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Contacts.ContactInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding ActiveItem.IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTelegramTitle1Style}"/>
+            <TextBlock x:Name="TimerString"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,0">
+            <ScrollViewer>
+
+                <Grid x:Name="ContentPanel" Margin="12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border x:Name="PhotoPlaceholder"
+                    micro:Message.Attach="[Event Tap] = [Action OpenPhoto]"
+				    Margin="12,10" 
+                    Height="128" Width="128"
+                    Background="{Binding CurrentItem.Index, Converter={StaticResource PlaceholderBackgroundConverter}}">
+                        <Grid>
+                            <TextBlock FontSize="56" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding CurrentItem, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+                            <Image x:Name="UserPhoto" Source="{Binding CurrentItem.Photo, Converter={StaticResource ProfileSmallPhotoConverter}}"/>
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <TextBlock Margin="0,2,0,0" TextWrapping="Wrap" Text="{Binding CurrentItem.UserName, StringFormat='@{0}'}" Foreground="{StaticResource PhoneForegroundBrush}"
+                        Visibility="{Binding CurrentItem.UserName, Converter={StaticResource EmptyTLStringToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}" Style="{StaticResource PhoneTextSubtleStyle}" />
+                        <TextBlock Margin="0,2,0,0" TextWrapping="Wrap" Text="{Binding Subtitle}" Style="{StaticResource PhoneTextSubtleStyle}" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,-8,0,0" x:Name="Actions">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Margin="-12,9,0,0" Grid.Row="0" x:Name="SendMessage" Style="{StaticResource ProfileButtonStyle}">
+                            <TextBlock Margin="10,0,12,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="36" Text="{Binding Resources.SendMessage, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                        </Button>
+                        <Button Margin="-12,0" Grid.Row="1" x:Name="CreateSecretChat" Style="{StaticResource ProfileButtonStyle}">
+                            <TextBlock Margin="10,0,12,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="36" Text="{Binding Resources.CreateSecretChat, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                        </Button>
+                        <Button Margin="-12,0" Grid.Row="2" x:Name="Call" Style="{StaticResource ProfileButtonStyle}" Visibility="{Binding HasPhone, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel>
+                                <TextBlock Margin="10,0,12,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="36" Text="{Binding Resources.Call, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                                <TextBlock Margin="12,-7,12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding Phone, StringFormat='+{0}'}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <StackPanel Grid.Row="4" Margin="0,24,0,0">
+                            <toolkit:ListPicker
+                                Margin="12,-10,12,0"
+                                Header="{Binding Resources.Notifications, Source={StaticResource Strings}}"
+                                ItemsSource="{Binding Spans}"
+                                ExpansionMode="FullScreenOnly"
+                                FullModeHeader="{Binding Resources.ChooseAnItem, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}">
+                                <toolkit:ListPicker.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock Margin="0,2,0,2" Text="{Binding DataContext.MuteUntil, ElementName=Self, Converter={StaticResource MuteUntilToStringConverter}}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" FontFamily="{StaticResource PhoneFontFamilyNormal}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </toolkit:ListPicker.ItemTemplate>
+                                <toolkit:ListPicker.FullModeItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="0,12" Text="{Binding Description}" Tap="UIElement_OnTap" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                                    </DataTemplate>
+                                </toolkit:ListPicker.FullModeItemTemplate>
+                            </toolkit:ListPicker>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="5" Margin="0,24,0,0">
+                            <toolkit:ListPicker
+                                Margin="12,-10,12,62"
+                                Header="{Binding Resources.Sound, Source={StaticResource Strings}}"
+                                ItemsSource="{Binding StateService.Sounds}"
+                                SelectedItem="{Binding SelectedSound, Mode=TwoWay}"
+                                FullModeHeader="{Binding Resources.ChooseAnItem, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}">
+                                <toolkit:ListPicker.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"/>
+                                    </DataTemplate>
+                                </toolkit:ListPicker.ItemTemplate>
+                                <toolkit:ListPicker.FullModeItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="0,12" Text="{Binding}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                                    </DataTemplate>
+                                </toolkit:ListPicker.FullModeItemTemplate>
+                            </toolkit:ListPicker>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            <Border Background="#99000000" Visibility="{Binding ProgressVisibility, FallbackValue=Collapsed}">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Resources.Loading, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</views:TelegramViewBase>

@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F04BE5A2-70DF-4E82-BFB5-CD03985C9746}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Telegram.Controls</RootNamespace>
+    <AssemblyName>Telegram.Controls</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Telegram.Controls\AnimationMediator.cs">
+      <Link>AnimationMediator.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\BindingListener.cs">
+      <Link>BindingListener.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Extensions\ScrollViewerExtensions.cs">
+      <Link>Extensions\ScrollViewerExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Extensions\VisualTreeExtensions.cs">
+      <Link>Extensions\VisualTreeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\FlipCounter.xaml.cs">
+      <Link>FlipCounter.xaml.cs</Link>
+      <DependentUpon>FlipCounter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\FlipPanel.xaml.cs">
+      <Link>FlipPanel.xaml.cs</Link>
+      <DependentUpon>FlipPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Helpers\DependencyPropertyChangedListener.cs">
+      <Link>Helpers\DependencyPropertyChangedListener.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Helpers\DependencyPropertyValueChangedEventArgs.cs">
+      <Link>Helpers\DependencyPropertyValueChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\HighlightingTextBlock.cs">
+      <Link>HighlightingTextBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\IHighlightable.cs">
+      <Link>IHighlightable.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LazyItemsControl.cs">
+      <Link>LazyItemsControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LazyListBox.cs">
+      <Link>LazyListBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\Common\MotionParameters.cs">
+      <Link>LongListSelector\Common\MotionParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\Common\SafeRaise.cs">
+      <Link>LongListSelector\Common\SafeRaise.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\Common\TempaltedVisualTreeExtensions.cs">
+      <Link>LongListSelector\Common\TempaltedVisualTreeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\Common\VisualStates.cs">
+      <Link>LongListSelector\Common\VisualStates.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\LongListSelector.cs">
+      <Link>LongListSelector\LongListSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\LongListSelectorEventArgs.cs">
+      <Link>LongListSelector\LongListSelectorEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\LongListSelectorGroup.cs">
+      <Link>LongListSelector\LongListSelectorGroup.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\LongListSelectorItem.cs">
+      <Link>LongListSelector\LongListSelectorItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\LongListSelectorItemsControl.cs">
+      <Link>LongListSelector\LongListSelectorItemsControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\LongListSelectorItemType.cs">
+      <Link>LongListSelector\LongListSelectorItemType.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\TemplatedListBox.cs">
+      <Link>LongListSelector\TemplatedListBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\LongListSelector\TemplatedListBoxItem.cs">
+      <Link>LongListSelector\TemplatedListBoxItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\MultiTemplateItemsControl.cs">
+      <Link>MultiTemplateItemsControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\MultiTemplateLazyListBox.cs">
+      <Link>MultiTemplateLazyListBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Notifications\DialogService.cs">
+      <Link>Notifications\DialogService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Notifications\PopUp.cs">
+      <Link>Notifications\PopUp.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Notifications\ToastPrompt.cs">
+      <Link>Notifications\ToastPrompt.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Profiling\ApplicationSpace.cs">
+      <Link>Profiling\ApplicationSpace.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Profiling\MemoryCounter.cs">
+      <Link>Profiling\MemoryCounter.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\RangeSlider.cs">
+      <Link>RangeSlider.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\ReorderListBox\ReorderListBox.cs">
+      <Link>ReorderListBox\ReorderListBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\ReorderListBox\ReorderListBoxItem.cs">
+      <Link>ReorderListBox\ReorderListBoxItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\ScrollableTextBlock.cs">
+      <Link>ScrollableTextBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\SmoothProgressBar.xaml.cs">
+      <Link>SmoothProgressBar.xaml.cs</Link>
+      <DependentUpon>SmoothProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Triggers\CompressionTrigger.cs">
+      <Link>Triggers\CompressionTrigger.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\UnreadCounter.xaml.cs">
+      <Link>UnreadCounter.xaml.cs</Link>
+      <DependentUpon>UnreadCounter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\Utils\Language.cs">
+      <Link>Utils\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Controls\WatermarkTextBox.cs">
+      <Link>WatermarkTextBox.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Currency.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Telegram.Controls\FlipCounter.xaml">
+      <Link>FlipCounter.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Telegram.Controls\FlipPanel.xaml">
+      <Link>FlipPanel.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Telegram.Controls\SmoothProgressBar.xaml">
+      <Link>SmoothProgressBar.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Telegram.Controls\Themes\generic.xaml">
+      <Link>Themes\generic.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Telegram.Controls\UnreadCounter.xaml">
+      <Link>UnreadCounter.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="LayoutTransformer">
+      <HintPath>..\Libraries\LayoutTransformer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

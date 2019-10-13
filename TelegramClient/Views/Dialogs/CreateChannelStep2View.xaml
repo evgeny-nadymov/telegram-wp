@@ -1,0 +1,310 @@
+﻿<navigation:AnimatedBasePage
+    x:Class="TelegramClient.Views.Dialogs.CreateChannelStep2View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Self"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True"
+    BackKeyPress="CreateChannelStep2View_OnBackKeyPress">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <navigation:AnimatedBasePage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ChannelTemplate">
+                <ListBoxItem>
+                    <Grid x:Name="MainItemGrid" Margin="0,0,18,-12" Height="92" Background="Transparent" Tap="MainItemGrid_OnTap">
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=ContentPanel}" >
+                                <toolkit:MenuItem micro:Message.Attach="[Event Click] = [RevokeLink($DataContext)]" Header="{Binding Resources.RevokeLink, Source={StaticResource Strings}}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="12,12,0,7" Grid.RowSpan="2" VerticalAlignment="Top">
+                            <Grid>
+                                <Border Height="62" Width="62" Background="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}"/>
+                                <TextBlock FontSize="27" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+                                <Image Height="62" Width="62" Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Margin="14,-2,0,-1" FontSize="36.667" MaxHeight="48.77"
+                                    Text="{Binding FullName}" 
+                                    Foreground="{StaticResource PhoneForegroundBrush}"
+                                    Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            </Grid>
+                        </Grid>
+
+                        <ContentControl Grid.Row="1" Grid.Column="1" Margin="13,0,0,0"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Top"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0" VerticalAlignment="Top" Margin="2,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="1" Height="22"
+                                        Margin="0"
+                                        LineStackingStrategy="BlockLineHeight" LineHeight="22"
+                                        Text="t.me/"
+                                        Foreground="{StaticResource PhoneSubtleBrush}"/>
+
+                                    <TextBlock Grid.Column="2" Height="22"
+                                        Margin="0"
+                                        LineStackingStrategy="BlockLineHeight" LineHeight="22"
+                                        Text="{Binding UserName}" TextWrapping="NoWrap"
+                                        TextTrimming="WordEllipsis"/>
+                                </Grid>
+                            </Grid>
+                        </ContentControl>
+                    </Grid>
+                </ListBoxItem>
+            </DataTemplate>
+        </ResourceDictionary>
+    </navigation:AnimatedBasePage.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent" CacheMode="BitmapCache">
+        <i:Interaction.Behaviors>
+            <ec:DataStateBehavior Binding="{Binding HasError}" Value="True" TrueState="NotAvailable" FalseState="Available"/>
+            <ec:DataStateBehavior Binding="{Binding IsUsernameAvailable}" Value="True" TrueState="UsernameAvailable" FalseState="UsernameNotAvailable"/>
+        </i:Interaction.Behaviors>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="UsernameAvailableGroup">
+                <VisualState x:Name="UsernameNotAvailable">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="UsernameHint">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-100">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="UsernameHint">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="1"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="UsernameAvailable">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="UsernameHint">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="100"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="UsernameHint">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="AvailabilityGroup">
+                <VisualState x:Name="Available">
+                    <Storyboard>
+                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ErrorBorder">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>-->
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="Error">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-100">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Error">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="1"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="NotAvailable">
+                    <Storyboard>
+                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ErrorBorder">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>-->
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="Error">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="100"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Error">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.ChannelType, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+        
+        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" ManipulationStarted="ScrollViewer_OnManipulationStarted">
+            <Grid x:Name="ContentPanel" Margin="12,0,12,72">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="0,6,0,0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <RadioButton Grid.Row="0" GroupName="ChannelType" IsChecked="{Binding IsPublic, Mode=TwoWay}" Margin="0,6,0,-16" Content="{Binding Resources.PublicChannel, Source={StaticResource Strings}}"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Resources.PublicChannelDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" Margin="60,0,12,0"/>
+                    <RadioButton Margin="0,18,0,-16" Grid.Row="2" GroupName="ChannelType" IsChecked="{Binding IsPublic, Converter={StaticResource InvertBooleanConverter}}" Content="{Binding Resources.PrivateChannel, Source={StaticResource Strings}}"/>
+                    <TextBlock Grid.Row="3" Text="{Binding Resources.PrivateChannelDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" Margin="60,0,12,0"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0,24,0,0" Visibility="{Binding IsPublic, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid Visibility="{Binding TooMuchUsernames, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Bottom" Text="{Binding Resources.Link, Source={StaticResource Strings}, StringFormat='\{0\}: t.me/'}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="-36,-12,-12,-12" x:Name="UserName" Style="{StaticResource HiddenTextBoxStyle}"/>
+                        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,2,12,0" BorderThickness="0.5" BorderBrush="{StaticResource PhoneSubtleBrush}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,24,12,0" x:Name="Error" Text="{Binding Error}" TextWrapping="Wrap" Foreground="#FFB2362E" Style="{StaticResource PhoneTextSubtleStyle}">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,24,12,0" x:Name="UsernameHint" Text="{Binding UsernameAvailableString}" TextWrapping="Wrap" Foreground="ForestGreen"  Style="{StaticResource PhoneTextSubtleStyle}">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,24,12,0" Text="{Binding Resources.PublicLinkDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    </Grid>
+
+                    <Grid Visibility="{Binding TooMuchUsernames, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Resources.ChannelsAdminPublicTooMuch, Source={StaticResource Strings}}" TextWrapping="Wrap" Foreground="#FFB2362E" Style="{StaticResource PhoneTextSubtleStyle}">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform Y="0"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <ItemsControl Grid.Row="1" Margin="0,12,12,28" ItemsSource="{Binding AdminedPublicChannels}" ItemTemplate="{StaticResource ChannelTemplate}"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0,24,0,0" Background="Transparent" Visibility="{Binding IsPublic, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}">
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Self}">
+                            <toolkit:MenuItem Click="CopyInvite_OnClick" Header="{Binding Resources.Copy, Source={StaticResource Strings}}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Bottom" Text="{Binding InviteLink}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <Border Grid.Row="1" Grid.Column="0" Margin="12,2,12,24" BorderThickness="0.5" BorderBrush="{StaticResource PhoneSubtleBrush}"/>
+                    <TextBlock Grid.Row="2" Text="{Binding Resources.PrivateLinkDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</navigation:AnimatedBasePage>

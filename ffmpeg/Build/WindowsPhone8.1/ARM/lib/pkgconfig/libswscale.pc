@@ -1,0 +1,14 @@
+prefix=../../../Build/WindowsPhone8.1/ARM
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 4.0.100
+Requires: 
+Requires.private: libavutil >= 55.11.100
+Conflicts:
+Libs: -L${libdir}  -lswscale 
+Libs.private: 
+Cflags: -I${includedir}

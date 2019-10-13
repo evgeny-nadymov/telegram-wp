@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.UserActionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="OpenStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.0">
+                        <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Visible</Visibility>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="CloseStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-90">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn" Exponent="3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserActionLabel" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                        <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Collapsed</Visibility>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Grid x:Name="UserActionLabel">
+        <Grid.RenderTransform>
+            <TranslateTransform/>
+        </Grid.RenderTransform>
+
+        <Border Background="{StaticResource PhoneBackgroundBrush}" Opacity="0.7" Margin="0,-2,0,0" MinHeight="68"/>
+        <Grid Margin="18,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock micro:Message.Attach="[Event Tap] = [Action Invoke2]" Foreground="{StaticResource PhoneAccentBrush}" Margin="6,-2,6,0" TextWrapping="Wrap" Text="{Binding Resources.ReportSpam, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" TextAlignment="Center" HorizontalAlignment="Stretch" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+            </ListBoxItem>
+            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock micro:Message.Attach="[Event Tap] = [Action Invoke]" Margin="6,-2,6,0" TextWrapping="Wrap" Text="{Binding Resources.AddContact, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Stretch" FontSize="{StaticResource PhoneFontSizeMediumLarge}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <eim:ControlStoryboardAction Storyboard="{Binding ElementName=CloseStoryboard}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+            </ListBoxItem>
+        </Grid>
+        <!--<Button Margin="6,0,12,0" micro:Message.Attach="[Event Click] = [Action Remove]" x:Name="RemoveUserActionButton"
+                HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource ProfileButtonStyle}"                   
+            toolkit:TiltEffect.IsTiltEnabled="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <eim:ControlStoryboardAction Storyboard="{Binding ElementName=CloseStoryboard}"/>
+                    <ec:ChangePropertyAction TargetName="RemoveUserActionButton" PropertyName="IsEnabled" Value="False"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <StackPanel.RenderTransform>
+                    <RotateTransform CenterX="21.5" CenterY="21.5" Angle="45"/>
+                </StackPanel.RenderTransform>
+                <Grid Width="43" Height="43">
+                    <Ellipse Stroke="{StaticResource PhoneForegroundBrush}" Fill="{StaticResource PhoneBackgroundBrush}" StrokeThickness="3"  />
+                    <Line X2="21" Stroke="{StaticResource PhoneForegroundBrush}" StrokeThickness="3" RenderTransformOrigin="0.5,0.5">
+                        <Line.RenderTransform>
+                            <CompositeTransform TranslateX="11" TranslateY="21.5"/>
+                        </Line.RenderTransform>
+                    </Line>
+                    <Line Y2="21" Stroke="{StaticResource PhoneForegroundBrush}" StrokeThickness="3" RenderTransformOrigin="0.5,0.5">
+                        <Line.RenderTransform>
+                            <CompositeTransform TranslateX="21.5" TranslateY="11"/>
+                        </Line.RenderTransform>
+                    </Line>
+                </Grid>
+            </StackPanel>
+        </Button>-->
+    </Grid>
+</UserControl>

@@ -1,0 +1,115 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.CacheView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    BackKeyPress="CacheView_OnBackKeyPress"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.Cache, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+        
+        <ScrollViewer Grid.Row="1" IsHitTestVisible="{Binding ClearCacheSettings.IsOpen, FallbackValue=True, Converter={StaticResource InvertBooleanConverter}}">
+            <Grid x:Name="ContentPanel" Margin="6,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+<!--
+                <StackPanel Grid.Row="0" Margin="0,0,0,0">
+                    <toolkit:ListPicker
+                        Margin="12,4,12,0"
+                        Header="{Binding Resources.KeepMedia, Source={StaticResource Strings}}"
+                        ExpansionMode="FullScreenOnly"
+                        ItemsSource="{Binding Spans}"
+                        SelectedItem="{Binding SelectedSpan, Mode=TwoWay}"
+                        FullModeHeader="{Binding Resources.ChooseAnItem, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}">
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,12" Text="{Binding}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
+                    </toolkit:ListPicker>
+                </StackPanel>
+                <TextBlock Grid.Row="1" Margin="12,12,12,0" Text="{Binding Resources.KeepMediaDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+-->
+                <Button Margin="-12,24,-12,0" Grid.Row="2" x:Name="ClearCache" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.ClearCache, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding Status, Converter={StaticResource Lowercase}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,24,-12,0" Grid.Row="3" x:Name="ClearLocalDatabase" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.LocalDatabase, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LocalDatabaseStatus, Converter={StaticResource Lowercase}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="4" Margin="12,12,12,0" Text="{Binding Resources.ClearLocalDatabaseDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+            </Grid>
+        </ScrollViewer>
+
+        <ContentControl Grid.RowSpan="2" x:Name="ClearCacheSettings" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+    </Grid>
+
+</views:TelegramViewBase>

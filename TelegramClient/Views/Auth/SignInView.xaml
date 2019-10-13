@@ -1,0 +1,175 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Auth.SignInView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    micro:Message.Attach="[Event BackKeyPress] = [Action OnBackKeyPressed($EventArgs)]"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    x:Name="Self"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" 
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideRightFadeOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" CacheMode="BitmapCache">
+        <i:Interaction.Behaviors>
+            <ec:DataStateBehavior Binding="{Binding IsWorking}" Value="True" TrueState="Working" FalseState="Normal"/>
+        </i:Interaction.Behaviors>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MainGroup">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Working">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="PhoneNumber">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="SignIn">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="PCode">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="SelectCountry">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <Grid>
+                <TextBlock VerticalAlignment="Top" Text="{Binding Resources.YourPhone, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+                <Button x:Name="ChangeProxy" Margin="0,-20" HorizontalAlignment="Right" Content="{Binding Resources.ChangeProxy, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Foreground="White" Style="{StaticResource TextButton}"/>
+            </Grid>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="6,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Margin="12,18,12,0" Text="{Binding Resources.Country, Source={StaticResource Strings}}" FontSize="23"/>
+                <Button x:Name="SelectCountry" HorizontalContentAlignment="Stretch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="1" Data="M0,0 9,9 18,0" Stroke="{StaticResource PhoneForegroundBrush}" StrokeThickness="2" VerticalAlignment="Center"/>
+                        <TextBlock Visibility="{Binding IsPhoneCodeInvalid, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding SelectedCountry.Name}"/>
+                        <TextBlock Visibility="{Binding IsPhoneCodeInvalid, Converter={StaticResource BooleanToVisibilityConverter}}" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.ChooseYourCountry, Source={StaticResource Strings}}"/>
+                    </Grid>
+                </Button>
+
+                <TextBlock Margin="12,12,12,0" Text="{Binding Resources.PhoneNumber, Source={StaticResource Strings}}" FontSize="23"/>
+                <Grid Margin="0,0,0,22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="PCode" Width="110" MaxLength="4" InputScope="TelephoneCountryCode" KeyDown="PCode_OnKeyDown" Text="{Binding PhoneCode, Mode=TwoWay}" Style="{StaticResource PCodeTextBoxStyle}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <TextBox x:Name="PhoneNumber" Grid.Column="1" InputScope="TelephoneLocalNumber" TextChanged="PhoneNumber_OnTextChanged" KeyDown="PhoneNumber_OnKeyDown" GotFocus="PhoneNumber_OnGotFocus" Style="{StaticResource SignInTextBoxStyle}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </Grid>
+
+                <StackPanel>
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform Y="-100"/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock Margin="12,-10,12,0" TextWrapping="Wrap" Text="{Binding Resources.SignInMessage, Source={StaticResource Strings}}" FontSize="20" Foreground="{StaticResource PhoneSubtleBrush}"/>
+
+                    <Grid>
+                        <Button x:Name="SignIn" Width="204" Content="{Binding Resources.Next, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" HorizontalAlignment="Left"/>
+                    </Grid>
+
+
+                    <RichTextBox Margin="0,25,0,0" Visibility="{Binding HelpVisibility}" FontSize="20" Foreground="{StaticResource PhoneSubtleBrush}">
+                        <Paragraph>
+                            <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.RegistrationProblemDescription, Source={StaticResource Strings}}"/>
+                            <Hyperlink Click="Hyperlink_OnClick" FontSize="{StaticResource PhoneFontSizeMedium}">
+                                <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Email}"/>
+                            </Hyperlink>
+                        </Paragraph>
+                    </RichTextBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.RowSpan="2" 
+              Visibility="{Binding Converter={StaticResource PrivateBetaToVisibilityConverter}}"
+              Background="{StaticResource PhoneChromeBrush}" VerticalAlignment="Bottom">
+            <Grid x:Name="LogControl" Visibility="Collapsed" Height="600">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="1" x:Name="Send" Content="send"/>
+                <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Log.Items}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</views:TelegramViewBase>

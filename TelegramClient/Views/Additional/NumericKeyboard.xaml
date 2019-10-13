@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="TelegramClient.Views.Additional.NumericKeyboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Name="Self"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="ButtonBackground" Color="#FF474747"/>
+            <SolidColorBrush x:Key="ButtonLightBackground" Color="White"/>
+            
+            <Style x:Key="ButtonStyle" TargetType="Border">
+                <Setter Property="Width" Value="152"/>
+                <Setter Property="Height" Value="78"/>
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+            </Style>
+
+            <Style x:Key="ButtonTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextExtraLargeStyle}">
+                <Setter Property="Margin" Value="0,-6,0,0"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <Grid VerticalAlignment="Bottom" Margin="0,4,0,72">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border x:Name="Button1" Grid.Row="0" Grid.Column="0" Tag="1" Style="{StaticResource ButtonStyle}" >
+                <TextBlock Margin="-2,-6,0,0" Text="1" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button2" Grid.Row="0" Grid.Column="1" Tag="2" Width="157" Style="{StaticResource ButtonStyle}" >
+                <TextBlock Text="2" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button3" Grid.Row="0" Grid.Column="2" Tag="3" Width="153" Style="{StaticResource ButtonStyle}" >
+                <TextBlock Text="3" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+
+            <Border x:Name="Button4" Grid.Row="1" Grid.Column="0" Tag="4" Style="{StaticResource ButtonStyle}" >
+                <TextBlock Text="4" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button5" Grid.Row="1" Grid.Column="1" Tag="5" Width="157" Style="{StaticResource ButtonStyle}" >
+                <TextBlock Text="5" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button6" Grid.Row="1" Grid.Column="2" Tag="6" Width="153" Style="{StaticResource ButtonStyle}">
+                <TextBlock Text="6" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+
+            <Border x:Name="Button7" Grid.Row="2" Grid.Column="0" Tag="7" Style="{StaticResource ButtonStyle}">
+                <TextBlock Text="7" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button8" Grid.Row="2" Grid.Column="1" Tag="8" Width="157" Style="{StaticResource ButtonStyle}">
+                <TextBlock Text="8" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button9" Grid.Row="2" Grid.Column="2" Tag="9" Width="153" Style="{StaticResource ButtonStyle}">
+                <TextBlock Text="9" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+
+            <Border x:Name="Button" Grid.Row="3" Grid.Column="0" Style="{StaticResource ButtonStyle}">
+                <TextBlock Margin="-2,-6,0,0" Text="" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="Button0" Grid.Row="3" Grid.Column="1" Tag="0" Width="157" Style="{StaticResource ButtonStyle}">
+                <TextBlock Text="0" Style="{StaticResource ButtonTextStyle}"/>
+            </Border>
+            <Border x:Name="ButtonBack" Grid.Row="3" Grid.Column="2" Tag="9" Width="153" Style="{StaticResource ButtonStyle}">
+                <Image Source="{Binding BackButtonImageSource, ElementName=Self}" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

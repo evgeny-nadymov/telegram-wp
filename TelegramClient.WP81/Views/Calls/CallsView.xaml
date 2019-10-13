@@ -1,0 +1,132 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Calls.CallsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:controls1="clr-namespace:Telegram.Controls;assembly=Telegram.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:triggers="clr-namespace:Telegram.Controls.Triggers;assembly=Telegram.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    Visibility="{Binding Visibility}"
+    x:Name="Main"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" d:DesignHeight="768" d:DesignWidth="480">
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="DialogTemplate">
+                <Grid x:Name="MainItemGrid" Margin="18,24,20,0" Height="72" Background="Transparent" Tap="MainItemGrid_OnTap">
+                    <Grid.RenderTransform>
+                        <CompositeTransform/>
+                    </Grid.RenderTransform>
+                    
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Items}">
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteDialog($DataContext)]" Header="{Binding Resources.Delete, Source={StaticResource Strings}}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <views:ConversationTileControl Size="72" 
+                        Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
+                        Source="{Binding With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                        Fill="{Binding With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                        Text="{Binding With, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                    <Grid Grid.Row="0" Grid.Column="1" Margin="3,3,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                navigation:AnimatedBasePage.IsAnimationTarget="True"
+                                Margin="14,-2,0,-1" FontSize="27" MaxHeight="36"
+                                Text="{Binding With, Converter={StaticResource DialogCaptionConverter}}" 
+                                Foreground="{Binding ForegroundBrush}"
+                                Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+
+                            <Image 
+                                Width="19" Height="19"
+                                Grid.Column="1" 
+                                Visibility="{Binding VerifiedVisibility}"
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                Margin="6,0,0,5"
+                                Source="/Images/W10M/ic_verification_2x.png" Stretch="UniformToFill"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="18,3,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="2"
+                                Margin="0"
+                                Text="{Binding Self, Converter={StaticResource DialogToBriefInfo}}"
+                                Foreground="{StaticResource PhoneSubtleBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                TextWrapping="NoWrap"
+                                TextTrimming="WordEllipsis"/>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="-12,0,-14,0">
+        <controls1:LazyListBox 
+            x:Name="Items"
+            ItemsSource="{Binding Items}"
+            ItemTemplate="{StaticResource DialogTemplate}"
+            IsScrolling="{Binding IsScrolling, Mode=TwoWay}"
+            CloseToEndPercent="0.1"
+            CloseToEnd="Items_OnCloseToEnd"
+            ScrollingStateChanged="Items_OnManipulationStarted"
+            ManipulationCompleted="Items_OnManipulationCompleted"
+            Style="{StaticResource LazyListBoxStyle}">
+            <controls1:LazyListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel VirtualizationMode="Recycling"/>
+                </ItemsPanelTemplate>
+            </controls1:LazyListBox.ItemsPanel>
+            <i:Interaction.Triggers>
+                <triggers:CompressionTrigger CompressionType="Bottom">
+                    <micro:ActionMessage MethodName="LoadNextSlice"/>
+                </triggers:CompressionTrigger>
+            </i:Interaction.Triggers>
+        </controls1:LazyListBox>
+
+        <TextBlock Margin="18,12,6,0" Text="{Binding Status}" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+    </Grid>
+</views:TelegramViewBase>

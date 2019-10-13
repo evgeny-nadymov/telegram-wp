@@ -1,0 +1,342 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Dialogs.DialogsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Telegram.Controls;assembly=Telegram.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:triggers="clr-namespace:Telegram.Controls.Triggers;assembly=Telegram.Controls"
+    xmlns:telegramControls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:dialogs="clr-namespace:TelegramClient.Views.Dialogs"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    Visibility="{Binding Visibility}"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="PinnedBackgroundLight" Color="#FFF3F4F5"/>
+            <SolidColorBrush x:Key="PinnedBackgroundDark" Color="#FF1F1F1F"/>
+            <SolidColorBrush x:Key="PinnedBackground" Color="Transparent"/>
+
+            <DataTemplate x:Key="DialogFullHDTemplate">
+                <Grid x:Name="MainItemGrid" Margin="0,0,18,-12" Height="92" Background="Transparent" Tap="MainItemGrid_OnTapCommon">
+                    <Grid.RenderTransform>
+                        <CompositeTransform/>
+                    </Grid.RenderTransform>
+
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Items}" Loaded="ContextMenu_OnLoaded">
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [ClearHistory($DataContext)]" Loaded="ClearHistory_OnLoaded" Header="{Binding Resources.ClearHistory, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteDialog($DataContext)]" Loaded="DeleteDialog_OnLoaded" Header="{Binding Resources.Delete, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteAndStop($DataContext)]" Loaded="DeleteAndStop_OnLoaded" Header="{Binding Resources.DeleteAndStop, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteAndExit($DataContext)]" Loaded="DeleteAndExit_OnLoaded" Header="{Binding Resources.DeleteAndExit, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [PinToStart($DataContext)]" Loaded="PinToStart_OnLoaded"  Header="{Binding Resources.PinToStart, Source={StaticResource Strings}}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <views:ConversationTileControl 
+                        Margin="12,12,0,7" Grid.RowSpan="2" VerticalAlignment="Top"
+                        Source="{Binding With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                        Fill="{Binding With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                        Text="{Binding With, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Width="19" Height="19"
+                            Grid.Column="0" 
+                            Visibility="{Binding EncryptedChatVisibility}"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Margin="12,3,-6,5"
+                            Source="/Images/W10M/ic_secretchat_2x.png"/>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                navigation:AnimatedBasePage.IsAnimationTarget="True"
+                                Margin="14,-2,0,-1" FontSize="36.667" MaxHeight="48.77"
+                                Text="{Binding With, Converter={StaticResource DialogCaptionConverter}}" 
+                                Foreground="{Binding ForegroundBrush}"
+                                Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+
+                            <Image 
+                                Width="19" Height="19"
+                                Grid.Column="1" 
+                                Visibility="{Binding VerifiedVisibility}"
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                Margin="6,0,0,5"
+                                Source="/Images/W10M/ic_verification_2x.png" Stretch="UniformToFill"/>
+                        </Grid>
+
+                        <telegramControls:MessageStatusControl Grid.Column="2"
+                        Visibility="{Binding Self, Converter={StaticResource DialogToMessageStatusVisibilityConverter}, FallbackValue=Collapsed}" 
+                        VerticalAlignment="Bottom" Height="18" Margin="6,1,0,8"/>
+
+                        <TextBlock Grid.Column="3" Margin="6,0,0,4" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" LineStackingStrategy="BlockLineHeight" LineHeight="22" Text="{Binding Self, Converter={StaticResource DraftDialogDateTimeConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="15,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Height="22"
+                                Margin="0"
+                                MaxWidth="150"
+                                LineStackingStrategy="BlockLineHeight" LineHeight="22"
+                                Text="{Binding Resources.Draft, Source={StaticResource Strings}, StringFormat='\{0\}: '}"
+                                Foreground="{StaticResource TelegramBadgeAccentBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                Visibility="{Binding Self, Converter={StaticResource DraftToVisibilityConverter}, FallbackValue=Collapsed}"/>
+
+                        <TextBlock Grid.Column="1" Height="22"
+                                Margin="0"
+                                MaxWidth="150" TextTrimming="WordEllipsis"
+                                LineStackingStrategy="BlockLineHeight" LineHeight="22"
+                                Text="{Binding Self, Converter={StaticResource DialogMessageFromConverter}}"
+                                Foreground="{StaticResource PhoneSubtleBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                Visibility="{Binding Self, Converter={StaticResource ShowFromVisibilityConverter}}"/>
+
+                        <TextBlock Grid.Column="2" Height="22"
+                                Margin="0"
+                                LineStackingStrategy="BlockLineHeight" LineHeight="22"
+                                Text="{Binding Self, Converter={StaticResource DialogToBriefInfo}}"
+                                Foreground="{StaticResource PhoneSubtleBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                TextWrapping="Wrap"
+                                TextTrimming="WordEllipsis"/>
+
+                        <Border Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,-6" Background="{StaticResource PhoneBackgroundBrush}" Visibility="{Binding Self.Typing, Converter={StaticResource ExistsToVisibilityConverter}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal">
+                                <telegramControls:TypingControl Height="22" Typing="{Binding Self.Typing}">
+                                    <telegramControls:TypingControl.RenderTransform>
+                                        <TranslateTransform Y="-2"/>
+                                    </telegramControls:TypingControl.RenderTransform>
+                                </telegramControls:TypingControl>
+                                <TextBlock
+                                    VerticalAlignment="Top"
+                                    Margin="6,0,0,0"
+                                    LineStackingStrategy="BlockLineHeight" LineHeight="22"
+                                    Text="{Binding Self.Typing}" TextWrapping="NoWrap"
+                                    Foreground="{StaticResource PhoneSubtleBrush}"
+                                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                    FontSize="{StaticResource PhoneFontSizeNormal}"
+                                    TextTrimming="WordEllipsis"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="3" Margin="6,0,0,0"
+                                Background="{Binding Self, Converter={StaticResource MessageForeground}, FallbackValue={StaticResource TelegramBadgeSubtleBrush}}"
+                                Height="28" MinWidth="28" CornerRadius="14"
+                                Visibility="{Binding UnreadCount, Converter={StaticResource UnreadCountToVisibilityConverter}}" >
+                            <TextBlock Margin="7,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Foreground="White" 
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontWeight="SemiBold"
+                                FontSize="18"
+                                Text="{Binding UnreadCount}">
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="DialogTemplate">
+                <Grid x:Name="MainItemGrid" Margin="18,24,20,0" Height="72" Background="Transparent" Tap="MainItemGrid_OnTapCommon">
+                    <Grid.RenderTransform>
+                        <CompositeTransform/>
+                    </Grid.RenderTransform>
+                    <!--<Grid Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="-18,-24,-18,-12" Background="{StaticResource PinnedBackground}" Visibility="{Binding IsPinned, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
+
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Items}" Loaded="ContextMenu_OnLoaded">
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [ChangeUnreadMark($DataContext)]" Loaded="ChangeUnreadMark_OnLoaded" Header="{Binding Resources.MarkUnread, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Group($DataContext)]" Loaded="Group_OnLoaded" Header="{Binding Resources.Group, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Pin($DataContext)]" Loaded="Pin_OnLoaded" Header="{Binding Resources.PinDialog, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [ClearHistory($DataContext)]" Loaded="ClearHistory_OnLoaded" Header="{Binding Resources.ClearHistory, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteDialog($DataContext)]" Loaded="DeleteDialog_OnLoaded" Header="{Binding Resources.Delete, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteAndStop($DataContext)]" Loaded="DeleteAndStop_OnLoaded" Header="{Binding Resources.DeleteAndStop, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [DeleteAndExit($DataContext)]" Loaded="DeleteAndExit_OnLoaded" Header="{Binding Resources.DeleteAndExit, Source={StaticResource Strings}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [PinToStart($DataContext)]" Loaded="PinToStart_OnLoaded" Header="{Binding Resources.PinToStart, Source={StaticResource Strings}}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <views:ConversationTileControl Size="72" 
+                        Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
+                        Object="{Binding With}"
+                        Source="{Binding With.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                        Fill="{Binding With.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                        Text="{Binding With, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                    <Grid Grid.Row="0" Grid.Column="1" Margin="3,3,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Width="19" Height="19"
+                            Grid.Column="0" 
+                            Visibility="{Binding EncryptedChatVisibility}"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Margin="12,3,-6,5"
+                            Source="/Images/W10M/ic_secretchat_2x.png"/>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                navigation:AnimatedBasePage.IsAnimationTarget="True"
+                                Margin="14,-2,0,-1" FontSize="27" MaxHeight="36"
+                                Text="{Binding With, Converter={StaticResource DialogCaptionConverter}}" 
+                                Foreground="{Binding ForegroundBrush}"
+                                Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+
+                            <Image 
+                                Width="19" Height="19"
+                                Grid.Column="1" 
+                                Visibility="{Binding VerifiedVisibility}"
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                Margin="6,0,0,5"
+                                Source="/Images/W10M/ic_verification_2x.png" Stretch="UniformToFill"/>
+                        </Grid>
+
+                        <telegramControls:MessageStatusControl Grid.Column="2"
+                            Visibility="{Binding Self, Converter={StaticResource DialogToMessageStatusVisibilityConverter}, FallbackValue=Collapsed}" 
+                            VerticalAlignment="Bottom" Height="18" Margin="6,1,0,6"/>
+
+                        <TextBlock Grid.Column="3" Margin="6,0,0,1" VerticalAlignment="Bottom" FontSize="18" Text="{Binding Self, Converter={StaticResource DraftDialogDateTimeConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="18,3,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                Margin="0"
+                                MaxWidth="150"
+                                Text="{Binding Resources.Draft, Source={StaticResource Strings}, StringFormat='\{0\}: '}"
+                                Foreground="{StaticResource TelegramBadgeAccentBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                Visibility="{Binding Self, Converter={StaticResource DraftToVisibilityConverter}, FallbackValue=Collapsed}"/>
+
+                        <TextBlock Grid.Column="1"
+                                Margin="0"
+                                MaxWidth="150" TextTrimming="WordEllipsis"
+                                Text="{Binding Self, Converter={StaticResource DialogMessageFromConverter}}"
+                                Foreground="{StaticResource PhoneForegroundBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                Visibility="{Binding Self, Converter={StaticResource ShowFromVisibilityConverter}}"/>
+
+                        <TextBlock Grid.Column="2"
+                                Margin="0"
+                                Text="{Binding Self, Converter={StaticResource DialogToBriefInfo}}"
+                                Foreground="{StaticResource PhoneSubtleBrush}"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                TextWrapping="NoWrap"
+                                TextTrimming="WordEllipsis"/>
+
+                        <Border Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,-6" Background="{StaticResource PhoneBackgroundBrush}" Visibility="{Binding Self.Typing, Converter={StaticResource ExistsToVisibilityConverter}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal">
+                                <telegramControls:TypingControl Height="26" Typing="{Binding Self.Typing}">
+                                    <telegramControls:TypingControl.RenderTransform>
+                                        <TranslateTransform Y="-2"/>
+                                    </telegramControls:TypingControl.RenderTransform>
+                                </telegramControls:TypingControl>
+                                <TextBlock
+                                    VerticalAlignment="Top"
+                                    Margin="6,0,0,0"
+                                    Text="{Binding Self.Typing}" TextWrapping="NoWrap"
+                                    Foreground="{StaticResource PhoneSubtleBrush}"
+                                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                    FontSize="{StaticResource PhoneFontSizeNormal}"
+                                    TextTrimming="WordEllipsis"/>
+                            </StackPanel>
+                        </Border>
+
+                        <dialogs:UnreadCounter
+                            Grid.Column="4"
+                            Count="{Binding UnreadCount.Value}"
+                            MentionsCount="{Binding UnreadMentionsCount.Value}"
+                            Pinned="{Binding IsPinned}"
+                            UnreadMark="{Binding UnreadMark}"
+                            Brush="{Binding Self, Converter={StaticResource MessageForeground}, FallbackValue={StaticResource TelegramBadgeSubtleBrush}}"/>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="-12,0,-14,0">
+        <longListSelector:LongListSelector 
+            x:Name="Items"
+            IsFlatList="True"
+            ItemsSource="{Binding FilteredItems}"
+            ItemTemplate="{StaticResource DialogTemplate}"
+            CloseToEndPercent="0.1"
+            Margin="0,0,4,0"
+            Background="Transparent"
+            micro:Message.Attach="[Event CloseToEnd] = [Action LoadNextSlice]; [Event StretchingBottom] = [Action LoadNextSlice]">
+            <longListSelector:LongListSelector.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel VirtualizationMode="Recycling"/>
+                </ItemsPanelTemplate>
+            </longListSelector:LongListSelector.ItemsPanel>
+        </longListSelector:LongListSelector>
+
+        <TextBlock Margin="18,12,6,0" Text="{Binding Status}" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+    </Grid>
+</views:TelegramViewBase>

@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.HashtagHintsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="InputBorderBrushLight" Color="#FFDEE3EA"/>
+        <SolidColorBrush x:Key="InputBorderBrushDark" Color="#CC5D5D5D"/>
+        <SolidColorBrush x:Key="HintsBackgroundBrushLight" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="HintsBackgroundBrushDark" Color="#FF1F1F1F"/>
+    </UserControl.Resources>
+    
+    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <Grid.Resources>
+            <DataTemplate x:Key="HashtagHintTemplate">
+                <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                    <Grid Height="66">
+                        <TextBlock Text="{Binding Hashtag, StringFormat='#\{0\}'}" Margin="15,0,0,0" FontSize="{Binding DefaultFontSize, Source={StaticResource ScaledText}}" VerticalAlignment="Center"/>
+                    </Grid>
+                </ListBoxItem>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid x:Name="HashtagHintsPanel" Visibility="Visible" CacheMode="BitmapCache">
+            <Border x:Name="BackgroundBorder" Background="White"/>
+            <Border x:Name="Border" VerticalAlignment="Top" Height="2" Visibility="{Binding Hints.Count, Converter={StaticResource CountMoreThanToVisibilityConverter}, ConverterParameter=0}"/>
+            <ItemsControl ItemsSource="{Binding Hints}" ItemTemplate="{StaticResource HashtagHintTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>

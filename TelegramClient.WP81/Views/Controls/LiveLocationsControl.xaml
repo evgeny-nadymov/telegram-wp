@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.LiveLocationsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:cal="http://www.caliburnproject.org"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,20,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <ListBox Grid.Row="1" ItemsSource="{Binding Messages}" MaxHeight="198">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <views:ConversationTileControl x:Name="DialogPhoto" Size="54"
+                            Margin="0,0,6,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top"
+                            Source="{Binding To.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                            Fill="{Binding To.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                            Text="{Binding To, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding To.FullName2, Converter={StaticResource Uppercase}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+
+                        <controls:LiveLocationProgress 
+                            Grid.Column="2"
+                            Margin="6,0,0,0"
+                            Media="{Binding Media}"
+                            VerticalAlignment="Center"
+                            Completed="LiveLocationProgress_OnCompleted"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,194 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Media.LinksView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:telegramClient="clr-namespace:TelegramClient"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    xmlns:templateSelectors="clr-namespace:TelegramClient.Helpers.TemplateSelectors"
+    xmlns:emojiPanel="clr-namespace:Telegram.EmojiPanel"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    Visibility="{Binding Visibility}"
+    x:Name="Self"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <converters:DeclensionConverter x:Key="CountConverter"
+                NominativeSingular="{Binding Resources.LinkNominativeSingular, Source={StaticResource Strings}}"
+                NominativePlural="{Binding Resources.LinkNominativePlural, Source={StaticResource Strings}}"
+                GenitiveSingular="{Binding Resources.LinkGenitiveSingular, Source={StaticResource Strings}}"
+                GenitivePlural="{Binding Resources.LinkGenitivePlural, Source={StaticResource Strings}}"/>
+            
+            <phone:JumpListItemBackgroundConverter x:Key="BackgroundConverter" Enabled="{StaticResource TelegramAccentBrush}"/>
+            <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+            
+            <Style x:Key="FilesJumpListStyle" TargetType="phone:LongListSelector">
+                <Setter Property="LayoutMode" Value="List" />
+                <Setter Property="Margin" Value="12,12,0,0"/>
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" 
+                                Width="470" 
+                                Height="70" 
+                                Margin="6,6,18,6">
+                                <TextBlock Text="{Binding KeyString}"
+                                       Foreground="{Binding Converter={StaticResource ForegroundConverter}}"
+                                       FontSize="23"  
+                                       Padding="2"
+                                       Margin="12,0"
+                                       VerticalAlignment="Bottom"/>
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <DataTemplate x:Key="GroupHeaderTemplate">
+                <Grid Margin="66,0,18,0">
+                    <TextBlock Text="{Binding KeyString}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="23" Margin="0,18,18,6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Count, Converter={StaticResource CountConverter}}" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="23" Margin="0,18,0,6" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding DataContext.IsSelectionEnabled, ElementName=Self, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Visible}"/>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="LinkTemplate">
+                <Grid Margin="0,12" Background="Transparent" micro:Message.Attach="[Event Tap] = [Action OpenMedia($DataContext)]">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="64" Height="64" Margin="0,0,18,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
+                        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource PhoneChromeBrush}"/>
+                        <TextBlock FontSize="27" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}" Text="{Binding Converter={StaticResource LinkDefaultTextConverter}}"/>
+                        <Image Source="{Binding Media.Self, Converter={StaticResource DefaultPhotoConverter}, ConverterParameter=90}" Stretch="UniformToFill"/>
+                    </Grid>
+                    <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="0" Grid.Row="0" MaxHeight="72" TextWrapping="Wrap" Text="{Binding Converter={StaticResource MessageToWebPageCaptionConverter}}" TextTrimming="WordEllipsis" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="27"/>
+                        <emojiPanel:TelegramRichTextBox Margin="-12,0,0,0" Grid.Row="1" MaxHeight="81" emojiPanel:BrowserNavigationService.SuppressParsing="True" Text="{Binding Media.WebPage.Description}" Visibility="{Binding Media.WebPage.DescriptionVisibility}" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="20" />
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding Links}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem toolkit:TiltEffect.SuppressTilt="False">
+                                        <TextBlock micro:Message.Attach="[Event Tap] = [Action OpenLink($DataContext)]" TextWrapping="NoWrap" Text="{Binding}" TextTrimming="WordEllipsis" Foreground="{StaticResource TelegramBadgeAccentBrush}" FontSize="20"/>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EmptyLinkTemplate">
+                <Grid Margin="0,12" Background="Transparent" micro:Message.Attach="[Event Tap] = [Action OpenMedia($DataContext)]">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width ="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="64" Height="64" Margin="0,0,18,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top">
+                        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource PhoneChromeBrush}"/>
+                        <TextBlock FontSize="27" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}" Text="{Binding Converter={StaticResource LinkDefaultTextConverter}}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="0" Grid.Row="0" MaxHeight="72" TextWrapping="Wrap" Text="{Binding WebPageTitle}" Visibility="{Binding WebPageTitle, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}" TextTrimming="WordEllipsis" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="27"/>
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding Links}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem toolkit:TiltEffect.SuppressTilt="False">
+                                        <TextBlock micro:Message.Attach="[Event Tap] = [Action OpenLink($DataContext)]" TextWrapping="NoWrap" Text="{Binding}" TextTrimming="WordEllipsis" Foreground="{StaticResource TelegramBadgeAccentBrush}" FontSize="20"/>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+            <templateSelectors:LinkTemplateSelector
+                x:Key="LinkTemplateSelector"
+                LinkTemplate="{StaticResource LinkTemplate}"
+                EmptyLinkTemplate="{StaticResource EmptyLinkTemplate}"/>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+
+    <Grid x:Name="LayoutRoot" Margin="-6,-30,-12,0">
+        <telegramClient:LongListSelectorEx 
+            Margin="-48,0,0,0" 
+            ItemsSource="{Binding Files}"
+            toolkit:TiltEffect.SuppressTilt="True"
+            IsSelectionEnabled="{Binding IsSelectionEnabled}"
+            IsGroupingEnabled="True"
+            HideEmptyGroups="True"
+            JumpListStyle="{StaticResource FilesJumpListStyle}"
+            GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}"
+            ManipulationStarted="Files_OnManipulationStarted"
+            Knob="15" micro:Message.Attach="[Event CloseToEnd] = [Action LoadNextSlice]"
+            Style="{StaticResource LazyLongListSelectorStyle2}">
+            <telegramClient:LongListSelectorEx.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" 
+                                Background="{StaticResource PhoneSubtleBrush}"
+                                Opacity="0.3" 
+                                IsHitTestVisible="False"
+                                Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}" Margin="6,0,-12,0" VerticalAlignment="Center"/>
+                        <ContentControl Grid.Column="1" Margin="0,0,18,0"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" 
+                            Content="{Binding}" ContentTemplate="{Binding Self, Converter={StaticResource LinkTemplateSelector}}">
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Self}">
+                                    <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Action DeleteMessage($DataContext)]" Loaded="DeleteMessage_OnLoaded" Header="{Binding Resources.Delete, Source={StaticResource Strings}}" />
+                                    <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Action ForwardMessage($DataContext)]" Header="{Binding Resources.Forward, Source={StaticResource Strings}}"/>
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+                        </ContentControl>
+                        <Border Grid.Column="0" Grid.ColumnSpan="2" 
+                                Background="Transparent" 
+                                Tap="SelectionBorder_OnTap" 
+                                Visibility="{Binding DataContext.IsSelectionEnabled, ElementName=LayoutRoot, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    </Grid>
+                </DataTemplate>
+            </telegramClient:LongListSelectorEx.ItemTemplate>
+        </telegramClient:LongListSelectorEx>
+        <Border Margin="-48,0,0,0" Width="49" VerticalAlignment="Stretch" HorizontalAlignment="Left" Background="{StaticResource PhoneBackgroundBrush}" Visibility="{Binding IsSelectionEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=invert}"/>
+
+        <Grid 
+            VerticalAlignment="Top" HorizontalAlignment="Center" 
+            Visibility="{Binding IsEmptyList, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Margin="0,100,0,0">
+                <Image Width="160" Height="160" Source="{Binding EmptyListImageSource}" Stretch="UniformToFill"/>
+                <TextBlock Text="{Binding Resources.ShareFiles, Source={StaticResource Strings}}" TextWrapping="Wrap" Width="300" Margin="12,40,12,0" TextAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Margin="18,12" Text="{Binding Status}" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+    </Grid>
+
+</views:TelegramViewBase>

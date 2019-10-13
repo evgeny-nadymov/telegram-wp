@@ -1,0 +1,148 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Chats.AddAdminsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    xmlns:controls1="clr-namespace:Telegram.Controls;assembly=Telegram.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Self"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="False"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <views:TelegramViewBase.Resources>
+
+        <DataTemplate x:Key="UserItemTemplate">
+            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                <Grid x:Name="MainItemGrid" Margin="0,0,0,12" Background="Transparent" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="62"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" IsEnabled="{Binding DataContext.AdminsEnabled, ElementName=Self}" Style="{x:Null}"/>
+                    <Border Grid.Column="1" Width="62" Height="62" Background="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}">
+                        <Grid>
+                            <TextBlock FontSize="27" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+                            <Image Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"/>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Column="2" VerticalAlignment="Center" Margin="0,-2,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <controls1:HighlightingTextBlock Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                Margin="14,-6,0,0"
+                                MaxHeight="42.56"
+                                Text="{Binding FullName}"
+                                HighlightText="{Binding DataContext.Text, ElementName=Self}"
+                                HighlightBrush="{StaticResource PhoneAccentBrush}">
+                            <controls1:HighlightingTextBlock.TextBlockStyle>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource PhoneTextLargeStyle}">
+                                    <Setter Property="Margin" Value="0"/>
+                                </Style>
+                            </controls1:HighlightingTextBlock.TextBlockStyle>
+                        </controls1:HighlightingTextBlock>
+                        <TextBlock Grid.Row="1" Margin="15,-4,0,0" Text="{Binding StatusCommon, Converter={StaticResource UserStatusToStringConverter}}" Foreground="{Binding StatusCommon, Converter={StaticResource UserStatusToBrushConverter}}" Visibility="{Binding Converter={StaticResource ContactToVisibilityConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    </Grid>
+                    
+                    <Border Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent" Tap="UIElement_OnTap"/>
+                </Grid>
+            </ListBoxItem>
+        </DataTemplate>
+    </views:TelegramViewBase.Resources>
+    
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition EndTransition="TelegramNavigationTransition_OnEndTransition">
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,49,0,28">
+            <TextBlock Text="{Binding Resources.SetAdmins, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <longListSelector:LongListSelector 
+            Grid.Row="1"
+            ItemsSource="{Binding Items}"
+            ItemTemplate="{StaticResource UserItemTemplate}"
+            IsFlatList="True" Margin="12,0">
+            <longListSelector:LongListSelector.ListHeaderTemplate>
+                <DataTemplate>
+                    <StackPanel DataContext="{Binding DataContext, ElementName=Self}">
+                        <toolkit:ToggleSwitch Margin="0,0,-24,-21" IsEnabled="{Binding IsEnabled}" IsChecked="{Binding AdminsEnabled, Mode=TwoWay, Converter={StaticResource InvertBooleanConverter}}" Header="{Binding Resources.AllMembersAreAdmins, Source={StaticResource Strings}}">
+                            <i:Interaction.Behaviors>
+                                <behaviors:ToggleSwitchLocalizedContentBehavior
+                                OnContent="{Binding Resources.On, Source={StaticResource Strings}}"
+                                OffContent="{Binding Resources.Off, Source={StaticResource Strings}}"/>
+                            </i:Interaction.Behaviors>
+                        </toolkit:ToggleSwitch>
+                        <TextBlock Text="{Binding AddAdminsDescription}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,12,12,30"/>
+                    </StackPanel>
+                </DataTemplate>
+            </longListSelector:LongListSelector.ListHeaderTemplate>
+            <longListSelector:LongListSelector.ListFooterTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="16,0" Text="{Binding DataContext.Status, ElementName=Self}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+                </DataTemplate>
+            </longListSelector:LongListSelector.ListFooterTemplate>
+        </longListSelector:LongListSelector>
+
+        <StackPanel x:Name="SearchPanel" Grid.Row="0" Grid.RowSpan="2" Margin="12,29,12,12" Visibility="Collapsed">
+            <StackPanel.RenderTransform>
+                <CompositeTransform/>
+            </StackPanel.RenderTransform>
+            <controls1:WatermarkedTextBox x:Name="SearchBox" Text="{Binding Text, Mode=TwoWay}" Watermark="{Binding Resources.Search, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}">
+                <controls1:WatermarkedTextBox.InputScope>
+                    <InputScope>
+                        <InputScopeName NameValue="Search"/>
+                    </InputScope>
+                </controls1:WatermarkedTextBox.InputScope>
+                <i:Interaction.Behaviors>
+                    <behaviors:UpdateTextBindingBehavior/>
+                </i:Interaction.Behaviors>
+            </controls1:WatermarkedTextBox>
+        </StackPanel>
+    </Grid>
+
+</views:TelegramViewBase>

@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.StickerHintsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="HintsBackgroundBrushLight" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="HintsBackgroundBrushDark" Color="#FF1F1F1F"/>
+    </UserControl.Resources>
+    
+    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <Grid.Resources>
+            <Storyboard x:Name="OpenStickersStoryboard" TargetName="StickersPanel" Completed="OpenStickersStoryboard_OnCompleted">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="StickersPanel">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="24"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="5"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimation From="0" To="1" Duration="0:0:0.25" Storyboard.TargetProperty="(UIElement.Opacity)">
+                    <DoubleAnimation.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut" Exponent="5"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </Grid.Resources>
+
+        <Grid x:Name="StickersPanel" CacheMode="BitmapCache">
+            <Border x:Name="BackgroundBorder" Background="White"/>
+            <ItemsControl ItemsSource="{Binding Hints}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True" VerticalContentAlignment="Center">
+                            <Image Source="{Binding Self, Converter={StaticResource DefaultPhotoConverter}}" Stretch="UniformToFill" Margin="2,3,1,3" 
+                                   Height="{Binding Document, Converter={StaticResource StickerPreviewToDimensionConverter}, ConverterParameter=Height}" Width="{Binding Document, Converter={StaticResource StickerPreviewToDimensionConverter}, ConverterParameter=Width}"/>
+                        </ListBoxItem>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>

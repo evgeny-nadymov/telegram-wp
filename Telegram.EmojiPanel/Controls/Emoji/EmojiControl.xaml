@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="Telegram.EmojiPanel.Controls.Emoji.EmojiControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utilites="clr-namespace:Telegram.EmojiPanel.Controls.Utilites"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Name="Self"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <Style x:Key="CategoryButtonBaseStyle" TargetType="Button">
+            <Setter Property="Margin" Value="3 0 3 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="ContentGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ContentGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <ContentControl x:Name="ContentContainer"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                            Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="CategoryButtonDarkThemeStyle" TargetType="Button" BasedOn="{StaticResource CategoryButtonBaseStyle}">
+            <Setter Property="Background" Value="#FF474747"/>
+        </Style>
+
+        <Style x:Key="CategoryButtonLightThemeStyle" TargetType="Button" BasedOn="{StaticResource CategoryButtonBaseStyle}">
+            <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+
+        <Style x:Key="RepeatButtonBaseStyle" TargetType="RepeatButton">
+            <Setter Property="Margin" Value="3 0 3 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Grid x:Name="ContentGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ContentGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <ContentControl x:Name="ContentContainer"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                            Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RepeatButtonDarkThemeStyle" TargetType="RepeatButton" BasedOn="{StaticResource RepeatButtonBaseStyle}">
+            <Setter Property="Background" Value="#FF474747"/>
+        </Style>
+
+        <Style x:Key="RepeatButtonLightThemeStyle" TargetType="RepeatButton" BasedOn="{StaticResource RepeatButtonBaseStyle}">
+            <Setter Property="Background" Value="#FFFFFFFF"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="EmojiContainer"
+          Visibility="Visible">
+        <Grid Background="{StaticResource PhoneChromeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ProgressBar x:Name="LoadingProgressBar" IsIndeterminate="True"/>
+
+            <ScrollViewer Grid.Row="0" Margin="0" Padding="0" x:Name="CSV">
+                <utilites:MyVirtualizingPanel x:Name="VirtPanel" Margin="0 3 0 0" />
+            </ScrollViewer>
+
+            <!-- recent panel-->
+            <Border Background="{StaticResource PhoneChromeBrush}" Grid.Row="0" Margin="0" Padding="0" x:Name="Recents" Visibility="Collapsed">
+                <ItemsControl ItemsSource="{Binding RecentItems, ElementName=Self}" Margin="3,4,3,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border 
+                                MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
+                                MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"
+                                MouseLeave="UIElement_OnMouseLeave"
+                                Tap="EmojiButton_OnTap" 
+                                Width="77" Height="68" Margin="1" 
+                                Background="{Binding ButtonBackground, ElementName=Self}">
+                                <Image Width="42" Source="{Binding Uri}">
+                                    <Image.RenderTransform>
+                                        <TranslateTransform Y="-1"/>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <toolkit:WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                <ItemsPresenter Margin="0"/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                </ItemsControl>
+            </Border>
+
+            <Grid x:Name="ButtonsGrid"
+                  Grid.Row="1" 
+                  Height="78"
+                  Margin="0 6 0 0"
+                  Background="{StaticResource PhoneChromeBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Buttons created code behind -->
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

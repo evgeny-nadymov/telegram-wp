@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>b168f0cb-dc50-4df4-9161-ce6c9e6f26e7</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="emoji_suggestions.cpp" />
+    <ClCompile Include="emoji_suggestions_data.cpp" />
+    <ClCompile Include="EmojiSuggestion.cpp" />
+    <ClCompile Include="ConnectionSocket.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="emoji_suggestions.h" />
+    <ClInclude Include="emoji_suggestions_data.h" />
+    <ClInclude Include="EmojiSuggestion.h" />
+    <ClInclude Include="ConnectionSocket.h" />
+  </ItemGroup>
+</Project>

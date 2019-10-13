@@ -1,0 +1,86 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.WebView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FFE3F4FF"
+    shell:SystemTray.IsVisible="True"
+    OrientationChanged="WebView_OnOrientationChanged">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="CaptionBorder" Grid.RowSpan="2" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+        <Button Margin="-4,18,0,0" VerticalAlignment="Bottom" Style="{StaticResource DialogDetailsCaptionButtonStyle}">
+            <Button.RenderTransform>
+                <TranslateTransform x:Name="CaptionTransform"/>
+            </Button.RenderTransform>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" x:Name="Title">
+                    <StackPanel.RenderTransform>
+                        <CompositeTransform/>
+                    </StackPanel.RenderTransform>
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding GameTitle, Converter={StaticResource Uppercase}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+                </StackPanel>
+                <TextBlock x:Name="Subtitle" Margin="6,-4,0,0" Foreground="White" Opacity="0.5" Style="{StaticResource PhoneTextSubtleStyle}"/>
+            </StackPanel>
+        </Button>
+        <!--<StackPanel Grid.Row="0" Margin="8,30,0,12">
+            <TextBlock HorizontalAlignment="Left" Text="{Binding GameTitle}" MaxHeight="42.56" Style="{StaticResource PhoneTextTitle2Style}"/>
+            <TextBlock x:Name="Subtitle" Margin="12,-4,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+        </StackPanel>-->
+
+        <phone:WebBrowser x:Name="Browser" Grid.Row="1" Source="{Binding Url}" IsScriptEnabled="True" LoadCompleted="Browser_OnLoadCompleted" ScriptNotify="WebBrowser_OnScriptNotify"/>
+        <Grid Grid.Row="2" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="Input"/>
+            <Button Grid.Column="1" Visibility="Visible" Content="send" Click="ButtonBase_OnClick"/>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

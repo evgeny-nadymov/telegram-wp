@@ -1,0 +1,102 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:notifications="clr-namespace:Telegram.Controls.Notifications;assembly=Telegram.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:additional="clr-namespace:TelegramClient.Views.Additional">
+
+    <Style TargetType="controls:TransitionFrame">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:TransitionFrame">
+                    <Border x:Name="ClientArea" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}">
+                        <Grid>
+                            <ContentPresenter x:Name="FirstContentPresenter" Opacity="0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="SecondContentPresenter" Opacity="0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:TelegramTransitionFrame">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:TelegramTransitionFrame">
+                    <Border x:Name="ClientArea" IsHitTestVisible="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <MediaElement x:Name="Element" Grid.RowSpan="2" AutoPlay="False" Visibility="Collapsed"/>
+
+                            <ContentControl Grid.Row="0" x:Name="CallPlaceholder" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+
+                            <ContentPresenter Grid.Row="1" x:Name="FirstContentPresenter" Opacity="0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter Grid.Row="1" x:Name="SecondContentPresenter" Opacity="0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <Border Grid.RowSpan="2" x:Name="BlockingProgress" Visibility="Collapsed" Background="{StaticResource PhoneBackgroundBrush}" Opacity="0.7"/>
+                            <StackPanel Grid.RowSpan="2" x:Name="BlockingPanel" Visibility="Collapsed" VerticalAlignment="Center">
+                                <ProgressBar IsIndeterminate="True"/>
+                                <TextBlock x:Name="ProgressText" HorizontalAlignment="Center" Text="{TemplateBinding Title}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+
+                            <Border Grid.RowSpan="2" x:Name="Player" Visibility="Collapsed" UseOptimizedManipulationRouting="False" Margin="0,200,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" CacheMode="BitmapCache" CornerRadius="80" Width="160" Height="160"/>
+
+                            <additional:LockscreenView Grid.RowSpan="2" x:Name="PasscodePanel" Visibility="Collapsed"/>
+
+                            <ContentControl x:Name="BlockingPlaceholder" Grid.RowSpan="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Visibility="Collapsed"/>
+
+                            <!--<Grid Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,32,0,0" Visibility="Visible" IsHitTestVisible="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.ColumnSpan="2" Background="{StaticResource PhoneBackgroundBrush}" Opacity="0.9" IsHitTestVisible="False"/>
+                                <TextBlock x:Name="DebugInfo" Grid.Column="0" Foreground="GreenYellow" FontSize="10" IsHitTestVisible="False" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <ListBox x:Name="DebugList" Grid.Column="1" MaxHeight="150" Foreground="GreenYellow" VerticalAlignment="Top" IsHitTestVisible="True" FontSize="10"/>
+                            </Grid>-->
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="toolkit:TransitionFrame">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toolkit:TransitionFrame">
+                    <Border x:Name="ClientArea" IsHitTestVisible="True" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}">
+                        <Grid>
+                            <ContentPresenter x:Name="FirstContentPresenter" Opacity="0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="SecondContentPresenter" Opacity="0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <!--<Border Background="Transparent" Opacity="0.3"/>-->
+                            <!--<additional:LockscreenView/>-->
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+
+

@@ -1,0 +1,113 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Media.MediaView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:Telegram.Controls;assembly=Telegram.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:triggers="clr-namespace:Telegram.Controls.Triggers;assembly=Telegram.Controls"
+    xmlns:templateSelectors="clr-namespace:TelegramClient.Helpers.TemplateSelectors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.IsVisible="True">
+
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="MessageVideoTemplate">
+                <Border Background="{StaticResource PhoneChromeBrush}" Width="99" Height="99" Margin="6" micro:Message.Attach="[Event Tap] = [Action OpenMedia($DataContext)]">
+                    <Grid Background="Transparent" >
+                        <Image Source="{Binding Media.Video, Converter={StaticResource DefaultPhotoConverter}, ConverterParameter=99.0}" Stretch="UniformToFill"/>
+
+                        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image VerticalAlignment="Center"
+					            Width="35" Height="35" Margin="-4,3,-4,0"
+					            Source="/Images/Audio/appbar.transport.play.rest.png"/>
+                            <TextBlock Grid.Column="1"
+					            VerticalAlignment="Center" Margin="0"
+					            Text="{Binding Media.Video.DurationString}"
+					            Foreground="White"
+					            Style="{StaticResource PhoneTextSmallStyle}"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MessagePhotoTemplate">
+                <Border Background="{StaticResource PhoneChromeBrush}" Width="99" Height="99" Margin="6" micro:Message.Attach="[Event Tap] = [Action OpenMedia($DataContext)]">
+                    <Image Source="{Binding Media.Photo, Converter={StaticResource DefaultPhotoConverter}, ConverterParameter=99.0}" Stretch="UniformToFill"/>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MessageEmptyTemplate">
+                <Grid/>
+            </DataTemplate>
+
+            <templateSelectors:MediaGridTemplateSelector 
+                x:Key="MediaGridTemplateSelector"
+                PhotoTemplate="{StaticResource MessagePhotoTemplate}"
+                VideoTemplate="{StaticResource MessageVideoTemplate}"
+                EmptyTemplate="{StaticResource MessageEmptyTemplate}"/>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+
+    <Grid x:Name="LayoutRoot" Margin="-12,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="BottomAppBarPlaceholder" Height="72"/>
+        </Grid.RowDefinitions>
+        <controls:LazyListBox 
+            Margin="18,0,0,0"
+            Grid.RowSpan="2"
+            x:Name="Items"
+            CloseToEndPercent="0.1"
+            CloseToEnd="Items_OnCloseToEnd">
+            <i:Interaction.Triggers>
+                <triggers:CompressionTrigger CompressionType="Bottom">
+                    <micro:ActionMessage MethodName="LoadNextSlice"/>
+                </triggers:CompressionTrigger>
+            </i:Interaction.Triggers>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" toolkit:TiltEffect.IsTiltEnabled="True">
+                        <ListBoxItem Content="{Binding Message1}" ContentTemplate="{Binding Message1, Converter={StaticResource MediaGridTemplateSelector}}"/>
+                        <ListBoxItem Content="{Binding Message2}" ContentTemplate="{Binding Message2, Converter={StaticResource MediaGridTemplateSelector}}"/>
+                        <ListBoxItem Content="{Binding Message3}" ContentTemplate="{Binding Message3, Converter={StaticResource MediaGridTemplateSelector}}"/>
+                        <ListBoxItem Content="{Binding Message4}" ContentTemplate="{Binding Message4, Converter={StaticResource MediaGridTemplateSelector}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </controls:LazyListBox>
+
+        <Grid 
+            VerticalAlignment="Top" HorizontalAlignment="Center" 
+            Visibility="{Binding IsEmptyList, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Margin="0,100,0,0">
+                <Image Width="160" Height="160" Source="{Binding EmptyListImageSource}" Stretch="UniformToFill"/>
+                <TextBlock Text="{Binding Resources.SharePhotosAndVideos, Source={StaticResource Strings}}" TextWrapping="Wrap" Width="300" Margin="12,40,12,0" TextAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Margin="24,0" Text="{Binding Status}" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+    </Grid>
+
+</views:TelegramViewBase>

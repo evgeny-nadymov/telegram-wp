@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.PhotoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="CustomAccentBrush" Color="#FF29B6F6"/>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" Width="146" Height="146" Background="Transparent" IsHitTestVisible="True">
+        <Border x:Name="ChromeBorder" Background="{StaticResource PhoneChromeBrush}" IsHitTestVisible="False"/>
+        <Image x:Name="ImageControl" Stretch="UniformToFill" IsHitTestVisible="False"/>
+        <Border x:Name="SelectionBorder" IsHitTestVisible="False" BorderThickness="3" BorderBrush="{StaticResource CustomAccentBrush}"/>
+        <controls:SelectionControl x:Name="SelectionControl" Margin="12" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False"/>
+    </Grid>
+</UserControl>

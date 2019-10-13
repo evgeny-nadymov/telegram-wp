@@ -1,0 +1,2058 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE897F51-AF1F-48FE-9DBB-6B308F9740D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Telegram.Api</RootNamespace>
+    <AssemblyName>Telegram.Api.PCL</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WIN_RT;WP8</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WIN_RT;WP8</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
+    <TargetPlatform Include="Windows, Version=8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Telegram.Api\Compression\GZipDeflateStream.cs">
+      <Link>Compression\GZipDeflateStream.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Constants.cs">
+      <Link>Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Hash\CRC32\CRC.cs">
+      <Link>Hash\CRC32\CRC.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Extensions\ActionExtensions.cs">
+      <Link>Extensions\ActionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Extensions\HttpWebRequestExtensions.cs">
+      <Link>Extensions\HttpWebRequestExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Extensions\StreamExtensions.cs">
+      <Link>Extensions\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Extensions\TLObjectExtensions.cs">
+      <Link>Extensions\TLObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Helpers\Execute.cs">
+      <Link>Helpers\Execute.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Helpers\FileUtils.cs">
+      <Link>Helpers\FileUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Helpers\SettingsHelper.cs">
+      <Link>Helpers\SettingsHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Helpers\Utils.cs">
+      <Link>Helpers\Utils.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Hash\MD5\MD5.cs">
+      <Link>Hash\MD5\MD5.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Hash\MD5\MD5CryptoServiceProvider.cs">
+      <Link>Hash\MD5\MD5CryptoServiceProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Hash\MD5\MD5Managed.cs">
+      <Link>Hash\MD5\MD5Managed.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Cache\Context.cs">
+      <Link>Services\Cache\Context.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Cache\EventArgs\DialogAddedEventArgs.cs">
+      <Link>Services\Cache\EventArgs\DialogAddedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Cache\EventArgs\TopMessageUpdatedEventArgs.cs">
+      <Link>Services\Cache\EventArgs\TopMessageUpdatedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Cache\ICacheService.cs">
+      <Link>Services\Cache\ICacheService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Cache\InMemoryCacheService.cs">
+      <Link>Services\Cache\InMemoryCacheService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Cache\InMemoryDatabase.cs">
+      <Link>Services\Cache\InMemoryDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Connection\ConnectionService.cs">
+      <Link>Services\Connection\ConnectionService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\DCOptionItem.cs">
+      <Link>Services\DCOptionItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\DelayedItem.cs">
+      <Link>Services\DelayedItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\AudioFileManager.cs">
+      <Link>Services\FileManager\AudioFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\DocumentFileManager.cs">
+      <Link>Services\FileManager\DocumentFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\DownloadableItem.cs">
+      <Link>Services\FileManager\DownloadableItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\DownloadablePart.cs">
+      <Link>Services\FileManager\DownloadablePart.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\DownloadingCanceledEventArgs.cs">
+      <Link>Services\FileManager\DownloadingCanceledEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\EncryptedFileManager.cs">
+      <Link>Services\FileManager\EncryptedFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\FileManager.cs">
+      <Link>Services\FileManager\FileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IAudioFileManager.cs">
+      <Link>Services\FileManager\IAudioFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IDocumentFileManager.cs">
+      <Link>Services\FileManager\IDocumentFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IEncryptedFileManager.cs">
+      <Link>Services\FileManager\IEncryptedFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IFileManager.cs">
+      <Link>Services\FileManager\IFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IUploadAudioFileManager.cs">
+      <Link>Services\FileManager\IUploadAudioFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IUploadFileManager.cs">
+      <Link>Services\FileManager\IUploadFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IUploadVideoFileManager.cs">
+      <Link>Services\FileManager\IUploadVideoFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\IVideoFileManager.cs">
+      <Link>Services\FileManager\IVideoFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\ProgressChangedEventArgs.cs">
+      <Link>Services\FileManager\ProgressChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\UploadAudioFileManager.cs">
+      <Link>Services\FileManager\UploadAudioFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\UploadFileManager.cs">
+      <Link>Services\FileManager\UploadFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\UploadVideoFileManager.cs">
+      <Link>Services\FileManager\UploadVideoFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\VideoFileManager.cs">
+      <Link>Services\FileManager\VideoFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\Worker.cs">
+      <Link>Services\FileManager\Worker.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\HistoryItem.cs">
+      <Link>Services\HistoryItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\IMTProtoService.cs">
+      <Link>Services\IMTProtoService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Account.cs">
+      <Link>Services\MTProtoService.Account.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Auth.cs">
+      <Link>Services\MTProtoService.Auth.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.ByTransport.cs">
+      <Link>Services\MTProtoService.ByTransport.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Config.cs">
+      <Link>Services\MTProtoService.Config.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Contacts.cs">
+      <Link>Services\MTProtoService.Contacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.cs">
+      <Link>Services\MTProtoService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.DHKeyExchange.cs">
+      <Link>Services\MTProtoService.DHKeyExchange.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Help.cs">
+      <Link>Services\MTProtoService.Help.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Helpers.cs">
+      <Link>Services\MTProtoService.Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.HttpLongPoll.cs">
+      <Link>Services\MTProtoService.HttpLongPoll.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Messages.cs">
+      <Link>Services\MTProtoService.Messages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Photos.cs">
+      <Link>Services\MTProtoService.Photos.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.SecretChats.cs">
+      <Link>Services\MTProtoService.SecretChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.SendingQueue.cs">
+      <Link>Services\MTProtoService.SendingQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Stuff.cs">
+      <Link>Services\MTProtoService.Stuff.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Updates.cs">
+      <Link>Services\MTProtoService.Updates.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Upload.cs">
+      <Link>Services\MTProtoService.Upload.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Users.cs">
+      <Link>Services\MTProtoService.Users.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\ServiceBase.cs">
+      <Link>Services\ServiceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Updates\IUpdatesService.cs">
+      <Link>Services\Updates\IUpdatesService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Updates\ReceiveUpdatesEventArgs.cs">
+      <Link>Services\Updates\ReceiveUpdatesEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Updates\UpdatesBySeqComparer.cs">
+      <Link>Services\Updates\UpdatesBySeqComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Updates\UpdatesService.cs">
+      <Link>Services\Updates\UpdatesService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLCheckUsername.cs">
+      <Link>TL\Functions\Account\TLCheckUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLDeleteAccount.cs">
+      <Link>TL\Functions\Account\TLDeleteAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLGetAccountTTL.cs">
+      <Link>TL\Functions\Account\TLGetAccountTTL.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLGetNotifySettings.cs">
+      <Link>TL\Functions\Account\TLGetNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLGetPrivacy.cs">
+      <Link>TL\Functions\Account\TLGetPrivacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLRegisterDevice.cs">
+      <Link>TL\Functions\Account\TLRegisterDevice.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLResetNotifySettings.cs">
+      <Link>TL\Functions\Account\TLResetNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLSetPrivacy.cs">
+      <Link>TL\Functions\Account\TLSetPrivacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLUnregisterDevice.cs">
+      <Link>TL\Functions\Account\TLUnregisterDevice.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLUpdateNotifySettings.cs">
+      <Link>TL\Functions\Account\TLUpdateNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLUpdateProfile.cs">
+      <Link>TL\Functions\Account\TLUpdateProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLUpdateStatus.cs">
+      <Link>TL\Functions\Account\TLUpdateStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Account\TLUpdateUserName.cs">
+      <Link>TL\Functions\Account\TLUpdateUserName.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLCheckPhone.cs">
+      <Link>TL\Functions\Auth\TLCheckPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLExportAuthorization.cs">
+      <Link>TL\Functions\Auth\TLExportAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLImportAuthorization.cs">
+      <Link>TL\Functions\Auth\TLImportAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLLogOut.cs">
+      <Link>TL\Functions\Auth\TLLogOut.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLResetAuthorizations.cs">
+      <Link>TL\Functions\Auth\TLResetAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLSendCall.cs">
+      <Link>TL\Functions\Auth\TLSendCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLSendCode.cs">
+      <Link>TL\Functions\Auth\TLSendCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLSendInvites.cs">
+      <Link>TL\Functions\Auth\TLSendInvites.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLSendSms.cs">
+      <Link>TL\Functions\Auth\TLSendSms.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLSignIn.cs">
+      <Link>TL\Functions\Auth\TLSignIn.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLSignUp.cs">
+      <Link>TL\Functions\Auth\TLSignUp.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLBlock.cs">
+      <Link>TL\Functions\Contacts\TLBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLDeleteContact.cs">
+      <Link>TL\Functions\Contacts\TLDeleteContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLDeleteContacts.cs">
+      <Link>TL\Functions\Contacts\TLDeleteContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLGetBlocked.cs">
+      <Link>TL\Functions\Contacts\TLGetBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLGetContacts.cs">
+      <Link>TL\Functions\Contacts\TLGetContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLGetStatuses.cs">
+      <Link>TL\Functions\Contacts\TLGetStatuses.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLImportContacts.cs">
+      <Link>TL\Functions\Contacts\TLImportContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLSearch.cs">
+      <Link>TL\Functions\Contacts\TLSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLUnblock.cs">
+      <Link>TL\Functions\Contacts\TLUnblock.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\DHKeyExchange\TLReqDHParams.cs">
+      <Link>TL\Functions\DHKeyExchange\TLReqDHParams.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\DHKeyExchange\TLReqPQ.cs">
+      <Link>TL\Functions\DHKeyExchange\TLReqPQ.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\DHKeyExchange\TLSetClientDHParams.cs">
+      <Link>TL\Functions\DHKeyExchange\TLSetClientDHParams.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetConfig.cs">
+      <Link>TL\Functions\Help\TLGetConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetInviteText.cs">
+      <Link>TL\Functions\Help\TLGetInviteText.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetNearestDC.cs">
+      <Link>TL\Functions\Help\TLGetNearestDC.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetSupport.cs">
+      <Link>TL\Functions\Help\TLGetSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLInvokeWithLayerN.cs">
+      <Link>TL\Functions\Help\TLInvokeWithLayerN.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLAcceptEncryption.cs">
+      <Link>TL\Functions\Messages\TLAcceptEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLAddChatUser.cs">
+      <Link>TL\Functions\Messages\TLAddChatUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLCreateChat.cs">
+      <Link>TL\Functions\Messages\TLCreateChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLDeleteChatUser.cs">
+      <Link>TL\Functions\Messages\TLDeleteChatUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLDeleteHistory.cs">
+      <Link>TL\Functions\Messages\TLDeleteHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLDeleteMessages.cs">
+      <Link>TL\Functions\Messages\TLDeleteMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLDiscardEncryption.cs">
+      <Link>TL\Functions\Messages\TLDiscardEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLEditChatPhoto.cs">
+      <Link>TL\Functions\Messages\TLEditChatPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLEditChatTitle.cs">
+      <Link>TL\Functions\Messages\TLEditChatTitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLForwardMessage.cs">
+      <Link>TL\Functions\Messages\TLForwardMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLForwardMessages.cs">
+      <Link>TL\Functions\Messages\TLForwardMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetChats.cs">
+      <Link>TL\Functions\Messages\TLGetChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetDHConfig.cs">
+      <Link>TL\Functions\Messages\TLGetDHConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetDialogs.cs">
+      <Link>TL\Functions\Messages\TLGetDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetFullChat.cs">
+      <Link>TL\Functions\Messages\TLGetFullChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetHistory.cs">
+      <Link>TL\Functions\Messages\TLGetHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetMessages.cs">
+      <Link>TL\Functions\Messages\TLGetMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReadEncryptedHistory.cs">
+      <Link>TL\Functions\Messages\TLReadEncryptedHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReadHistory.cs">
+      <Link>TL\Functions\Messages\TLReadHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReadMessageContents.cs">
+      <Link>TL\Functions\Messages\TLReadMessageContents.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReceivedMessages.cs">
+      <Link>TL\Functions\Messages\TLReceivedMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReceivedQueue.cs">
+      <Link>TL\Functions\Messages\TLReceivedQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLRequestEncryption.cs">
+      <Link>TL\Functions\Messages\TLRequestEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLRestoreMessages.cs">
+      <Link>TL\Functions\Messages\TLRestoreMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSearch.cs">
+      <Link>TL\Functions\Messages\TLSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendBroadcast.cs">
+      <Link>TL\Functions\Messages\TLSendBroadcast.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendEncrypted.cs">
+      <Link>TL\Functions\Messages\TLSendEncrypted.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendEncryptedFile.cs">
+      <Link>TL\Functions\Messages\TLSendEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendEncryptedService.cs">
+      <Link>TL\Functions\Messages\TLSendEncryptedService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendMedia.cs">
+      <Link>TL\Functions\Messages\TLSendMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendMessage.cs">
+      <Link>TL\Functions\Messages\TLSendMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSetEncryptedTyping.cs">
+      <Link>TL\Functions\Messages\TLSetEncryptedTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSetTyping.cs">
+      <Link>TL\Functions\Messages\TLSetTyping.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Photos\TLGetUserPhotos.cs">
+      <Link>TL\Functions\Photos\TLGetUserPhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Photos\TLUpdateProfilePhoto.cs">
+      <Link>TL\Functions\Photos\TLUpdateProfilePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Photos\TLUploadProfilePhoto.cs">
+      <Link>TL\Functions\Photos\TLUploadProfilePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Stuff\TLGetFutureSalts.cs">
+      <Link>TL\Functions\Stuff\TLGetFutureSalts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Stuff\TLHttpWait.cs">
+      <Link>TL\Functions\Stuff\TLHttpWait.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Stuff\TLMessageAcknowledgments.cs">
+      <Link>TL\Functions\Stuff\TLMessageAcknowledgments.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Stuff\TLRPCDropAnswer.cs">
+      <Link>TL\Functions\Stuff\TLRPCDropAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Updates\TLGetDifference.cs">
+      <Link>TL\Functions\Updates\TLGetDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Updates\TLGetState.cs">
+      <Link>TL\Functions\Updates\TLGetState.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Upload\TLGetFile.cs">
+      <Link>TL\Functions\Upload\TLGetFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Upload\TLSaveFilePart.cs">
+      <Link>TL\Functions\Upload\TLSaveFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Users\TLGetFullUser.cs">
+      <Link>TL\Functions\Users\TLGetFullUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Users\TLGetUsers.cs">
+      <Link>TL\Functions\Users\TLGetUsers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Interfaces\IBytes.cs">
+      <Link>TL\Interfaces\IBytes.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Interfaces\IFullName.cs">
+      <Link>TL\Interfaces\IFullName.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Interfaces\IInputPeer.cs">
+      <Link>TL\Interfaces\IInputPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Interfaces\ISelectable.cs">
+      <Link>TL\Interfaces\ISelectable.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Interfaces\IVIsibility.cs">
+      <Link>TL\Interfaces\IVIsibility.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAffectedHistory.cs">
+      <Link>TL\TLAffectedHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAudio.cs">
+      <Link>TL\TLAudio.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAuthorization.cs">
+      <Link>TL\TLAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBadMessageNotification.cs">
+      <Link>TL\TLBadMessageNotification.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBadServerSalt.cs">
+      <Link>TL\TLBadServerSalt.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBool.cs">
+      <Link>TL\TLBool.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChat.cs">
+      <Link>TL\TLChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChatFull.cs">
+      <Link>TL\TLChatFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChatParticipant.cs">
+      <Link>TL\TLChatParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChatParticipants.cs">
+      <Link>TL\TLChatParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChats.cs">
+      <Link>TL\TLChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCheckedPhone.cs">
+      <Link>TL\TLCheckedPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLClientDHInnerData.cs">
+      <Link>TL\TLClientDHInnerData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLConfig.cs">
+      <Link>TL\TLConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContact.cs">
+      <Link>TL\TLContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContactBlocked.cs">
+      <Link>TL\TLContactBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContactFound.cs">
+      <Link>TL\TLContactFound.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContacts.cs">
+      <Link>TL\TLContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContactsBlocked.cs">
+      <Link>TL\TLContactsBlocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContactsFound.cs">
+      <Link>TL\TLContactsFound.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContactStatus.cs">
+      <Link>TL\TLContactStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContainerTransportMessage.cs">
+      <Link>TL\TLContainerTransportMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDCOption.cs">
+      <Link>TL\TLDCOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDecryptedMessage.cs">
+      <Link>TL\TLDecryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDecryptedMessageAction.cs">
+      <Link>TL\TLDecryptedMessageAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDecryptedMessageLayer.cs">
+      <Link>TL\TLDecryptedMessageLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDecryptedMessageMedia.cs">
+      <Link>TL\TLDecryptedMessageMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDHConfig.cs">
+      <Link>TL\TLDHConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDHGen.cs">
+      <Link>TL\TLDHGen.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDialog.cs">
+      <Link>TL\TLDialog.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDialogs.cs">
+      <Link>TL\TLDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDifference.cs">
+      <Link>TL\TLDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDocument.cs">
+      <Link>TL\TLDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDouble.cs">
+      <Link>TL\TLDouble.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLEncryptedChat.cs">
+      <Link>TL\TLEncryptedChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLEncryptedFile.cs">
+      <Link>TL\TLEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLEncryptedMessage.cs">
+      <Link>TL\TLEncryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLExportedAuthorization.cs">
+      <Link>TL\TLExportedAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFile.cs">
+      <Link>TL\TLFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFileLocation.cs">
+      <Link>TL\TLFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFileType.cs">
+      <Link>TL\TLFileType.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLForeignLink.cs">
+      <Link>TL\TLForeignLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFutureSalt.cs">
+      <Link>TL\TLFutureSalt.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLGeoPoint.cs">
+      <Link>TL\TLGeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLGzipPacked.cs">
+      <Link>TL\TLGzipPacked.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLImportedContact.cs">
+      <Link>TL\TLImportedContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLImportedContacts.cs">
+      <Link>TL\TLImportedContacts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInitConnection.cs">
+      <Link>TL\TLInitConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputAudio.cs">
+      <Link>TL\TLInputAudio.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputChatPhoto.cs">
+      <Link>TL\TLInputChatPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputContact.cs">
+      <Link>TL\TLInputContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputDocument.cs">
+      <Link>TL\TLInputDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputEncryptedChat.cs">
+      <Link>TL\TLInputEncryptedChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputEncryptedFile.cs">
+      <Link>TL\TLInputEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputEncryptedFileBigUploaded.cs">
+      <Link>TL\TLInputEncryptedFileBigUploaded.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputEncryptedFileLocation.cs">
+      <Link>TL\TLInputEncryptedFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputFile.cs">
+      <Link>TL\TLInputFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputFileBig.cs">
+      <Link>TL\TLInputFileBig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputFileLocation.cs">
+      <Link>TL\TLInputFileLocation.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputGeoPoint.cs">
+      <Link>TL\TLInputGeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputMedia.cs">
+      <Link>TL\TLInputMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputMessagesFilter.cs">
+      <Link>TL\TLInputMessagesFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputNotifyPeer.cs">
+      <Link>TL\TLInputNotifyPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPeerBase.cs">
+      <Link>TL\TLInputPeerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPeerNotifyEvents.cs">
+      <Link>TL\TLInputPeerNotifyEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPeerNotifySettings.cs">
+      <Link>TL\TLInputPeerNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPhoto.cs">
+      <Link>TL\TLInputPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPhotoCrop.cs">
+      <Link>TL\TLInputPhotoCrop.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputUser.cs">
+      <Link>TL\TLInputUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputVideo.cs">
+      <Link>TL\TLInputVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInt.cs">
+      <Link>TL\TLInt.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInt128.cs">
+      <Link>TL\TLInt128.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInt256.cs">
+      <Link>TL\TLInt256.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInviteText.cs">
+      <Link>TL\TLInviteText.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInvokeAfterMsg.cs">
+      <Link>TL\TLInvokeAfterMsg.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLLink.cs">
+      <Link>TL\TLLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLLong.cs">
+      <Link>TL\TLLong.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessage.cs">
+      <Link>TL\TLMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessage.Encrypted.cs">
+      <Link>TL\TLMessage.Encrypted.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageAction.cs">
+      <Link>TL\TLMessageAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageContainer.cs">
+      <Link>TL\TLMessageContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageInfo.cs">
+      <Link>TL\TLMessageInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageMedia.cs">
+      <Link>TL\TLMessageMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessages.cs">
+      <Link>TL\TLMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessagesAcknowledgment.cs">
+      <Link>TL\TLMessagesAcknowledgment.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessagesChatFull.cs">
+      <Link>TL\TLMessagesChatFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMyLink.cs">
+      <Link>TL\TLMyLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLNearestDC.cs">
+      <Link>TL\TLNearestDC.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLNewSessionCreated.cs">
+      <Link>TL\TLNewSessionCreated.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLNonEncryptedMessage.cs">
+      <Link>TL\TLNonEncryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLNotifyPeer.cs">
+      <Link>TL\TLNotifyPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLNull.cs">
+      <Link>TL\TLNull.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLObject.cs">
+      <Link>TL\TLObject.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLObjectGenerator.cs">
+      <Link>TL\TLObjectGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPeer.cs">
+      <Link>TL\TLPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPeerNotifyEvents.cs">
+      <Link>TL\TLPeerNotifyEvents.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPeerNotifySettings.cs">
+      <Link>TL\TLPeerNotifySettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhoto.cs">
+      <Link>TL\TLPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhotos.cs">
+      <Link>TL\TLPhotos.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhotoSize.cs">
+      <Link>TL\TLPhotoSize.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhotosPhoto.cs">
+      <Link>TL\TLPhotosPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPong.cs">
+      <Link>TL\TLPong.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPQInnerData.cs">
+      <Link>TL\TLPQInnerData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLResponse.cs">
+      <Link>TL\TLResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLResPQ.cs">
+      <Link>TL\TLResPQ.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRPCDropAnswer.cs">
+      <Link>TL\TLRPCDropAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRPCError.cs">
+      <Link>TL\TLRPCError.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRPCResult.cs">
+      <Link>TL\TLRPCResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSendMessageAction.cs">
+      <Link>TL\TLSendMessageAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSentCode.cs">
+      <Link>TL\TLSentCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSentEncryptedFile.cs">
+      <Link>TL\TLSentEncryptedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSentEncryptedMessage.cs">
+      <Link>TL\TLSentEncryptedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSentMessage.cs">
+      <Link>TL\TLSentMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLServerDHInnerData.cs">
+      <Link>TL\TLServerDHInnerData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLServerDHParams.cs">
+      <Link>TL\TLServerDHParams.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLServerFile.cs">
+      <Link>TL\TLServerFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSignatures.cs">
+      <Link>TL\TLSignatures.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLState.cs">
+      <Link>TL\TLState.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStatedMessage.cs">
+      <Link>TL\TLStatedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStatedMessages.cs">
+      <Link>TL\TLStatedMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLString.cs">
+      <Link>TL\TLString.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSupport.cs">
+      <Link>TL\TLSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUpdate.cs">
+      <Link>TL\TLUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUpdates.cs">
+      <Link>TL\TLUpdates.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUserBase.cs">
+      <Link>TL\TLUserBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUserFull.cs">
+      <Link>TL\TLUserFull.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUserStatus.cs">
+      <Link>TL\TLUserStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUtils.cs">
+      <Link>TL\TLUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLUtils.Log.cs">
+      <Link>TL\TLUtils.Log.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLVector.cs">
+      <Link>TL\TLVector.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLVideo.cs">
+      <Link>TL\TLVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLWallpaperSolid.cs">
+      <Link>TL\TLWallpaperSolid.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\DataEventArgs.cs">
+      <Link>Transport\DataEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\ITransport.cs">
+      <Link>Transport\ITransport.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\ITransportService.cs">
+      <Link>Transport\ITransportService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\TCPTransportBase.cs">
+      <Link>Transport\TCPTransportBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\TCPTransportResult.cs">
+      <Link>Transport\TCPTransportResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\TransportService.cs">
+      <Link>Transport\TransportService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\Services\FileManager\IWebFileManager.cs">
+      <Link>Services\FileManager\IWebFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\Services\FileManager\WebFileManager.cs">
+      <Link>Services\FileManager\WebFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLAcceptAuthorization.cs">
+      <Link>TL\Functions\Account\TLAcceptAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLDeleteSecureValue.cs">
+      <Link>TL\Functions\Account\TLDeleteSecureValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLGetAllSecureValues.cs">
+      <Link>TL\Functions\Account\TLGetAllSecureValues.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLGetAuthorizationForm.cs">
+      <Link>TL\Functions\Account\TLGetAuthorizationForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLGetSecureValue.cs">
+      <Link>TL\Functions\Account\TLGetSecureValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLGetWebAuthorizations.cs">
+      <Link>TL\Functions\Account\TLGetWebAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLInitTakeoutSession.cs">
+      <Link>TL\Functions\Account\TLInitTakeoutSession.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLResetWebAuthorization.cs">
+      <Link>TL\Functions\Account\TLResetWebAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLResetWebAuthorizations.cs">
+      <Link>TL\Functions\Account\TLResetWebAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLSaveSecureValue.cs">
+      <Link>TL\Functions\Account\TLSaveSecureValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLSendVerifyEmailCode.cs">
+      <Link>TL\Functions\Account\TLSendVerifyEmailCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLSendVerifyPhoneCode.cs">
+      <Link>TL\Functions\Account\TLSendVerifyPhoneCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLVerifyEmail.cs">
+      <Link>TL\Functions\Account\TLVerifyEmail.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLVerifyEmailCode.cs">
+      <Link>TL\Functions\Account\TLVerifyEmailCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Account\TLVerifyPhone.cs">
+      <Link>TL\Functions\Account\TLVerifyPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Auth\TLBindTempAuthKey.cs">
+      <Link>TL\Functions\Auth\TLBindTempAuthKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Channels\TLChangeFeedBroadcast.cs">
+      <Link>TL\Functions\Channels\TLChangeFeedBroadcast.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Channels\TLGetFeed.cs">
+      <Link>TL\Functions\Channels\TLGetFeed.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Channels\TLReadFeed.cs">
+      <Link>TL\Functions\Channels\TLReadFeed.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Channels\TLSetFeedBroadcasts.cs">
+      <Link>TL\Functions\Channels\TLSetFeedBroadcasts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Contacts\TLGetSaved.cs">
+      <Link>TL\Functions\Contacts\TLGetSaved.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Help\TLGetDeepLinkInfo.cs">
+      <Link>TL\Functions\Help\TLGetDeepLinkInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Help\TLGetPassportConfig.cs">
+      <Link>TL\Functions\Help\TLGetPassportConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Help\TLGetProxyData.cs">
+      <Link>TL\Functions\Help\TLGetProxyData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Messages\TLClearAllDrafts.cs">
+      <Link>TL\Functions\Messages\TLClearAllDrafts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Messages\TLGetDialogUnreadMarks.cs">
+      <Link>TL\Functions\Messages\TLGetDialogUnreadMarks.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Messages\TLMarkDialogUnread.cs">
+      <Link>TL\Functions\Messages\TLMarkDialogUnread.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Messages\TLReport.cs">
+      <Link>TL\Functions\Messages\TLReport.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Messages\TLSearchStickerSets.cs">
+      <Link>TL\Functions\Messages\TLSearchStickerSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Messages\TLToggleTopPeers.cs">
+      <Link>TL\Functions\Messages\TLToggleTopPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Upload\TLGetWebFile.cs">
+      <Link>TL\Functions\Upload\TLGetWebFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\Functions\Users\TLSetSecureValueErrors.cs">
+      <Link>TL\Functions\Users\TLSetSecureValueErrors.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLAppUpdate.cs">
+      <Link>TL\TLAppUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLAuthorizationForm.cs">
+      <Link>TL\TLAuthorizationForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLContactsSettings.cs">
+      <Link>TL\TLContactsSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLDeepLinkInfo.cs">
+      <Link>TL\TLDeepLinkInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLDialogPeer.cs">
+      <Link>TL\TLDialogPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLFeedBroadcasts.cs">
+      <Link>TL\TLFeedBroadcasts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLFeedPosition.cs">
+      <Link>TL\TLFeedPosition.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLFeedSources.cs">
+      <Link>TL\TLFeedSources.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLFoundStickerSets.cs">
+      <Link>TL\TLFoundStickerSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInputCheckPasswordSRP.cs">
+      <Link>TL\TLInputCheckPasswordSRP.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInputClientProxy.cs">
+      <Link>TL\TLInputClientProxy.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInputDialogPeer.cs">
+      <Link>TL\TLInputDialogPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInputMessage.cs">
+      <Link>TL\TLInputMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInputSecureFile.cs">
+      <Link>TL\TLInputSecureFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInputSecureValue.cs">
+      <Link>TL\TLInputSecureValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLInvokeWithMessageRange.cs">
+      <Link>TL\TLInvokeWithMessageRange.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLPassportConfig.cs">
+      <Link>TL\TLPassportConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLPasswordKdfAlgo.cs">
+      <Link>TL\TLPasswordKdfAlgo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLProxyData.cs">
+      <Link>TL\TLProxyData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSavedPhoneContact.cs">
+      <Link>TL\TLSavedPhoneContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureCredentialsEncrypted.cs">
+      <Link>TL\TLSecureCredentialsEncrypted.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureData.cs">
+      <Link>TL\TLSecureData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureFile.cs">
+      <Link>TL\TLSecureFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecurePasswordKdfAlgo.cs">
+      <Link>TL\TLSecurePasswordKdfAlgo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureRequiredType.cs">
+      <Link>TL\TLSecureRequiredType.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureSecretSettings.cs">
+      <Link>TL\TLSecureSecretSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureValue.cs">
+      <Link>TL\TLSecureValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureValueError.cs">
+      <Link>TL\TLSecureValueError.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureValueHash.cs">
+      <Link>TL\TLSecureValueHash.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureValuePlainData.cs">
+      <Link>TL\TLSecureValuePlainData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSecureValueType.cs">
+      <Link>TL\TLSecureValueType.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLSentEmailCode.cs">
+      <Link>TL\TLSentEmailCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLTakeout.cs">
+      <Link>TL\TLTakeout.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLTermsOfServiceUpdate.cs">
+      <Link>TL\TLTermsOfServiceUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLWebAuthorization.cs">
+      <Link>TL\TLWebAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\TL\TLWebAuthorizations.cs">
+      <Link>TL\TLWebAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api.WP8\Transport\TCPTransportWinRT.cs">
+      <Link>Transport\TCPTransportWinRT.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Aggregator\EventAggregator.cs">
+      <Link>Aggregator\EventAggregator.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Aggregator\ExtensionMethods.cs">
+      <Link>Aggregator\ExtensionMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Helpers\Notifications.cs">
+      <Link>Helpers\Notifications.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Logs\Log.cs">
+      <Link>Logs\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\Connection\PublicConfigService.cs">
+      <Link>Services\Connection\PublicConfigService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\DeviceInfo\EmptyDeviceInfoService.cs">
+      <Link>Services\DeviceInfo\EmptyDeviceInfoService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\DeviceInfo\IDeviceInfo.cs">
+      <Link>Services\DeviceInfo\IDeviceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\FileManager\FileManagerBase.cs">
+      <Link>Services\FileManager\FileManagerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Channel.cs">
+      <Link>Services\MTProtoService.Channel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Langpack.cs">
+      <Link>Services\MTProtoService.Langpack.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Payments.cs">
+      <Link>Services\MTProtoService.Payments.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Services\MTProtoService.Phone.cs">
+      <Link>Services\MTProtoService.Phone.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLChangePhone.cs">
+      <Link>TL\Functions\Account\TLChangePhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLCheckPassword.cs">
+      <Link>TL\Functions\Account\TLCheckPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLConfirmPhone.cs">
+      <Link>TL\Functions\Account\TLConfirmPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLGetAuthorizations.cs">
+      <Link>TL\Functions\Account\TLGetAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLGetPassword.cs">
+      <Link>TL\Functions\Account\TLGetPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLGetPasswordSettings.cs">
+      <Link>TL\Functions\Account\TLGetPasswordSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLGetTmpPassword.cs">
+      <Link>TL\Functions\Account\TLGetTmpPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLGetWallPapers.cs">
+      <Link>TL\Functions\Account\TLGetWallPapers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLRecoverPassword.cs">
+      <Link>TL\Functions\Account\TLRecoverPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLReportPeer.cs">
+      <Link>TL\Functions\Account\TLReportPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLRequestPasswordRecovery.cs">
+      <Link>TL\Functions\Account\TLRequestPasswordRecovery.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLResetAuthorization.cs">
+      <Link>TL\Functions\Account\TLResetAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLResetPassword.cs">
+      <Link>TL\Functions\Account\TLResetPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLSendChangePhoneCode.cs">
+      <Link>TL\Functions\Account\TLSendChangePhoneCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLSendConfirmPhoneCode.cs">
+      <Link>TL\Functions\Account\TLSendConfirmPhoneCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLSetPassword.cs">
+      <Link>TL\Functions\Account\TLSetPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLUpdateDeviceLocked.cs">
+      <Link>TL\Functions\Account\TLUpdateDeviceLocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Account\TLUpdatePasswordSettings.cs">
+      <Link>TL\Functions\Account\TLUpdatePasswordSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLCancelCode.cs">
+      <Link>TL\Functions\Auth\TLCancelCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Auth\TLResendCode.cs">
+      <Link>TL\Functions\Auth\TLResendCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLCheckUsername.cs">
+      <Link>TL\Functions\Channels\TLCheckUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLCreateChannel.cs">
+      <Link>TL\Functions\Channels\TLCreateChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLDeleteChannel.cs">
+      <Link>TL\Functions\Channels\TLDeleteChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLDeleteChannelMessages.cs">
+      <Link>TL\Functions\Channels\TLDeleteChannelMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLDeleteHistory.cs">
+      <Link>TL\Functions\Channels\TLDeleteHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLDeleteUserHistory.cs">
+      <Link>TL\Functions\Channels\TLDeleteUserHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLEditAbout.cs">
+      <Link>TL\Functions\Channels\TLEditAbout.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLEditAdmin.cs">
+      <Link>TL\Functions\Channels\TLEditAdmin.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLEditMessage.cs">
+      <Link>TL\Functions\Channels\TLEditMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLEditPhoto.cs">
+      <Link>TL\Functions\Channels\TLEditPhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLEditTitle.cs">
+      <Link>TL\Functions\Channels\TLEditTitle.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLExportInvite.cs">
+      <Link>TL\Functions\Channels\TLExportInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLExportMessageLink.cs">
+      <Link>TL\Functions\Channels\TLExportMessageLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetAdminedPublicChannels.cs">
+      <Link>TL\Functions\Channels\TLGetAdminedPublicChannels.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetChannels.cs">
+      <Link>TL\Functions\Channels\TLGetChannels.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetDialogs.cs">
+      <Link>TL\Functions\Channels\TLGetDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetFullChannel.cs">
+      <Link>TL\Functions\Channels\TLGetFullChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetImportantHistory.cs">
+      <Link>TL\Functions\Channels\TLGetImportantHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetMessageEditData.cs">
+      <Link>TL\Functions\Channels\TLGetMessageEditData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetMessages.cs">
+      <Link>TL\Functions\Channels\TLGetMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetParticipant.cs">
+      <Link>TL\Functions\Channels\TLGetParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLGetParticipants.cs">
+      <Link>TL\Functions\Channels\TLGetParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLInviteToChannel.cs">
+      <Link>TL\Functions\Channels\TLInviteToChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLJoinChannel.cs">
+      <Link>TL\Functions\Channels\TLJoinChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLKickFromChannel.cs">
+      <Link>TL\Functions\Channels\TLKickFromChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLLeaveChannel.cs">
+      <Link>TL\Functions\Channels\TLLeaveChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLReadHistory.cs">
+      <Link>TL\Functions\Channels\TLReadHistory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLReadMessageContents.cs">
+      <Link>TL\Functions\Channels\TLReadMessageContents.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLReportSpam.cs">
+      <Link>TL\Functions\Channels\TLReportSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLSetStickers.cs">
+      <Link>TL\Functions\Channels\TLSetStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLToggleComments.cs">
+      <Link>TL\Functions\Channels\TLToggleComments.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLToggleInvites.cs">
+      <Link>TL\Functions\Channels\TLToggleInvites.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLTogglePreHistoryHidden.cs">
+      <Link>TL\Functions\Channels\TLTogglePreHistoryHidden.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLToggleSignatures.cs">
+      <Link>TL\Functions\Channels\TLToggleSignatures.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLUpdateChannelUsername.cs">
+      <Link>TL\Functions\Channels\TLUpdateChannelUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Channels\TLUpdatePinnedMessage.cs">
+      <Link>TL\Functions\Channels\TLUpdatePinnedMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLGetTopPeers.cs">
+      <Link>TL\Functions\Contacts\TLGetTopPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLResetSaved.cs">
+      <Link>TL\Functions\Contacts\TLResetSaved.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLResetTopPeerRating.cs">
+      <Link>TL\Functions\Contacts\TLResetTopPeerRating.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Contacts\TLResolveUsername.cs">
+      <Link>TL\Functions\Contacts\TLResolveUsername.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetAppChangelog.cs">
+      <Link>TL\Functions\Help\TLGetAppChangelog.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetCdnConfig.cs">
+      <Link>TL\Functions\Help\TLGetCdnConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetRecentMeUrls.cs">
+      <Link>TL\Functions\Help\TLGetRecentMeUrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLGetTermsOfService.cs">
+      <Link>TL\Functions\Help\TLGetTermsOfService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Help\TLInvokeWithoutUpdates.cs">
+      <Link>TL\Functions\Help\TLInvokeWithoutUpdates.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Langpack\TLGetDifference.cs">
+      <Link>TL\Functions\Langpack\TLGetDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Langpack\TLGetLangPack.cs">
+      <Link>TL\Functions\Langpack\TLGetLangPack.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Langpack\TLGetLanguages.cs">
+      <Link>TL\Functions\Langpack\TLGetLanguages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Langpack\TLGetStrings.cs">
+      <Link>TL\Functions\Langpack\TLGetStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLBotGetCallbackAnswer.cs">
+      <Link>TL\Functions\Messages\TLBotGetCallbackAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLCheckChatInvite.cs">
+      <Link>TL\Functions\Messages\TLCheckChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLClearRecentStickers.cs">
+      <Link>TL\Functions\Messages\TLClearRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLDeactivateChat.cs">
+      <Link>TL\Functions\Messages\TLDeactivateChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLEditChatAdmin.cs">
+      <Link>TL\Functions\Messages\TLEditChatAdmin.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLExportChatInvite.cs">
+      <Link>TL\Functions\Messages\TLExportChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLFaveSticker.cs">
+      <Link>TL\Functions\Messages\TLFaveSticker.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetAllDrafts.cs">
+      <Link>TL\Functions\Messages\TLGetAllDrafts.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetAllStickers.cs">
+      <Link>TL\Functions\Messages\TLGetAllStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetArchivedStickers.cs">
+      <Link>TL\Functions\Messages\TLGetArchivedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetAttachedStickers.cs">
+      <Link>TL\Functions\Messages\TLGetAttachedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetCommonChats.cs">
+      <Link>TL\Functions\Messages\TLGetCommonChats.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetDocumentByHash.cs">
+      <Link>TL\Functions\Messages\TLGetDocumentByHash.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetFavedStickers.cs">
+      <Link>TL\Functions\Messages\TLGetFavedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetFeaturedStickers.cs">
+      <Link>TL\Functions\Messages\TLGetFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetInlineBotResults.cs">
+      <Link>TL\Functions\Messages\TLGetInlineBotResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetMaskStickers.cs">
+      <Link>TL\Functions\Messages\TLGetMaskStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetPeerDialogs.cs">
+      <Link>TL\Functions\Messages\TLGetPeerDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetPeerSettings.cs">
+      <Link>TL\Functions\Messages\TLGetPeerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetPinnedDialogs.cs">
+      <Link>TL\Functions\Messages\TLGetPinnedDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetRecentLocations.cs">
+      <Link>TL\Functions\Messages\TLGetRecentLocations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetRecentStickers.cs">
+      <Link>TL\Functions\Messages\TLGetRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetSavedGifs.cs">
+      <Link>TL\Functions\Messages\TLGetSavedGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetStickers.cs">
+      <Link>TL\Functions\Messages\TLGetStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetStickerSet.cs">
+      <Link>TL\Functions\Messages\TLGetStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetUnreadMentions.cs">
+      <Link>TL\Functions\Messages\TLGetUnreadMentions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetUnusedStickers.cs">
+      <Link>TL\Functions\Messages\TLGetUnusedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetWebPage.cs">
+      <Link>TL\Functions\Messages\TLGetWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLGetWebPagePreview.cs">
+      <Link>TL\Functions\Messages\TLGetWebPagePreview.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLHideReportSpam.cs">
+      <Link>TL\Functions\Messages\TLHideReportSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLImportChatInvite.cs">
+      <Link>TL\Functions\Messages\TLImportChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLInstallStickerSet.cs">
+      <Link>TL\Functions\Messages\TLInstallStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLMigrateChat.cs">
+      <Link>TL\Functions\Messages\TLMigrateChat.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReadFeaturedStickers.cs">
+      <Link>TL\Functions\Messages\TLReadFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReadMentions.cs">
+      <Link>TL\Functions\Messages\TLReadMentions.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReorderPinnedDialogs.cs">
+      <Link>TL\Functions\Messages\TLReorderPinnedDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReorderStickerSets.cs">
+      <Link>TL\Functions\Messages\TLReorderStickerSets.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLReportSpam.cs">
+      <Link>TL\Functions\Messages\TLReportSpam.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSaveDraft.cs">
+      <Link>TL\Functions\Messages\TLSaveDraft.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSaveGif.cs">
+      <Link>TL\Functions\Messages\TLSaveGif.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSearchGifs.cs">
+      <Link>TL\Functions\Messages\TLSearchGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendInlineBotResult.cs">
+      <Link>TL\Functions\Messages\TLSendInlineBotResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSendMultiMedia.cs">
+      <Link>TL\Functions\Messages\TLSendMultiMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSetBotCallbackAnswer.cs">
+      <Link>TL\Functions\Messages\TLSetBotCallbackAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLSetInlineBotResults.cs">
+      <Link>TL\Functions\Messages\TLSetInlineBotResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLStartBot.cs">
+      <Link>TL\Functions\Messages\TLStartBot.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLToggleChatAdmins.cs">
+      <Link>TL\Functions\Messages\TLToggleChatAdmins.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLToggleDialogPin.cs">
+      <Link>TL\Functions\Messages\TLToggleDialogPin.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLUninstallStickerSet.cs">
+      <Link>TL\Functions\Messages\TLUninstallStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Messages\TLUploadMedia.cs">
+      <Link>TL\Functions\Messages\TLUploadMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Payments\TLClearSavedInfo.cs">
+      <Link>TL\Functions\Payments\TLClearSavedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Payments\TLGetPaymentForm.cs">
+      <Link>TL\Functions\Payments\TLGetPaymentForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Payments\TLGetPaymentReceipt.cs">
+      <Link>TL\Functions\Payments\TLGetPaymentReceipt.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Payments\TLGetSavedInfo.cs">
+      <Link>TL\Functions\Payments\TLGetSavedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Payments\TLSendPaymentForm.cs">
+      <Link>TL\Functions\Payments\TLSendPaymentForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Payments\TLValidateRequestedInfo.cs">
+      <Link>TL\Functions\Payments\TLValidateRequestedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLAcceptCall.cs">
+      <Link>TL\Functions\Phone\TLAcceptCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLConfirmCall.cs">
+      <Link>TL\Functions\Phone\TLConfirmCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLDiscardCall.cs">
+      <Link>TL\Functions\Phone\TLDiscardCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLGetCallConfig.cs">
+      <Link>TL\Functions\Phone\TLGetCallConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLReceivedCall.cs">
+      <Link>TL\Functions\Phone\TLReceivedCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLRequestCall.cs">
+      <Link>TL\Functions\Phone\TLRequestCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLSaveCallDebug.cs">
+      <Link>TL\Functions\Phone\TLSaveCallDebug.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Phone\TLSetCallRating.cs">
+      <Link>TL\Functions\Phone\TLSetCallRating.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Updates\TLGetChannelDifference.cs">
+      <Link>TL\Functions\Updates\TLGetChannelDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Upload\TLGetCdnFile.cs">
+      <Link>TL\Functions\Upload\TLGetCdnFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\Functions\Upload\TLReuploadCdnFile.cs">
+      <Link>TL\Functions\Upload\TLReuploadCdnFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAccountAuthorization.cs">
+      <Link>TL\TLAccountAuthorization.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAccountAuthorizations.cs">
+      <Link>TL\TLAccountAuthorizations.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAccountDaysTTL.cs">
+      <Link>TL\TLAccountDaysTTL.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLActionInfo.cs">
+      <Link>TL\TLActionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAdminLogResults.cs">
+      <Link>TL\TLAdminLogResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAffectedMessages.cs">
+      <Link>TL\TLAffectedMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAllStrickers.cs">
+      <Link>TL\TLAllStrickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLAppChangelogBase.cs">
+      <Link>TL\TLAppChangelogBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLArchivedStickers.cs">
+      <Link>TL\TLArchivedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBotCallbackAnswer.cs">
+      <Link>TL\TLBotCallbackAnswer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBotCommand.cs">
+      <Link>TL\TLBotCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBotInfo.cs">
+      <Link>TL\TLBotInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBotInlineMessage.cs">
+      <Link>TL\TLBotInlineMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBotInlineResult.cs">
+      <Link>TL\TLBotInlineResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLBotResults.cs">
+      <Link>TL\TLBotResults.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCallsSecurity.cs">
+      <Link>TL\TLCallsSecurity.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCameraSettings.cs">
+      <Link>TL\TLCameraSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCdnConfig.cs">
+      <Link>TL\TLCdnConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCdnFile.cs">
+      <Link>TL\TLCdnFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCdnPublicKey.cs">
+      <Link>TL\TLCdnPublicKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelAdminLogEvent.cs">
+      <Link>TL\TLChannelAdminLogEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelAdminLogEventAction.cs">
+      <Link>TL\TLChannelAdminLogEventAction.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelAdminLogEventsFilter.cs">
+      <Link>TL\TLChannelAdminLogEventsFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelAdminRights.cs">
+      <Link>TL\TLChannelAdminRights.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelBannedRights.cs">
+      <Link>TL\TLChannelBannedRights.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelDifference.cs">
+      <Link>TL\TLChannelDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelMessagesFiler.cs">
+      <Link>TL\TLChannelMessagesFiler.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelParticipant.cs">
+      <Link>TL\TLChannelParticipant.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelParticipantRole.cs">
+      <Link>TL\TLChannelParticipantRole.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChannelParticipantsFilter.cs">
+      <Link>TL\TLChannelParticipantsFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChatInvite.cs">
+      <Link>TL\TLChatInvite.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLChatSettings.cs">
+      <Link>TL\TLChatSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLCodeType.cs">
+      <Link>TL\TLCodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLConfigSimple.cs">
+      <Link>TL\TLConfigSimple.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLContactLink.cs">
+      <Link>TL\TLContactLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDataJSON.cs">
+      <Link>TL\TLDataJSON.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDisabledFeature.cs">
+      <Link>TL\TLDisabledFeature.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDocumentAttribute.cs">
+      <Link>TL\TLDocumentAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLDraftMessage.cs">
+      <Link>TL\TLDraftMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLExportedMessageLink.cs">
+      <Link>TL\TLExportedMessageLink.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFavedStickers.cs">
+      <Link>TL\TLFavedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFeaturedStickers.cs">
+      <Link>TL\TLFeaturedStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFoundGif.cs">
+      <Link>TL\TLFoundGif.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLFoundGifs.cs">
+      <Link>TL\TLFoundGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLGame.cs">
+      <Link>TL\TLGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLHashtagItem.cs">
+      <Link>TL\TLHashtagItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLHighScore.cs">
+      <Link>TL\TLHighScore.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLHighScores.cs">
+      <Link>TL\TLHighScores.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInlineBotSwitchPM.cs">
+      <Link>TL\TLInlineBotSwitchPM.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputBotInlineMessage.cs">
+      <Link>TL\TLInputBotInlineMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputBotInlineMessageId.cs">
+      <Link>TL\TLInputBotInlineMessageId.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputBotInlineResult.cs">
+      <Link>TL\TLInputBotInlineResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputChatBase.cs">
+      <Link>TL\TLInputChatBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputGame.cs">
+      <Link>TL\TLInputGame.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputMessageEntityMentionName.cs">
+      <Link>TL\TLInputMessageEntityMentionName.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPaymentCredentials.cs">
+      <Link>TL\TLInputPaymentCredentials.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPhoneCall.cs">
+      <Link>TL\TLInputPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPrivacyKey.cs">
+      <Link>TL\TLInputPrivacyKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputPrivacyRule.cs">
+      <Link>TL\TLInputPrivacyRule.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputReportReason.cs">
+      <Link>TL\TLInputReportReason.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputSingleMedia.cs">
+      <Link>TL\TLInputSingleMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputStickeredMedia.cs">
+      <Link>TL\TLInputStickeredMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputStickerSet.cs">
+      <Link>TL\TLInputStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInputWebDocument.cs">
+      <Link>TL\TLInputWebDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLInvoice.cs">
+      <Link>TL\TLInvoice.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLIpPort.cs">
+      <Link>TL\TLIpPort.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLKeyboardButton.cs">
+      <Link>TL\TLKeyboardButton.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLKeyboardButtonRow.cs">
+      <Link>TL\TLKeyboardButtonRow.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLLabeledPrice.cs">
+      <Link>TL\TLLabeledPrice.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLLangPackDifference.cs">
+      <Link>TL\TLLangPackDifference.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLLangPackLanguage.cs">
+      <Link>TL\TLLangPackLanguage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLLangPackString.cs">
+      <Link>TL\TLLangPackString.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMaskCoords.cs">
+      <Link>TL\TLMaskCoords.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageEditData.cs">
+      <Link>TL\TLMessageEditData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageEntity.cs">
+      <Link>TL\TLMessageEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageFwdHeader.cs">
+      <Link>TL\TLMessageFwdHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageGroup.cs">
+      <Link>TL\TLMessageGroup.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessageRange.cs">
+      <Link>TL\TLMessageRange.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessagesChannelParticipants.cs">
+      <Link>TL\TLMessagesChannelParticipants.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLMessagesStickerSet.cs">
+      <Link>TL\TLMessagesStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPage.cs">
+      <Link>TL\TLPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPageBlock.cs">
+      <Link>TL\TLPageBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPasscodeParams.cs">
+      <Link>TL\TLPasscodeParams.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPassword.cs">
+      <Link>TL\TLPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPasswordInputSettings.cs">
+      <Link>TL\TLPasswordInputSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPasswordRecovery.cs">
+      <Link>TL\TLPasswordRecovery.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPasswordSettings.cs">
+      <Link>TL\TLPasswordSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPaymentCharge.cs">
+      <Link>TL\TLPaymentCharge.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPaymentForm.cs">
+      <Link>TL\TLPaymentForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPaymentReceipt.cs">
+      <Link>TL\TLPaymentReceipt.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPaymentRequestedInfo.cs">
+      <Link>TL\TLPaymentRequestedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPaymentResult.cs">
+      <Link>TL\TLPaymentResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPaymentSavedCredentialsCard.cs">
+      <Link>TL\TLPaymentSavedCredentialsCard.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPeerDialogs.cs">
+      <Link>TL\TLPeerDialogs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPeerSettings.cs">
+      <Link>TL\TLPeerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhoneCall.cs">
+      <Link>TL\TLPhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhoneCallDiscardReason.cs">
+      <Link>TL\TLPhoneCallDiscardReason.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhoneCallProtocol.cs">
+      <Link>TL\TLPhoneCallProtocol.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhoneConnection.cs">
+      <Link>TL\TLPhoneConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhonePhoneCall.cs">
+      <Link>TL\TLPhonePhoneCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPhotoPickerSettings.cs">
+      <Link>TL\TLPhotoPickerSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPopularContact.cs">
+      <Link>TL\TLPopularContact.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPostAddress.cs">
+      <Link>TL\TLPostAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPrivacyKey.cs">
+      <Link>TL\TLPrivacyKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPrivacyRule.cs">
+      <Link>TL\TLPrivacyRule.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLPrivacyRules.cs">
+      <Link>TL\TLPrivacyRules.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLProxyConfig.cs">
+      <Link>TL\TLProxyConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLReceivedNotifyMessage.cs">
+      <Link>TL\TLReceivedNotifyMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRecentlyUsedSticker.cs">
+      <Link>TL\TLRecentlyUsedSticker.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRecentMeUrl.cs">
+      <Link>TL\TLRecentMeUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRecentMeUrls.cs">
+      <Link>TL\TLRecentMeUrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRecentStickers.cs">
+      <Link>TL\TLRecentStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLReplyKeyboardMarkup.cs">
+      <Link>TL\TLReplyKeyboardMarkup.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLResolvedPeer.cs">
+      <Link>TL\TLResolvedPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLResultInfo.cs">
+      <Link>TL\TLResultInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLRichText.cs">
+      <Link>TL\TLRichText.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSavedGifs.cs">
+      <Link>TL\TLSavedGifs.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSavedInfo.cs">
+      <Link>TL\TLSavedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSentChangePhoneCode.cs">
+      <Link>TL\TLSentChangePhoneCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLSentCodeType.cs">
+      <Link>TL\TLSentCodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLShippingOption.cs">
+      <Link>TL\TLShippingOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStickerPack.cs">
+      <Link>TL\TLStickerPack.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStickers.cs">
+      <Link>TL\TLStickers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStickerSet.cs">
+      <Link>TL\TLStickerSet.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStickerSetCovered.cs">
+      <Link>TL\TLStickerSetCovered.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLStickerSetInstallResult.cs">
+      <Link>TL\TLStickerSetInstallResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLTermsOfService.cs">
+      <Link>TL\TLTermsOfService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLTmpPassword.cs">
+      <Link>TL\TLTmpPassword.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLTopPeer.cs">
+      <Link>TL\TLTopPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLTopPeerCategory.cs">
+      <Link>TL\TLTopPeerCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLTopPeerCategoryPeers.cs">
+      <Link>TL\TLTopPeerCategoryPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLTopPeers.cs">
+      <Link>TL\TLTopPeers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLValidatedRequestedInfo.cs">
+      <Link>TL\TLValidatedRequestedInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLWebDocument.cs">
+      <Link>TL\TLWebDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLWebFile.cs">
+      <Link>TL\TLWebFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\TL\TLWebPage.cs">
+      <Link>TL\TLWebPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\Transport\SocksProxy.cs">
+      <Link>Transport\SocksProxy.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\WindowsPhone\BigInteger.cs">
+      <Link>WindowsPhone\BigInteger.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.Api\WindowsPhone\Tuple.cs">
+      <Link>WindowsPhone\Tuple.cs</Link>
+    </Compile>
+    <Compile Include="Hash\CRC32\CRC.WinRT.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="crypto">
+      <HintPath>..\packages\Portable.BouncyCastle.1.7.0.2\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\portable-win81+wpa81\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\portable-win81+wpa81\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\portable-win81+wpa81\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <PRIResource Include="Resources\ru\Resources.resw" />
+    <PRIResource Include="Resources\pt\Resources.resw" />
+    <PRIResource Include="Resources\nl\Resources.resw" />
+    <PRIResource Include="Resources\it\Resources.resw" />
+    <PRIResource Include="Resources\es\Resources.resw" />
+    <PRIResource Include="Resources\de\Resources.resw" />
+    <PRIResource Include="Resources\en\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

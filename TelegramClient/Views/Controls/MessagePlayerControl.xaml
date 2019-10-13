@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.MessagePlayerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    x:Name="self"
+    d:DesignHeight="180" d:DesignWidth="480">
+	<UserControl.Resources>
+        <Style x:Key="PlayerProgressStyle" TargetType="Slider">
+            <Setter Property="Foreground" Value="#66000000"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        	<Setter Property="BorderBrush" Value="Transparent"/>
+        	<Setter Property="Maximum" Value="10"/>
+        	<Setter Property="Minimum" Value="0"/>
+        	<Setter Property="Value" Value="0"/>
+            <Setter Property="Background" Value="White"/>
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="Slider">
+        				<Grid Background="Transparent">
+        					<VisualStateManager.VisualStateGroups>
+        						<VisualStateGroup x:Name="CommonStates">
+        							<VisualState x:Name="Normal"/>
+        							<VisualState x:Name="MouseOver"/>
+        							<VisualState x:Name="Disabled">
+        								<Storyboard>
+        									<!--<DoubleAnimation Duration="0" To="0.1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalTrack"/>
+        									<DoubleAnimation Duration="0" To="0.1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalTrack"/>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="HorizontalFill">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>
+        									<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="VerticalFill">
+        										<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+        									</ObjectAnimationUsingKeyFrames>-->
+        								</Storyboard>
+        							</VisualState>
+        						</VisualStateGroup>
+        					</VisualStateManager.VisualStateGroups>
+        					<Grid x:Name="HorizontalTemplate" Margin="{StaticResource PhoneHorizontalMargin}">
+                                <Path x:Name="HorizontalTrack" Fill="{TemplateBinding Foreground}" Opacity="0.85" Height="22" IsHitTestVisible="False" Margin="0,9,0,33">
+                                    <Path.Data>
+                                        <RectangleGeometry Rect="0,18,204,4" RadiusX="2" RadiusY="2"/>
+                                    </Path.Data>
+                                </Path>
+                                <Path x:Name="HorizontalFill" Fill="{StaticResource TelegramBadgeAccentBrush}" Height="22" IsHitTestVisible="False" Margin="0,9,0,33">
+                                    <Path.Data>
+                                        <RectangleGeometry Rect="0,18,204,4" RadiusX="2" RadiusY="2"/>
+                                    </Path.Data>
+                                    <Path.Clip>
+                                        <RectangleGeometry Rect="0, 0, 6, 22"/>
+                                    </Path.Clip>
+                                </Path>
+                                
+                                <Grid x:Name="HorizontalCenterElement" Background="Transparent" HorizontalAlignment="Left" Height="25" Margin="0,16,0,23" Width="14">
+                                    <Grid.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Grid.RenderTransform>
+                                    <Border CornerRadius="7" Width="14" Height="14" Background="{StaticResource TelegramBadgeAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Grid>
+        					<Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
+        						<Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12"/>
+        						<Rectangle x:Name="VerticalFill" Fill="{TemplateBinding Foreground}" IsHitTestVisible="False" Margin="18,0,18,0" Width="12">
+        							<Rectangle.Clip>
+        								<RectangleGeometry Rect="0, 0, 12, 6"/>
+        							</Rectangle.Clip>
+        						</Rectangle>
+        						<Rectangle x:Name="VerticalCenterElement" Fill="{StaticResource PhoneForegroundBrush}" Height="12" Margin="12,0,12,0" VerticalAlignment="Top" Width="24">
+        							<Rectangle.RenderTransform>
+        								<TranslateTransform/>
+        							</Rectangle.RenderTransform>
+        						</Rectangle>
+        					</Grid>
+        				</Grid>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+            
+        <Ellipse Width="64" Height="64" Grid.RowSpan="2" Fill="{StaticResource TelegramBadgeAccentBrush}"/>
+        
+        <ToggleButton CacheMode="BitmapCache"
+            Visibility="Visible"
+            toolkit:TiltEffect.IsTiltEnabled="True"
+            x:Name="PlayerToggleButton" VerticalAlignment="Top" Grid.RowSpan="2" 
+            Click="PlayerToggleButton_Click" 
+            Style="{StaticResource DialogPlayerToggleButtonStyle}"/>
+        <Grid CacheMode="BitmapCache" Grid.Column="0" Grid.RowSpan="2" 
+              VerticalAlignment="Top" 
+              Visibility="Collapsed"
+              Width="64" Height="64"
+              x:Name="PlayerDownloadButton">
+            <Grid x:Name="CancelDownloadButton"
+                  Visibility="Collapsed" 
+                  Background="Transparent" 
+                  Tap="CancelDownloadButton_OnTap">
+                <Path RenderTransformOrigin="0.5,0.5"  Fill="White" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Path.RenderTransform>
+                        <RotateTransform Angle="45"/>
+                    </Path.RenderTransform>
+                    <Path.Data>
+                        <GeometryGroup FillRule="Nonzero">
+                            <RectangleGeometry Rect="15,0,6,36"/>
+                            <RectangleGeometry Rect="0,15,36,6"/>
+                        </GeometryGroup>
+                    </Path.Data>
+                </Path>
+            </Grid>
+            <Grid x:Name="DownloadButton" Visibility="Visible">
+                <Rectangle Width="4" Height="24" Fill="White"/>
+                <Polyline StrokeThickness="3.5" Stroke="White" Margin="1,0,0,0" Points="0 15 10 25 20 15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <Grid CacheMode="BitmapCache" Grid.Column="0" Grid.RowSpan="2" 
+              VerticalAlignment="Top"
+              Width="64" Height="64"
+              Visibility="Collapsed"
+              x:Name="PlayerCancelDownloadButton">
+            <Path RenderTransformOrigin="0.5,0.5"  Fill="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Path.RenderTransform>
+                    <RotateTransform Angle="45"/>
+                </Path.RenderTransform>
+                <Path.Data>
+                    <GeometryGroup FillRule="Nonzero">
+                        <RectangleGeometry Rect="15,0,6,36"/>
+                        <RectangleGeometry Rect="0,15,36,6"/>
+                    </GeometryGroup>
+                </Path.Data>
+            </Path>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="0" Margin="16,0,0,0" IsHitTestVisible="False">
+            <Grid.RenderTransform>
+                <TranslateTransform Y="33"/>
+            </Grid.RenderTransform>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="Duration" Margin="0" Text="0:25" FontSize="20"/>
+            <Ellipse x:Name="NotListenedIndicator" Visibility="Collapsed" Grid.Column="1" Margin="6,11,0,13" Width="8" Height="8" Fill="{StaticResource TelegramBadgeAccentBrush}"/>
+        </Grid>
+        <controls:WaveformSlider x:Name="PositionIndicator" 
+            CacheMode="BitmapCache" 
+            Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+            IsEnabled="False" 
+            Margin="4,0,-6,0"
+            Foreground="{Binding Foreground, ElementName=self}"
+            ManipulationDelta="Slider_ManipulationDelta" 
+            ManipulationStarted="Slider_ManipulationStarted"  
+            ManipulationCompleted="Slider_ManipulationCompleted" 
+            Style="{StaticResource PlayerProgressStyle}"/>
+    </Grid>
+</UserControl>

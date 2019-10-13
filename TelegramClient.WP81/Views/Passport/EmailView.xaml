@@ -1,0 +1,94 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Passport.EmailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="20"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="False"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FFE3F4FF"
+    shell:SystemTray.IsVisible="True" 
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.PassportEmail, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Border Width="32" Height="32" Margin="18,36,18,18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="{StaticResource PhoneForegroundBrush}" Tap="DoneIcon_OnTap">
+            <Border.OpacityMask>
+                <ImageBrush ImageSource="/Images/W10M/ic_done_2x.png"/>
+            </Border.OpacityMask>
+        </Border>
+
+        <ScrollViewer x:Name="Scroll" Grid.Row="1">
+            <StackPanel x:Name="ContentPanel" Margin="6,0">
+                <StackPanel>
+                    <StackPanel Visibility="{Binding CurrentEmail, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert}">
+                        <Button x:Name="UseCurrentEmail" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,18,-12,0" Style="{StaticResource ProfileButtonStyle}">
+                            <StackPanel>
+                                <TextBlock Margin="12,0,-12,0" Text="{Binding DataContext.UseCurrentEmailCommand, ElementName=ContentPanel}" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}"/>
+                            </StackPanel>
+                        </Button>
+                        <TextBlock Margin="12,12,12,18" TextWrapping="Wrap" Text="{Binding Resources.PassportEmailUseSameInfo, Source={StaticResource Strings}}" FontSize="20" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    </StackPanel>
+                    <controls1:LabeledTextBox 
+                        Margin="0,6,0,0"
+                        x:Name="EmailLabel" 
+                        InputScope="EmailSmtpAddress"
+                        Label="{Binding Resources.PassportEmail, Source={StaticResource Strings}}" 
+                        Text="{Binding Email, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateLabeledTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <TextBlock Margin="12,18,12,0" TextWrapping="Wrap" Text="{Binding Resources.PassportEmailUploadInfo, Source={StaticResource Strings}}" FontSize="20" Style="{StaticResource PhoneTextSubtleStyle}"/>
+
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</views:TelegramViewBase>

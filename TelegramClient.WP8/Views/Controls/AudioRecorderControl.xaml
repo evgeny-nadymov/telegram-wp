@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.AudioRecorderControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="clr-namespace:TelegramClient.Helpers"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="72" d:DesignWidth="680"
+    x:Name="Self">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Name="HintStoryboard" Completed="HintStoryboard_OnCompleted">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="Hint">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="Collapsed"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="RecordButton">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="Visible"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            
+            <Storyboard x:Name="CancelRecordingStoryboard" Completed="CancelRecordingStoryboard_OnCompleted">
+                <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="X" Storyboard.TargetName="SliderTransform">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.15" Value="-100"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="X" Storyboard.TargetName="TimerTransform">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.15" Value="-100"/>
+                </DoubleAnimationUsingKeyFrames>-->
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent"
+        ManipulationDelta="LayoutRoot_OnManipulationDelta"
+        ManipulationCompleted="LayoutRoot_OnManipulationCompleted">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--<Grid x:Name="ClipGrid" Grid.Column="1" Background="Transparent" helpers:Clip.ToBounds="True">      
+            <StackPanel x:Name="Slider" Visibility="Collapsed" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Margin="6,0,0,0">
+                <StackPanel.RenderTransform>
+                    <TranslateTransform x:Name="SliderTransform"/>
+                </StackPanel.RenderTransform>
+                <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Cancel, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+                <Path Data="M 0,0 7,12 0,24" VerticalAlignment="Center" Margin="6,0" Fill="Transparent" StrokeThickness="3" Stroke="{Binding Foreground, ElementName=Self}">
+                    <Path.RenderTransform>
+                        <TranslateTransform X="6" Y="2.5"/>
+                    </Path.RenderTransform>
+                </Path>
+            </StackPanel>
+        </Grid>-->
+        
+        <Grid x:Name="RecordButton"
+            Background="Transparent"
+            MouseLeftButtonDown="RecordButton_OnMouseLeftButtonDown"
+            MouseLeftButtonUp="RecordButton_OnMouseLeftButtonUp">
+            <Image x:Name="RecordImage" Margin="52,-1,0,0" Width="62" Height="62" />
+        </Grid>
+        
+        <TextBlock x:Name="Hint" Grid.Column="0" Grid.ColumnSpan="4" Visibility="Collapsed" VerticalAlignment="Center" Margin="12,0" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.TapAndHoldToRecord, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+    </Grid>
+</UserControl>

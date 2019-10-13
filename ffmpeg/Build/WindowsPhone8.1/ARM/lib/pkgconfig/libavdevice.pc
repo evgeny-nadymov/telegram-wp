@@ -1,0 +1,14 @@
+prefix=../../../Build/WindowsPhone8.1/ARM
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libavdevice
+Description: FFmpeg device handling library
+Version: 57.0.100
+Requires: 
+Requires.private: libavfilter >= 6.22.100, libswscale >= 4.0.100, libavformat >= 57.21.100, libavcodec >= 57.20.100, libswresample >= 2.0.101, libavutil >= 55.11.100
+Conflicts:
+Libs: -L${libdir}  -lavdevice 
+Libs.private: ws2_32.lib
+Cflags: -I${includedir}

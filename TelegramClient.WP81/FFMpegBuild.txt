@@ -1,0 +1,42 @@
+﻿mkdir -p Output/WindowsPhone8.1/ARM
+
+cd Output/WindowsPhone8.1/ARM
+
+../../../configure \
+--toolchain=msvc \
+--disable-programs \
+--disable-d3d11va \
+--disable-dxva2 \
+--disable-doc \
+--disable-avx \
+--disable-everything \
+--disable-network \
+--disable-zlib \
+--disable-avfilter \
+--disable-avdevice \
+--disable-postproc \
+--disable-debug \
+--disable-network \
+--arch=arm \
+--as=armasm \
+--cpu=armv7 \
+--enable-thumb \
+--enable-version3 \
+--enable-gpl \
+--enable-protocol=file \
+--enable-decoder=h264 \
+--enable-decoder=gif \
+--enable-demuxer=mov \
+--enable-demuxer=gif \
+--enable-hwaccels \
+--enable-asm \
+--enable-shared \
+--enable-cross-compile \
+--target-os=win32 \
+--extra-cflags="-MD -DWINAPI_FAMILY=WINAPI_FAMILY_PHONE_APP -D_WIN32_WINNT=0x0603 -D__ARM_PCS_VFP" \
+--extra-ldflags="-APPCONTAINER -MACHINE:ARM -subsystem:console -opt:ref WindowsPhoneCore.lib RuntimeObject.lib PhoneAppModelHost.lib -NODEFAULTLIB:kernel32.lib -NODEFAULTLIB:ole32.lib" \
+--prefix=../../../Build/WindowsPhone8.1/ARM
+
+make
+
+make install

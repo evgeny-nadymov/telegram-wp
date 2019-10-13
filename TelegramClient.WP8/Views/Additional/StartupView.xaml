@@ -1,0 +1,124 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="TelegramClient.Views.Additional.StartupView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:startView="clr-namespace:TelegramClient.Controls.StartView"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <!--<toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>-->
+            <!--<toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>-->
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <!--<toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>-->
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
+    <Grid>
+        <Border VerticalAlignment="Bottom" Margin="24,0,24,196" Height="2" Background="{StaticResource PhoneChromeBrush}"/>
+
+        <startView:StartView x:Name="StartView" Background="Transparent" SelectionChanged="StartView_OnSelectionChanged" ManipulationDelta="StartView_OnManipulationDelta">
+            <startView:StartViewItem>
+                <Grid>
+                    <Image Margin="0,42,0,0" VerticalAlignment="Top" Width="182" Height="182" Source="/Images/Startup/intro.1-720p.png"/>
+                    <StackPanel Margin="0,310,0,0">
+                        <TextBlock TextAlignment="Center" Margin="12,0,12,25" Text="{Binding Resources.AppName, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.Intro1Message, Source={StaticResource Strings}}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                    <!--<Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="12,0,12,196" Height="2" Width="76" Background="{StaticResource PhoneForegroundBrush}"/>-->
+
+                </Grid>
+            </startView:StartViewItem>
+            <startView:StartViewItem>
+                <Grid>
+                    <Image Margin="0,42,0,0" VerticalAlignment="Top" Width="182" Height="182" Source="/Images/Startup/intro.2-WXGA.png"/>
+                    <StackPanel Margin="0,310,0,0">
+                        <TextBlock Foreground="#FFF85B30" TextAlignment="Center" Margin="12,0,12,25" Text="{Binding Resources.Fast, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.FastMessage, Source={StaticResource Strings}}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                    <!--<Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="88,0,12,196" Height="2" Width="76" Background="{StaticResource PhoneForegroundBrush}"/>-->
+
+                </Grid>
+            </startView:StartViewItem>
+            <startView:StartViewItem>
+                <Grid>
+                    <Image Margin="0,42,0,0" VerticalAlignment="Top" Width="182" Height="182" Source="/Images/Startup/intro.3-WXGA.png"/>
+                    <StackPanel Margin="0,310,0,0">
+                        <TextBlock Foreground="#FFF99116" TextAlignment="Center" Margin="12,0,12,25" Text="{Binding Resources.Free, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.FreeMessage, Source={StaticResource Strings}}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                    <!--<Border HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="164,0,12,196" Height="2" Width="76" Background="{StaticResource PhoneForegroundBrush}"/>-->
+
+                </Grid>
+            </startView:StartViewItem>
+            <startView:StartViewItem>
+                <Grid>
+                    <Image Margin="0,42,0,0" VerticalAlignment="Top" Width="182" Height="182" Source="/Images/Startup/intro.4-WXGA.png"/>
+                    <StackPanel Margin="0,310,0,0">
+                        <TextBlock Foreground="#FFF8C700" TextAlignment="Center" Margin="12,0,12,25" Text="{Binding Resources.Powerful, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.PowerfulMessage, Source={StaticResource Strings}}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                    <!--<Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12,0,164,196" Height="2" Width="76" Background="{StaticResource PhoneForegroundBrush}"/>-->
+
+                </Grid>
+            </startView:StartViewItem>
+            <startView:StartViewItem>
+                <Grid>
+                    <Image Margin="0,42,0,0" VerticalAlignment="Top" Width="182" Height="182" Source="/Images/Startup/intro.5-WXGA.png"/>
+                    <StackPanel Margin="0,310,0,0">
+                        <TextBlock Foreground="#FF5DC226" TextAlignment="Center" Margin="12,0,12,25" Text="{Binding Resources.Secure, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.SecureMessage, Source={StaticResource Strings}}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                    <!--<Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12,0,88,196" Height="2" Width="76" Background="{StaticResource PhoneForegroundBrush}"/>-->
+
+                </Grid>
+            </startView:StartViewItem>
+            <startView:StartViewItem>
+                <Grid>
+                    <Image Margin="0,42,0,0" VerticalAlignment="Top" Width="182" Height="182" Source="/Images/Startup/intro.6-WXGA.png"/>
+                    <StackPanel Margin="0,310,0,0">
+                        <TextBlock Foreground="#FF2E90E7" TextAlignment="Center" Margin="12,0,12,25" Text="{Binding Resources.CloudBased, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Resources.CloudBasedMessage, Source={StaticResource Strings}}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                    <!--<Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12,0,12,196" Height="2" Width="76" Background="{StaticResource PhoneForegroundBrush}"/>-->
+
+                </Grid>
+            </startView:StartViewItem>
+        </startView:StartView>
+
+        <!--<Border VerticalAlignment="Bottom" Margin="0,0,0,196" Width="24" HorizontalAlignment="Left" Height="2" Background="{StaticResource PhoneBackgroundBrush}"/>
+        <Border VerticalAlignment="Bottom" Margin="0,0,0,196" Width="24" HorizontalAlignment="Right" Height="2" Background="{StaticResource PhoneBackgroundBrush}"/>-->
+        <Border VerticalAlignment="Bottom" Margin="24,0,12,196" Width="76" HorizontalAlignment="Left" Height="2" Background="{StaticResource PhoneForegroundBrush}">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="BorderPosition"/>
+            </Border.RenderTransform>
+        </Border>
+
+        <Border VerticalAlignment="Bottom" Background="{StaticResource PhoneChromeBrush}">
+            <Button x:Name="StartMessaging" Margin="12,0" Content="{Binding Resources.StartMessaging, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"/>
+        </Border>
+    </Grid>
+
+</phone:PhoneApplicationPage>

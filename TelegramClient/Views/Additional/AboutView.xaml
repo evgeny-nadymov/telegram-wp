@@ -1,0 +1,94 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <!--<controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>-->
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Projection>
+            <PlaneProjection CenterOfRotationX="0"/>
+        </Grid.Projection>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,20">
+            <TextBlock Text="{Binding Resources.AboutApp, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="6,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border x:Name="PhotoPlaceholder"
+				        Margin="12,0,2,0" 
+                        Height="112" Width="112">
+                    <Grid>
+                        <Image Source="{Binding ApplicationIconSource}"/>
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Margin="12,-12,0,0" Text="{Binding Resources.AppName, Source={StaticResource Strings}}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Text="{Binding Version}" Margin="12,-5,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </StackPanel>
+            </Grid>
+            <RichTextBox VerticalAlignment="Top" Grid.Row="1" Margin="0,20,0,0">
+                <Paragraph>
+                    <Run Text="{Binding Resources.AboutText1, Source={StaticResource Strings}}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding Resources.Support, Source={StaticResource Strings}, Converter={StaticResource Uppercase}, StringFormat='\{0\}:'}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding Resources.AboutText2, Source={StaticResource Strings}}"/>
+                </Paragraph>
+            </RichTextBox>
+            <HyperlinkButton NavigateUri="https://telegram.org/privacy" TargetName="_blank" HorizontalAlignment="Left" x:Name="PrivacyStatement" Grid.Row="2" Margin="0,20,0,0" Content="{Binding Resources.PrivacyStatement, Source={StaticResource Strings}}"/>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

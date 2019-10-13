@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>2206d049-0e47-412e-8562-3d4e665b7879</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="ConnectionSocket.cpp" />
+    <ClCompile Include="MicrosoftCryptoImpl.cpp" />
+    <ClCompile Include="ConnectionSocketWrapper.cpp" />
+    <ClCompile Include="BufferOutputStream.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="ConnectionSocket.h" />
+    <ClInclude Include="MicrosoftCryptoImpl.h" />
+    <ClInclude Include="ConnectionSocketWrapper.h" />
+    <ClInclude Include="BufferOutputStream.h" />
+  </ItemGroup>
+</Project>

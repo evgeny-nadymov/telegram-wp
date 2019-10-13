@@ -1,0 +1,278 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Media.EditVideoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:media="clr-namespace:TelegramClient.ViewModels.Media"
+    xmlns:media1="clr-namespace:TelegramClient.Views.Media"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="InputBorderBrushLight" Color="#FFDEE3EA"/>
+            <SolidColorBrush x:Key="InputBorderBrushDark" Color="#CC5D5D5D"/>
+            
+            <media1:BooleanToBrushConverter 
+                x:Name="BooleanToBrushConverter"
+                AccentBrush="{StaticResource TelegramBadgeAccentBrush}"
+                NormalBrush="{StaticResource PhoneForegroundBrush}"/>
+            
+            <media:TimerSpanToBrushConverter 
+                x:Name="TimerSpanToBrushConverter"
+                AccentBrush="{StaticResource TelegramBadgeAccentBrush}"
+                NormalBrush="{StaticResource PhoneForegroundBrush}"/>
+
+            <Style x:Key="CaptionTextBox" TargetType="TextBox">
+                <Setter Property="CaretBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource PhoneSubtleColor}"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+                <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="SelectionBackground" Value="{StaticResource TelegramBadgeAccentBrush}"/>
+                <Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="10,2"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid Background="Transparent">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="MouseOver"/>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBorder">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="ReadOnly">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBorder">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Collapsed</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <Visibility>Visible</Visibility>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="DisabledOrReadonlyBorder">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DisabledOrReadonlyContent">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxReadOnlyBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="EnabledBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="EnabledBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>-->
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unfocused"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="EnabledBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="9,15,9,18">
+                                    <ContentControl x:Name="ContentElement" Content="|Test" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
+                                </Border>
+                                <Border x:Name="DisabledOrReadonlyBorder" BorderBrush="{StaticResource PhoneDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed">
+                                    <TextBox x:Name="DisabledOrReadonlyContent" Background="Transparent" Foreground="{StaticResource PhoneDisabledBrush}" FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" IsReadOnly="True" SelectionForeground="{TemplateBinding SelectionForeground}" SelectionBackground="{TemplateBinding SelectionBackground}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" Text="{TemplateBinding Text}" Template="{StaticResource PhoneDisabledTextBoxTemplate}"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <Grid.RenderTransform>
+            <CompositeTransform/>
+        </Grid.RenderTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="Caption2" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,24,0,0">
+            <TextBlock Text="{Binding Resources.Video, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+            <TextBlock Text="{Binding EditedVideoParameters}" Margin="6,-4,0,0" Foreground="White" Opacity="0.5" CacheMode="BitmapCache" Style="{StaticResource PhoneTextSubtleStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ImagesGrid" Grid.Row="1" Background="Black" micro:Message.Attach="[Event Tap] = [Action OpenVideo]">
+            <Image x:Name="Preview" Source="{Binding PreviewPhoto, Converter={StaticResource PhotoConverter}}" CacheMode="BitmapCache"/>
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image VerticalAlignment="Center"
+					                Width="48" Height="48" Margin="-4,3,-4,0"
+					                Source="/Images/Audio/appbar.transport.play.rest.png"/>
+                <TextBlock Grid.Column="1"
+					                VerticalAlignment="Center" Margin=" 0"
+					                Text="{Binding DurationString}"
+					                Foreground="White"
+					                Style="{StaticResource PhoneTextLargeStyle}"/>
+            </Grid>
+        </Grid>
+
+        <!-- Mentions -->
+        <ContentControl x:Name="UsernameHints" 
+            Grid.Row="1"
+            VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+            HorizontalContentAlignment="Stretch" 
+            Margin="0,-38,0,0" MaxHeight="241"
+            Tap="UsernameHint_OnTap"
+            ManipulationStarted="UsernameHints_OnManipulationStarted"/>
+
+        <StackPanel x:Name="Bar" Grid.Row="2">
+            <StackPanel.RenderTransform>
+                <CompositeTransform/>
+            </StackPanel.RenderTransform>
+            <Grid Background="{StaticResource PhoneChromeBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Rectangle x:Name="TopBorder" VerticalAlignment="Top" Height="2" Fill="{StaticResource PhoneForegroundBrush}"/>
+                    <TextBlock x:Name="CaptionWatermark" Margin="20,0" Text="{Binding Resources.AddCaption, Source={StaticResource Strings}}" FontSize="{Binding DefaultFontSize, Source={StaticResource ScaledText}}" Foreground="{StaticResource PhoneSubtleBrush}" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Caption" MaxLength="140" FontSize="{Binding DefaultFontSize, Source={StaticResource ScaledText}}" Text="{Binding Caption, Mode=TwoWay}" Foreground="{StaticResource PhoneForegroundBrush}" InputScope="Text" KeyDown="Caption_OnKeyDown" GotFocus="Caption_OnGotFocus" LostFocus="Caption_OnLostFocus" TextChanged="Caption_OnTextChanged" Style="{StaticResource CaptionTextBox}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:UpdateTextBindingBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </Grid>
+                <Border Grid.Row="1" x:Name="KeyboardPlaceholder"/>
+                <controls1:VideoTimelineControl 
+                    x:Name="Timeline" 
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom"
+                    File="{Binding VideoFile}"
+                    TrimLeft="{Binding TrimLeft, Mode=TwoWay}"
+                    TrimRight="{Binding TrimRight, Mode=TwoWay}" 
+                    ThumbnailChanged="Timeline_OnThumbnailChanged"/>
+            </Grid>
+            <Grid x:Name="ApplicationBarPlaceholder">
+                <Border x:Name="MorePanel" Grid.Row="0" Visibility="Collapsed" VerticalAlignment="Bottom">
+                    <Border.RenderTransform>
+                        <CompositeTransform/>
+                    </Border.RenderTransform>
+                </Border>
+                <controls1:TelegramApplicationBar 
+                        x:Name="AppBar" 
+                        VerticalAlignment="Bottom"
+                        MorePanel="{Binding ElementName=MorePanel}">
+                    <controls1:TelegramApplicationBar.Buttons>
+                        <controls1:TelegramAppBarButton
+                                x:Name="TimerButton"
+                                Grid.Column="0" 
+                                Tap="Timer_OnClick"
+                                ImageSource="/Images/W10M/ic_timer_2x.png"
+                                Text="{Binding Resources.Timer, Source={StaticResource Strings}}"
+                                LabelForeground="{Binding TimerSpan, Converter={StaticResource TimerSpanToBrushConverter}}"/>
+                        <controls1:TelegramAppBarButton
+                                x:Name="QualityButton"
+                                Grid.Column="1" 
+                                Tap="Quality_OnClick"
+                                ImageSource="{Binding QualityButtonImageSource}"
+                                Text="{Binding Resources.Quality, Source={StaticResource Strings}}"
+                                IsEnabled="{Binding Compression}"/>
+                        <controls1:TelegramAppBarButton
+                                x:Name="MuteButton"
+                                Grid.Column="2"
+                                Tap="Mute_OnClick"
+                                ImageSource="/Images/W10M/ic_gif_2x.png"
+                                Text="{Binding Resources.Gif, Source={StaticResource Strings}}"
+                                IsEnabled="{Binding Mute}"
+                                LabelForeground="{Binding IsMuteEnabled, Converter={StaticResource BooleanToBrushConverter}}"/>
+                        <controls1:TelegramAppBarButton
+                                x:Name="SendButton"
+                                Grid.Column="3" 
+                                Tap="Done_Click"
+                                ImageSource="/Images/W10M/ic_send_2x.png"
+                                Text="{Binding Resources.Send, Source={StaticResource Strings}}"
+                                LabelForeground="{StaticResource TelegramBadgeAccentBrush}"/>
+                    </controls1:TelegramApplicationBar.Buttons>
+                </controls1:TelegramApplicationBar>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</views:TelegramViewBase>

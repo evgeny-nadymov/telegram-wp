@@ -1,0 +1,107 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Contacts.ContactsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" d:DesignHeight="768" d:DesignWidth="480">
+
+    <views:TelegramViewBase.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="GroupHeaderTemplate">
+                <Border  Visibility="{Binding Key, Converter={StaticResource GroupVisibilityConverter}, ConverterParameter='@'}"
+                    Margin="12,0,12,12" Background="Transparent">
+                    <Border Background="{StaticResource PhoneAccentBrush}" BorderBrush="{StaticResource PhoneAccentBrush}" BorderThickness="2" Width="62" 
+                        Height="62" Margin="0,0,18,0" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding Key}" Foreground="White" FontSize="48" Padding="6" 
+                        FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Border>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="UserItemTemplate">
+                <ListBoxItem>
+                    <Grid x:Name="MainItemGrid" Margin="12,0,24,12" Background="Transparent" Tap="MainItemGrid_OnTap" micro:Message.Attach="[Event Tap] = [Action SetOpenContactElement($source)]; [Event Tap] = [Action UserAction($DataContext)]">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="62"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="62" Height="62" Background="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}">
+                            <Grid>
+                                <Image Source="/Images/Placeholder/placeholder.user.transparent-WXGA.png" 
+                                    Visibility="{Binding Converter={StaticResource ContactToVisibilityConverter}}"/>
+                                <Image Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"/>
+                            </Grid>
+                        </Border>
+                        <Grid Grid.Column="1" VerticalAlignment="Center" Margin="0,-2,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Margin="14,-6,0,0" navigation:AnimatedBasePage.IsAnimationTarget="True" Text="{Binding FullName}" MaxHeight="42.56" Style="{StaticResource PhoneTextLargeStyle}"/>
+                            <TextBlock Grid.Row="1" Margin="15,-4,0,0" Text="{Binding StatusCommon, Converter={StaticResource UserStatusToStringConverter}}" Foreground="{Binding StatusCommon, Converter={StaticResource UserStatusToBrushConverter}}" 
+                                Visibility="{Binding Converter={StaticResource ContactToVisibilityConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        </Grid>
+                    </Grid>
+                </ListBoxItem>
+            </DataTemplate>
+        </ResourceDictionary>
+    </views:TelegramViewBase.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid Margin="0,-5,-16,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="1" Margin="16,60" Text="{Binding Status}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+            <longListSelector:LongListSelector Grid.Row="1" Margin="0,0,4,0" ItemsSource="{Binding Contacts}" ItemTemplate="{StaticResource UserItemTemplate}" GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}">
+                <longListSelector:LongListSelector.ListHeaderTemplate>
+                    <DataTemplate>
+                        <Button Margin="0,-12,0,18" Style="{StaticResource ProfileButtonStyle}" micro:Message.Attach="InviteFriends">
+                            <TextBlock Margin="0,0,12,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="36.667" Text="{Binding Resources.InviteFriends, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                        </Button>
+                    </DataTemplate>
+                </longListSelector:LongListSelector.ListHeaderTemplate>
+                <longListSelector:LongListSelector.ListFooterTemplate>
+                    <DataTemplate>
+                        <Border Height="0">
+                            <TextBlock Margin="16,0" Text="{Binding Status}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+                        </Border>
+                    </DataTemplate>
+                </longListSelector:LongListSelector.ListFooterTemplate>
+                <longListSelector:LongListSelector.GroupItemsPanel>
+                    <ItemsPanelTemplate>
+                        <toolkit:WrapPanel Orientation="Horizontal" Margin="0,32,0,0"/>
+                    </ItemsPanelTemplate>
+                </longListSelector:LongListSelector.GroupItemsPanel>
+                <longListSelector:LongListSelector.GroupItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Red" Width="99" Height="99" Margin="6" >
+                            <Grid>
+                                <TextBlock Text="{Binding Key}" 
+                                    Visibility="{Binding Key, Converter={StaticResource GroupVisibilityConverter}, ConverterParameter='@'}"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="48" Padding="6" 
+                                    Foreground="Green" VerticalAlignment="Center"/>
+                                <Image 
+                                    Visibility="{Binding Key, Converter={StaticResource TelegramGroupVisibilityConverter}, ConverterParameter='@'}"
+                                    Margin="6,24" Source="/Images/LockScreen/lockscreen.png" Width="37" Height="37" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </longListSelector:LongListSelector.GroupItemTemplate>
+            </longListSelector:LongListSelector>
+        </Grid>
+    </Grid>
+</views:TelegramViewBase>

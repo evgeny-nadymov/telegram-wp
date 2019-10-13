@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.UnreadCounter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="28" d:DesignWidth="68">
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" 
+                x:Name="UnreadMentionsLabel"
+                Margin="6,0,0,0" VerticalAlignment="Top"
+                Background="{StaticResource TelegramBadgeAccentBrush}"
+                Height="28" MinWidth="28" CornerRadius="14" 
+                Visibility="Collapsed">
+            <TextBlock Margin="0,-3,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Foreground="White" 
+                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                FontWeight="SemiBold"
+                FontSize="18"
+                Text="@" />
+        </Border>
+
+        <Border Grid.Column="1" 
+                x:Name="PinnedLabel"
+                Margin="6,0,0,0" VerticalAlignment="Top"
+                Width="28" Height="28" CornerRadius="14"
+                BorderBrush="{StaticResource PhoneSubtleBrush}" BorderThickness="2"
+                Visibility="Collapsed">
+            <Path Fill="{StaticResource PhoneSubtleBrush}" Data="M16.15625,6.75 L15.46875,7.6875 L13.21875,10.78125 C11.924168,10.669855 10.5806,10.980836 9.59375,11.96875 L8.90625,12.65625 L9.59375,13.375 L11.40625,15.1875 L8,18.59375 L8,20 L9.40625,20 L12.8125,16.59375 L14.625,18.40625 L15.34375,19.09375 L16.0625,18.40625 C17.049185,17.419565 17.329972,16.075962 17.21875,14.78125 L20.3125,12.53125 L21.25,11.84375 L20.40625,11.03125 L16.96875,7.59375 L16.15625,6.75 Z M16.375,9.8125 L18.1875,11.625 L15.65625,13.46875 L15.125,13.875 L15.28125,14.53125 C15.41953,15.057691 15.3564,15.584769 15.15625,16.09375 L11.90625,12.84375 C12.415029,12.643713 12.941995,12.580388 13.46875,12.71875 L14.125,12.875 L14.53125,12.34375 L16.375,9.8125 Z">
+                <Path.RenderTransform>
+                    <TranslateTransform X="-2" Y="-2"/>
+                </Path.RenderTransform>
+            </Path>
+        </Border>
+
+        <Border Grid.Column="1" 
+                x:Name="UnreadLabel"
+                Margin="6,0,0,0" VerticalAlignment="Top"
+                Height="28" MinWidth="28" CornerRadius="14"
+                Visibility="Collapsed">
+            <TextBlock 
+                x:Name="UnreadText"
+                Margin="7,-3,7,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Foreground="White" 
+                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                FontWeight="SemiBold"
+                FontSize="18" />
+        </Border>
+    </Grid>
+</UserControl>

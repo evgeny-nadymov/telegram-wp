@@ -1,0 +1,242 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Chats.ChatDetailsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:longListSelector="clr-namespace:Telegram.Controls.LongListSelector;assembly=Telegram.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Self"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <views:TelegramViewBase.Resources>
+        <DataTemplate x:Key="UserItemTemplate">
+            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                <Grid x:Name="MainItemGrid" Margin="12,0,24,12" Background="Transparent" Tap="MainItemGrid_OnTap" micro:Message.Attach="[Event Tap] = [Action ViewUser($DataContext)]">
+
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Self}">
+                            <toolkit:MenuItem Loaded="DeleteMenuItem_OnLoaded" micro:Message.Attach="[Event Click] = [DeleteParticipant($DataContext)]" Header="{Binding Resources.Delete, Source={StaticResource Strings}}" Visibility="{Binding DeleteActionVisibility}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [MessageUser($DataContext)]" Header="{Binding FirstName.Value, Converter={StaticResource MessageUserString}}"/>
+                            <toolkit:MenuItem micro:Message.Attach="[Event Click] = [ViewUser($DataContext)]" Header="{Binding FirstName.Value, Converter={StaticResource ViewUserString}}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="72"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <views:ConversationTileControl Size="72" 
+                        Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
+                        Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                        Fill="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                        Text="{Binding Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                    <Grid Grid.Column="1" VerticalAlignment="Center" Margin="0,-2,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="17,-8,0,0" Text="{Binding FullName2}" MaxHeight="36" FontSize="27" Foreground="White"/>
+                        <TextBlock Grid.Row="1" Margin="18,2,0,0" 
+                            Text="{Binding StatusCommon, Converter={StaticResource UserStatusToStringConverter}}" 
+                            Foreground="#99FFFFFF"
+                            Visibility="{Binding Converter={StaticResource ContactToVisibilityConverter}}" 
+                            Style="{StaticResource PhoneTextSubtleStyle}"/>
+
+                        <TextBlock Grid.Column="1" Grid.RowSpan="2" Margin="12,-4,0,0" Text="{Binding Resources.Admin, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" VerticalAlignment="Center" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="#99FFFFFF"/>
+                    </Grid>
+                    <!--<Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="12,-6,0,0" Text="{Binding FullName2}" MaxHeight="42.56" Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock Grid.Row="1" Margin="12,-4,0,0" Text="{Binding StatusCommon, Converter={StaticResource UserStatusToStringConverter}}" Foreground="{Binding StatusCommon, Converter={StaticResource UserStatusToBrushConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+
+                        <TextBlock Grid.Column="1" Grid.RowSpan="2" Margin="12,-4,0,0" Text="{Binding Resources.Admin, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" VerticalAlignment="Center" Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    </Grid>-->
+                </Grid>
+            </ListBoxItem>
+        </DataTemplate>
+    </views:TelegramViewBase.Resources>
+
+    <Grid x:Name="LayoutRoot" Margin="-18,0">
+        <longListSelector:LongListSelector 
+                Margin="12,0,0,0" 
+                ItemsSource="{Binding Items}" 
+                IsFlatList="True"
+                ItemTemplate="{StaticResource UserItemTemplate}"
+                Background="Transparent">
+            <longListSelector:LongListSelector.ListHeader>
+                <Grid x:Name="ContentPanel" Margin="0,0,12,0" DataContext="{Binding DataContext, ElementName=Self}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,15,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <views:ConversationTileControl
+                            micro:Message.Attach="[Event Tap] = [Action OpenPhoto]"
+				            Margin="12,0,0,0" 
+                            Size="100"
+                            Fill="{Binding CurrentItem.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                            Text="{Binding CurrentItem, Converter={StaticResource PlaceholderDefaultTextConverter}}"
+                            Source="{Binding CurrentItem.Photo, Converter={StaticResource ProfileSmallPhotoConverter}}"/>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                            <TextBlock Margin="24,13,0,0" Text="{Binding CurrentItem.FullName2}" FontSize="30" Foreground="White"/>
+                            <TextBlock Margin="24,1,0,0" Text="{Binding Subtitle}" Opacity="0.6" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!--
+                    <StackPanel Margin="0,2,0,0" Grid.Row="0" Grid.Column="1">
+                        <TextBlock Text="{Binding Subtitle}" Style="{StaticResource PhoneTextSubtleStyle}" />
+                        <TextBlock Text="{Binding Subtitle2}" Margin="12,-4,12,0" Foreground="{StaticResource PhoneAccentBrush}" Visibility="{Binding Subtitle2, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <TextBlock Text="{Binding Subtitle3}" TextWrapping="Wrap" MaxHeight="79.8" TextTrimming="WordEllipsis" Margin="12,-4,12,0" Foreground="{StaticResource PhoneForegroundBrush}" Visibility="{Binding Subtitle3, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert}" Style="{StaticResource PhoneTextSubtleStyle}" />
+                    </StackPanel>
+                    -->
+
+                    <Grid Grid.Row="1" Margin="0,0,0,0" x:Name="Actions">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel x:Name="SettingsGrid" Margin="0,24,0,0">
+                            
+                            <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" micro:Message.Attach="OpenLink" Visibility="{Binding CurrentItem.UserName, Converter={StaticResource EmptyTLStringToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Self}">
+                                        <toolkit:MenuItem Click="CopyLink_OnClick" Header="{Binding Resources.Copy, Source={StaticResource Strings}}" />                            
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+
+                                <StackPanel>
+                                    <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding CurrentItem.UserName, StringFormat='@\{0\}'}"/>
+                                    <TextBlock Margin="12,2,12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding Link}" Foreground="White" Opacity="0.6"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" Visibility="{Binding Subtitle3, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <StackPanel>
+                                    <TextBlock Margin="12,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.About, Source={StaticResource Strings}}"/>
+                                    <TextBlock Margin="12,2,12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding Subtitle3}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="81" Foreground="White" Opacity="0.6"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Visibility="{Binding IsChannelParticipantsButtonEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" micro:Message.Attach="OpenMembers" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <StackPanel>
+                                    <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Members, Source={StaticResource Strings}}"/>
+                                    <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding MembersSubtitle}" Foreground="White" Opacity="0.6"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Visibility="{Binding IsChannelAdministrator, Converter={StaticResource BooleanToVisibilityConverter}}" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" micro:Message.Attach="OpenAdministrators" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <StackPanel>
+                                    <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Administrators, Source={StaticResource Strings}}"/>
+                                    <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding AdministratorsSubtitle}" Foreground="White" Opacity="0.6"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Visibility="{Binding IsChannelAdministrator, Converter={StaticResource BooleanToVisibilityConverter}}" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" micro:Message.Attach="OpenKickedUsers" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <StackPanel>
+                                    <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.BlockedUsers, Source={StaticResource Strings}}"/>
+                                    <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding KickedUsersSubtitle}" Foreground="White" Opacity="0.6"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" micro:Message.Attach="OpenMedia" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Media, Source={StaticResource Strings}}"/>
+                            </Button>
+
+                            <!--<Button Visibility="{Binding IsReportButtonEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0" micro:Message.Attach="Report" Style="{StaticResource WhiteProfileButtonStyle}">
+                                <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Report, Source={StaticResource Strings}}"/>
+                            </Button>-->
+                            
+                            <StackPanel Margin="0,24,0,0">
+                                <toolkit:ToggleSwitch x:Name="NotificationsSwitch" Margin="0,0,-24,-21" Foreground="White" Checked="ToggleSwitch_OnChecked" Unchecked="ToggleSwitch_OnUnchecked" IsChecked="{Binding DataContext.MuteUntil, ElementName=Self, Converter={StaticResource MuteUntilToBoolConverter}}" Header="{Binding Resources.Notifications, Source={StaticResource Strings}}">
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:ToggleSwitchLocalizedContentBehavior
+                                            OnContent="{Binding Resources.On, Source={StaticResource Strings}}"
+                                            OffContent="{Binding Resources.Off, Source={StaticResource Strings}}"/>
+                                    </i:Interaction.Behaviors>
+                                </toolkit:ToggleSwitch>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,24,0,0">
+                                <toolkit:ListPicker
+                                    Foreground="White"
+                                    BorderBrush="#99FFFFFF"
+                                    Margin="12,-10,12,0"
+                                    Header="{Binding Resources.Sound, Source={StaticResource Strings}}"
+                                    ItemsSource="{Binding StateService.Sounds}"
+                                    SelectedItem="{Binding SelectedSound, Mode=TwoWay}">
+                                    <toolkit:ListPicker.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}"/>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.ItemTemplate>
+                                    <toolkit:ListPicker.FullModeItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="0,12" Text="{Binding}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.FullModeItemTemplate>
+                                </toolkit:ListPicker>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,36,0,0" Visibility="{Binding IsUpgradeAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock Margin="12,0,12,-5" Text="{Binding UpgradeDescription}" TextWrapping="Wrap" Foreground="White" Opacity="0.6" />
+                                <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,24,-12,0" micro:Message.Attach="UpgradeGroup" Style="{StaticResource WhiteProfileButtonStyle}">
+                                    <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.UpgradeToSupergroup, Source={StaticResource Strings}}"/>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="6" Text="{Binding Subtitle}" Margin="12,24,12,12" FontSize="23" Foreground="White" Visibility="{Binding DataContext.CanViewParticipants, ElementName=Self, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Grid>
+                </Grid>
+            </longListSelector:LongListSelector.ListHeader>
+            <!--<longListSelector:LongListSelector.ListFooter>
+                <Grid MinHeight="72">
+                    <Button toolkit:TiltEffect.IsTiltEnabled="True" Margin="-12,0,-12,72" micro:Message.Attach="DeleteAndExitGroup" Style="{StaticResource WhiteProfileButtonStyle}" Visibility="{Binding DataContext.IsDeleteAndExitVisible, ElementName=Self, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Margin="10,0,12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding DataContext.DeleteAndExitGroupString, ElementName=Self}"/>
+                    </Button>
+                </Grid>
+            </longListSelector:LongListSelector.ListFooter>-->
+        </longListSelector:LongListSelector>
+    </Grid>
+
+</views:TelegramViewBase>

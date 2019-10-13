@@ -1,0 +1,111 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:additional="clr-namespace:TelegramClient.Views.Additional"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:emojiPanel="clr-namespace:Telegram.EmojiPanel"
+    xmlns:views="clr-namespace:TelegramClient.Views">
+
+
+    <DataTemplate x:Key="AnimatedBackgroundTemplate">
+        <additional:BubbleBackgroundControl Width="480" Height="800"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="EmptyTemplate"/>
+
+
+    <converters:BackgroundImageConverter x:Key="BackgroundImageConverter"/>
+    <converters:BackgroundBrushConverter x:Key="BackgroundBrushConverter"/>
+    <DataTemplate x:Key="ImageBackgroundTemplate">
+        <Grid>
+            <Grid.Resources>
+                <Storyboard x:Name="FadeInStoryboard">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundImage">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="1" >
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </Grid.Resources>
+            <Image x:Name="BackgroundImage" Opacity="0" Source="{Binding CurrentBackground, Converter={StaticResource BackgroundImageConverter}, ConverterParameter=480}" Stretch="UniformToFill">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <eim:ControlStoryboardAction Storyboard="{StaticResource FadeInStoryboard}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SearchUserItemTemplate">
+        <ListBoxItem>
+            <Grid x:Name="MainItemGrid" Margin="12,12,24,12" Background="Transparent" micro:Message.Attach="[Event Tap] = [Action UserAction($DataContext)]">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <views:ConversationTileControl 
+                    Size="72"
+                    Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
+                    Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                    Fill="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                    Text="{Binding Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                <Grid Grid.Column="1" VerticalAlignment="Center" Margin="0,-2,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="17,-8,0,0" navigation:AnimatedBasePage.IsAnimationTarget="True" Text="{Binding FullName}" MaxHeight="36" FontSize="27" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Grid.Row="1" Margin="18,2,0,0" 
+                            Text="{Binding StatusCommon, Converter={StaticResource UserStatusToStringConverter}}" 
+                            Foreground="{Binding StatusCommon, Converter={StaticResource UserStatusToBrushConverter}}" 
+                            Visibility="{Binding Converter={StaticResource ContactToVisibilityConverter}}" 
+                            Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </Grid>
+        </ListBoxItem>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UserItemTemplate">
+        <ListBoxItem>
+            <Grid x:Name="MainItemGrid" Margin="12,12,24,12" Background="Transparent" micro:Message.Attach="[Event Tap] = [Action UserAction($DataContext)]">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <views:ConversationTileControl 
+                    Size="72"
+                    Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
+                    Source="{Binding Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                    Fill="{Binding Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                    Text="{Binding Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                <Grid Grid.Column="1" VerticalAlignment="Center" Margin="0,-2,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="17,-8,0,-8" navigation:AnimatedBasePage.IsAnimationTarget="True" Text="{Binding FullName}" MaxHeight="36" FontSize="27" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Grid.Row="1" Margin="18,10,0,0" 
+                            Text="{Binding StatusCommon, Converter={StaticResource UserStatusToStringConverter}}" 
+                            Foreground="{Binding StatusCommon, Converter={StaticResource UserStatusToBrushConverter}}" 
+                            Visibility="{Binding Converter={StaticResource ContactToVisibilityConverter}}" 
+                            Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </Grid>
+        </ListBoxItem>
+    </DataTemplate>
+</ResourceDictionary>
+
+

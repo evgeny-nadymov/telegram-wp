@@ -1,0 +1,103 @@
+﻿<UserControl
+    x:Class="TelegramClient.Views.Additional.ClearCacheSettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False" d:DesignHeight="800" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Name="OpenStoryboard">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="ContentPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="-90"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                            <DiscreteObjectKeyFrame.Value>
+                                <Visibility>Visible</Visibility>
+                            </DiscreteObjectKeyFrame.Value>
+                        </DiscreteObjectKeyFrame>
+                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Name="CloseStoryboard">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="ContentPanel">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="90">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase EasingMode="EaseIn" Exponent="3"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <ObjectAnimationUsingKeyFrames.KeyFrames>
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0.25">
+                            <DiscreteObjectKeyFrame.Value>
+                                <Visibility>Collapsed</Visibility>
+                            </DiscreteObjectKeyFrame.Value>
+                        </DiscreteObjectKeyFrame>
+                    </ObjectAnimationUsingKeyFrames.KeyFrames>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="#99000000" Visibility="Collapsed" Tap="LayoutRoot_OnTap">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" VerticalAlignment="Bottom" Tap="ContentPanel_OnTap" Background="{StaticResource PhoneChromeBrush}">
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
+            <ItemsControl Margin="12,18,10,25">
+                <Grid Visibility="{Binding Settings.Self.PhotosVisibility}">
+                    <TextBlock Margin="12,0,12,0" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Settings.Self.PhotosLength, Converter={StaticResource FileSizeConverter}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    <CheckBox Margin="0,0,12,0" Background="Transparent" IsChecked="{Binding Settings.Photos, Mode=TwoWay}" Content="{Binding Resources.Photos, Source={StaticResource Strings}}"/>
+                </Grid>
+                <Grid Visibility="{Binding Settings.Self.VideoVisibility}">
+                    <TextBlock Margin="12,0,12,0" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Settings.Self.VideoLength, Converter={StaticResource FileSizeConverter}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    <CheckBox Margin="0,0,12,0" Background="Transparent" IsChecked="{Binding Settings.Video, Mode=TwoWay}" Content="{Binding Resources.Video, Source={StaticResource Strings}}"/>
+                </Grid>
+                <Grid Visibility="{Binding Settings.Self.DocumentsVisibility}">
+                    <TextBlock Margin="12,0,12,0" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Settings.Self.DocumentsLength, Converter={StaticResource FileSizeConverter}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    <CheckBox Margin="0,0,12,0" Background="Transparent" IsChecked="{Binding Settings.Documents, Mode=TwoWay}" Content="{Binding Resources.Documents, Source={StaticResource Strings}}"/>
+                </Grid>
+                <Grid Visibility="{Binding Settings.Self.MusicVisibility}">
+                    <TextBlock Margin="12,0,12,0" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Settings.Self.MusicLength, Converter={StaticResource FileSizeConverter}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    <CheckBox Margin="0,0,12,0" Background="Transparent" IsChecked="{Binding Settings.Music, Mode=TwoWay}" Content="{Binding Resources.Music, Source={StaticResource Strings}}"/>
+                </Grid>
+                <Grid Visibility="{Binding Settings.Self.VoiceMessagesVisibility}">
+                    <TextBlock Margin="12,0,12,0" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Settings.Self.VoiceMessagesLength, Converter={StaticResource FileSizeConverter}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    <CheckBox Margin="0,0,12,0" Background="Transparent" IsChecked="{Binding Settings.VoiceMessages, Mode=TwoWay}" Content="{Binding Resources.VoiceMessages, Source={StaticResource Strings}}"/>
+                </Grid>
+                <Grid Visibility="{Binding Settings.Self.OtherFilesVisibility}">
+                    <TextBlock Margin="12,0,12,0" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Settings.Self.OtherFilesLength, Converter={StaticResource FileSizeConverter}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    <CheckBox Margin="0,0,12,0" Background="Transparent" IsChecked="{Binding Settings.OtherFiles, Mode=TwoWay}" Content="{Binding Resources.OtherFiles, Source={StaticResource Strings}}"/>
+                </Grid>
+                <ListBoxItem micro:Message.Attach="[Event Tap] = [Action ClearCache]">
+                    <TextBlock Margin="12" Text="{Binding Resources.ClearCache, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextLargeStyle}" />
+                </ListBoxItem>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+
+</UserControl>

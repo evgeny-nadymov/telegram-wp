@@ -1,0 +1,14 @@
+prefix=../../../Build/WindowsPhone8.1/ARM
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libswresample
+Description: FFmpeg audio resampling library
+Version: 2.0.101
+Requires: 
+Requires.private: libavutil >= 55.11.100
+Conflicts:
+Libs: -L${libdir}  -lswresample 
+Libs.private: 
+Cflags: -I${includedir}

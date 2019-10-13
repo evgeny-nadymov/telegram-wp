@@ -1,0 +1,59 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Media.VideoCaptureView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" 
+    SupportedOrientations="Landscape" Orientation="LandscapeLeft"
+    x:Name="Self"
+    shell:SystemTray.IsVisible="False"
+    mc:Ignorable="d">
+    
+    <Grid Background="Black" Tap="UIElement_OnTap">
+
+        <Grid.Resources>
+            <VideoBrush x:Name="ViewfinderBrush"  AlignmentX="Left" AlignmentY="Top" Stretch="UniformToFill">
+                <VideoBrush.RelativeTransform>
+                    <CompositeTransform x:Name="ViewfinderTransform" CenterX="0.5" CenterY="0.5"/>
+                </VideoBrush.RelativeTransform>
+            </VideoBrush>
+        </Grid.Resources>
+
+        <Rectangle
+                x:Name="Viewfinder"
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch" />
+
+        <!--<MediaElement 
+                x:Name="VideoPlayer" 
+                Width="640" 
+                Height="480"
+                AutoPlay="True" 
+                RenderTransformOrigin="0.5, 0.5" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Stretch="Fill"
+                Canvas.Left="80">
+                <MediaElement.RenderTransform>
+                    <CompositeTransform x:Name="VideoPlayerTransform" CenterX="0.5" CenterY="0.5"/>
+                </MediaElement.RenderTransform>
+            </MediaElement>-->
+
+        <Grid Margin="80,0" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="TimerTransform"/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Name="Timer" Foreground="White" VerticalAlignment="Bottom" Style="{StaticResource PhoneTextHugeStyle}" Text="{Binding TimerString, ElementName=Self}"/>
+            <TextBlock Grid.Row="1" Name="DebugText" FontSize="24" Visibility="Collapsed" TextWrapping="Wrap" />
+        </Grid>
+    </Grid>
+</views:TelegramViewBase>

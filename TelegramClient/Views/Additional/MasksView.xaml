@@ -1,0 +1,384 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.MasksView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:reorderListBox="clr-namespace:ReorderListBox;assembly=Telegram.Controls"
+    xmlns:chats="clr-namespace:TelegramClient.Views.Chats"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Self"
+    toolkit:TiltEffect.IsTiltEnabled="False"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FFE3F4FF"
+    shell:SystemTray.IsVisible="True" 
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition EndTransition="ForwardTransition_OnEndTransition">
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn"/>
+            </controls:TelegramNavigationInTransition.Backward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <views:TelegramViewBase.Resources>
+        <DataTemplate x:Key="SetItemTemplate">
+            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                <controls1:StickerSetControl/>
+            </ListBoxItem>
+        </DataTemplate>
+
+        <Style x:Key="ScrollViewerStyle" TargetType="ScrollViewer">
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ScrollStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Scrolling">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="NotScrolling"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="64"/>
+                                </Grid.RenderTransform>
+                                <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+                                <ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+                                <ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ReorderListBoxStyle" TargetType="reorderListBox:ReorderListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="reorderListBox:ReorderListBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer x:Name="ScrollViewer" Background="{TemplateBinding Background}" Grid.Column="0" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}" Style="{StaticResource ScrollViewerStyle}">
+                                <StackPanel>
+                                    <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+                                    <ItemsPresenter/>
+                                    <ContentPresenter ContentTemplate="{TemplateBinding FooterTemplate}"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                            <Canvas x:Name="DragInterceptor" Background="Transparent" Grid.Column="1" Margin="{TemplateBinding Padding}" VerticalAlignment="Stretch" Width="64">
+                                <Image x:Name="DragIndicator" Visibility="Collapsed" CacheMode="BitmapCache">
+                                    <Image.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Image.RenderTransform>
+                                </Image>
+                            </Canvas>
+                            <Canvas x:Name="RearrangeCanvas" Background="Transparent" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" Visibility="Collapsed"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="ListBoxItemStyle1" TargetType="reorderListBox:ReorderListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="CacheMode" Value="BitmapCache"/>
+            <Setter Property="DragHandleTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid Background="Transparent">
+                            <Image Stretch="Uniform" Width="40" Margin="0,0,24,0" Source="/Images/Messages/movestickerpack.png"/>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="reorderListBox:ReorderListBoxItem">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="DropBeforeSpace" Grid.Row="0" Height="0"/>
+                            <Grid x:Name="DropAfterSpace" Grid.Row="2" Height="0"/>
+                            <Grid Grid.Row="1">
+                                <Border x:Name="Background" Background="{StaticResource PhoneAccentBrush}" Opacity="0"/>
+                                <Border 
+                                    x:Name="LayoutRoot"
+                                    CacheMode="BitmapCache"
+                                    Background="{TemplateBinding Background}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid Background="Transparent" Margin="{TemplateBinding Padding}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ContentControl x:Name="ContentContainer"
+                                        Grid.Column="0"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        Foreground="{TemplateBinding Foreground}" />
+                                        <Grid x:Name="HandleContainer" Grid.Column="1">
+                                            <ContentPresenter
+                                            x:Name="DragHandle"
+                                            VerticalAlignment="Stretch"
+                                            ContentTemplate="{TemplateBinding DragHandleTemplate}" />
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TransparentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimation Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Opacity" Duration="0" To=".5" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ReorderEnabledStates">
+                                    <VisualState x:Name="ReorderDisabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DragHandle" Storyboard.TargetProperty="Width" To="0" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ReorderEnabled" />
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="ReorderDisabled" To="ReorderEnabled">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DragHandle" Storyboard.TargetProperty="Width" To="52" Duration="0:0:0.4" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="ReorderEnabled" To="ReorderDisabled">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DragHandle" Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.4" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DraggingStates">
+                                    <VisualState x:Name="NotDragging" />
+                                    <VisualState x:Name="Dragging">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="Background" Storyboard.TargetProperty="Opacity" To="0.9" Duration="0" />
+                                            <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0.9" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition To="NotDragging">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="Background" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" From="0.9" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition To="Dragging">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="Background" Storyboard.TargetProperty="Opacity" To="0.9" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0.9" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DropIndicatorStates">
+                                    <VisualState x:Name="NoDropIndicator">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="0" Duration="0" />
+                                            <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="0" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="DropBeforeIndicator">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="1" Duration="0" />
+                                            <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="0" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="DropAfterIndicator">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="0" Duration="0" />
+                                            <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="1" Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="NoDropIndicator" To="DropBeforeIndicator">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="NoDropIndicator" To="DropAfterIndicator">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="DropBeforeIndicator" To="NoDropIndicator">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="DropAfterIndicator" To="NoDropIndicator">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="DropBeforeIndicator" To="DropAfterIndicator">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="DropAfterIndicator" To="DropBeforeIndicator">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="DropBeforeSpace" Storyboard.TargetProperty="Height" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="DropAfterSpace" Storyboard.TargetProperty="Height" To="0" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </views:TelegramViewBase.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.Masks, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        
+        <reorderListBox:ReorderListBox
+            Grid.Row="1"
+            x:Name="Items"
+            Margin="-70,0,0,0"
+            ItemsSource="{Binding Items}" 
+            IsReorderEnabled="True" Style="{StaticResource ReorderListBoxStyle}" 
+            ItemContainerStyle="{StaticResource ListBoxItemStyle1}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent" Tap="StickerSet_OnTap" toolkit:TiltEffect.IsTiltEnabled="True">
+                        <Grid.CacheMode>
+                            <BitmapCache RenderAtScale="2.0"/>
+                        </Grid.CacheMode>
+                        <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu Style="{StaticResource W10MContextMenuStyle}" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=Items}" Opened="ContextMenu_OnOpened">
+                                <!--<toolkit:MenuItem micro:Message.Attach="[Event Click] = [Archive($DataContext)]" Header="{Binding Resources.Archive, Source={StaticResource Strings}}"/>-->
+                                <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Remove($DataContext)]" Loaded="Remove_OnLoaded" Header="{Binding Resources.Remove, Source={StaticResource Strings}}"/>
+                                <toolkit:MenuItem micro:Message.Attach="[Event Click] = [Share($DataContext)]" Header="{Binding Resources.Share, Source={StaticResource Strings}}"/>
+                                <toolkit:MenuItem micro:Message.Attach="[Event Click] = [CopyLink($DataContext)]" Header="{Binding Resources.CopyLink, Source={StaticResource Strings}}"/>
+                            </toolkit:ContextMenu>
+                        </toolkit:ContextMenuService.ContextMenu>
+                        <controls1:StickerSetControl/>
+                        <!--<ContentControl HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding}" ContentTemplate="{StaticResource SetItemTemplate}"/>-->
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <reorderListBox:ReorderListBox.FooterTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="24,12,18,0" Text="{Binding DataContext.Status, ElementName=Self}" Visibility="{Binding DataContext.Status, ElementName=Self, Converter={StaticResource EmptyStringToVisibilityConverter}, ConverterParameter=invert}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource PhoneTextGroupHeaderStyle}"/>
+                        <!--<TextBlock Grid.Row="1" Margin="24,43,24,43" Text="{Binding Resources.StickersHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" TextAlignment="Center" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>-->
+                        <RichTextBox Grid.Row="1" Margin="12,43,12,43" TextWrapping="Wrap" chats:ConvertToSupergroupView.FormattedLinkedText="{Binding Resources.MasksHint, Source={StaticResource Strings}}" TextAlignment="Left" LineHeight="22" LineStackingStrategy="BlockLineHeight" Foreground="{StaticResource PhoneSubtleBrush}" FontFamily="{StaticResource PhoneFontFamilyNormal}"/>
+                    </Grid>
+                </DataTemplate>
+            </reorderListBox:ReorderListBox.FooterTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </reorderListBox:ReorderListBox>
+    </Grid>
+</views:TelegramViewBase>

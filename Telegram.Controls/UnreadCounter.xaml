@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Telegram.Controls.UnreadCounter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" 
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Border x:Name="Border" CornerRadius="14" Height="28" MinWidth="28" Background="{StaticResource PhoneAccentBrush}"/>
+        <TextBlock x:Name="CounterText" Margin="7,-3,7,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+            Foreground="White" 
+            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+            FontWeight="SemiBold"
+            FontSize="18"
+            Text="9"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,182 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.PrivacySecurityView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True" d:DesignHeight="768" d:DesignWidth="480">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.PrivacyAndSecurity, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="ContentPanel" Margin="6,0,6,0">
+                <TextBlock Margin="12,12,12,0" FontSize="35" Text="{Binding Resources.Privacy, Source={StaticResource Strings}}"/>
+                
+                <Button Margin="-12,12,-12,0" x:Name="OpenBlockedUsers" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.BlockedUsers, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding BlockedUsersSubtitle}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="LastSeen" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.LastSeenShort, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LastSeenSubtitle}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="CallsPrivacy" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Calls, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding PhoneCallsSubtitle}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="Groups" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.GroupsShort, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding GroupsSubtitle}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+                
+                <TextBlock Margin="12,12,12,0" FontSize="35" Text="{Binding Resources.Security, Source={StaticResource Strings}}"/>
+
+                <Button Margin="-12,12,-12,0" x:Name="Passcode" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Passcode, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="TwoStepVerification" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.TwoStepVerification, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="Sessions" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Sessions, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="DeleteAllCloudDrafts" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.DeleteAllCloudDrafts, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="Passport" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.TelegramPassport, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="AccountSelfDestructs" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.AccountSelfDestructs, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding AccountSelfDestructsSubtitle}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="Payments" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Payments, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding Resources.PaymentsSubtitle, Source={StaticResource Strings}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="LoggedIn" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.LoggedInWithTelegram, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="Contacts" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Contacts, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="SecretChats" Visibility="{Binding IsSecretChatsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.SecretChats, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="-12,0,-12,0" x:Name="CallsSecurity" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Calls, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>
+
+                <!--<TextBlock Margin="12,12,12,0" FontSize="35" Text="{Binding Resources.ConnectionType, Source={StaticResource Strings}}"/>
+                <Button Margin="-12,0,-12,0" x:Name="Proxy" Style="{StaticResource ProfileButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="10,0,-12,0" FontSize="27" FontFamily="{StaticResource PhoneFontFamilyNormal}" Text="{Binding Resources.Proxy, Source={StaticResource Strings}}"/>
+                        <TextBlock Margin="12,2,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text=" " Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    </StackPanel>
+                </Button>-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</views:TelegramViewBase>

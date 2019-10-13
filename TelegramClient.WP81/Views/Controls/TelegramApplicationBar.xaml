@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.TelegramApplicationBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Margin="0,0,0,-18" Height="90"
+    d:DesignHeight="90" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="AppBarPanelLight" Color="#E7E9EB"/>
+        <SolidColorBrush x:Key="AppBarPanelDark" Color="#1F1F1F"/>
+        <SolidColorBrush x:Key="MorePanelLight" Color="#F3F4F5"/>
+        <SolidColorBrush x:Key="MorePanelDark" Color="#2B2B2B"/>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" CacheMode="BitmapCache" Background="{StaticResource PhoneChromeBrush}">
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="Transform" Y="0"/>
+        </Grid.RenderTransform>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="72"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="72"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="72"/>
+        </Grid.ColumnDefinitions>
+        <controls:TelegramAppBarButton
+            x:Name="MoreButton"
+            Grid.Column="4" 
+            Tap="More_OnTap"
+            ImageSource="/Images/ApplicationBar/ic_more_2x.png"/>
+    </Grid>
+</UserControl>

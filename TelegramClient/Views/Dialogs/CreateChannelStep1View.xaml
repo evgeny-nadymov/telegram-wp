@@ -1,0 +1,113 @@
+﻿<navigation:AnimatedBasePage
+    x:Class="TelegramClient.Views.Dialogs.CreateChannelStep1View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:navigation="clr-namespace:TelegramClient.Animation.Navigation"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Self"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,28">
+            <TextBlock Text="{Binding Resources.NewChannel, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="6,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <views:ConversationTileControl HorizontalAlignment="Left"
+                micro:Message.Attach="[Event Tap] = [Action SetChannelPhoto]"
+				Margin="12,10" 
+                Size="100"
+                Fill="{StaticResource PhoneChromeBrush}"
+                Text="{Binding PlaceholderText}"
+                Source="{Binding Photo, Converter={StaticResource ProfileSmallPhotoConverter}}"/>
+
+            <Button Margin="-12,0,-12,0" Grid.Row="1" x:Name="SetChannelPhoto" Style="{StaticResource ProfileButtonStyle}">
+                <TextBlock Margin="10,0,-12,0" FontSize="27" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding Resources.SetChannelPhoto, Source={StaticResource Strings}}"/>
+            </Button>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Bottom" Text="{Binding Resources.ChannelName, Source={StaticResource Strings}, StringFormat='\{0\}:'}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="-24,0,-12,-12" x:Name="Title" MaxLength="140" Style="{StaticResource HiddenTextBoxStyle}" >
+                    <TextBox.InputScope>
+                        <InputScope>
+                            <InputScopeName NameValue="Text"/>
+                        </InputScope>
+                    </TextBox.InputScope>
+                </TextBox>
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,2,12,28" BorderThickness="0.5" BorderBrush="{StaticResource PhoneSubtleBrush}"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Bottom" Text="{Binding Resources.Description, Source={StaticResource Strings}, StringFormat='\{0\}:'}" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="-24,0,-12,-12" x:Name="About" MaxLength="140" Style="{StaticResource HiddenTextBoxStyle}" >
+                    <TextBox.InputScope>
+                        <InputScope>
+                            <InputScopeName NameValue="Text"/>
+                        </InputScope>
+                    </TextBox.InputScope>
+                </TextBox>
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="12,2,12,28" BorderThickness="0.5" BorderBrush="{StaticResource PhoneSubtleBrush}"/>
+                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Resources.AboutDescription, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,0,12,-5"/>
+
+            </Grid>
+            <!--<RichTextBox Grid.Row="4" Grid.ColumnSpan="2" Margin="0,22,0,0" >
+                <Paragraph>
+                    --><!--<Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.RegistrationProblemDescription, Source={StaticResource Strings}}"/>--><!--
+                    <Hyperlink Click="WhatIsChannel_OnClick"  FontSize="{StaticResource PhoneFontSizeMedium}">
+                        <Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="{Binding Resources.WhatIsChannel, Source={StaticResource Strings}}"/>
+                    </Hyperlink>
+                    --><!--<Run FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeMedium}" Text="."/>--><!--
+                </Paragraph>
+            </RichTextBox>-->
+        </Grid>
+    </Grid>
+</navigation:AnimatedBasePage>

@@ -1,0 +1,96 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Chats.InviteLinkView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+    
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <!--<controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>-->
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <!--<controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>-->
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,28">
+            <TextBlock Text="{Binding Resources.InviteLink, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>
+            <!--<TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTelegramTitle1Style}"/>-->
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="12,10,12,-5" Grid.Row="1" TextWrapping="Wrap" Foreground="{StaticResource PhoneForegroundBrush}" Text="{Binding Link}" Style="{StaticResource PhoneTextSubtleStyle}" />
+            <TextBlock Grid.Row="3" Margin="12,23,12,0" Text="{Binding Resources.InviteLinkHint, Source={StaticResource Strings}}" TextWrapping="Wrap" LineHeight="22" LineStackingStrategy="BlockLineHeight" Style="{StaticResource PhoneTextSubtleStyle}"/>
+
+            <Button Margin="-12,12,-12,0" Grid.Row="4" x:Name="CopyLink" Style="{StaticResource ProfileButtonStyle}">
+                <StackPanel>
+                    <TextBlock Margin="10,0,-12,0" FontSize="36.667" Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Resources.CopyLink, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                    <TextBlock Margin="12,-6,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                </StackPanel>
+            </Button>
+
+            <Button Margin="-12,-10,-12,0" Grid.Row="5" x:Name="RevokeLink" Style="{StaticResource ProfileButtonStyle}">
+                <StackPanel>
+                    <TextBlock Margin="10,0,-12,0" FontSize="36.667" Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Resources.RevokeLink, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                    <TextBlock Margin="12,-6,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                </StackPanel>
+            </Button>
+
+            <Button Margin="-12,-10,-12,0" Grid.Row="6" x:Name="ShareLink" Style="{StaticResource ProfileButtonStyle}">
+                <StackPanel>
+                    <TextBlock Margin="10,0,-12,0" FontSize="36.667" Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Resources.ShareLink, Converter={StaticResource Lowercase}, Source={StaticResource Strings}}"/>
+                    <TextBlock Margin="12,-6,-12,0" Style="{StaticResource PhoneTextNormalStyle}" Text="" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

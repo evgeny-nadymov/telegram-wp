@@ -1,0 +1,2887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8223DB37-4A07-4E16-91A1-B28E822C9DC0}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Telegram.EmojiPanel</RootNamespace>
+    <AssemblyName>Telegram.EmojiPanel</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Telegram.EmojiPanel\BrowserNavigationService.cs">
+      <Link>BrowserNavigationService.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Emoji\EmojiControl.xaml.cs">
+      <Link>Controls\Emoji\EmojiControl.xaml.cs</Link>
+      <DependentUpon>EmojiControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Emoji\EmojiData.cs">
+      <Link>Controls\Emoji\EmojiData.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Emoji\EmojiSpriteItem.cs">
+      <Link>Controls\Emoji\EmojiSpriteItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Utilites\DelayedExecutor.cs">
+      <Link>Controls\Utilites\DelayedExecutor.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Utilites\Helpers.cs">
+      <Link>Controls\Utilites\Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Utilites\MyListItemBase.cs">
+      <Link>Controls\Utilites\MyListItemBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Utilites\MyVirtualizingPanel.cs">
+      <Link>Controls\Utilites\MyVirtualizingPanel.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Utilites\VirtSegment.cs">
+      <Link>Controls\Utilites\VirtSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\Controls\Utilites\VListItemBase.cs">
+      <Link>Controls\Utilites\VListItemBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\TelegramRichTextBox.cs">
+      <Link>TelegramRichTextBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Telegram.EmojiPanel\TestScrollableTextBlock.cs">
+      <Link>TestScrollableTextBlock.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Telegram.EmojiPanel\Controls\Emoji\EmojiControl.xaml">
+      <Link>Controls\Emoji\EmojiControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Telegram.EmojiPanel\Themes\generic.xaml">
+      <Link>Themes\generic.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.abc-WXGA.png">
+      <Link>Assets\emoji.abc-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.backspace-WXGA.png">
+      <Link>Assets\emoji.backspace-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.category.1-WXGA.png">
+      <Link>Assets\emoji.category.1-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.category.2-WXGA.png">
+      <Link>Assets\emoji.category.2-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.category.3-WXGA.png">
+      <Link>Assets\emoji.category.3-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.category.4-WXGA.png">
+      <Link>Assets\emoji.category.4-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.category.5-WXGA.png">
+      <Link>Assets\emoji.category.5-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\emoji.recent-WXGA.png">
+      <Link>Assets\emoji.recent-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\002320E3.png">
+      <Link>Assets\Emoji\Separated\002320E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003020E3.png">
+      <Link>Assets\Emoji\Separated\003020E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003120E3.png">
+      <Link>Assets\Emoji\Separated\003120E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003220E3.png">
+      <Link>Assets\Emoji\Separated\003220E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003320E3.png">
+      <Link>Assets\Emoji\Separated\003320E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003420E3.png">
+      <Link>Assets\Emoji\Separated\003420E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003520E3.png">
+      <Link>Assets\Emoji\Separated\003520E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003620E3.png">
+      <Link>Assets\Emoji\Separated\003620E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003720E3.png">
+      <Link>Assets\Emoji\Separated\003720E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003820E3.png">
+      <Link>Assets\Emoji\Separated\003820E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\003920E3.png">
+      <Link>Assets\Emoji\Separated\003920E3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\00a9.png">
+      <Link>Assets\Emoji\Separated\00a9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\00ae.png">
+      <Link>Assets\Emoji\Separated\00ae.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\203C.png">
+      <Link>Assets\Emoji\Separated\203C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2049.png">
+      <Link>Assets\Emoji\Separated\2049.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2122.png">
+      <Link>Assets\Emoji\Separated\2122.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2139.png">
+      <Link>Assets\Emoji\Separated\2139.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2194.png">
+      <Link>Assets\Emoji\Separated\2194.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2195.png">
+      <Link>Assets\Emoji\Separated\2195.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2196.png">
+      <Link>Assets\Emoji\Separated\2196.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2197.png">
+      <Link>Assets\Emoji\Separated\2197.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2198.png">
+      <Link>Assets\Emoji\Separated\2198.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2199.png">
+      <Link>Assets\Emoji\Separated\2199.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\21A9.png">
+      <Link>Assets\Emoji\Separated\21A9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\21AA.png">
+      <Link>Assets\Emoji\Separated\21AA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\231A.png">
+      <Link>Assets\Emoji\Separated\231A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\231B.png">
+      <Link>Assets\Emoji\Separated\231B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\23e9.png">
+      <Link>Assets\Emoji\Separated\23e9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\23ea.png">
+      <Link>Assets\Emoji\Separated\23ea.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\23eb.png">
+      <Link>Assets\Emoji\Separated\23eb.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\23ec.png">
+      <Link>Assets\Emoji\Separated\23ec.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\23f0.png">
+      <Link>Assets\Emoji\Separated\23f0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\23f3.png">
+      <Link>Assets\Emoji\Separated\23f3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\24C2.png">
+      <Link>Assets\Emoji\Separated\24C2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25AA.png">
+      <Link>Assets\Emoji\Separated\25AA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25AB.png">
+      <Link>Assets\Emoji\Separated\25AB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25B6.png">
+      <Link>Assets\Emoji\Separated\25B6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25C0.png">
+      <Link>Assets\Emoji\Separated\25C0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25FB.png">
+      <Link>Assets\Emoji\Separated\25FB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25FC.png">
+      <Link>Assets\Emoji\Separated\25FC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25FD.png">
+      <Link>Assets\Emoji\Separated\25FD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\25FE.png">
+      <Link>Assets\Emoji\Separated\25FE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2600.png">
+      <Link>Assets\Emoji\Separated\2600.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2601.png">
+      <Link>Assets\Emoji\Separated\2601.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\260E.png">
+      <Link>Assets\Emoji\Separated\260E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2611.png">
+      <Link>Assets\Emoji\Separated\2611.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2614.png">
+      <Link>Assets\Emoji\Separated\2614.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2615.png">
+      <Link>Assets\Emoji\Separated\2615.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\261D.png">
+      <Link>Assets\Emoji\Separated\261D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\263A.png">
+      <Link>Assets\Emoji\Separated\263A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2648.png">
+      <Link>Assets\Emoji\Separated\2648.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2649.png">
+      <Link>Assets\Emoji\Separated\2649.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\264A.png">
+      <Link>Assets\Emoji\Separated\264A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\264B.png">
+      <Link>Assets\Emoji\Separated\264B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\264C.png">
+      <Link>Assets\Emoji\Separated\264C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\264D.png">
+      <Link>Assets\Emoji\Separated\264D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\264E.png">
+      <Link>Assets\Emoji\Separated\264E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\264F.png">
+      <Link>Assets\Emoji\Separated\264F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2650.png">
+      <Link>Assets\Emoji\Separated\2650.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2651.png">
+      <Link>Assets\Emoji\Separated\2651.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2652.png">
+      <Link>Assets\Emoji\Separated\2652.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2653.png">
+      <Link>Assets\Emoji\Separated\2653.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2660.png">
+      <Link>Assets\Emoji\Separated\2660.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2663.png">
+      <Link>Assets\Emoji\Separated\2663.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2665.png">
+      <Link>Assets\Emoji\Separated\2665.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2666.png">
+      <Link>Assets\Emoji\Separated\2666.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2668.png">
+      <Link>Assets\Emoji\Separated\2668.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\267B.png">
+      <Link>Assets\Emoji\Separated\267B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\267F.png">
+      <Link>Assets\Emoji\Separated\267F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2693.png">
+      <Link>Assets\Emoji\Separated\2693.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26A0.png">
+      <Link>Assets\Emoji\Separated\26A0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26A1.png">
+      <Link>Assets\Emoji\Separated\26A1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26AA.png">
+      <Link>Assets\Emoji\Separated\26AA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26AB.png">
+      <Link>Assets\Emoji\Separated\26AB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26BD.png">
+      <Link>Assets\Emoji\Separated\26BD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26BE.png">
+      <Link>Assets\Emoji\Separated\26BE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26C4.png">
+      <Link>Assets\Emoji\Separated\26C4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26C5.png">
+      <Link>Assets\Emoji\Separated\26C5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26ce.png">
+      <Link>Assets\Emoji\Separated\26ce.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26D4.png">
+      <Link>Assets\Emoji\Separated\26D4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26EA.png">
+      <Link>Assets\Emoji\Separated\26EA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26F2.png">
+      <Link>Assets\Emoji\Separated\26F2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26F3.png">
+      <Link>Assets\Emoji\Separated\26F3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26F5.png">
+      <Link>Assets\Emoji\Separated\26F5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26FA.png">
+      <Link>Assets\Emoji\Separated\26FA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\26FD.png">
+      <Link>Assets\Emoji\Separated\26FD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2702.png">
+      <Link>Assets\Emoji\Separated\2702.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2705.png">
+      <Link>Assets\Emoji\Separated\2705.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2708.png">
+      <Link>Assets\Emoji\Separated\2708.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2709.png">
+      <Link>Assets\Emoji\Separated\2709.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\270a.png">
+      <Link>Assets\Emoji\Separated\270a.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\270b.png">
+      <Link>Assets\Emoji\Separated\270b.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\270C.png">
+      <Link>Assets\Emoji\Separated\270C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\270F.png">
+      <Link>Assets\Emoji\Separated\270F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2712.png">
+      <Link>Assets\Emoji\Separated\2712.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2714.png">
+      <Link>Assets\Emoji\Separated\2714.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2716.png">
+      <Link>Assets\Emoji\Separated\2716.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2728.png">
+      <Link>Assets\Emoji\Separated\2728.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2733.png">
+      <Link>Assets\Emoji\Separated\2733.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2734.png">
+      <Link>Assets\Emoji\Separated\2734.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2744.png">
+      <Link>Assets\Emoji\Separated\2744.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2747.png">
+      <Link>Assets\Emoji\Separated\2747.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\274c.png">
+      <Link>Assets\Emoji\Separated\274c.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\274e.png">
+      <Link>Assets\Emoji\Separated\274e.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2753.png">
+      <Link>Assets\Emoji\Separated\2753.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2754.png">
+      <Link>Assets\Emoji\Separated\2754.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2755.png">
+      <Link>Assets\Emoji\Separated\2755.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2757.png">
+      <Link>Assets\Emoji\Separated\2757.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2764.png">
+      <Link>Assets\Emoji\Separated\2764.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2795.png">
+      <Link>Assets\Emoji\Separated\2795.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2796.png">
+      <Link>Assets\Emoji\Separated\2796.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2797.png">
+      <Link>Assets\Emoji\Separated\2797.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\27A1.png">
+      <Link>Assets\Emoji\Separated\27A1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\27b0.png">
+      <Link>Assets\Emoji\Separated\27b0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\27bf.png">
+      <Link>Assets\Emoji\Separated\27bf.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2934.png">
+      <Link>Assets\Emoji\Separated\2934.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2935.png">
+      <Link>Assets\Emoji\Separated\2935.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B05.png">
+      <Link>Assets\Emoji\Separated\2B05.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B06.png">
+      <Link>Assets\Emoji\Separated\2B06.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B07.png">
+      <Link>Assets\Emoji\Separated\2B07.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B1B.png">
+      <Link>Assets\Emoji\Separated\2B1B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B1C.png">
+      <Link>Assets\Emoji\Separated\2B1C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B50.png">
+      <Link>Assets\Emoji\Separated\2B50.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\2B55.png">
+      <Link>Assets\Emoji\Separated\2B55.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\3030.png">
+      <Link>Assets\Emoji\Separated\3030.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\303D.png">
+      <Link>Assets\Emoji\Separated\303D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\3297.png">
+      <Link>Assets\Emoji\Separated\3297.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\3299.png">
+      <Link>Assets\Emoji\Separated\3299.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDC04.png">
+      <Link>Assets\Emoji\Separated\D83CDC04.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDCCF.png">
+      <Link>Assets\Emoji\Separated\D83CDCCF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD70.png">
+      <Link>Assets\Emoji\Separated\D83CDD70.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD71.png">
+      <Link>Assets\Emoji\Separated\D83CDD71.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD7E.png">
+      <Link>Assets\Emoji\Separated\D83CDD7E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD7F.png">
+      <Link>Assets\Emoji\Separated\D83CDD7F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD8E.png">
+      <Link>Assets\Emoji\Separated\D83CDD8E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD91.png">
+      <Link>Assets\Emoji\Separated\D83CDD91.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD92.png">
+      <Link>Assets\Emoji\Separated\D83CDD92.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD93.png">
+      <Link>Assets\Emoji\Separated\D83CDD93.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD94.png">
+      <Link>Assets\Emoji\Separated\D83CDD94.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD95.png">
+      <Link>Assets\Emoji\Separated\D83CDD95.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD96.png">
+      <Link>Assets\Emoji\Separated\D83CDD96.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD97.png">
+      <Link>Assets\Emoji\Separated\D83CDD97.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD98.png">
+      <Link>Assets\Emoji\Separated\D83CDD98.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD99.png">
+      <Link>Assets\Emoji\Separated\D83CDD99.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDD9A.png">
+      <Link>Assets\Emoji\Separated\D83CDD9A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDE8D83CDDF3.png">
+      <Link>Assets\Emoji\Separated\D83CDDE8D83CDDF3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDE9D83CDDEA.png">
+      <Link>Assets\Emoji\Separated\D83CDDE9D83CDDEA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDEAD83CDDF8.png">
+      <Link>Assets\Emoji\Separated\D83CDDEAD83CDDF8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDEBD83CDDF7.png">
+      <Link>Assets\Emoji\Separated\D83CDDEBD83CDDF7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDECD83CDDE7.png">
+      <Link>Assets\Emoji\Separated\D83CDDECD83CDDE7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDEED83CDDF9.png">
+      <Link>Assets\Emoji\Separated\D83CDDEED83CDDF9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDEFD83CDDF5.png">
+      <Link>Assets\Emoji\Separated\D83CDDEFD83CDDF5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDF0D83CDDF7.png">
+      <Link>Assets\Emoji\Separated\D83CDDF0D83CDDF7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDF7D83CDDFA.png">
+      <Link>Assets\Emoji\Separated\D83CDDF7D83CDDFA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDDFAD83CDDF8.png">
+      <Link>Assets\Emoji\Separated\D83CDDFAD83CDDF8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE01.png">
+      <Link>Assets\Emoji\Separated\D83CDE01.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE02.png">
+      <Link>Assets\Emoji\Separated\D83CDE02.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE1A.png">
+      <Link>Assets\Emoji\Separated\D83CDE1A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE2F.png">
+      <Link>Assets\Emoji\Separated\D83CDE2F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE32.png">
+      <Link>Assets\Emoji\Separated\D83CDE32.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE33.png">
+      <Link>Assets\Emoji\Separated\D83CDE33.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE34.png">
+      <Link>Assets\Emoji\Separated\D83CDE34.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE35.png">
+      <Link>Assets\Emoji\Separated\D83CDE35.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE36.png">
+      <Link>Assets\Emoji\Separated\D83CDE36.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE37.png">
+      <Link>Assets\Emoji\Separated\D83CDE37.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE38.png">
+      <Link>Assets\Emoji\Separated\D83CDE38.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE39.png">
+      <Link>Assets\Emoji\Separated\D83CDE39.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE3A.png">
+      <Link>Assets\Emoji\Separated\D83CDE3A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE50.png">
+      <Link>Assets\Emoji\Separated\D83CDE50.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDE51.png">
+      <Link>Assets\Emoji\Separated\D83CDE51.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF00.png">
+      <Link>Assets\Emoji\Separated\D83CDF00.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF01.png">
+      <Link>Assets\Emoji\Separated\D83CDF01.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF02.png">
+      <Link>Assets\Emoji\Separated\D83CDF02.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF03.png">
+      <Link>Assets\Emoji\Separated\D83CDF03.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF04.png">
+      <Link>Assets\Emoji\Separated\D83CDF04.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF05.png">
+      <Link>Assets\Emoji\Separated\D83CDF05.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF06.png">
+      <Link>Assets\Emoji\Separated\D83CDF06.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF07.png">
+      <Link>Assets\Emoji\Separated\D83CDF07.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF08.png">
+      <Link>Assets\Emoji\Separated\D83CDF08.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF09.png">
+      <Link>Assets\Emoji\Separated\D83CDF09.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF0A.png">
+      <Link>Assets\Emoji\Separated\D83CDF0A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF0B.png">
+      <Link>Assets\Emoji\Separated\D83CDF0B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF0C.png">
+      <Link>Assets\Emoji\Separated\D83CDF0C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF0D.png">
+      <Link>Assets\Emoji\Separated\D83CDF0D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF0E.png">
+      <Link>Assets\Emoji\Separated\D83CDF0E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF0F.png">
+      <Link>Assets\Emoji\Separated\D83CDF0F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF10.png">
+      <Link>Assets\Emoji\Separated\D83CDF10.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF11.png">
+      <Link>Assets\Emoji\Separated\D83CDF11.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF12.png">
+      <Link>Assets\Emoji\Separated\D83CDF12.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF13.png">
+      <Link>Assets\Emoji\Separated\D83CDF13.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF14.png">
+      <Link>Assets\Emoji\Separated\D83CDF14.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF15.png">
+      <Link>Assets\Emoji\Separated\D83CDF15.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF16.png">
+      <Link>Assets\Emoji\Separated\D83CDF16.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF17.png">
+      <Link>Assets\Emoji\Separated\D83CDF17.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF18.png">
+      <Link>Assets\Emoji\Separated\D83CDF18.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF19.png">
+      <Link>Assets\Emoji\Separated\D83CDF19.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF1A.png">
+      <Link>Assets\Emoji\Separated\D83CDF1A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF1B.png">
+      <Link>Assets\Emoji\Separated\D83CDF1B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF1C.png">
+      <Link>Assets\Emoji\Separated\D83CDF1C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF1D.png">
+      <Link>Assets\Emoji\Separated\D83CDF1D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF1E.png">
+      <Link>Assets\Emoji\Separated\D83CDF1E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF1F.png">
+      <Link>Assets\Emoji\Separated\D83CDF1F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF20.png">
+      <Link>Assets\Emoji\Separated\D83CDF20.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF30.png">
+      <Link>Assets\Emoji\Separated\D83CDF30.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF31.png">
+      <Link>Assets\Emoji\Separated\D83CDF31.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF32.png">
+      <Link>Assets\Emoji\Separated\D83CDF32.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF33.png">
+      <Link>Assets\Emoji\Separated\D83CDF33.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF34.png">
+      <Link>Assets\Emoji\Separated\D83CDF34.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF35.png">
+      <Link>Assets\Emoji\Separated\D83CDF35.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF37.png">
+      <Link>Assets\Emoji\Separated\D83CDF37.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF38.png">
+      <Link>Assets\Emoji\Separated\D83CDF38.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF39.png">
+      <Link>Assets\Emoji\Separated\D83CDF39.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF3A.png">
+      <Link>Assets\Emoji\Separated\D83CDF3A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF3B.png">
+      <Link>Assets\Emoji\Separated\D83CDF3B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF3C.png">
+      <Link>Assets\Emoji\Separated\D83CDF3C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF3D.png">
+      <Link>Assets\Emoji\Separated\D83CDF3D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF3E.png">
+      <Link>Assets\Emoji\Separated\D83CDF3E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF3F.png">
+      <Link>Assets\Emoji\Separated\D83CDF3F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF40.png">
+      <Link>Assets\Emoji\Separated\D83CDF40.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF41.png">
+      <Link>Assets\Emoji\Separated\D83CDF41.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF42.png">
+      <Link>Assets\Emoji\Separated\D83CDF42.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF43.png">
+      <Link>Assets\Emoji\Separated\D83CDF43.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF44.png">
+      <Link>Assets\Emoji\Separated\D83CDF44.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF45.png">
+      <Link>Assets\Emoji\Separated\D83CDF45.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF46.png">
+      <Link>Assets\Emoji\Separated\D83CDF46.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF47.png">
+      <Link>Assets\Emoji\Separated\D83CDF47.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF48.png">
+      <Link>Assets\Emoji\Separated\D83CDF48.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF49.png">
+      <Link>Assets\Emoji\Separated\D83CDF49.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF4A.png">
+      <Link>Assets\Emoji\Separated\D83CDF4A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF4B.png">
+      <Link>Assets\Emoji\Separated\D83CDF4B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF4C.png">
+      <Link>Assets\Emoji\Separated\D83CDF4C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF4D.png">
+      <Link>Assets\Emoji\Separated\D83CDF4D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF4E.png">
+      <Link>Assets\Emoji\Separated\D83CDF4E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF4F.png">
+      <Link>Assets\Emoji\Separated\D83CDF4F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF50.png">
+      <Link>Assets\Emoji\Separated\D83CDF50.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF51.png">
+      <Link>Assets\Emoji\Separated\D83CDF51.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF52.png">
+      <Link>Assets\Emoji\Separated\D83CDF52.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF53.png">
+      <Link>Assets\Emoji\Separated\D83CDF53.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF54.png">
+      <Link>Assets\Emoji\Separated\D83CDF54.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF55.png">
+      <Link>Assets\Emoji\Separated\D83CDF55.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF56.png">
+      <Link>Assets\Emoji\Separated\D83CDF56.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF57.png">
+      <Link>Assets\Emoji\Separated\D83CDF57.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF58.png">
+      <Link>Assets\Emoji\Separated\D83CDF58.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF59.png">
+      <Link>Assets\Emoji\Separated\D83CDF59.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF5A.png">
+      <Link>Assets\Emoji\Separated\D83CDF5A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF5B.png">
+      <Link>Assets\Emoji\Separated\D83CDF5B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF5C.png">
+      <Link>Assets\Emoji\Separated\D83CDF5C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF5D.png">
+      <Link>Assets\Emoji\Separated\D83CDF5D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF5E.png">
+      <Link>Assets\Emoji\Separated\D83CDF5E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF5F.png">
+      <Link>Assets\Emoji\Separated\D83CDF5F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF60.png">
+      <Link>Assets\Emoji\Separated\D83CDF60.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF61.png">
+      <Link>Assets\Emoji\Separated\D83CDF61.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF62.png">
+      <Link>Assets\Emoji\Separated\D83CDF62.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF63.png">
+      <Link>Assets\Emoji\Separated\D83CDF63.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF64.png">
+      <Link>Assets\Emoji\Separated\D83CDF64.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF65.png">
+      <Link>Assets\Emoji\Separated\D83CDF65.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF66.png">
+      <Link>Assets\Emoji\Separated\D83CDF66.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF67.png">
+      <Link>Assets\Emoji\Separated\D83CDF67.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF68.png">
+      <Link>Assets\Emoji\Separated\D83CDF68.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF69.png">
+      <Link>Assets\Emoji\Separated\D83CDF69.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF6A.png">
+      <Link>Assets\Emoji\Separated\D83CDF6A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF6B.png">
+      <Link>Assets\Emoji\Separated\D83CDF6B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF6C.png">
+      <Link>Assets\Emoji\Separated\D83CDF6C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF6D.png">
+      <Link>Assets\Emoji\Separated\D83CDF6D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF6E.png">
+      <Link>Assets\Emoji\Separated\D83CDF6E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF6F.png">
+      <Link>Assets\Emoji\Separated\D83CDF6F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF70.png">
+      <Link>Assets\Emoji\Separated\D83CDF70.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF71.png">
+      <Link>Assets\Emoji\Separated\D83CDF71.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF72.png">
+      <Link>Assets\Emoji\Separated\D83CDF72.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF73.png">
+      <Link>Assets\Emoji\Separated\D83CDF73.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF74.png">
+      <Link>Assets\Emoji\Separated\D83CDF74.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF75.png">
+      <Link>Assets\Emoji\Separated\D83CDF75.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF76.png">
+      <Link>Assets\Emoji\Separated\D83CDF76.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF77.png">
+      <Link>Assets\Emoji\Separated\D83CDF77.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF78.png">
+      <Link>Assets\Emoji\Separated\D83CDF78.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF79.png">
+      <Link>Assets\Emoji\Separated\D83CDF79.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF7A.png">
+      <Link>Assets\Emoji\Separated\D83CDF7A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF7B.png">
+      <Link>Assets\Emoji\Separated\D83CDF7B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF7C.png">
+      <Link>Assets\Emoji\Separated\D83CDF7C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF80.png">
+      <Link>Assets\Emoji\Separated\D83CDF80.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF81.png">
+      <Link>Assets\Emoji\Separated\D83CDF81.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF82.png">
+      <Link>Assets\Emoji\Separated\D83CDF82.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF83.png">
+      <Link>Assets\Emoji\Separated\D83CDF83.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF84.png">
+      <Link>Assets\Emoji\Separated\D83CDF84.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF85.png">
+      <Link>Assets\Emoji\Separated\D83CDF85.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF86.png">
+      <Link>Assets\Emoji\Separated\D83CDF86.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF87.png">
+      <Link>Assets\Emoji\Separated\D83CDF87.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF88.png">
+      <Link>Assets\Emoji\Separated\D83CDF88.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF89.png">
+      <Link>Assets\Emoji\Separated\D83CDF89.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF8A.png">
+      <Link>Assets\Emoji\Separated\D83CDF8A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF8B.png">
+      <Link>Assets\Emoji\Separated\D83CDF8B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF8C.png">
+      <Link>Assets\Emoji\Separated\D83CDF8C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF8D.png">
+      <Link>Assets\Emoji\Separated\D83CDF8D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF8E.png">
+      <Link>Assets\Emoji\Separated\D83CDF8E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF8F.png">
+      <Link>Assets\Emoji\Separated\D83CDF8F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF90.png">
+      <Link>Assets\Emoji\Separated\D83CDF90.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF91.png">
+      <Link>Assets\Emoji\Separated\D83CDF91.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF92.png">
+      <Link>Assets\Emoji\Separated\D83CDF92.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDF93.png">
+      <Link>Assets\Emoji\Separated\D83CDF93.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA0.png">
+      <Link>Assets\Emoji\Separated\D83CDFA0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA1.png">
+      <Link>Assets\Emoji\Separated\D83CDFA1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA2.png">
+      <Link>Assets\Emoji\Separated\D83CDFA2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA3.png">
+      <Link>Assets\Emoji\Separated\D83CDFA3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA4.png">
+      <Link>Assets\Emoji\Separated\D83CDFA4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA5.png">
+      <Link>Assets\Emoji\Separated\D83CDFA5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA6.png">
+      <Link>Assets\Emoji\Separated\D83CDFA6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA7.png">
+      <Link>Assets\Emoji\Separated\D83CDFA7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA8.png">
+      <Link>Assets\Emoji\Separated\D83CDFA8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFA9.png">
+      <Link>Assets\Emoji\Separated\D83CDFA9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFAA.png">
+      <Link>Assets\Emoji\Separated\D83CDFAA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFAB.png">
+      <Link>Assets\Emoji\Separated\D83CDFAB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFAC.png">
+      <Link>Assets\Emoji\Separated\D83CDFAC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFAD.png">
+      <Link>Assets\Emoji\Separated\D83CDFAD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFAE.png">
+      <Link>Assets\Emoji\Separated\D83CDFAE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFAF.png">
+      <Link>Assets\Emoji\Separated\D83CDFAF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB0.png">
+      <Link>Assets\Emoji\Separated\D83CDFB0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB1.png">
+      <Link>Assets\Emoji\Separated\D83CDFB1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB2.png">
+      <Link>Assets\Emoji\Separated\D83CDFB2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB3.png">
+      <Link>Assets\Emoji\Separated\D83CDFB3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB4.png">
+      <Link>Assets\Emoji\Separated\D83CDFB4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB5.png">
+      <Link>Assets\Emoji\Separated\D83CDFB5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB6.png">
+      <Link>Assets\Emoji\Separated\D83CDFB6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB7.png">
+      <Link>Assets\Emoji\Separated\D83CDFB7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB8.png">
+      <Link>Assets\Emoji\Separated\D83CDFB8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFB9.png">
+      <Link>Assets\Emoji\Separated\D83CDFB9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFBA.png">
+      <Link>Assets\Emoji\Separated\D83CDFBA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFBB.png">
+      <Link>Assets\Emoji\Separated\D83CDFBB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFBC.png">
+      <Link>Assets\Emoji\Separated\D83CDFBC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFBD.png">
+      <Link>Assets\Emoji\Separated\D83CDFBD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFBE.png">
+      <Link>Assets\Emoji\Separated\D83CDFBE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFBF.png">
+      <Link>Assets\Emoji\Separated\D83CDFBF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC0.png">
+      <Link>Assets\Emoji\Separated\D83CDFC0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC1.png">
+      <Link>Assets\Emoji\Separated\D83CDFC1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC2.png">
+      <Link>Assets\Emoji\Separated\D83CDFC2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC3.png">
+      <Link>Assets\Emoji\Separated\D83CDFC3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC4.png">
+      <Link>Assets\Emoji\Separated\D83CDFC4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC6.png">
+      <Link>Assets\Emoji\Separated\D83CDFC6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC7.png">
+      <Link>Assets\Emoji\Separated\D83CDFC7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC8.png">
+      <Link>Assets\Emoji\Separated\D83CDFC8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFC9.png">
+      <Link>Assets\Emoji\Separated\D83CDFC9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFCA.png">
+      <Link>Assets\Emoji\Separated\D83CDFCA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE0.png">
+      <Link>Assets\Emoji\Separated\D83CDFE0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE1.png">
+      <Link>Assets\Emoji\Separated\D83CDFE1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE2.png">
+      <Link>Assets\Emoji\Separated\D83CDFE2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE3.png">
+      <Link>Assets\Emoji\Separated\D83CDFE3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE4.png">
+      <Link>Assets\Emoji\Separated\D83CDFE4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE5.png">
+      <Link>Assets\Emoji\Separated\D83CDFE5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE6.png">
+      <Link>Assets\Emoji\Separated\D83CDFE6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE7.png">
+      <Link>Assets\Emoji\Separated\D83CDFE7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE8.png">
+      <Link>Assets\Emoji\Separated\D83CDFE8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFE9.png">
+      <Link>Assets\Emoji\Separated\D83CDFE9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFEA.png">
+      <Link>Assets\Emoji\Separated\D83CDFEA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFEB.png">
+      <Link>Assets\Emoji\Separated\D83CDFEB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFEC.png">
+      <Link>Assets\Emoji\Separated\D83CDFEC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFED.png">
+      <Link>Assets\Emoji\Separated\D83CDFED.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFEE.png">
+      <Link>Assets\Emoji\Separated\D83CDFEE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFEF.png">
+      <Link>Assets\Emoji\Separated\D83CDFEF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83CDFF0.png">
+      <Link>Assets\Emoji\Separated\D83CDFF0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC00.png">
+      <Link>Assets\Emoji\Separated\D83DDC00.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC01.png">
+      <Link>Assets\Emoji\Separated\D83DDC01.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC02.png">
+      <Link>Assets\Emoji\Separated\D83DDC02.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC03.png">
+      <Link>Assets\Emoji\Separated\D83DDC03.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC04.png">
+      <Link>Assets\Emoji\Separated\D83DDC04.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC05.png">
+      <Link>Assets\Emoji\Separated\D83DDC05.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC06.png">
+      <Link>Assets\Emoji\Separated\D83DDC06.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC07.png">
+      <Link>Assets\Emoji\Separated\D83DDC07.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC08.png">
+      <Link>Assets\Emoji\Separated\D83DDC08.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC09.png">
+      <Link>Assets\Emoji\Separated\D83DDC09.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC0A.png">
+      <Link>Assets\Emoji\Separated\D83DDC0A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC0B.png">
+      <Link>Assets\Emoji\Separated\D83DDC0B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC0C.png">
+      <Link>Assets\Emoji\Separated\D83DDC0C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC0D.png">
+      <Link>Assets\Emoji\Separated\D83DDC0D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC0E.png">
+      <Link>Assets\Emoji\Separated\D83DDC0E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC0F.png">
+      <Link>Assets\Emoji\Separated\D83DDC0F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC10.png">
+      <Link>Assets\Emoji\Separated\D83DDC10.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC11.png">
+      <Link>Assets\Emoji\Separated\D83DDC11.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC12.png">
+      <Link>Assets\Emoji\Separated\D83DDC12.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC13.png">
+      <Link>Assets\Emoji\Separated\D83DDC13.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC14.png">
+      <Link>Assets\Emoji\Separated\D83DDC14.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC15.png">
+      <Link>Assets\Emoji\Separated\D83DDC15.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC16.png">
+      <Link>Assets\Emoji\Separated\D83DDC16.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC17.png">
+      <Link>Assets\Emoji\Separated\D83DDC17.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC18.png">
+      <Link>Assets\Emoji\Separated\D83DDC18.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC19.png">
+      <Link>Assets\Emoji\Separated\D83DDC19.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC1A.png">
+      <Link>Assets\Emoji\Separated\D83DDC1A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC1B.png">
+      <Link>Assets\Emoji\Separated\D83DDC1B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC1C.png">
+      <Link>Assets\Emoji\Separated\D83DDC1C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC1D.png">
+      <Link>Assets\Emoji\Separated\D83DDC1D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC1E.png">
+      <Link>Assets\Emoji\Separated\D83DDC1E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC1F.png">
+      <Link>Assets\Emoji\Separated\D83DDC1F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC20.png">
+      <Link>Assets\Emoji\Separated\D83DDC20.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC21.png">
+      <Link>Assets\Emoji\Separated\D83DDC21.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC22.png">
+      <Link>Assets\Emoji\Separated\D83DDC22.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC23.png">
+      <Link>Assets\Emoji\Separated\D83DDC23.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC24.png">
+      <Link>Assets\Emoji\Separated\D83DDC24.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC25.png">
+      <Link>Assets\Emoji\Separated\D83DDC25.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC26.png">
+      <Link>Assets\Emoji\Separated\D83DDC26.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC27.png">
+      <Link>Assets\Emoji\Separated\D83DDC27.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC28.png">
+      <Link>Assets\Emoji\Separated\D83DDC28.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC29.png">
+      <Link>Assets\Emoji\Separated\D83DDC29.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC2A.png">
+      <Link>Assets\Emoji\Separated\D83DDC2A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC2B.png">
+      <Link>Assets\Emoji\Separated\D83DDC2B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC2C.png">
+      <Link>Assets\Emoji\Separated\D83DDC2C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC2D.png">
+      <Link>Assets\Emoji\Separated\D83DDC2D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC2E.png">
+      <Link>Assets\Emoji\Separated\D83DDC2E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC2F.png">
+      <Link>Assets\Emoji\Separated\D83DDC2F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC30.png">
+      <Link>Assets\Emoji\Separated\D83DDC30.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC31.png">
+      <Link>Assets\Emoji\Separated\D83DDC31.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC32.png">
+      <Link>Assets\Emoji\Separated\D83DDC32.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC33.png">
+      <Link>Assets\Emoji\Separated\D83DDC33.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC34.png">
+      <Link>Assets\Emoji\Separated\D83DDC34.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC35.png">
+      <Link>Assets\Emoji\Separated\D83DDC35.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC36.png">
+      <Link>Assets\Emoji\Separated\D83DDC36.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC37.png">
+      <Link>Assets\Emoji\Separated\D83DDC37.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC38.png">
+      <Link>Assets\Emoji\Separated\D83DDC38.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC39.png">
+      <Link>Assets\Emoji\Separated\D83DDC39.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC3A.png">
+      <Link>Assets\Emoji\Separated\D83DDC3A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC3B.png">
+      <Link>Assets\Emoji\Separated\D83DDC3B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC3C.png">
+      <Link>Assets\Emoji\Separated\D83DDC3C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC3D.png">
+      <Link>Assets\Emoji\Separated\D83DDC3D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC3E.png">
+      <Link>Assets\Emoji\Separated\D83DDC3E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC40.png">
+      <Link>Assets\Emoji\Separated\D83DDC40.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC42.png">
+      <Link>Assets\Emoji\Separated\D83DDC42.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC43.png">
+      <Link>Assets\Emoji\Separated\D83DDC43.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC44.png">
+      <Link>Assets\Emoji\Separated\D83DDC44.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC45.png">
+      <Link>Assets\Emoji\Separated\D83DDC45.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC46.png">
+      <Link>Assets\Emoji\Separated\D83DDC46.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC47.png">
+      <Link>Assets\Emoji\Separated\D83DDC47.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC48.png">
+      <Link>Assets\Emoji\Separated\D83DDC48.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC49.png">
+      <Link>Assets\Emoji\Separated\D83DDC49.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC4A.png">
+      <Link>Assets\Emoji\Separated\D83DDC4A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC4B.png">
+      <Link>Assets\Emoji\Separated\D83DDC4B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC4C.png">
+      <Link>Assets\Emoji\Separated\D83DDC4C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC4D.png">
+      <Link>Assets\Emoji\Separated\D83DDC4D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC4E.png">
+      <Link>Assets\Emoji\Separated\D83DDC4E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC4F.png">
+      <Link>Assets\Emoji\Separated\D83DDC4F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC50.png">
+      <Link>Assets\Emoji\Separated\D83DDC50.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC51.png">
+      <Link>Assets\Emoji\Separated\D83DDC51.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC52.png">
+      <Link>Assets\Emoji\Separated\D83DDC52.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC53.png">
+      <Link>Assets\Emoji\Separated\D83DDC53.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC54.png">
+      <Link>Assets\Emoji\Separated\D83DDC54.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC55.png">
+      <Link>Assets\Emoji\Separated\D83DDC55.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC56.png">
+      <Link>Assets\Emoji\Separated\D83DDC56.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC57.png">
+      <Link>Assets\Emoji\Separated\D83DDC57.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC58.png">
+      <Link>Assets\Emoji\Separated\D83DDC58.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC59.png">
+      <Link>Assets\Emoji\Separated\D83DDC59.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC5A.png">
+      <Link>Assets\Emoji\Separated\D83DDC5A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC5B.png">
+      <Link>Assets\Emoji\Separated\D83DDC5B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC5C.png">
+      <Link>Assets\Emoji\Separated\D83DDC5C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC5D.png">
+      <Link>Assets\Emoji\Separated\D83DDC5D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC5E.png">
+      <Link>Assets\Emoji\Separated\D83DDC5E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC5F.png">
+      <Link>Assets\Emoji\Separated\D83DDC5F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC60.png">
+      <Link>Assets\Emoji\Separated\D83DDC60.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC61.png">
+      <Link>Assets\Emoji\Separated\D83DDC61.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC62.png">
+      <Link>Assets\Emoji\Separated\D83DDC62.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC63.png">
+      <Link>Assets\Emoji\Separated\D83DDC63.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC64.png">
+      <Link>Assets\Emoji\Separated\D83DDC64.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC65.png">
+      <Link>Assets\Emoji\Separated\D83DDC65.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC66.png">
+      <Link>Assets\Emoji\Separated\D83DDC66.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC67.png">
+      <Link>Assets\Emoji\Separated\D83DDC67.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC68.png">
+      <Link>Assets\Emoji\Separated\D83DDC68.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC69.png">
+      <Link>Assets\Emoji\Separated\D83DDC69.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC6A.png">
+      <Link>Assets\Emoji\Separated\D83DDC6A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC6B.png">
+      <Link>Assets\Emoji\Separated\D83DDC6B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC6C.png">
+      <Link>Assets\Emoji\Separated\D83DDC6C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC6D.png">
+      <Link>Assets\Emoji\Separated\D83DDC6D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC6E.png">
+      <Link>Assets\Emoji\Separated\D83DDC6E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC6F.png">
+      <Link>Assets\Emoji\Separated\D83DDC6F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC70.png">
+      <Link>Assets\Emoji\Separated\D83DDC70.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC71.png">
+      <Link>Assets\Emoji\Separated\D83DDC71.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC72.png">
+      <Link>Assets\Emoji\Separated\D83DDC72.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC73.png">
+      <Link>Assets\Emoji\Separated\D83DDC73.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC74.png">
+      <Link>Assets\Emoji\Separated\D83DDC74.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC75.png">
+      <Link>Assets\Emoji\Separated\D83DDC75.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC76.png">
+      <Link>Assets\Emoji\Separated\D83DDC76.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC77.png">
+      <Link>Assets\Emoji\Separated\D83DDC77.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC78.png">
+      <Link>Assets\Emoji\Separated\D83DDC78.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC79.png">
+      <Link>Assets\Emoji\Separated\D83DDC79.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC7A.png">
+      <Link>Assets\Emoji\Separated\D83DDC7A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC7B.png">
+      <Link>Assets\Emoji\Separated\D83DDC7B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC7C.png">
+      <Link>Assets\Emoji\Separated\D83DDC7C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC7D.png">
+      <Link>Assets\Emoji\Separated\D83DDC7D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC7E.png">
+      <Link>Assets\Emoji\Separated\D83DDC7E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC7F.png">
+      <Link>Assets\Emoji\Separated\D83DDC7F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC80.png">
+      <Link>Assets\Emoji\Separated\D83DDC80.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC81.png">
+      <Link>Assets\Emoji\Separated\D83DDC81.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC82.png">
+      <Link>Assets\Emoji\Separated\D83DDC82.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC83.png">
+      <Link>Assets\Emoji\Separated\D83DDC83.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC84.png">
+      <Link>Assets\Emoji\Separated\D83DDC84.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC85.png">
+      <Link>Assets\Emoji\Separated\D83DDC85.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC86.png">
+      <Link>Assets\Emoji\Separated\D83DDC86.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC87.png">
+      <Link>Assets\Emoji\Separated\D83DDC87.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC88.png">
+      <Link>Assets\Emoji\Separated\D83DDC88.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC89.png">
+      <Link>Assets\Emoji\Separated\D83DDC89.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC8A.png">
+      <Link>Assets\Emoji\Separated\D83DDC8A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC8B.png">
+      <Link>Assets\Emoji\Separated\D83DDC8B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC8C.png">
+      <Link>Assets\Emoji\Separated\D83DDC8C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC8D.png">
+      <Link>Assets\Emoji\Separated\D83DDC8D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC8E.png">
+      <Link>Assets\Emoji\Separated\D83DDC8E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC8F.png">
+      <Link>Assets\Emoji\Separated\D83DDC8F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC90.png">
+      <Link>Assets\Emoji\Separated\D83DDC90.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC91.png">
+      <Link>Assets\Emoji\Separated\D83DDC91.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC92.png">
+      <Link>Assets\Emoji\Separated\D83DDC92.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC93.png">
+      <Link>Assets\Emoji\Separated\D83DDC93.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC94.png">
+      <Link>Assets\Emoji\Separated\D83DDC94.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC95.png">
+      <Link>Assets\Emoji\Separated\D83DDC95.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC96.png">
+      <Link>Assets\Emoji\Separated\D83DDC96.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC97.png">
+      <Link>Assets\Emoji\Separated\D83DDC97.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC98.png">
+      <Link>Assets\Emoji\Separated\D83DDC98.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC99.png">
+      <Link>Assets\Emoji\Separated\D83DDC99.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC9A.png">
+      <Link>Assets\Emoji\Separated\D83DDC9A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC9B.png">
+      <Link>Assets\Emoji\Separated\D83DDC9B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC9C.png">
+      <Link>Assets\Emoji\Separated\D83DDC9C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC9D.png">
+      <Link>Assets\Emoji\Separated\D83DDC9D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC9E.png">
+      <Link>Assets\Emoji\Separated\D83DDC9E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDC9F.png">
+      <Link>Assets\Emoji\Separated\D83DDC9F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA0.png">
+      <Link>Assets\Emoji\Separated\D83DDCA0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA1.png">
+      <Link>Assets\Emoji\Separated\D83DDCA1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA2.png">
+      <Link>Assets\Emoji\Separated\D83DDCA2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA3.png">
+      <Link>Assets\Emoji\Separated\D83DDCA3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA4.png">
+      <Link>Assets\Emoji\Separated\D83DDCA4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA5.png">
+      <Link>Assets\Emoji\Separated\D83DDCA5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA6.png">
+      <Link>Assets\Emoji\Separated\D83DDCA6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA7.png">
+      <Link>Assets\Emoji\Separated\D83DDCA7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA8.png">
+      <Link>Assets\Emoji\Separated\D83DDCA8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCA9.png">
+      <Link>Assets\Emoji\Separated\D83DDCA9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCAA.png">
+      <Link>Assets\Emoji\Separated\D83DDCAA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCAB.png">
+      <Link>Assets\Emoji\Separated\D83DDCAB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCAC.png">
+      <Link>Assets\Emoji\Separated\D83DDCAC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCAD.png">
+      <Link>Assets\Emoji\Separated\D83DDCAD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCAE.png">
+      <Link>Assets\Emoji\Separated\D83DDCAE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCAF.png">
+      <Link>Assets\Emoji\Separated\D83DDCAF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB0.png">
+      <Link>Assets\Emoji\Separated\D83DDCB0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB1.png">
+      <Link>Assets\Emoji\Separated\D83DDCB1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB2.png">
+      <Link>Assets\Emoji\Separated\D83DDCB2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB3.png">
+      <Link>Assets\Emoji\Separated\D83DDCB3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB4.png">
+      <Link>Assets\Emoji\Separated\D83DDCB4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB5.png">
+      <Link>Assets\Emoji\Separated\D83DDCB5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB6.png">
+      <Link>Assets\Emoji\Separated\D83DDCB6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB7.png">
+      <Link>Assets\Emoji\Separated\D83DDCB7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB8.png">
+      <Link>Assets\Emoji\Separated\D83DDCB8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCB9.png">
+      <Link>Assets\Emoji\Separated\D83DDCB9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCBA.png">
+      <Link>Assets\Emoji\Separated\D83DDCBA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCBB.png">
+      <Link>Assets\Emoji\Separated\D83DDCBB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCBC.png">
+      <Link>Assets\Emoji\Separated\D83DDCBC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCBD.png">
+      <Link>Assets\Emoji\Separated\D83DDCBD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCBE.png">
+      <Link>Assets\Emoji\Separated\D83DDCBE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCBF.png">
+      <Link>Assets\Emoji\Separated\D83DDCBF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC0.png">
+      <Link>Assets\Emoji\Separated\D83DDCC0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC1.png">
+      <Link>Assets\Emoji\Separated\D83DDCC1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC2.png">
+      <Link>Assets\Emoji\Separated\D83DDCC2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC3.png">
+      <Link>Assets\Emoji\Separated\D83DDCC3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC4.png">
+      <Link>Assets\Emoji\Separated\D83DDCC4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC5.png">
+      <Link>Assets\Emoji\Separated\D83DDCC5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC6.png">
+      <Link>Assets\Emoji\Separated\D83DDCC6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC7.png">
+      <Link>Assets\Emoji\Separated\D83DDCC7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC8.png">
+      <Link>Assets\Emoji\Separated\D83DDCC8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCC9.png">
+      <Link>Assets\Emoji\Separated\D83DDCC9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCCA.png">
+      <Link>Assets\Emoji\Separated\D83DDCCA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCCB.png">
+      <Link>Assets\Emoji\Separated\D83DDCCB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCCC.png">
+      <Link>Assets\Emoji\Separated\D83DDCCC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCCD.png">
+      <Link>Assets\Emoji\Separated\D83DDCCD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCCE.png">
+      <Link>Assets\Emoji\Separated\D83DDCCE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCCF.png">
+      <Link>Assets\Emoji\Separated\D83DDCCF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD0.png">
+      <Link>Assets\Emoji\Separated\D83DDCD0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD1.png">
+      <Link>Assets\Emoji\Separated\D83DDCD1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD2.png">
+      <Link>Assets\Emoji\Separated\D83DDCD2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD3.png">
+      <Link>Assets\Emoji\Separated\D83DDCD3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD4.png">
+      <Link>Assets\Emoji\Separated\D83DDCD4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD5.png">
+      <Link>Assets\Emoji\Separated\D83DDCD5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD6.png">
+      <Link>Assets\Emoji\Separated\D83DDCD6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD7.png">
+      <Link>Assets\Emoji\Separated\D83DDCD7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD8.png">
+      <Link>Assets\Emoji\Separated\D83DDCD8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCD9.png">
+      <Link>Assets\Emoji\Separated\D83DDCD9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCDA.png">
+      <Link>Assets\Emoji\Separated\D83DDCDA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCDB.png">
+      <Link>Assets\Emoji\Separated\D83DDCDB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCDC.png">
+      <Link>Assets\Emoji\Separated\D83DDCDC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCDD.png">
+      <Link>Assets\Emoji\Separated\D83DDCDD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCDE.png">
+      <Link>Assets\Emoji\Separated\D83DDCDE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCDF.png">
+      <Link>Assets\Emoji\Separated\D83DDCDF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE0.png">
+      <Link>Assets\Emoji\Separated\D83DDCE0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE1.png">
+      <Link>Assets\Emoji\Separated\D83DDCE1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE2.png">
+      <Link>Assets\Emoji\Separated\D83DDCE2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE3.png">
+      <Link>Assets\Emoji\Separated\D83DDCE3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE4.png">
+      <Link>Assets\Emoji\Separated\D83DDCE4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE5.png">
+      <Link>Assets\Emoji\Separated\D83DDCE5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE6.png">
+      <Link>Assets\Emoji\Separated\D83DDCE6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE7.png">
+      <Link>Assets\Emoji\Separated\D83DDCE7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE8.png">
+      <Link>Assets\Emoji\Separated\D83DDCE8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCE9.png">
+      <Link>Assets\Emoji\Separated\D83DDCE9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCEA.png">
+      <Link>Assets\Emoji\Separated\D83DDCEA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCEB.png">
+      <Link>Assets\Emoji\Separated\D83DDCEB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCEC.png">
+      <Link>Assets\Emoji\Separated\D83DDCEC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCED.png">
+      <Link>Assets\Emoji\Separated\D83DDCED.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCEE.png">
+      <Link>Assets\Emoji\Separated\D83DDCEE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCEF.png">
+      <Link>Assets\Emoji\Separated\D83DDCEF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF0.png">
+      <Link>Assets\Emoji\Separated\D83DDCF0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF1.png">
+      <Link>Assets\Emoji\Separated\D83DDCF1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF2.png">
+      <Link>Assets\Emoji\Separated\D83DDCF2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF3.png">
+      <Link>Assets\Emoji\Separated\D83DDCF3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF4.png">
+      <Link>Assets\Emoji\Separated\D83DDCF4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF5.png">
+      <Link>Assets\Emoji\Separated\D83DDCF5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF6.png">
+      <Link>Assets\Emoji\Separated\D83DDCF6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF7.png">
+      <Link>Assets\Emoji\Separated\D83DDCF7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCF9.png">
+      <Link>Assets\Emoji\Separated\D83DDCF9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCFA.png">
+      <Link>Assets\Emoji\Separated\D83DDCFA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCFB.png">
+      <Link>Assets\Emoji\Separated\D83DDCFB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDCFC.png">
+      <Link>Assets\Emoji\Separated\D83DDCFC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD00.png">
+      <Link>Assets\Emoji\Separated\D83DDD00.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD01.png">
+      <Link>Assets\Emoji\Separated\D83DDD01.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD02.png">
+      <Link>Assets\Emoji\Separated\D83DDD02.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD03.png">
+      <Link>Assets\Emoji\Separated\D83DDD03.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD04.png">
+      <Link>Assets\Emoji\Separated\D83DDD04.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD05.png">
+      <Link>Assets\Emoji\Separated\D83DDD05.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD06.png">
+      <Link>Assets\Emoji\Separated\D83DDD06.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD07.png">
+      <Link>Assets\Emoji\Separated\D83DDD07.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD08.png">
+      <Link>Assets\Emoji\Separated\D83DDD08.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD09.png">
+      <Link>Assets\Emoji\Separated\D83DDD09.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD0A.png">
+      <Link>Assets\Emoji\Separated\D83DDD0A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD0B.png">
+      <Link>Assets\Emoji\Separated\D83DDD0B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD0C.png">
+      <Link>Assets\Emoji\Separated\D83DDD0C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD0D.png">
+      <Link>Assets\Emoji\Separated\D83DDD0D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD0E.png">
+      <Link>Assets\Emoji\Separated\D83DDD0E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD0F.png">
+      <Link>Assets\Emoji\Separated\D83DDD0F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD10.png">
+      <Link>Assets\Emoji\Separated\D83DDD10.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD11.png">
+      <Link>Assets\Emoji\Separated\D83DDD11.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD12.png">
+      <Link>Assets\Emoji\Separated\D83DDD12.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD13.png">
+      <Link>Assets\Emoji\Separated\D83DDD13.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD14.png">
+      <Link>Assets\Emoji\Separated\D83DDD14.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD15.png">
+      <Link>Assets\Emoji\Separated\D83DDD15.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD16.png">
+      <Link>Assets\Emoji\Separated\D83DDD16.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD17.png">
+      <Link>Assets\Emoji\Separated\D83DDD17.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD18.png">
+      <Link>Assets\Emoji\Separated\D83DDD18.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD19.png">
+      <Link>Assets\Emoji\Separated\D83DDD19.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD1A.png">
+      <Link>Assets\Emoji\Separated\D83DDD1A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD1B.png">
+      <Link>Assets\Emoji\Separated\D83DDD1B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD1C.png">
+      <Link>Assets\Emoji\Separated\D83DDD1C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD1D.png">
+      <Link>Assets\Emoji\Separated\D83DDD1D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD1E.png">
+      <Link>Assets\Emoji\Separated\D83DDD1E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD1F.png">
+      <Link>Assets\Emoji\Separated\D83DDD1F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD20.png">
+      <Link>Assets\Emoji\Separated\D83DDD20.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD21.png">
+      <Link>Assets\Emoji\Separated\D83DDD21.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD22.png">
+      <Link>Assets\Emoji\Separated\D83DDD22.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD23.png">
+      <Link>Assets\Emoji\Separated\D83DDD23.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD24.png">
+      <Link>Assets\Emoji\Separated\D83DDD24.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD25.png">
+      <Link>Assets\Emoji\Separated\D83DDD25.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD26.png">
+      <Link>Assets\Emoji\Separated\D83DDD26.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD27.png">
+      <Link>Assets\Emoji\Separated\D83DDD27.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD28.png">
+      <Link>Assets\Emoji\Separated\D83DDD28.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD29.png">
+      <Link>Assets\Emoji\Separated\D83DDD29.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD2A.png">
+      <Link>Assets\Emoji\Separated\D83DDD2A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD2B.png">
+      <Link>Assets\Emoji\Separated\D83DDD2B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD2C.png">
+      <Link>Assets\Emoji\Separated\D83DDD2C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD2D.png">
+      <Link>Assets\Emoji\Separated\D83DDD2D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD2E.png">
+      <Link>Assets\Emoji\Separated\D83DDD2E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD2F.png">
+      <Link>Assets\Emoji\Separated\D83DDD2F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD30.png">
+      <Link>Assets\Emoji\Separated\D83DDD30.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD31.png">
+      <Link>Assets\Emoji\Separated\D83DDD31.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD32.png">
+      <Link>Assets\Emoji\Separated\D83DDD32.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD33.png">
+      <Link>Assets\Emoji\Separated\D83DDD33.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD34.png">
+      <Link>Assets\Emoji\Separated\D83DDD34.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD35.png">
+      <Link>Assets\Emoji\Separated\D83DDD35.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD36.png">
+      <Link>Assets\Emoji\Separated\D83DDD36.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD37.png">
+      <Link>Assets\Emoji\Separated\D83DDD37.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD38.png">
+      <Link>Assets\Emoji\Separated\D83DDD38.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD39.png">
+      <Link>Assets\Emoji\Separated\D83DDD39.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD3A.png">
+      <Link>Assets\Emoji\Separated\D83DDD3A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD3B.png">
+      <Link>Assets\Emoji\Separated\D83DDD3B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD3C.png">
+      <Link>Assets\Emoji\Separated\D83DDD3C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD3D.png">
+      <Link>Assets\Emoji\Separated\D83DDD3D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD50.png">
+      <Link>Assets\Emoji\Separated\D83DDD50.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD51.png">
+      <Link>Assets\Emoji\Separated\D83DDD51.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD52.png">
+      <Link>Assets\Emoji\Separated\D83DDD52.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD53.png">
+      <Link>Assets\Emoji\Separated\D83DDD53.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD54.png">
+      <Link>Assets\Emoji\Separated\D83DDD54.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD55.png">
+      <Link>Assets\Emoji\Separated\D83DDD55.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD56.png">
+      <Link>Assets\Emoji\Separated\D83DDD56.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD57.png">
+      <Link>Assets\Emoji\Separated\D83DDD57.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD58.png">
+      <Link>Assets\Emoji\Separated\D83DDD58.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD59.png">
+      <Link>Assets\Emoji\Separated\D83DDD59.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD5A.png">
+      <Link>Assets\Emoji\Separated\D83DDD5A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD5B.png">
+      <Link>Assets\Emoji\Separated\D83DDD5B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD5C.png">
+      <Link>Assets\Emoji\Separated\D83DDD5C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD5D.png">
+      <Link>Assets\Emoji\Separated\D83DDD5D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD5E.png">
+      <Link>Assets\Emoji\Separated\D83DDD5E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD5F.png">
+      <Link>Assets\Emoji\Separated\D83DDD5F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD60.png">
+      <Link>Assets\Emoji\Separated\D83DDD60.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD61.png">
+      <Link>Assets\Emoji\Separated\D83DDD61.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD62.png">
+      <Link>Assets\Emoji\Separated\D83DDD62.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD63.png">
+      <Link>Assets\Emoji\Separated\D83DDD63.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD64.png">
+      <Link>Assets\Emoji\Separated\D83DDD64.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD65.png">
+      <Link>Assets\Emoji\Separated\D83DDD65.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD66.png">
+      <Link>Assets\Emoji\Separated\D83DDD66.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDD67.png">
+      <Link>Assets\Emoji\Separated\D83DDD67.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDDFB.png">
+      <Link>Assets\Emoji\Separated\D83DDDFB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDDFC.png">
+      <Link>Assets\Emoji\Separated\D83DDDFC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDDFD.png">
+      <Link>Assets\Emoji\Separated\D83DDDFD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDDFE.png">
+      <Link>Assets\Emoji\Separated\D83DDDFE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDDFF.png">
+      <Link>Assets\Emoji\Separated\D83DDDFF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE00.png">
+      <Link>Assets\Emoji\Separated\D83DDE00.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE01.png">
+      <Link>Assets\Emoji\Separated\D83DDE01.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE02.png">
+      <Link>Assets\Emoji\Separated\D83DDE02.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE03.png">
+      <Link>Assets\Emoji\Separated\D83DDE03.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE04.png">
+      <Link>Assets\Emoji\Separated\D83DDE04.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE05.png">
+      <Link>Assets\Emoji\Separated\D83DDE05.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE06.png">
+      <Link>Assets\Emoji\Separated\D83DDE06.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE07.png">
+      <Link>Assets\Emoji\Separated\D83DDE07.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE08.png">
+      <Link>Assets\Emoji\Separated\D83DDE08.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE09.png">
+      <Link>Assets\Emoji\Separated\D83DDE09.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE0A.png">
+      <Link>Assets\Emoji\Separated\D83DDE0A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE0B.png">
+      <Link>Assets\Emoji\Separated\D83DDE0B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE0C.png">
+      <Link>Assets\Emoji\Separated\D83DDE0C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE0D.png">
+      <Link>Assets\Emoji\Separated\D83DDE0D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE0E.png">
+      <Link>Assets\Emoji\Separated\D83DDE0E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE0F.png">
+      <Link>Assets\Emoji\Separated\D83DDE0F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE10.png">
+      <Link>Assets\Emoji\Separated\D83DDE10.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE11.png">
+      <Link>Assets\Emoji\Separated\D83DDE11.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE12.png">
+      <Link>Assets\Emoji\Separated\D83DDE12.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE13.png">
+      <Link>Assets\Emoji\Separated\D83DDE13.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE14.png">
+      <Link>Assets\Emoji\Separated\D83DDE14.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE15.png">
+      <Link>Assets\Emoji\Separated\D83DDE15.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE16.png">
+      <Link>Assets\Emoji\Separated\D83DDE16.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE17.png">
+      <Link>Assets\Emoji\Separated\D83DDE17.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE18.png">
+      <Link>Assets\Emoji\Separated\D83DDE18.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE19.png">
+      <Link>Assets\Emoji\Separated\D83DDE19.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE1A.png">
+      <Link>Assets\Emoji\Separated\D83DDE1A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE1B.png">
+      <Link>Assets\Emoji\Separated\D83DDE1B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE1C.png">
+      <Link>Assets\Emoji\Separated\D83DDE1C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE1D.png">
+      <Link>Assets\Emoji\Separated\D83DDE1D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE1E.png">
+      <Link>Assets\Emoji\Separated\D83DDE1E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE1F.png">
+      <Link>Assets\Emoji\Separated\D83DDE1F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE20.png">
+      <Link>Assets\Emoji\Separated\D83DDE20.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE21.png">
+      <Link>Assets\Emoji\Separated\D83DDE21.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE22.png">
+      <Link>Assets\Emoji\Separated\D83DDE22.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE23.png">
+      <Link>Assets\Emoji\Separated\D83DDE23.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE24.png">
+      <Link>Assets\Emoji\Separated\D83DDE24.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE25.png">
+      <Link>Assets\Emoji\Separated\D83DDE25.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE26.png">
+      <Link>Assets\Emoji\Separated\D83DDE26.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE27.png">
+      <Link>Assets\Emoji\Separated\D83DDE27.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE28.png">
+      <Link>Assets\Emoji\Separated\D83DDE28.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE29.png">
+      <Link>Assets\Emoji\Separated\D83DDE29.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE2A.png">
+      <Link>Assets\Emoji\Separated\D83DDE2A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE2B.png">
+      <Link>Assets\Emoji\Separated\D83DDE2B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE2C.png">
+      <Link>Assets\Emoji\Separated\D83DDE2C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE2D.png">
+      <Link>Assets\Emoji\Separated\D83DDE2D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE2E.png">
+      <Link>Assets\Emoji\Separated\D83DDE2E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE2F.png">
+      <Link>Assets\Emoji\Separated\D83DDE2F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE30.png">
+      <Link>Assets\Emoji\Separated\D83DDE30.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE31.png">
+      <Link>Assets\Emoji\Separated\D83DDE31.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE32.png">
+      <Link>Assets\Emoji\Separated\D83DDE32.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE33.png">
+      <Link>Assets\Emoji\Separated\D83DDE33.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE34.png">
+      <Link>Assets\Emoji\Separated\D83DDE34.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE35.png">
+      <Link>Assets\Emoji\Separated\D83DDE35.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE36.png">
+      <Link>Assets\Emoji\Separated\D83DDE36.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE37.png">
+      <Link>Assets\Emoji\Separated\D83DDE37.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE38.png">
+      <Link>Assets\Emoji\Separated\D83DDE38.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE39.png">
+      <Link>Assets\Emoji\Separated\D83DDE39.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE3A.png">
+      <Link>Assets\Emoji\Separated\D83DDE3A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE3B.png">
+      <Link>Assets\Emoji\Separated\D83DDE3B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE3C.png">
+      <Link>Assets\Emoji\Separated\D83DDE3C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE3D.png">
+      <Link>Assets\Emoji\Separated\D83DDE3D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE3E.png">
+      <Link>Assets\Emoji\Separated\D83DDE3E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE3F.png">
+      <Link>Assets\Emoji\Separated\D83DDE3F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE40.png">
+      <Link>Assets\Emoji\Separated\D83DDE40.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE45.png">
+      <Link>Assets\Emoji\Separated\D83DDE45.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE46.png">
+      <Link>Assets\Emoji\Separated\D83DDE46.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE47.png">
+      <Link>Assets\Emoji\Separated\D83DDE47.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE48.png">
+      <Link>Assets\Emoji\Separated\D83DDE48.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE49.png">
+      <Link>Assets\Emoji\Separated\D83DDE49.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE4A.png">
+      <Link>Assets\Emoji\Separated\D83DDE4A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE4B.png">
+      <Link>Assets\Emoji\Separated\D83DDE4B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE4C.png">
+      <Link>Assets\Emoji\Separated\D83DDE4C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE4D.png">
+      <Link>Assets\Emoji\Separated\D83DDE4D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE4E.png">
+      <Link>Assets\Emoji\Separated\D83DDE4E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE4F.png">
+      <Link>Assets\Emoji\Separated\D83DDE4F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE80.png">
+      <Link>Assets\Emoji\Separated\D83DDE80.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE81.png">
+      <Link>Assets\Emoji\Separated\D83DDE81.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE82.png">
+      <Link>Assets\Emoji\Separated\D83DDE82.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE83.png">
+      <Link>Assets\Emoji\Separated\D83DDE83.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE84.png">
+      <Link>Assets\Emoji\Separated\D83DDE84.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE85.png">
+      <Link>Assets\Emoji\Separated\D83DDE85.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE86.png">
+      <Link>Assets\Emoji\Separated\D83DDE86.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE87.png">
+      <Link>Assets\Emoji\Separated\D83DDE87.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE88.png">
+      <Link>Assets\Emoji\Separated\D83DDE88.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE89.png">
+      <Link>Assets\Emoji\Separated\D83DDE89.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE8A.png">
+      <Link>Assets\Emoji\Separated\D83DDE8A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE8B.png">
+      <Link>Assets\Emoji\Separated\D83DDE8B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE8C.png">
+      <Link>Assets\Emoji\Separated\D83DDE8C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE8D.png">
+      <Link>Assets\Emoji\Separated\D83DDE8D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE8E.png">
+      <Link>Assets\Emoji\Separated\D83DDE8E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE8F.png">
+      <Link>Assets\Emoji\Separated\D83DDE8F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE90.png">
+      <Link>Assets\Emoji\Separated\D83DDE90.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE91.png">
+      <Link>Assets\Emoji\Separated\D83DDE91.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE92.png">
+      <Link>Assets\Emoji\Separated\D83DDE92.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE93.png">
+      <Link>Assets\Emoji\Separated\D83DDE93.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE94.png">
+      <Link>Assets\Emoji\Separated\D83DDE94.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE95.png">
+      <Link>Assets\Emoji\Separated\D83DDE95.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE96.png">
+      <Link>Assets\Emoji\Separated\D83DDE96.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE97.png">
+      <Link>Assets\Emoji\Separated\D83DDE97.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE98.png">
+      <Link>Assets\Emoji\Separated\D83DDE98.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE99.png">
+      <Link>Assets\Emoji\Separated\D83DDE99.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE9A.png">
+      <Link>Assets\Emoji\Separated\D83DDE9A.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE9B.png">
+      <Link>Assets\Emoji\Separated\D83DDE9B.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE9C.png">
+      <Link>Assets\Emoji\Separated\D83DDE9C.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE9D.png">
+      <Link>Assets\Emoji\Separated\D83DDE9D.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE9E.png">
+      <Link>Assets\Emoji\Separated\D83DDE9E.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDE9F.png">
+      <Link>Assets\Emoji\Separated\D83DDE9F.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA0.png">
+      <Link>Assets\Emoji\Separated\D83DDEA0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA1.png">
+      <Link>Assets\Emoji\Separated\D83DDEA1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA2.png">
+      <Link>Assets\Emoji\Separated\D83DDEA2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA3.png">
+      <Link>Assets\Emoji\Separated\D83DDEA3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA4.png">
+      <Link>Assets\Emoji\Separated\D83DDEA4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA5.png">
+      <Link>Assets\Emoji\Separated\D83DDEA5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA6.png">
+      <Link>Assets\Emoji\Separated\D83DDEA6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA7.png">
+      <Link>Assets\Emoji\Separated\D83DDEA7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA8.png">
+      <Link>Assets\Emoji\Separated\D83DDEA8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEA9.png">
+      <Link>Assets\Emoji\Separated\D83DDEA9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEAA.png">
+      <Link>Assets\Emoji\Separated\D83DDEAA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEAB.png">
+      <Link>Assets\Emoji\Separated\D83DDEAB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEAC.png">
+      <Link>Assets\Emoji\Separated\D83DDEAC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEAD.png">
+      <Link>Assets\Emoji\Separated\D83DDEAD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEAE.png">
+      <Link>Assets\Emoji\Separated\D83DDEAE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEAF.png">
+      <Link>Assets\Emoji\Separated\D83DDEAF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB0.png">
+      <Link>Assets\Emoji\Separated\D83DDEB0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB1.png">
+      <Link>Assets\Emoji\Separated\D83DDEB1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB2.png">
+      <Link>Assets\Emoji\Separated\D83DDEB2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB3.png">
+      <Link>Assets\Emoji\Separated\D83DDEB3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB4.png">
+      <Link>Assets\Emoji\Separated\D83DDEB4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB5.png">
+      <Link>Assets\Emoji\Separated\D83DDEB5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB6.png">
+      <Link>Assets\Emoji\Separated\D83DDEB6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB7.png">
+      <Link>Assets\Emoji\Separated\D83DDEB7.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB8.png">
+      <Link>Assets\Emoji\Separated\D83DDEB8.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEB9.png">
+      <Link>Assets\Emoji\Separated\D83DDEB9.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEBA.png">
+      <Link>Assets\Emoji\Separated\D83DDEBA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEBB.png">
+      <Link>Assets\Emoji\Separated\D83DDEBB.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEBC.png">
+      <Link>Assets\Emoji\Separated\D83DDEBC.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEBD.png">
+      <Link>Assets\Emoji\Separated\D83DDEBD.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEBE.png">
+      <Link>Assets\Emoji\Separated\D83DDEBE.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEBF.png">
+      <Link>Assets\Emoji\Separated\D83DDEBF.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEC0.png">
+      <Link>Assets\Emoji\Separated\D83DDEC0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEC1.png">
+      <Link>Assets\Emoji\Separated\D83DDEC1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEC2.png">
+      <Link>Assets\Emoji\Separated\D83DDEC2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEC3.png">
+      <Link>Assets\Emoji\Separated\D83DDEC3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEC4.png">
+      <Link>Assets\Emoji\Separated\D83DDEC4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\Separated\D83DDEC5.png">
+      <Link>Assets\Emoji\Separated\D83DDEC5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part0.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part1.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part2.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part3.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part0.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part1.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part2.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part0.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part1.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part2.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part3.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part4.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part0.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part1.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part2.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part0.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part1.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part2.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part3.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part4.png">
+      <Link>Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat0_part0.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat0_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat0_part1.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat0_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat0_part2.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat0_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat0_part3.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat0_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat0_part4.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat0_part4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat0_part5.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat0_part5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat1_part0.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat1_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat1_part1.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat1_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat1_part2.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat1_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat1_part3.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat1_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part0.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part1.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part2.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part3.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part4.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part5.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat2_part6.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat2_part6.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat3_part0.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat3_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat3_part1.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat3_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat3_part2.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat3_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat4_part0.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat4_part0.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat4_part1.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat4_part1.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat4_part2.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat4_part2.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat4_part3.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat4_part3.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat4_part4.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat4_part4.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\Emoji\SpacedSprites\sprite64_cat4_part5.png">
+      <Link>Assets\Emoji\SpacedSprites\sprite64_cat4_part5.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.abc-WXGA.png">
+      <Link>Assets\light.emoji.abc-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.backspace-WXGA.png">
+      <Link>Assets\light.emoji.backspace-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.category.1-WXGA.png">
+      <Link>Assets\light.emoji.category.1-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.category.2-WXGA.png">
+      <Link>Assets\light.emoji.category.2-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.category.3-WXGA.png">
+      <Link>Assets\light.emoji.category.3-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.category.4-WXGA.png">
+      <Link>Assets\light.emoji.category.4-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.category.5-WXGA.png">
+      <Link>Assets\light.emoji.category.5-WXGA.png</Link>
+    </Content>
+    <Content Include="..\Telegram.EmojiPanel\Assets\light.emoji.recent-WXGA.png">
+      <Link>Assets\light.emoji.recent-WXGA.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

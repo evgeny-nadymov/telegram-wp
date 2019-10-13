@@ -1,0 +1,2859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE3550C4-15BA-4212-BB5F-A9AF0059D775}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TelegramClient</RootNamespace>
+    <AssemblyName>TelegramClient</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>de;es;pt;nl;it</SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>Telegram_1.11.0.0_wp7.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>TelegramClient.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;LOG_REGISTRATION</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;LOG_REGISTRATION</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Private Beta|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug Private Beta\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;PRIVATE_BETA;</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Private Beta|AnyCPU'">
+    <OutputPath>bin\Release Private Beta\</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;PRIVATE_BETA;LOG_REGISTRATION;</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BugSense, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\BugSense.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp71\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Extensions">
+      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp71\Caliburn.Micro.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\wp71\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.WebAnalytics, Version=1.4.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Libraries\Google.WebAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZLib.Phone">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ICSharpCode.SharpZLib.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Id3">
+      <HintPath>..\packages\ID3.0.3.0\lib\sl4-wp71\Id3.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.Controls">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.Filtering">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.Filtering.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.IO.Bmp">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.IO.Bmp.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.IO.Gif">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.IO.Gif.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.IO.Png">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.IO.Png.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.Utils">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="LayoutTransformer">
+      <HintPath>..\Libraries\LayoutTransformer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.SilverlightMediaFramework.Compatibility.Phone, Version=2.2011.1101.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Libraries\Microsoft.SilverlightMediaFramework.Compatibility.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WebAnalytics, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Libraries\Microsoft.WebAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WebAnalytics.Behaviors, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Libraries\Microsoft.WebAnalytics.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="PhoneCodeContractsAssemblies">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\PhoneCodeContractsAssemblies.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Device" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Observable" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.2\lib\windowsphone71\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.2\lib\windowsphone71\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.2\lib\windowsphone71\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.2\lib\windowsphone71\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading">
+      <HintPath>..\packages\Rx-XAML.2.2.2\lib\windowsphone71\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Servicemodel.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\wp71\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analytics\AnalyticsProperties.cs" />
+    <Compile Include="Analytics\AnalyticsService.cs" />
+    <Compile Include="Analytics\AnalyticsTracker.cs" />
+    <Compile Include="Analytics\ReviewRequester.cs" />
+    <Compile Include="Animation\LinqToVisualTree.cs" />
+    <Compile Include="Animation\MetroInMotion.cs" />
+    <Compile Include="Animation\Navigation\AnimatedBasePage.cs" />
+    <Compile Include="Animation\Navigation\AnimatorHelperBase.cs" />
+    <Compile Include="Animation\Navigation\ContinuumAnimator.cs" />
+    <Compile Include="Animation\Navigation\SlideAnimator.cs" />
+    <Compile Include="Animation\Navigation\Storyboards.cs" />
+    <Compile Include="Animation\Navigation\SwivelAnimator.cs" />
+    <Compile Include="Animation\Navigation\TurnstileAnimator.cs" />
+    <Compile Include="Animation\Navigation\TurnstileFeatherAnimator.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Behaviors\MarkTapAsHandledBehavior.cs" />
+    <Compile Include="Behaviors\PanAndZoomBehavior.cs" />
+    <Compile Include="Behaviors\ProgressBarSmoother.cs" />
+    <Compile Include="Behaviors\SelectionBehavior.cs" />
+    <Compile Include="Behaviors\ThemeToStateBehavior.cs" />
+    <Compile Include="Behaviors\ToggleSwitchLocalizedContentBehavior.cs" />
+    <Compile Include="Behaviors\UpdateTextBindingBehavior.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="CapabilityPlaceholder.cs" />
+    <Compile Include="Commands.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controls\BrowserNavigationService.cs" />
+    <Compile Include="Controls\TelegramNavigationInTransition.cs" />
+    <Compile Include="Controls\TelegramNavigationOutTransition.cs" />
+    <Compile Include="Controls\TelegramNavigationTransition.cs" />
+    <Compile Include="Controls\TelegramRichTextBox.cs" />
+    <Compile Include="Controls\TelegramTransitionFrame.cs" />
+    <Compile Include="Controls\TelegramTransitionService.cs" />
+    <Compile Include="Controls\TelegramTurnstileTransition.cs" />
+    <Compile Include="Controls\TestScrollableTextBlock.cs" />
+    <Compile Include="Controls\TransitionFrame.cs" />
+    <Compile Include="Converters\BackgroundImageConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ChatForbiddenToVisibilityConverter.cs" />
+    <Compile Include="Converters\ChatToMaxHeight.cs" />
+    <Compile Include="Converters\ChatToVisibilityConverter.cs" />
+    <Compile Include="Converters\CountToVisibilityConverter.cs" />
+    <Compile Include="Converters\DebugVisibilityConverter.cs" />
+    <Compile Include="Converters\DefaultPhotoConverter.cs" />
+    <Compile Include="Converters\DialogCaptionConverter.cs" />
+    <Compile Include="Converters\DialogDetailsBackgroundConverter.cs" />
+    <Compile Include="Converters\DialogMessageFromConverter.cs" />
+    <Compile Include="Converters\DistanceAwayConverter.cs" />
+    <Compile Include="Converters\EmptyDialogMessageConverter.cs" />
+    <Compile Include="Converters\EmptyPhotoToVisibilityConverter.cs" />
+    <Compile Include="Converters\ExistsToVisibilityConverter.cs" />
+    <Compile Include="Converters\FileExtToColorConverter.cs" />
+    <Compile Include="Converters\FileNameConverter.cs" />
+    <Compile Include="Converters\FileSizeConverter.cs" />
+    <Compile Include="Converters\ForwardedMessageConverter.cs" />
+    <Compile Include="Converters\GeoLocationToVisibilityConverter.cs" />
+    <Compile Include="Converters\GroupToBackgroundBrushValueConverter.cs" />
+    <Compile Include="Converters\GroupToForegroundBrushValueConverter.cs" />
+    <Compile Include="Converters\IdToPlaceholderBackgroundConverter.cs" />
+    <Compile Include="Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\BooleanToValueConverter.cs" />
+    <Compile Include="Converters\GeoPointToStaticGoogleMapsConverter.cs" />
+    <Compile Include="Converters\IsSelectedToBackgroundConverter.cs" />
+    <Compile Include="Converters\LowercaseConverter.cs" />
+    <Compile Include="Converters\MaskConverter.cs" />
+    <Compile Include="Converters\MediaContactToPhotoConverter.cs" />
+    <Compile Include="Converters\MediaEmptyToVisibilityConverter.cs" />
+    <Compile Include="Converters\MediaSizeConverter.cs" />
+    <Compile Include="Converters\MessageToFontFamilyConverter.cs" />
+    <Compile Include="Converters\MergeBrushesConverter.cs" />
+    <Compile Include="Converters\MessageStateToForegroundConverter.cs" />
+    <Compile Include="Converters\MessageStatusConverter.cs" />
+    <Compile Include="Converters\MessageToBriefInfoConverter.cs" />
+    <Compile Include="Converters\MuteUntilToStringConverter.cs" />
+    <Compile Include="Converters\NotifySettingsToVisibilityConverter.cs" />
+    <Compile Include="Converters\NotServiceMessageToVisibilityConverter.cs" />
+    <Compile Include="Converters\OverlayAccentBrushConverter.cs" />
+    <Compile Include="Converters\PhoneNumberConverter.cs" />
+    <Compile Include="Converters\PhotoBytesToImageConverter.cs" />
+    <Compile Include="Converters\PhotoToDimensionConverter.cs" />
+    <Compile Include="Converters\PhotoToThumbConverter.cs" />
+    <Compile Include="Converters\PlaceholderDefaultImageConverter.cs" />
+    <Compile Include="Converters\PrivateBetaToVisibilityConverter.cs" />
+    <Compile Include="Converters\ProgressToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReplyMarkupButtonVisibilityConverter.cs" />
+    <Compile Include="Converters\SecretChatsAvailabilityConverter.cs" />
+    <Compile Include="Converters\SecretChatsForegroundConverter.cs" />
+    <Compile Include="Converters\ServiceMessageToTextConverter.cs" />
+    <Compile Include="Converters\StatusToImageConverter.cs" />
+    <Compile Include="Converters\StickerSetToCountStringConverter.cs" />
+    <Compile Include="Converters\StringEqualsToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\EmptyStringToVisibilityConverter.cs" />
+    <Compile Include="Converters\TestBindingConverter.cs" />
+    <Compile Include="Converters\TextMessageToVisibilityConverter.cs" />
+    <Compile Include="Converters\TextSizeToVisibilityConverter.cs" />
+    <Compile Include="Converters\TLIntToDateTimeConverter.cs" />
+    <Compile Include="Converters\UnreadCountToVisibilityConverter.cs" />
+    <Compile Include="Converters\UnreadMessageConverter.cs" />
+    <Compile Include="Converters\UnregisteredUserIdToVisibilityConverter.cs" />
+    <Compile Include="Converters\UppercaseConverter.cs" />
+    <Compile Include="Converters\UserStatusToBrushConverter.cs" />
+    <Compile Include="Converters\UserStatusToStringConverter.cs" />
+    <Compile Include="Converters\UserStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\UserToActionStringConverter.cs" />
+    <Compile Include="Converters\WP8VisibilityConverter.cs" />
+    <Compile Include="EmojiPanel\Controls\Emoji\EmojiControl.xaml.cs" />
+    <Compile Include="EmojiPanel\Controls\Emoji\EmojiData.cs" />
+    <Compile Include="EmojiPanel\Controls\Emoji\EmojiSpriteItem.cs" />
+    <Compile Include="EmojiPanel\Controls\Emoji\StickerSpriteItem.cs" />
+    <Compile Include="EmojiPanel\Controls\Utilities\DelayedExecutor.cs" />
+    <Compile Include="EmojiPanel\Controls\Utilities\Helpers.cs" />
+    <Compile Include="EmojiPanel\Controls\Utilities\MyListItemBase.cs" />
+    <Compile Include="EmojiPanel\Controls\Utilities\MyVirtualizingPanel.cs" />
+    <Compile Include="EmojiPanel\Controls\Utilities\VirtSegment.cs" />
+    <Compile Include="EmojiPanel\Controls\Utilities\VListItemBase.cs" />
+    <Compile Include="EventArgs\UpdateChatTitleEventArgs.cs" />
+    <Compile Include="Converters\ExtendedImageConverter.cs" />
+    <Compile Include="Extensions\ApplicationExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Helpers\Clip.cs" />
+    <Compile Include="Helpers\CollectionHelper.cs" />
+    <Compile Include="Helpers\ImageUtils.cs" />
+    <Compile Include="Helpers\ItemsControlHelper.cs" />
+    <Compile Include="Helpers\Property.cs" />
+    <Compile Include="Helpers\TemplateSelectors\DocumentTemplateSelector.cs" />
+    <Compile Include="Helpers\TemplateSelectors\EmptyDialogToDescriptionConverter.cs" />
+    <Compile Include="Helpers\TemplateSelectors\ItemsPanelTemplateSelector.cs" />
+    <Compile Include="Helpers\TemplateSelectors\LocationTemplateSelector.cs" />
+    <Compile Include="Helpers\TemplateSelectors\MediaTemplateSelector.cs" />
+    <Compile Include="Helpers\TemplateSelectors\MessageTemplateSelector.cs" />
+    <Compile Include="Helpers\TemplateSelectors\SearchContactsTemplateSelector.cs" />
+    <Compile Include="Models\AlphaKeyGroup.cs" />
+    <Compile Include="Models\ContactsByLastName.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\InAppNotifications.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\UsersByFirstName.cs" />
+    <Compile Include="Models\UsersByLastName.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AppResources.de.Designer.cs">
+      <DependentUpon>AppResources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AppResources.es.Designer.cs">
+      <DependentUpon>AppResources.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AppResources.pt.Designer.cs">
+      <DependentUpon>AppResources.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AppResources.nl.Designer.cs">
+      <DependentUpon>AppResources.nl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\AppResources.it.Designer.cs">
+      <DependentUpon>AppResources.it.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\LocalizationConverter.cs" />
+    <Compile Include="Resources\LocalizedStrings.cs" />
+    <Compile Include="Services\CommonErrorHandler.cs" />
+    <Compile Include="Services\ICommonErrorHandler.cs" />
+    <Compile Include="Services\IPushService.cs" />
+    <Compile Include="Services\IStateService.cs" />
+    <Compile Include="Services\PhoneInfoService.cs" />
+    <Compile Include="Services\PushService.cs" />
+    <Compile Include="Services\PushServiceBase.cs" />
+    <Compile Include="Services\StateService.cs" />
+    <Compile Include="Utils\Color.cs" />
+    <Compile Include="Utils\Language.cs" />
+    <Compile Include="Utils\TelegramUriMapper.cs" />
+    <Compile Include="ViewModels\Additional\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Additional\AccountSelfDestructsViewModel.cs" />
+    <Compile Include="ViewModels\Additional\AllowUsersViewModel.cs" />
+    <Compile Include="ViewModels\Additional\AskQuestionConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\Additional\BlockedContactsViewModel.cs" />
+    <Compile Include="ViewModels\Additional\CacheViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChangePasswordEmailViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChangePasscodeViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChangePasswordHintViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChangePhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChooseAttachmentViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChooseBackgroundViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChooseCountryViewModel.cs" />
+    <Compile Include="ViewModels\Additional\AddChatParticipantConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChooseNotificationSpanViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ChooseTTLViewModel.cs" />
+    <Compile Include="ViewModels\Additional\EditCurrentUserViewModel.cs" />
+    <Compile Include="ViewModels\Additional\EditUsernameViewModel.cs" />
+    <Compile Include="ViewModels\Additional\EncryptionKeyViewModel.cs" />
+    <Compile Include="ViewModels\Additional\EnterPasscodeViewModel.cs" />
+    <Compile Include="ViewModels\Additional\EnterPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Additional\LastSeenViewModel.cs" />
+    <Compile Include="ViewModels\Additional\EditPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Additional\LockscreenViewModel.cs" />
+    <Compile Include="ViewModels\Additional\NotificationsViewModel.cs" />
+    <Compile Include="ViewModels\Additional\PasscodeViewModel.cs" />
+    <Compile Include="ViewModels\Additional\PasswordRecoveryViewModel.cs" />
+    <Compile Include="ViewModels\Additional\PasswordViewModel.cs" />
+    <Compile Include="ViewModels\Additional\PrivacySecureViewModel.cs" />
+    <Compile Include="ViewModels\Additional\PrivacyStatementViewModel.cs" />
+    <Compile Include="ViewModels\Additional\SelectMultipleUsersViewModel.cs" />
+    <Compile Include="ViewModels\Additional\SessionsViewModel.cs" />
+    <Compile Include="ViewModels\Additional\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Additional\ShareViewModel.cs" />
+    <Compile Include="ViewModels\Additional\SnapshotsViewModel.cs" />
+    <Compile Include="ViewModels\Additional\SpecialThanksViewModel.cs" />
+    <Compile Include="ViewModels\Additional\StartupViewModel.cs" />
+    <Compile Include="ViewModels\Additional\StickersViewModel.cs" />
+    <Compile Include="ViewModels\Auth\ConfirmPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Auth\ConfirmViewModel.cs" />
+    <Compile Include="ViewModels\Auth\SignUpViewModel.cs" />
+    <Compile Include="ViewModels\Chats\AddChannelManagerViewModel.cs" />
+    <Compile Include="ViewModels\Chats\AddChatParticipantViewModel.cs" />
+    <Compile Include="ViewModels\Chats\AddSecretChatParticipantViewModel.cs" />
+    <Compile Include="ViewModels\Chats\Chat2ViewModel.cs" />
+    <Compile Include="ViewModels\Chats\ChatDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Chats\ChatViewModel.cs" />
+    <Compile Include="ViewModels\Chats\EditChatViewModel.cs" />
+    <Compile Include="ViewModels\Chats\InviteLinkViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactInfoViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactsViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\EditContactViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\SecretContactDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\SecretContactViewModel.cs" />
+    <Compile Include="ViewModels\Contacts\ShareContactViewModel.cs" />
+    <Compile Include="ViewModels\Debug\LogViewModel.cs" />
+    <Compile Include="ViewModels\Debug\LongPollViewModel.cs" />
+    <Compile Include="ViewModels\Debug\DebugViewModel.cs" />
+    <Compile Include="ViewModels\Debug\PerformanceViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\ChooseDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\ChooseParticipantsViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CommandHintsViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateBroadcastViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateChannelViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\CreateDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsMode.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Channel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Document.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.GeoPoint.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Handle.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Media.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Photo.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Reply.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Search.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogsViewModel.Common.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogsViewModel.cs" />
+    <Compile Include="ViewModels\Auth\SignInViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\HashtagHintsViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\MessageViewerViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogSearchMessagesViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretChatDebugViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.Document.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.GeoPoint.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.Media.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.Text.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.Video.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.Handle.cs" />
+    <Compile Include="ViewModels\Dialogs\UserActionViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\UsernameHintsViewModel.cs" />
+    <Compile Include="ViewModels\ItemDetailsViewModelBase.cs" />
+    <Compile Include="ViewModels\ItemsViewModelBase.cs" />
+    <Compile Include="ViewModels\Media\AnimatedImageViewerViewModel.cs" />
+    <Compile Include="ViewModels\Media\LinksViewModel.cs" />
+    <Compile Include="ViewModels\Media\DecryptedImageViewerViewModel.cs" />
+    <Compile Include="ViewModels\Media\FilesViewModel.cs" />
+    <Compile Include="ViewModels\Media\FullMediaViewModel.cs" />
+    <Compile Include="ViewModels\Media\ImageEditorViewModel.cs" />
+    <Compile Include="ViewModels\Media\ImageViewerViewModel.cs" />
+    <Compile Include="ViewModels\Media\MapViewModel.cs" />
+    <Compile Include="ViewModels\Media\MediaViewModel.cs" />
+    <Compile Include="ViewModels\Media\PivotImageViewerViewModel.cs" />
+    <Compile Include="ViewModels\Media\ProfilePhotoViewerViewModel.cs" />
+    <Compile Include="ViewModels\Media\SecretMediaViewModel.cs" />
+    <Compile Include="ViewModels\Media\VideoCaptureViewModel.cs" />
+    <Compile Include="ViewModels\Media\VideoPlayerViewModel.cs" />
+    <Compile Include="ViewModels\Search\ISearch.cs" />
+    <Compile Include="ViewModels\Search\SearchContactsViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchDialogsViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchFilesViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchItemsViewModelBase.cs" />
+    <Compile Include="ViewModels\Search\SearchLinksViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchMessagesViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchShellViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchVenuesViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Additional\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\AccountSelfDestructsView.xaml.cs">
+      <DependentUpon>AccountSelfDestructsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\AllowUsersView.xaml.cs">
+      <DependentUpon>AllowUsersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\AskQuestionConfirmationView.xaml.cs">
+      <DependentUpon>AskQuestionConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\BlockedContactsView.xaml.cs">
+      <DependentUpon>BlockedContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\BubbleBackgroundControl.xaml.cs">
+      <DependentUpon>BubbleBackgroundControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\CacheView.xaml.cs">
+      <DependentUpon>CacheView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChangePasswordEmailView.xaml.cs">
+      <DependentUpon>ChangePasswordEmailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChangePasswordHintView.xaml.cs">
+      <DependentUpon>ChangePasswordHintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChangePhoneNumberView.xaml.cs">
+      <DependentUpon>ChangePhoneNumberView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChooseAttachmentView.xaml.cs">
+      <DependentUpon>ChooseAttachmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChooseBackgroundView.xaml.cs">
+      <DependentUpon>ChooseBackgroundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChooseCountryView.xaml.cs">
+      <DependentUpon>ChooseCountryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\AddChatParticipantConfirmationView.xaml.cs">
+      <DependentUpon>AddChatParticipantConfirmationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChooseNotificationSpanView.xaml.cs">
+      <DependentUpon>ChooseNotificationSpanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChooseTTLView.xaml.cs">
+      <DependentUpon>ChooseTTLView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ChangePasscodeView.xaml.cs">
+      <DependentUpon>ChangePasscodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\EnterPasswordView.xaml.cs">
+      <DependentUpon>EnterPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\EditCurrentUserView.xaml.cs">
+      <DependentUpon>EditCurrentUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\EditUsernameView.xaml.cs">
+      <DependentUpon>EditUsernameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\EncryptionKeyView.xaml.cs">
+      <DependentUpon>EncryptionKeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\EnterPasscodeView.xaml.cs">
+      <DependentUpon>EnterPasscodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\FallingSnowControl.xaml.cs">
+      <DependentUpon>FallingSnowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\LastSeenView.xaml.cs">
+      <DependentUpon>LastSeenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\EditPhoneNumberView.xaml.cs">
+      <DependentUpon>EditPhoneNumberView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\LockscreenView.xaml.cs">
+      <DependentUpon>LockscreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\NumericKeyboard.xaml.cs">
+      <DependentUpon>NumericKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\PasscodeView.xaml.cs">
+      <DependentUpon>PasscodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\PasswordRecoveryView.xaml.cs">
+      <DependentUpon>PasswordRecoveryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\PasswordView.xaml.cs">
+      <DependentUpon>PasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\PrivacySecurityView.xaml.cs">
+      <DependentUpon>PrivacySecurityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\PrivacyStatementView.xaml.cs">
+      <DependentUpon>PrivacyStatementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\SelectMultipleUsersView.xaml.cs">
+      <DependentUpon>SelectMultipleUsersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\SessionsView.xaml.cs">
+      <DependentUpon>SessionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\ShareView.xaml.cs">
+      <DependentUpon>ShareView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\SnapshotsView.xaml.cs">
+      <DependentUpon>SnapshotsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\SpecialThanksView.xaml.cs">
+      <DependentUpon>SpecialThanksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\StartupView.xaml.cs">
+      <DependentUpon>StartupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\StickersView.xaml.cs">
+      <DependentUpon>StickersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\TelegramPasswordBox.xaml.cs">
+      <DependentUpon>TelegramPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\ConfirmPasswordView.xaml.cs">
+      <DependentUpon>ConfirmPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\ConfirmView.xaml.cs">
+      <DependentUpon>ConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\AddChannelManagerView.xaml.cs">
+      <DependentUpon>AddChannelManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\AddChatParticipantView.xaml.cs">
+      <DependentUpon>AddChatParticipantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\AddSecretChatParticipantView.xaml.cs">
+      <DependentUpon>AddSecretChatParticipantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\Chat2View.xaml.cs">
+      <DependentUpon>Chat2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\ChatDetailsView.xaml.cs">
+      <DependentUpon>ChatDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\ChatView.xaml.cs">
+      <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\EditChatView.xaml.cs">
+      <DependentUpon>EditChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\InviteLinkView.xaml.cs">
+      <DependentUpon>InviteLinkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\ContactDetailsView.xaml.cs">
+      <DependentUpon>ContactDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\ContactInfoView.xaml.cs">
+      <DependentUpon>ContactInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\ContactView.xaml.cs">
+      <DependentUpon>ContactView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\EditContactView.xaml.cs">
+      <DependentUpon>EditContactView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\SecretContactDetailsView.xaml.cs">
+      <DependentUpon>SecretContactDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\SecretContactView.xaml.cs">
+      <DependentUpon>SecretContactView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\ShareContactView.xaml.cs">
+      <DependentUpon>ShareContactView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MainTitleControl.xaml.cs">
+      <DependentUpon>MainTitleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ConversationTileControl.xaml.cs">
+      <DependentUpon>ConversationTileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MessagePlayerControl.xaml.cs">
+      <DependentUpon>MessagePlayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\MessageStatusControl.xaml.cs">
+      <DependentUpon>MessageStatusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\PieSlice.cs" />
+    <Compile Include="Views\Controls\SecretPhotoPlaceholder.xaml.cs">
+      <DependentUpon>SecretPhotoPlaceholder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debug\DebugView.xaml.cs">
+      <DependentUpon>DebugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debug\LongPollView.xaml.cs">
+      <DependentUpon>LongPollView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Debug\PerformanceView.xaml.cs">
+      <DependentUpon>PerformanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ChooseDialogView.xaml.cs">
+      <DependentUpon>ChooseDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ChooseParticipantsView.xaml.cs">
+      <DependentUpon>ChooseParticipantsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CommandHintsView.xaml.cs">
+      <DependentUpon>CommandHintsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CommandsControl.xaml.cs">
+      <DependentUpon>CommandsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CreateBroadcastView.xaml.cs">
+      <DependentUpon>CreateBroadcastView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CreateChannelView.xaml.cs">
+      <DependentUpon>CreateChannelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CreateDialogView.xaml.cs">
+      <DependentUpon>CreateDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\DialogDetailsView.xaml.cs">
+      <DependentUpon>DialogDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\DialogsView.xaml.cs">
+      <DependentUpon>DialogsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contacts\ContactsView.xaml.cs">
+      <DependentUpon>ContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Additional\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\EmojiKeyboardControl.xaml.cs">
+      <DependentUpon>EmojiKeyboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\HashtagHintsView.xaml.cs">
+      <DependentUpon>HashtagHintsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\MessageViewerView.xaml.cs">
+      <DependentUpon>MessageViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\DialogSearchMessagesView.xaml.cs">
+      <DependentUpon>DialogSearchMessagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\SecretChatDebugView.xaml.cs">
+      <DependentUpon>SecretChatDebugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\SecretDialogDetailsView.xaml.cs">
+      <DependentUpon>SecretDialogDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\UserActionView.xaml.cs">
+      <DependentUpon>UserActionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\UsernameHintsView.xaml.cs">
+      <DependentUpon>UsernameHintsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\AnimatedImageViewerView.xaml.cs">
+      <DependentUpon>AnimatedImageViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\LinksView.xaml.cs">
+      <DependentUpon>LinksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\DecryptedImageViewerView.xaml.cs">
+      <DependentUpon>DecryptedImageViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\FilesView.xaml.cs">
+      <DependentUpon>FilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\FullMediaView.xaml.cs">
+      <DependentUpon>FullMediaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\ImageEditorView.xaml.cs">
+      <DependentUpon>ImageEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\ImageViewerView.xaml.cs">
+      <DependentUpon>ImageViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\MapTileSources\GoogleMapsTileSource.cs" />
+    <Compile Include="Views\Media\MapTileSources\OpenAeralMapTileSource.cs" />
+    <Compile Include="Views\Media\MapTileSources\OpenStreetMapTileSource.cs" />
+    <Compile Include="Views\Media\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\MediaView.xaml.cs">
+      <DependentUpon>MediaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\ProfilePhotoViewerView.xaml.cs">
+      <DependentUpon>ProfilePhotoViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\SecretMediaView.xaml.cs">
+      <DependentUpon>SecretMediaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\VideoCaptureView.xaml.cs">
+      <DependentUpon>VideoCaptureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Media\VideoPlayerView.xaml.cs">
+      <DependentUpon>VideoPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchContactsView.xaml.cs">
+      <DependentUpon>SearchContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchDialogsView.xaml.cs">
+      <DependentUpon>SearchDialogsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchFilesView.xaml.cs">
+      <DependentUpon>SearchFilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchLinksView.xaml.cs">
+      <DependentUpon>SearchLinksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchMessagesView.xaml.cs">
+      <DependentUpon>SearchMessagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchShellView.xaml.cs">
+      <DependentUpon>SearchShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search\SearchVenuesView.xaml.cs">
+      <DependentUpon>SearchVenuesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TelegramViewBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="EmojiPanel\Controls\Emoji\EmojiControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\ToggleSwitch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\LongListSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\ScrollViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Templates\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Templates\ItemsPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Templates\Media.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\ToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\Transitions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <ApplicationDefinition Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Views\Additional\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\AccountSelfDestructsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\AllowUsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\AskQuestionConfirmationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\BlockedContactsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\BubbleBackgroundControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\CacheView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChangePasswordEmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChangePasswordHintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChangePasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChangePhoneNumberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChooseAttachmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <ApplicationDefinition Include="Views\Additional\ChooseBackgroundView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Views\Additional\ChooseCountryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\AddChatParticipantConfirmationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Additional\ChooseNotificationSpanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChooseTTLView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ChangePasscodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\EnterPasswordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Additional\EditCurrentUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\EditUsernameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\EncryptionKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\EnterPasscodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\FallingSnowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\LastSeenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\EditPhoneNumberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\LockscreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\NotificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\NumericKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Additional\PasscodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\PasswordRecoveryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\PasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\PrivacySecurityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\PrivacyStatementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\SelectMultipleUsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\SessionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\ShareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\SnapshotsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\SpecialThanksView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\StartupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\StickersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\TelegramPasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Auth\ConfirmPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auth\ConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auth\SignUpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\AddChannelManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\AddChatParticipantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\AddSecretChatParticipantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\Chat2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\ChatDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\ChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\EditChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\InviteLinkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\ContactDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\ContactInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\ContactView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\EditContactView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\SecretContactDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\SecretContactView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\ShareContactView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\MainTitleControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\ConversationTileControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\MessagePlayerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\MessageStatusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SecretPhotoPlaceholder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Debug\DebugView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Debug\LongPollView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Debug\PerformanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\ChooseDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\ChooseParticipantsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CommandHintsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CommandsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CreateBroadcastView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\CreateChannelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CreateDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\DialogDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\DialogsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contacts\ContactsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auth\SignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Additional\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\EmojiKeyboardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\HashtagHintsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\MessageViewerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\DialogSearchMessagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\SecretChatDebugView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\SecretDialogDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\UserActionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\UsernameHintsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\AnimatedImageViewerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\LinksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Media\DecryptedImageViewerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Media\FilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\FullMediaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\ImageEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\ImageViewerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\MapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\MediaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\ProfilePhotoViewerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\SecretMediaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\VideoCaptureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Media\VideoPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchContactsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchDialogsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchLinksView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchMessagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search\SearchVenuesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Actions.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Video.cs" />
+    <Compile Include="ViewModels\Dialogs\SecretDialogDetailsViewModel.Photo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon99.png" />
+    <Content Include="Assets\emoji.abc-WXGA.png" />
+    <Content Include="Assets\emoji.backspace-WXGA.png" />
+    <Content Include="Assets\emoji.category.1-WXGA.png" />
+    <Content Include="Assets\emoji.category.2-WXGA.png" />
+    <Content Include="Assets\emoji.category.3-WXGA.png" />
+    <Content Include="Assets\emoji.category.4-WXGA.png" />
+    <Content Include="Assets\emoji.category.5-WXGA.png" />
+    <Content Include="Assets\emoji.recent-WXGA.png" />
+    <Content Include="Assets\Emoji\Separated\002320E3.png" />
+    <Content Include="Assets\Emoji\Separated\003020E3.png" />
+    <Content Include="Assets\Emoji\Separated\003120E3.png" />
+    <Content Include="Assets\Emoji\Separated\003220E3.png" />
+    <Content Include="Assets\Emoji\Separated\003320E3.png" />
+    <Content Include="Assets\Emoji\Separated\003420E3.png" />
+    <Content Include="Assets\Emoji\Separated\003520E3.png" />
+    <Content Include="Assets\Emoji\Separated\003620E3.png" />
+    <Content Include="Assets\Emoji\Separated\003720E3.png" />
+    <Content Include="Assets\Emoji\Separated\003820E3.png" />
+    <Content Include="Assets\Emoji\Separated\003920E3.png" />
+    <Content Include="Assets\Emoji\Separated\00a9.png" />
+    <Content Include="Assets\Emoji\Separated\00ae.png" />
+    <Content Include="Assets\Emoji\Separated\203C.png" />
+    <Content Include="Assets\Emoji\Separated\2049.png" />
+    <Content Include="Assets\Emoji\Separated\2122.png" />
+    <Content Include="Assets\Emoji\Separated\2139.png" />
+    <Content Include="Assets\Emoji\Separated\2194.png" />
+    <Content Include="Assets\Emoji\Separated\2195.png" />
+    <Content Include="Assets\Emoji\Separated\2196.png" />
+    <Content Include="Assets\Emoji\Separated\2197.png" />
+    <Content Include="Assets\Emoji\Separated\2198.png" />
+    <Content Include="Assets\Emoji\Separated\2199.png" />
+    <Content Include="Assets\Emoji\Separated\21A9.png" />
+    <Content Include="Assets\Emoji\Separated\21AA.png" />
+    <Content Include="Assets\Emoji\Separated\231A.png" />
+    <Content Include="Assets\Emoji\Separated\231B.png" />
+    <Content Include="Assets\Emoji\Separated\23e9.png" />
+    <Content Include="Assets\Emoji\Separated\23ea.png" />
+    <Content Include="Assets\Emoji\Separated\23eb.png" />
+    <Content Include="Assets\Emoji\Separated\23ec.png" />
+    <Content Include="Assets\Emoji\Separated\23f0.png" />
+    <Content Include="Assets\Emoji\Separated\23f3.png" />
+    <Content Include="Assets\Emoji\Separated\24C2.png" />
+    <Content Include="Assets\Emoji\Separated\25AA.png" />
+    <Content Include="Assets\Emoji\Separated\25AB.png" />
+    <Content Include="Assets\Emoji\Separated\25B6.png" />
+    <Content Include="Assets\Emoji\Separated\25C0.png" />
+    <Content Include="Assets\Emoji\Separated\25FB.png" />
+    <Content Include="Assets\Emoji\Separated\25FC.png" />
+    <Content Include="Assets\Emoji\Separated\25FD.png" />
+    <Content Include="Assets\Emoji\Separated\25FE.png" />
+    <Content Include="Assets\Emoji\Separated\2600.png" />
+    <Content Include="Assets\Emoji\Separated\2601.png" />
+    <Content Include="Assets\Emoji\Separated\2602.png" />
+    <Content Include="Assets\Emoji\Separated\2603.png" />
+    <Content Include="Assets\Emoji\Separated\2604.png" />
+    <Content Include="Assets\Emoji\Separated\260E.png" />
+    <Content Include="Assets\Emoji\Separated\2611.png" />
+    <Content Include="Assets\Emoji\Separated\2614.png" />
+    <Content Include="Assets\Emoji\Separated\2615.png" />
+    <Content Include="Assets\Emoji\Separated\2618.png" />
+    <Content Include="Assets\Emoji\Separated\261D.png" />
+    <Content Include="Assets\Emoji\Separated\261DD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\261DD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\261DD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\261DD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\261DD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\2620.png" />
+    <Content Include="Assets\Emoji\Separated\263A.png" />
+    <Content Include="Assets\Emoji\Separated\2648.png" />
+    <Content Include="Assets\Emoji\Separated\2649.png" />
+    <Content Include="Assets\Emoji\Separated\264A.png" />
+    <Content Include="Assets\Emoji\Separated\264B.png" />
+    <Content Include="Assets\Emoji\Separated\264C.png" />
+    <Content Include="Assets\Emoji\Separated\264D.png" />
+    <Content Include="Assets\Emoji\Separated\264E.png" />
+    <Content Include="Assets\Emoji\Separated\264F.png" />
+    <Content Include="Assets\Emoji\Separated\2650.png" />
+    <Content Include="Assets\Emoji\Separated\2651.png" />
+    <Content Include="Assets\Emoji\Separated\2652.png" />
+    <Content Include="Assets\Emoji\Separated\2653.png" />
+    <Content Include="Assets\Emoji\Separated\2660.png" />
+    <Content Include="Assets\Emoji\Separated\2663.png" />
+    <Content Include="Assets\Emoji\Separated\2665.png" />
+    <Content Include="Assets\Emoji\Separated\2666.png" />
+    <Content Include="Assets\Emoji\Separated\2668.png" />
+    <Content Include="Assets\Emoji\Separated\267B.png" />
+    <Content Include="Assets\Emoji\Separated\267F.png" />
+    <Content Include="Assets\Emoji\Separated\2692.png" />
+    <Content Include="Assets\Emoji\Separated\2693.png" />
+    <Content Include="Assets\Emoji\Separated\2694.png" />
+    <Content Include="Assets\Emoji\Separated\2696.png" />
+    <Content Include="Assets\Emoji\Separated\2697.png" />
+    <Content Include="Assets\Emoji\Separated\2699.png" />
+    <Content Include="Assets\Emoji\Separated\26A0.png" />
+    <Content Include="Assets\Emoji\Separated\26A1.png" />
+    <Content Include="Assets\Emoji\Separated\26AA.png" />
+    <Content Include="Assets\Emoji\Separated\26AB.png" />
+    <Content Include="Assets\Emoji\Separated\26B0.png" />
+    <Content Include="Assets\Emoji\Separated\26B1.png" />
+    <Content Include="Assets\Emoji\Separated\26BD.png" />
+    <Content Include="Assets\Emoji\Separated\26BE.png" />
+    <Content Include="Assets\Emoji\Separated\26C4.png" />
+    <Content Include="Assets\Emoji\Separated\26C5.png" />
+    <Content Include="Assets\Emoji\Separated\26C8.png" />
+    <Content Include="Assets\Emoji\Separated\26ce.png" />
+    <Content Include="Assets\Emoji\Separated\26CF.png" />
+    <Content Include="Assets\Emoji\Separated\26D1.png" />
+    <Content Include="Assets\Emoji\Separated\26D3.png" />
+    <Content Include="Assets\Emoji\Separated\26D4.png" />
+    <Content Include="Assets\Emoji\Separated\26E9.png" />
+    <Content Include="Assets\Emoji\Separated\26EA.png" />
+    <Content Include="Assets\Emoji\Separated\26F0.png" />
+    <Content Include="Assets\Emoji\Separated\26F1.png" />
+    <Content Include="Assets\Emoji\Separated\26F2.png" />
+    <Content Include="Assets\Emoji\Separated\26F3.png" />
+    <Content Include="Assets\Emoji\Separated\26F4.png" />
+    <Content Include="Assets\Emoji\Separated\26F5.png" />
+    <Content Include="Assets\Emoji\Separated\26F7.png" />
+    <Content Include="Assets\Emoji\Separated\26F8.png" />
+    <Content Include="Assets\Emoji\Separated\26F9.png" />
+    <Content Include="Assets\Emoji\Separated\26F9D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\26F9D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\26F9D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\26F9D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\26F9D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\26FA.png" />
+    <Content Include="Assets\Emoji\Separated\26FD.png" />
+    <Content Include="Assets\Emoji\Separated\2702.png" />
+    <Content Include="Assets\Emoji\Separated\2705.png" />
+    <Content Include="Assets\Emoji\Separated\2708.png" />
+    <Content Include="Assets\Emoji\Separated\2709.png" />
+    <Content Include="Assets\Emoji\Separated\270a.png" />
+    <Content Include="Assets\Emoji\Separated\270AD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\270AD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\270AD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\270AD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\270AD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\270b.png" />
+    <Content Include="Assets\Emoji\Separated\270BD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\270BD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\270BD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\270BD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\270BD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\270C.png" />
+    <Content Include="Assets\Emoji\Separated\270CD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\270CD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\270CD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\270CD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\270CD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\270D.png" />
+    <Content Include="Assets\Emoji\Separated\270DD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\270DD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\270DD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\270DD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\270DD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\270F.png" />
+    <Content Include="Assets\Emoji\Separated\2712.png" />
+    <Content Include="Assets\Emoji\Separated\2714.png" />
+    <Content Include="Assets\Emoji\Separated\2716.png" />
+    <Content Include="Assets\Emoji\Separated\2728.png" />
+    <Content Include="Assets\Emoji\Separated\2733.png" />
+    <Content Include="Assets\Emoji\Separated\2734.png" />
+    <Content Include="Assets\Emoji\Separated\2744.png" />
+    <Content Include="Assets\Emoji\Separated\2747.png" />
+    <Content Include="Assets\Emoji\Separated\274c.png" />
+    <Content Include="Assets\Emoji\Separated\274e.png" />
+    <Content Include="Assets\Emoji\Separated\2753.png" />
+    <Content Include="Assets\Emoji\Separated\2754.png" />
+    <Content Include="Assets\Emoji\Separated\2755.png" />
+    <Content Include="Assets\Emoji\Separated\2757.png" />
+    <Content Include="Assets\Emoji\Separated\2764.png" />
+    <Content Include="Assets\Emoji\Separated\2795.png" />
+    <Content Include="Assets\Emoji\Separated\2796.png" />
+    <Content Include="Assets\Emoji\Separated\2797.png" />
+    <Content Include="Assets\Emoji\Separated\27A1.png" />
+    <Content Include="Assets\Emoji\Separated\27b0.png" />
+    <Content Include="Assets\Emoji\Separated\27bf.png" />
+    <Content Include="Assets\Emoji\Separated\2934.png" />
+    <Content Include="Assets\Emoji\Separated\2935.png" />
+    <Content Include="Assets\Emoji\Separated\2B05.png" />
+    <Content Include="Assets\Emoji\Separated\2B06.png" />
+    <Content Include="Assets\Emoji\Separated\2B07.png" />
+    <Content Include="Assets\Emoji\Separated\2B1B.png" />
+    <Content Include="Assets\Emoji\Separated\2B1C.png" />
+    <Content Include="Assets\Emoji\Separated\2B50.png" />
+    <Content Include="Assets\Emoji\Separated\2B55.png" />
+    <Content Include="Assets\Emoji\Separated\3030.png" />
+    <Content Include="Assets\Emoji\Separated\303D.png" />
+    <Content Include="Assets\Emoji\Separated\3297.png" />
+    <Content Include="Assets\Emoji\Separated\3299.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDC04.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDCCF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD70.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD71.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD7E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD7F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD8E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD91.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD92.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD93.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD94.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD95.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD96.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD97.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD98.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD99.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDD9A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDE8D83CDDF3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDE9D83CDDEA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDEAD83CDDF8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDEBD83CDDF7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDECD83CDDE7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDEED83CDDF9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDEFD83CDDF5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDF0D83CDDF7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDF7D83CDDFA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDDFAD83CDDF8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE01.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE02.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE1A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE2F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE32.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE33.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE34.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE35.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE36.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE37.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE38.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE39.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE3A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE50.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDE51.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF00.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF01.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF02.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF03.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF04.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF05.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF06.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF07.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF08.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF09.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF0A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF0B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF0C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF0D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF0E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF0F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF10.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF11.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF12.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF13.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF14.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF15.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF16.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF17.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF18.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF19.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF1A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF1B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF1C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF1D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF1E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF1F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF20.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF21.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF24.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF25.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF26.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF27.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF28.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF29.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF2A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF2B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF2C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF2D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF2E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF2F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF30.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF31.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF32.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF33.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF34.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF35.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF36.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF37.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF38.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF39.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF3A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF3B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF3C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF3D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF3E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF3F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF40.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF41.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF42.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF43.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF44.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF45.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF46.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF47.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF48.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF49.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF4A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF4B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF4C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF4D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF4E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF4F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF50.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF51.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF52.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF53.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF54.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF55.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF56.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF57.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF58.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF59.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF5A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF5B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF5C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF5D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF5E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF5F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF60.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF61.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF62.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF63.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF64.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF65.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF66.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF67.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF68.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF69.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF6A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF6B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF6C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF6D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF6E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF6F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF70.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF71.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF72.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF73.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF74.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF75.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF76.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF77.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF78.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF79.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF7A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF7B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF7C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF7D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF7E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF7F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF80.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF81.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF82.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF83.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF84.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF85.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF85D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF85D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF85D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF85D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF85D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF86.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF87.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF88.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF89.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF8A.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF8B.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF8C.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF8D.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF8E.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF8F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF90.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF91.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF92.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF93.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF96.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF97.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDF9F.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA0.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA1.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA2.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA4.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA6.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFA9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFAA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFAB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFAC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFAD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFAE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFAF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB0.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB1.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB2.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB4.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB6.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFB9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFBA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFBB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFBC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFBD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFBE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFBF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC0.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC1.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC2.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC3D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC3D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC3D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC3D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC3D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC4.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC4D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC4D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC4D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC4D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC4D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC6.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC7D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC7D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC7D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC7D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC7D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFC9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCAD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCAD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCAD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCAD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCAD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCBD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCBD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCBD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCBD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCBD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFCF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD0.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD1.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD2.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD4.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD6.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFD9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFDA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFDB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFDC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFDD.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFDE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFDF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE0.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE1.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE2.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE4.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE6.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFE9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFEA.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFEB.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFEC.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFED.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFEE.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFEF.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF0.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF3.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF4.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF5.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF7.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF8.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFF9.png" />
+    <Content Include="Assets\Emoji\Separated\D83CDFFA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC00.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC01.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC02.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC03.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC04.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC05.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC06.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC07.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC08.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC09.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC0A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC0B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC0C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC0D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC0E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC0F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC10.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC11.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC12.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC13.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC14.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC15.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC16.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC17.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC18.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC19.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC1A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC1B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC1C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC1D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC1E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC1F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC20.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC21.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC22.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC23.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC24.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC25.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC26.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC27.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC28.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC29.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC2A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC2B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC2C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC2D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC2E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC2F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC30.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC31.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC32.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC33.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC34.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC35.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC36.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC37.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC38.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC39.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC3A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC3B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC3C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC3D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC3E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC3F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC40.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC41.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC42.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC42D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC42D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC42D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC42D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC42D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC43.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC43D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC43D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC43D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC43D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC43D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC44.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC45.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC46.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC46D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC46D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC46D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC46D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC46D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC47.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC47D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC47D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC47D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC47D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC47D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC48.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC48D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC48D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC48D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC48D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC48D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC49.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC49D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC49D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC49D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC49D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC49D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4AD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4AD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4AD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4AD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4AD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4BD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4BD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4BD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4BD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4BD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4CD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4CD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4CD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4CD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4CD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4DD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4DD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4DD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4DD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4DD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4ED83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4ED83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4ED83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4ED83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4ED83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4FD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4FD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4FD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4FD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC4FD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC50.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC50D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC50D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC50D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC50D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC50D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC51.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC52.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC53.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC54.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC55.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC56.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC57.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC58.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC59.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC5A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC5B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC5C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC5D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC5E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC5F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC60.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC61.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC62.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC63.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC64.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC65.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC66.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC66D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC66D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC66D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC66D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC66D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC67.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC67D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC67D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC67D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC67D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC67D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC68.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC68D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC68D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC68D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC68D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC68D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC69.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC69D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC69D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC69D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC69D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC69D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6ED83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6ED83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6ED83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6ED83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6ED83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC6F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC70.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC70D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC70D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC70D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC70D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC70D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC71.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC71D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC71D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC71D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC71D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC71D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC72.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC72D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC72D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC72D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC72D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC72D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC73.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC73D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC73D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC73D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC73D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC73D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC74.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC74D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC74D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC74D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC74D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC74D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC75.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC75D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC75D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC75D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC75D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC75D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC76.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC76D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC76D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC76D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC76D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC76D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC77.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC77D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC77D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC77D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC77D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC77D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC78.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC78D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC78D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC78D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC78D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC78D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC79.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7CD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7CD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7CD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7CD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7CD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC7F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC80.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC81.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC81D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC81D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC81D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC81D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC81D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC82.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC82D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC82D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC82D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC82D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC82D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC83.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC83D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC83D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC83D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC83D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC83D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC84.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC85.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC85D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC85D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC85D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC85D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC85D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC86.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC86D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC86D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC86D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC86D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC86D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC87.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC87D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC87D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC87D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC87D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC87D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC88.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC89.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC8A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC8B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC8C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC8D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC8E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC8F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC90.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC91.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC92.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC93.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC94.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC95.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC96.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC97.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC98.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC99.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC9A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC9B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC9C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC9D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC9E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDC9F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCA9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAAD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAAD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAAD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAAD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAAD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCAF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCB9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCBA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCBB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCBC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCBD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCBE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCBF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCC9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCCA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCCB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCCC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCCD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCCE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCCF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCD9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCDA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCDB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCDC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCDD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCDE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCDF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCE9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCEA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCEB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCEC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCED.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCEE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCEF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCF9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCFA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDCFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD00.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD01.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD02.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD03.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD04.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD05.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD06.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD07.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD08.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD09.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD0A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD0B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD0C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD0D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD0E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD0F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD10.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD11.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD12.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD13.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD14.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD15.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD16.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD17.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD18.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD19.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD1A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD1B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD1C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD1D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD1E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD1F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD20.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD21.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD22.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD23.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD24.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD25.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD26.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD27.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD28.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD29.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD2A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD2B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD2C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD2D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD2E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD2F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD30.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD31.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD32.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD33.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD34.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD35.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD36.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD37.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD38.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD39.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD3A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD3B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD3C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD3D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD4A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD4B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD4C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD4D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD50.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD51.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD52.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD53.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD54.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD55.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD56.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD57.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD58.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD59.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD5A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD5B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD5C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD5D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD5E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD5F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD60.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD61.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD62.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD63.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD64.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD65.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD66.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD67.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD6F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD73.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD74.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD75.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD76.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD77.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD78.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD87.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD8A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD8B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD8C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD8D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD90.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD90D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD90D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD90D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD90D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD90D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD95.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD95D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD95D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD95D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD95D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD95D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD96.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD96D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD96D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD96D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD96D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDD96D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDBC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDC2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDC3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDC4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDD1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDD2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDD3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDDD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDDE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDE1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDE3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDF3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDFA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDDFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE00.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE01.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE02.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE03.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE04.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE05.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE06.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE07.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE08.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE09.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE0A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE0B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE0C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE0D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE0E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE0F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE10.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE11.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE12.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE13.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE14.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE15.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE16.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE17.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE18.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE19.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE1A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE1B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE1C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE1D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE1E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE1F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE20.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE21.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE22.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE23.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE24.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE25.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE26.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE27.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE28.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE29.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE2A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE2B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE2C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE2D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE2E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE2F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE30.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE31.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE32.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE33.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE34.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE35.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE36.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE37.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE38.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE39.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE3A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE3B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE3C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE3D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE3E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE3F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE40.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE45.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE45D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE45D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE45D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE45D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE45D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE46.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE46D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE46D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE46D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE46D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE46D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE47.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE47D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE47D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE47D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE47D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE47D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE48.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE49.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4BD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4BD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4BD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4BD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4BD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4CD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4CD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4CD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4CD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4CD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4DD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4DD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4DD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4DD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4DD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4ED83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4ED83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4ED83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4ED83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4ED83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4FD83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4FD83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4FD83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4FD83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE4FD83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE80.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE81.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE82.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE83.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE84.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE85.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE86.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE87.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE88.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE89.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE8A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE8B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE8C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE8D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE8E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE8F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE90.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE91.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE92.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE93.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE94.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE95.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE96.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE97.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE98.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE99.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE9A.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE9B.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE9C.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE9D.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE9E.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDE9F.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA3D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA3D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA3D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA3D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA3D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEA9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEAA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEAB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEAC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEAD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEAE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEAF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB4D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB4D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB4D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB4D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB4D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB5D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB5D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB5D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB5D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB5D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB6.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB6D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB6D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB6D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB6D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB6D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB7.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB8.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEB9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEBA.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEBB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEBC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEBD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEBE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEBF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC0D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC0D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC0D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC0D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC0D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEC5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDECB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDECC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDECD.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDECE.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDECF.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE1.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE2.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE3.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE4.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE5.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEE9.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEEB.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEEC.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEF0.png" />
+    <Content Include="Assets\Emoji\Separated\D83DDEF3.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD18D83CDFFB.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD18D83CDFFC.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD18D83CDFFD.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD18D83CDFFE.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD18D83CDFFF.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD80.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD81.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD82.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD83.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDD84.png" />
+    <Content Include="Assets\Emoji\Separated\D83EDDC0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat0_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat1_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat2_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat3_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSpritesLandscape\sprite64_landscape_cat4_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat0_part5.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat1_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part5.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat2_part6.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat3_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat3_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat3_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part0.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part1.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part2.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part3.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part4.png" />
+    <Content Include="Assets\Emoji\SpacedSprites\sprite64_cat4_part5.png" />
+    <Content Include="Assets\light.emoji.abc-WXGA.png" />
+    <Content Include="Assets\light.emoji.backspace-WXGA.png" />
+    <Content Include="Assets\light.emoji.category.1-WXGA.png" />
+    <Content Include="Assets\light.emoji.category.2-WXGA.png" />
+    <Content Include="Assets\light.emoji.category.3-WXGA.png" />
+    <Content Include="Assets\light.emoji.category.4-WXGA.png" />
+    <Content Include="Assets\light.emoji.category.5-WXGA.png" />
+    <Content Include="Assets\light.emoji.recent-WXGA.png" />
+    <Content Include="Assets\light.emoji.sticker-WXGA.png" />
+    <Content Include="Assets\emoji.sticker-WXGA.png" />
+    <Content Include="FlipCycleTileMedium336.png" />
+    <Content Include="FlipCycleTileSmall159.png" />
+    <Content Include="Images\ApplicationBar\appbar.add.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.attach.png" />
+    <Content Include="Images\ApplicationBar\appbar.cancel.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.check.png" />
+    <Content Include="Images\ApplicationBar\appbar.delete.png" />
+    <Content Include="Images\ApplicationBar\appbar.edit.png" />
+    <Content Include="Images\ApplicationBar\appbar.feature.search.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.feature.video.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.forwardmessage.png" />
+    <Content Include="Images\ApplicationBar\appbar.manage.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.map.centerme.png" />
+    <Content Include="Images\ApplicationBar\appbar.map.checkin.png" />
+    <Content Include="Images\ApplicationBar\appbar.refresh.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.save.png" />
+    <Content Include="Images\ApplicationBar\appbar.send.text.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.share.png" />
+    <Content Include="Images\ApplicationBar\appbar.smile.png" />
+    <Content Include="Images\ApplicationBar\appbar.stop.rest.png" />
+    <Content Include="Images\ApplicationBar\appbar.next.png" />
+    <Content Include="Images\ApplicationBar\appbar.transport.play.png" />
+    <Content Include="Images\ApplicationBar\appbar.basecircle.png" />
+    <Content Include="Images\ApplicationBar\appbar.next.light.png" />
+    <Content Include="Images\ApplicationBar\appbar.map.direction.png" />
+    <Content Include="Images\Audio\appbar.basecircle.rest.png" />
+    <Content Include="Images\Audio\appbar.download.rest.png" />
+    <Content Include="Images\Audio\appbar.transport.pause.rest.png" />
+    <Content Include="Images\Audio\appbar.transport.play.rest.png" />
+    <Content Include="Images\Backgrounds\gallery_WXGA.png" />
+    <Content Include="Images\Backgrounds\wallpapercheck_WXGA.png" />
+    <Content Include="Images\Dialogs\broadcast-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.check-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.gas-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.mute-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.commands-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.keyboard-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.customkeyboard-WXGA.png" />
+    <Content Include="Images\Dialogs\passcode.close-WXGA.png" />
+    <Content Include="Images\Dialogs\group-WXGA.png" />
+    <Content Include="Images\Dialogs\passcode.open-WXGA.png" />
+    <Content Include="Images\Dialogs\secretchat-WXGA.png" />
+    <Content Include="Images\LockScreen\lockscreen.logo.png" />
+    <Content Include="Images\LockScreen\lockscreen.logo.white.png" />
+    <Content Include="Images\Maps\4SQ.png" />
+    <Content Include="Images\Messages\channel.broadcast-WXGA.png" />
+    <Content Include="Images\Messages\chat_doc-WXGA.png" />
+    <Content Include="Images\Messages\message.state.views-WXGA.png" />
+    <Content Include="Images\Messages\file.black-WXGA.png" />
+    <Content Include="Images\Messages\file.white-WXGA.png" />
+    <Content Include="Images\Messages\link.png" />
+    <Content Include="Images\Messages\media.black-WXGA.png" />
+    <Content Include="Images\Messages\media.download-WXGA.png" />
+    <Content Include="Images\Messages\media.white-WXGA.png" />
+    <Content Include="Images\Messages\message.state.broadcast.png" />
+    <Content Include="Images\Dialogs\chat.state.read-black-WXGA.png" />
+    <Content Include="Images\Dialogs\chat.state.sent-black-WXGA.png" />
+    <Content Include="Images\Dialogs\secretchat-black-WXGA.png" />
+    <Content Include="Images\Dialogs\secretchat-white-WXGA.png" />
+    <Content Include="Images\LockScreen\lockscreen.png" />
+    <Content Include="Images\Maps\attach-location-black.png" />
+    <Content Include="Images\Maps\Map_Pin.png" />
+    <Content Include="Images\Messages\chat.nomessages-WXGA.png" />
+    <Content Include="Images\Messages\chat.nomessages-white-WXGA.png" />
+    <Content Include="Images\Messages\message.state.read-WXGA.png" />
+    <Content Include="Images\Messages\message.state.sending-WXGA.png" />
+    <Content Include="Images\Messages\message.state.sent-WXGA.png" />
+    <Content Include="Images\Messages\unreadmessages.png" />
+    <Content Include="Images\Messages\message.deletereply.png" />
+    <Content Include="Images\NumericKeyboard\back.png" />
+    <Content Include="Images\NumericKeyboard\back.white.png" />
+    <Content Include="Images\PhoneNumber\changenumber_2x.png" />
+    <Content Include="Images\Placeholder\placeholder.broadcast.png" />
+    <Content Include="Images\Placeholder\placeholder.group.transparent-WXGA.png" />
+    <Content Include="Images\Placeholder\placeholder.user.transparent-WXGA.png" />
+    <Content Include="Images\Startup\intro.1-720p.png" />
+    <Content Include="Images\Startup\intro.2-WXGA.png" />
+    <Content Include="Images\Startup\intro.3-WXGA.png" />
+    <Content Include="Images\Startup\intro.4-WXGA.png" />
+    <Content Include="Images\Startup\intro.5-WXGA.png" />
+    <Content Include="Images\Startup\intro.6-WXGA.png" />
+    <None Include="Properties\WMAppManifest.Private.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\WMAppManifest.Public.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Sounds\Sound2.wav" />
+    <Content Include="Sounds\Sound1.wav" />
+    <Content Include="Sounds\Default.wav" />
+    <Content Include="Sounds\Sound3.wav" />
+    <Content Include="Sounds\Sound4.wav" />
+    <Content Include="Sounds\Sound5.wav" />
+    <Content Include="Sounds\Sound6.wav" />
+    <Content Include="SplashScreenImage.jpg" />
+    <Compile Include="ViewModels\Dialogs\DialogDetailsViewModel.Contact.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExifLib\ExifLib.csproj">
+      <Project>{1E7F202B-8830-42F6-BCDA-2A6C590A7E10}</Project>
+      <Name>ExifLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Telegram.Api\Telegram.Api.csproj">
+      <Project>{0C2F1B61-A8FE-45FB-8538-AA6925A415B6}</Project>
+      <Name>Telegram.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Telegram.Controls\Telegram.Controls.csproj">
+      <Project>{C1E19589-BD32-4DCF-AF58-393AD4D40B4E}</Project>
+      <Name>Telegram.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TelegramClient.ScheduledTaskAgent\TelegramClient.ScheduledTaskAgent.csproj">
+      <Project>{218ABB75-04FB-4E0E-BBB5-69DD36B204B5}</Project>
+      <Name>TelegramClient.ScheduledTaskAgent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.es.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.pt.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.nl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.nl.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.it.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Backgrounds\Dark\" />
+    <Folder Include="Images\Backgrounds\Light\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="BeforeBuild">
+    <Delete Files="Properties\WMAppManifest.xml" />
+    <Copy SourceFiles="Properties\WMAppManifest.Private.xml" DestinationFiles="Properties\WMAppManifest.xml" OverwriteReadOnlyFiles="True" Condition=" '$(Configuration)' == 'Release Private Beta' Or '$(Configuration)' == 'Debug Private Beta'" />
+    <Copy SourceFiles="Properties\WMAppManifest.Public.xml" DestinationFiles="Properties\WMAppManifest.xml" OverwriteReadOnlyFiles="True" Condition=" '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Debug'" />
+  </Target>
+  <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+</Project>

@@ -1,0 +1,354 @@
+﻿<Application 
+    x:Class="TelegramClient.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:telegramClient="clr-namespace:TelegramClient"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    xmlns:resources="clr-namespace:TelegramClient.Resources"
+    xmlns:selectors="clr-namespace:TelegramClient.Helpers.TemplateSelectors"
+    xmlns:dialogs="clr-namespace:TelegramClient.Views.Dialogs"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
+
+    <!--<Application.ApplicationLifetimeObjects>
+        <shell:PhoneApplicationService/>
+    </Application.ApplicationLifetimeObjects>-->
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Default/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <dialogs:CheckDialogTypeConverter x:Key="CheckDialogTypeConverter"/>
+
+            <selectors:ItemsPanelTemplateSelector x:Key="ItemsPanelTemplateSelector"
+                LowMemoryDeviceTemplate="{StaticResource LowMemoryDeviceTemplate}"
+                NormalMemoryDeviceTemplate="{StaticResource NormalMemoryDeviceTemplate}"/>
+
+            <controls:NonBreakingStringConverter x:Key="NonBreakingStringConverter"/>
+            <converters:RecentItemToNameConverter x:Key="RecentItemToNameConverter"/>
+            <resources:LocalizedStrings x:Key="Strings" />
+            <resources:ScaledText x:Key="ScaledText"/>
+            <converters:LowercaseConverter x:Key="Lowercase"/>
+            <converters:UppercaseConverter x:Key="Uppercase"/>
+            <resources:LocalizationConverter x:Key="LocalizationLowercase" Type="Lowercase"/>
+            <resources:LocalizationConverter x:Key="LocalizationUppercase" Type="UpperCase"/>
+            <converters:MaskConverter x:Key="MaskConverter"/>
+
+            <SolidColorBrush x:Key="InputBorderBrushLight" Color="#FFDEE3EA"/>
+            <SolidColorBrush x:Key="InputBorderBrushDark" Color="#CC5D5D5D"/>
+
+            <SolidColorBrush Color="#333333" x:Key="PhoneChromeBrush2" />
+            <SolidColorBrush Color="#0050EF" x:Key="BlueBrush" />
+            <SolidColorBrush  Color="#00BCD4" x:Key="CyanBrush" />
+            <SolidColorBrush  Color="#00AA08" x:Key="GreenBrush" />
+            <SolidColorBrush Color="#F0A30A" x:Key="OrangeBrush" />
+            <SolidColorBrush Color="#F472D0" x:Key="PinkBrush" />
+            <SolidColorBrush Color="#AA00FF" x:Key="PurpleBrush" />
+            <SolidColorBrush Color="#FA6800" x:Key="RedBrush" />
+            <SolidColorBrush  Color="#FBC02D" x:Key="YellowBrush" />
+            <converters:IdToPlaceholderBackgroundConverter x:Key="PlaceholderBackgroundConverter"/>
+            <converters:FileExtToColorConverter x:Key="FileExtToColorConverter"
+                Yellow="{StaticResource YellowBrush}"
+                Green="{StaticResource GreenBrush}"
+                Red="{StaticResource RedBrush}"
+                Blue="{StaticResource BlueBrush}"/>
+            <converters:PlaceholderDefaultImageConverter x:Key="PlaceholderDefaultImageConverter"/>
+            <converters:PlaceholderDefaultTextConverter x:Key="PlaceholderDefaultTextConverter"/>
+            <converters:ContactToVisibilityConverter x:Key="ContactToVisibilityConverter"/>
+
+            <converters:LinkDefaultTextConverter x:Key="LinkDefaultTextConverter"/>
+            <converters:InlineResultDefaultTextConverter x:Key="InlineResultDefaultTextConverter"/>
+            <!--<converters:InvoiceToDescriptionConverter2 x:Key="InvoiceToDescriptionConverter2"/>-->
+
+
+            <selectors:MediaTemplateSelector
+                x:Key="MediaTemplateSelector"
+                EmptyTemplate="{StaticResource MediaEmptyTemplate}"
+                GroupTemplate="{StaticResource GroupTemplate}"
+                CallTemplate="{StaticResource CallTemplate}"
+                StickerTemplate="{StaticResource StickerTemplate}"
+                VenueTemplate="{StaticResource VenueTemplate}"
+                ContactTemplate="{StaticResource ContactTemplate}"
+                PhoneContactTemplate="{StaticResource PhoneContactTemplate}"
+                SecretPhotoTemplate="{StaticResource SecretPhotoTemplate}"
+                PhotoTemplate="{StaticResource PhotoTemplate}"
+                RoundVideoTemplate="{StaticResource RoundVideoTemplate}"
+                SecretVideoTemplate="{StaticResource SecretVideoTemplate}"
+                VideoTemplate="{StaticResource VideoTemplate}"
+                GeoLiveTemplate="{StaticResource LiveGeoPointTemplate}"
+                GeoTemplate="{StaticResource GeoPointTemplate}"
+                DocumentTemplate="{StaticResource DocumentTemplate}"
+                AudioTemplate="{StaticResource AudioTemplate}"
+                WebPageTemplate="{StaticResource WebPageMediaTemplate}"
+                WebPageSmallPhotoTemplate="{StaticResource WebPageSmallPhotoMediaTemplate}"
+                WebPagePhotoTemplate="{StaticResource WebPagePhotoMediaTemplate}"
+                WebPagePendingTemplate="{StaticResource WebPagePendingMediaTemplate}"
+                WebPageGifTemplate="{StaticResource WebPageGifMediaTemplate}"
+                GifTemplate="{StaticResource GifTemplate}"
+                GameGifTemplate="{StaticResource GameGifTemplate}"
+                GameTemplate="{StaticResource GameTemplate}"
+                InvoiceTemplate="{StaticResource InvoiceTemplate}"
+                InvoicePhotoTemplate="{StaticResource InvoicePhotoTemplate}"
+                UnsupportedTemplate="{StaticResource UnsupportedTemplate}"/>
+
+            <selectors:ReplyTemplateSelector
+                x:Key="ReplyTemplateSelector" 
+                WebPageEmptyTemplate="{StaticResource WebPageEmptyTemplate}"
+                WebPageTemplate="{StaticResource WebPageTemplate}"
+                WebPagePendingTemplate="{StaticResource WebPagePendingTemplate}"
+                
+                ForwardedMessagesTemplate="{StaticResource ForwardedMessagesTemplate}"
+                
+                ForwardEmptyTemplate="{StaticResource ForwardEmptyTemplate}"
+                ForwardTextTemplate="{StaticResource ForwardTextTemplate}"
+                ForwardContactTemplate="{StaticResource ForwardContactTemplate}"
+                ForwardGameTemplate="{StaticResource ForwardGameTemplate}"
+                ForwardInvoiceTemplate="{StaticResource ForwardInvoiceTemplate}"
+                ForwardPhotoTemplate="{StaticResource ForwardPhotoTemplate}"
+                ForwardVideoTemplate="{StaticResource ForwardVideoTemplate}"
+                ForwardRoundVideoTemplate="{StaticResource ForwardRoundVideoTemplate}"
+                ForwardGeoPointTemplate="{StaticResource ForwardGeoPointTemplate}"
+                ForwardLiveGeoPointTemplate="{StaticResource ForwardLiveGeoPointTemplate}"
+                ForwardDocumentTemplate="{StaticResource ForwardDocumentTemplate}"
+                ForwardGifTemplate="{StaticResource ForwardGifTemplate}"
+                ForwardStickerTemplate="{StaticResource ForwardStickerTemplate}"
+                ForwardAudioTemplate="{StaticResource ForwardAudioTemplate}"
+                ForwardVoiceMessageTemplate="{StaticResource ForwardVoiceMessageTemplate}"
+                ForwardUnsupportedTemplate="{StaticResource ForwardUnsupportedTemplate}"
+                
+                ReplyServiceTextTemplate="{StaticResource ReplyServiceTextTemplate}"
+                ReplyServicePhotoTemplate="{StaticResource ReplyServicePhotoTemplate}"
+                
+                ReplyEmptyTemplate="{StaticResource ReplyEmptyTemplate}"
+                ReplyLoadingTemplate="{StaticResource ReplyLoadingTemplate}"
+                ReplyTextTemplate="{StaticResource ReplyTextTemplate}"
+                ReplyContactTemplate="{StaticResource ReplyContactTemplate}"
+                ReplyPhotoTemplate="{StaticResource ReplyPhotoTemplate}"
+                ReplyInvoiceTemplate="{StaticResource ReplyInvoiceTemplate}"
+                ReplyGameTemplate="{StaticResource ReplyGameTemplate}"
+                ReplyVideoTemplate="{StaticResource ReplyVideoTemplate}"
+                ReplyRoundVideoTemplate="{StaticResource ReplyRoundVideoTemplate}"
+                ReplyGeoPointTemplate="{StaticResource ReplyGeoPointTemplate}"
+                ReplyLiveGeoPointTemplate="{StaticResource ReplyLiveGeoPointTemplate}"
+                ReplyDocumentTemplate="{StaticResource ReplyDocumentTemplate}"
+                ReplyGifTemplate="{StaticResource ReplyGifTemplate}"
+                ReplyStickerTemplate="{StaticResource ReplyStickerTemplate}"
+                ReplyAudioTemplate="{StaticResource ReplyAudioTemplate}"
+                ReplyVoiceMessageTemplate="{StaticResource ReplyVoiceMessageTemplate}"
+                ReplyUnsupportedTemplate="{StaticResource ReplyUnsupportedTemplate}"
+                
+                EditTextTemplate="{StaticResource EditTextTemplate}"
+                EditContactTemplate="{StaticResource EditContactTemplate}"
+                EditPhotoTemplate="{StaticResource EditPhotoTemplate}"
+                EditVideoTemplate="{StaticResource EditVideoTemplate}"
+                EditRoundVideoTemplate="{StaticResource EditRoundVideoTemplate}"
+                EditGeoPointTemplate="{StaticResource EditGeoPointTemplate}"
+                EditLiveGeoPointTemplate="{StaticResource EditLiveGeoPointTemplate}"
+                EditDocumentTemplate="{StaticResource EditDocumentTemplate}"
+                EditGifTemplate="{StaticResource EditGifTemplate}"
+                EditStickerTemplate="{StaticResource EditStickerTemplate}"
+                EditAudioTemplate="{StaticResource EditAudioTemplate}"
+                EditVoiceMessageTemplate="{StaticResource EditVoiceMessageTemplate}"
+                EditUnsupportedTemplate="{StaticResource EditUnsupportedTemplate}"/>
+
+            <selectors:PinnedMessageTemplateSelector
+                x:Key="PinnedMessageTemplateSelector"
+                PinnedEmptyTemplate="{StaticResource PinnedEmptyTemplate}"
+                PinnedTextTemplate="{StaticResource PinnedTextTemplate}"
+                PinnedContactTemplate="{StaticResource PinnedContactTemplate}"
+                PinnedInvoiceTemplate="{StaticResource PinnedInvoiceTemplate}"
+                PinnedGameTemplate="{StaticResource PinnedGameTemplate}"
+                PinnedPhotoTemplate="{StaticResource PinnedPhotoTemplate}"
+                PinnedVideoTemplate="{StaticResource PinnedVideoTemplate}"
+                PinnedRoundVideoTemplate="{StaticResource PinnedRoundVideoTemplate}"
+                PinnedGeoPointTemplate="{StaticResource PinnedGeoPointTemplate}"
+                PinnedLiveGeoPointTemplate="{StaticResource PinnedLiveGeoPointTemplate}"
+                PinnedDocumentTemplate="{StaticResource PinnedDocumentTemplate}"
+                PinnedGifTemplate="{StaticResource PinnedGifTemplate}"
+                PinnedStickerTemplate="{StaticResource PinnedStickerTemplate}"
+                PinnedAudioTemplate="{StaticResource PinnedAudioTemplate}"
+                PinnedVoiceMessageTemplate="{StaticResource PinnedVoiceMessageTemplate}"
+                PinnedClearHistoryTemplate="{StaticResource PinnedClearHistoryTemplate}"
+                PinnedUnsupportedTemplate="{StaticResource PinnedUnsupportedTemplate}"/>
+
+            <selectors:DecryptedReplyTemplateSelector
+                x:Key="DecryptedReplyTemplateSelector" 
+                
+                WebPageEmptyTemplate="{StaticResource WebPageEmptyTemplate}"
+                WebPageTemplate="{StaticResource WebPageTemplate}"
+                WebPagePendingTemplate="{StaticResource WebPagePendingTemplate}"
+                
+                ForwardedMessagesTemplate="{StaticResource ForwardedMessagesTemplate}"
+                
+                ForwardEmptyTemplate="{StaticResource ForwardEmptyTemplate}"
+                ForwardTextTemplate="{StaticResource ForwardTextTemplate}"
+                ForwardContactTemplate="{StaticResource ForwardContactTemplate}"
+                ForwardPhotoTemplate="{StaticResource ForwardPhotoTemplate}"
+                ForwardVideoTemplate="{StaticResource ForwardVideoTemplate}"
+                ForwardGeoPointTemplate="{StaticResource ForwardGeoPointTemplate}"
+                ForwardDocumentTemplate="{StaticResource ForwardDocumentTemplate}"
+                ForwardGifTemplate="{StaticResource ForwardGifTemplate}"
+                ForwardStickerTemplate="{StaticResource ForwardStickerTemplate}"
+                ForwardAudioTemplate="{StaticResource ForwardAudioTemplate}"
+                ForwardVoiceMessageTemplate="{StaticResource ForwardVoiceMessageTemplate}"
+                ForwardUnsupportedTemplate="{StaticResource ForwardUnsupportedTemplate}"
+                
+                ReplyServiceTextTemplate="{StaticResource ReplyServiceTextTemplate}"
+                ReplyServicePhotoTemplate="{StaticResource ReplyServicePhotoTemplate}"
+                
+                ReplyEmptyTemplate="{StaticResource ReplyEmptyTemplate}"
+                ReplyLoadingTemplate="{StaticResource ReplyLoadingTemplate}"
+                ReplyTextTemplate="{StaticResource ReplyTextTemplate}"
+                ReplyWebPageTemplate="{StaticResource ReplyWebPageTemplate}"
+                ReplyContactTemplate="{StaticResource ReplyContactTemplate}"
+                ReplyPhotoTemplate="{StaticResource ReplyPhotoTemplate}"
+                ReplySecretPhotoTemplate="{StaticResource ReplySecretPhotoTemplate}"
+                ReplyVideoTemplate="{StaticResource ReplyVideoTemplate}"
+                ReplyGeoPointTemplate="{StaticResource ReplyGeoPointTemplate}"
+                ReplyDocumentTemplate="{StaticResource ReplyDocumentTemplate}"
+                ReplyGifTemplate="{StaticResource ReplyGifTemplate}"
+                ReplyStickerTemplate="{StaticResource ReplyStickerTemplate}"
+                ReplyAudioTemplate="{StaticResource ReplyAudioTemplate}"
+                ReplyVoiceMessageTemplate="{StaticResource ReplyVoiceMessageTemplate}"
+                ReplyUnsupportedTemplate="{StaticResource ReplyUnsupportedTemplate}"/>
+
+            <converters:DialogDetailsBackgroundConverter 
+                x:Key="DialogDetailsBackgroundConverter"
+                EmptyTemplate="{StaticResource EmptyTemplate}"
+                ImageTemplate="{StaticResource ImageBackgroundTemplate}"
+                AnimatedTemplate="{StaticResource AnimatedBackgroundTemplate}"/>
+
+            <converters:InvoiceToDescriptionConverter x:Key="InvoiceToDescriptionConverter"/>
+            <converters:WebPageToDescriptionConverter x:Key="WebPageToDescriptionConverter"/>
+            <converters:WebPageToCaptionConverter x:Key="WebPageToCaptionConverter"/>
+            <converters:MessageToWebPageCaptionConverter x:Key="MessageToWebPageCaptionConverter"/>
+            <converters:MessageContainerToFromConverter x:Key="MessageContainerToFromConverter"/>
+            <converters:MessageContainerToContentConverter x:Key="MessageContainerToContentConverter"/>
+            <converters:DownloadMessageToVisibilityConverter x:Key="DownloadMessageToVisibilityConverter"/>
+            <converters:DownloadMediaToVisibilityConverter x:Key="DownloadMediaToVisibilityConverter"/>
+            <converters:UserToActionStringConverter x:Key="UserToActionStringConverter"/>
+            <converters:DebugVisibilityConverter x:Key="DebugVisibilityConverter"/>
+            <converters:EmptyChatPhotoToVisibilityConverter x:Key="EmptyChatPhotoToVisibilityConverter"/>
+            <converters:EmptyUserProfilePhotoToVisibilityConverter x:Key="EmptyPhotoToVisibilityConverter"/>
+            <converters:PrivateBetaToVisibilityConverter x:Key="PrivateBetaToVisibilityConverter"/>
+            <converters:PrivateBetaIdentityToVisibilityConverter x:Key="PrivateBetaIdentityNameToVisibilityConverter"/>
+            <converters:LogVisibilityConverter x:Key="LogVisibilityConverter"/>
+            <converters:TestBindingConverter x:Key="TestBindingConverter"/>
+            <converters:MediaSizeConverter x:Key="MediaSizeConverter"/>
+            <converters:FileSizeConverter x:Key="FileSizeConverter"/>
+            <converters:MessageViewsConverter x:Key="MessageViewsConverter"/>
+            <converters:FileNameConverter x:Key="FileNameConverter"/>
+            <converters:PhoneNumberConverter x:Key="PhoneNumberConverter"/>
+            <converters:PhoneCallToTitleConverter x:Key="PhoneCallToTitleConverter"/>
+            <converters:PhoneCallToSubtitleConverter x:Key="PhoneCallToSubtitleConverter"/>
+            <converters:SimplePhoneNumberConverter x:Key="SimplePhoneNumberConverter"/>
+            <converters:IsSelectedToBackgroundConverter x:Key="IsSelectedToBackgroundConverter"/>
+            <converters:ChatToMaxHeight x:Key="ChatToMaxHeight"/>
+            <converters:WP8VisibilityConverter x:Key="WP8VisibilityConverter"/>
+            <converters:WP81VisibilityConverter x:Key="WP81VisibilityConverter"/>
+            <converters:NotServiceMessageToVisibilityConverter x:Key="NotServiceMessageToVisibilityConverter"/>
+            <converters:TextMessageToVisibilityConverter x:Key="TextMessageToVisibilityConverter"/>
+            <converters:MediaFileAvailableToVisibilityConverter x:Key="MediaFileAvailableToVisibilityConverter"/>
+            <converters:ChatToVisibilityConverter x:Key="ChatToVisibilityConverter"/>
+            <converters:GroupToBackgroundBrushValueConverter x:Key="GroupBackground"/>
+            <converters:GroupToForegroundBrushValueConverter x:Key="GroupForeground"/>
+            <converters:StringEqualsToVisibilityConverter IsInvert="True" x:Key="GroupVisibilityConverter"/>
+            <converters:StringEqualsToVisibilityConverter IsInvert="False" x:Key="TelegramGroupVisibilityConverter"/>
+            <converters:DistanceAwayConverter x:Key="DistanceAwayConverter"/>
+            <converters:GeoLocationToVisibilityConverter x:Key="GeoLocationToVisibilityConverter"/>
+            <converters:DialogCaptionConverter x:Key="DialogCaptionConverter"/>
+            <converters:PhotoBytesToImageConverter x:Key="PhotoBytesToImageConverter"/>
+            <converters:UserStatusToStringConverter x:Key="UserStatusToStringConverter"/>
+            <converters:EditDateToStringConverter x:Key="EditDateToStringConverter"/>
+            <converters:MuteUntilToStringConverter x:Key="MuteUntilToStringConverter"/>
+            <converters:ViaBotToStringConverter x:Key="ViaBotToStringConverter"/>
+            <converters:DecryptedViaBotToStringConverter x:Key="DecryptedViaBotToStringConverter"/>
+            <converters:MuteUntilToBoolConverter x:Key="MuteUntilToBoolConverter"/>
+            <converters:UserStatusToBrushConverter x:Key="UserStatusToBrushConverter"/>
+            <converters:EmptyStringToVisibilityConverter x:Key="EmptyStringToVisibilityConverter"/>
+            <converters:EmptyTLStringToVisibilityConverter x:Key="EmptyTLStringToVisibilityConverter"/>
+            <converters:StringFormatConverter String="{Binding Resources.ViewUser, Source={StaticResource Strings}}" x:Key="ViewUserString"/>
+            <converters:StringFormatConverter String="{Binding Resources.MessageUser, Source={StaticResource Strings}}" x:Key="MessageUserString"/>
+            <converters:ProgressToVisibilityConverter x:Key="ProgressToVisibilityConverter"/>
+            <converters:ProgressBetween0and1ToVisibilityConverter x:Key="ProgressBetween0and1ToVisibilityConverter"/>
+            <converters:StatusToImageConverter x:Key="StatusToImageConverter"/>
+            <converters:ExistsToVisibilityConverter x:Key="ExistsToVisibilityConverter"/>
+            <converters:ServiceMessageToTextConverter x:Key="ServiceMessageToTextConverter"/>
+            <converters:DecryptedServiceMessageToTextConverter x:Key="DecryptedServiceMessageToTextConverter"/>
+            <converters:UnreadMessageConverter x:Key="UnreadMessageConverter"/>
+            <converters:PhotoToDimensionConverter x:Key="PhotoToDimensionConverter"/>
+            <converters:PhotoToDimensionConverter x:Key="FullPhotoToDimensionConverter" MaxDimension="480"/>
+            <converters:VideoToDimensionConverter x:Key="VideoToDimensionConverter"/>
+            <converters:DocumentToDimensionConverter x:Key="DocumentToDimensionConverter"/>
+            <converters:StickerToDimensionConverter x:Key="StickerToDimensionConverter"/>
+            <converters:StickerPreviewToDimensionConverter x:Key="StickerPreviewToDimensionConverter"/>
+            <converters:GifToDimensionConverter x:Key="GifToDimensionConverter"/>
+            <converters:WebPageGifToDimensionConverter x:Key="WebPageGifToDimensionConverter"/>
+            <converters:WebPageToDimensionConverter x:Key="WebPageToDimensionConverter"/>
+            <converters:GameToDimensionConverter x:Key="GameToDimensionConverter"/>
+            <converters:InvoiceToDimensionConverter x:Key="InvoiceToDimensionConverter"/>
+            <converters:PhotoToThumbConverter x:Key="PhotoToThumbConverter"/>
+            <converters:PhotoToThumbConverter x:Key="SecretPhotoToThumbConverter" Secret="True"/>
+            <converters:GeoPointToStaticGoogleMapsConverter2 Width="96" Height="96" x:Key="VenueToStaticGoogleMapsConverter"/>
+            <converters:GeoPointToStaticGoogleMapsConverter3 Width="96" Height="96" x:Key="VenueToStaticGoogleMapsConverter2"/>
+            <converters:GeoPointToStaticGoogleMapsConverter Width="320" Height="188" x:Key="GeoPointToStaticGoogleMapsConverter"/>
+            <converters:GeoPointToStaticGoogleMapsConverter2 Width="320" Height="188" x:Key="GeoPointToStaticGoogleMapsConverter2"/>
+            <converters:GeoPointToStaticGoogleMapsConverter3 Width="320" Height="188" x:Key="GeoPointToStaticGoogleMapsConverter3"/>
+            <converters:GeoPointToStaticGoogleMapsConverter Width="50" Height="50" x:Key="ReplyGeoPointToStaticGoogleMapsConverter"/>
+            <converters:MediaEmptyToVisibilityConverter x:Key="MediaEmptyToVisibilityConverter"/>
+            <converters:UserStatusToVisibilityConverter x:Key="UserStatus"/>
+            <converters:DialogToBriefInfoConverter x:Key="DialogToBriefInfo"/>
+            <converters:MessageStateToForegroundConverter x:Key="MessageForeground"/>
+            <converters:DialogToForegroundConverter x:Key="DialogForeground"/>
+            <converters:OverlayAccentBrushConverter AccentColor="{StaticResource PhoneAccentColor}" x:Key="OverlayAccentBrush"/>
+            <converters:BooleanToValueConverter x:Key="IsAnimatedToScaleConverter" TrueValue="0.0" FalseValue="1.0"/>
+            <converters:MessageStatusConverter x:Key="MessageStatusConverter"/>
+            <converters:StringEqualsToVisibilityConverter x:Key="StringEqualsToVisibilityConverter"/>
+            <converters:CountToVisibilityConverter x:Key="CountMoreThanToVisibilityConverter" Type="MoreThan"/>
+            <converters:CountToVisibilityConverter x:Key="CountEqualsToVisibilityConverter" Type="Equals"/>
+            <converters:DefaultPhotoConverter x:Key="DefaultPhotoConverter" CheckChatSettings="True"/>
+            <converters:DefaultPhotoConverter x:Key="ForcePhotoConverter" CheckChatSettings="False"/>
+            <converters:PhotoConverter x:Key="PhotoConverter"/>
+            <converters:ProfileBigPhotoConverter x:Key="ProfileBigPhotoConverter"/>
+            <converters:ProfileSmallPhotoConverter x:Key="ProfileSmallPhotoConverter"/>
+            <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
+            <converters:InvertVisibilityConverter x:Key="InvertVisibilityConverter"/>
+            <converters:DialogMessageFromConverter x:Key="DialogMessageFromConverter"/>
+            <converters:MessageToFontFamilyConverter x:Key="MessageToFontFamilyConverter"/>
+            <converters:EmptyDialogMessageConverter x:Key="EmptyDialogMessageConverter"/>
+            <converters:SecretChatsAvailabilityConverter x:Key="SecretChatsAvailabilityConverter"/>
+            <converters:SecretChatsForegroundConverter x:Key="SecretChatsForegroundConverter"/>
+            <converters:DialogStatusEqualsToVisibilityConverter x:Key="DialogStatusEqualsToVisibilityConverter"/>
+            <converters:TextSizeToVisibilityConverter x:Key="TextSizeToVisibilityConverter"/>
+            <converters:DraftToVisibilityConverter x:Key="DraftToVisibilityConverter"/>
+            <converters:ShowFromVisibilityConverter x:Key="ShowFromVisibilityConverter"/>
+            <converters:DialogToMessageStatusVisibilityConverter x:Key="DialogToMessageStatusVisibilityConverter"/>
+            <converters:UnreadCountToVisibilityConverter x:Key="UnreadCountToVisibilityConverter"/>
+            <converters:StickerSetToCountStringConverter x:Key="StickerSetToCountStringConverter"/>
+            <converters:ReplyMarkupButtonVisibilityConverter x:Key="ReplyMarkupButtonVisibilityConverter"/>
+
+            <converters:DialogTLIntToDateTimeConverter x:Key="DialogDateTimeConverter" 
+        		TodayFormat="{Binding Resources.TodayFormat, Source={StaticResource Strings}}"       
+        		WeekFormat="ddd" 
+        		RegularFormat="{Binding Resources.RegularFormat, Source={StaticResource Strings}}"
+        		LongRegularFormat="{Binding Resources.LongRegularFormat, Source={StaticResource Strings}}"/>
+
+            <converters:DraftDialogTLIntToDateTimeConverter x:Key="DraftDialogDateTimeConverter" 
+        		TodayFormat="{Binding Resources.TodayFormat, Source={StaticResource Strings}}"       
+        		WeekFormat="ddd" 
+        		RegularFormat="{Binding Resources.RegularFormat, Source={StaticResource Strings}}"
+        		LongRegularFormat="{Binding Resources.LongRegularFormat, Source={StaticResource Strings}}"/>
+
+            <converters:TLIntToDateTimeConverter x:Key="MessageDateTimeConverter" 
+        		TodayFormat="{Binding Resources.MessageTodayFormat, Source={StaticResource Strings}}" 
+        		RegularFormat="{Binding Resources.MessageRegularFormat, Source={StaticResource Strings}}"
+        		LongRegularFormat="{Binding Resources.MessageLongRegularFormat, Source={StaticResource Strings}}"/>
+
+            <telegramClient:Bootstrapper x:Key="Bootstrapper"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

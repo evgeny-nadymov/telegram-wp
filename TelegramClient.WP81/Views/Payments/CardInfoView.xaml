@@ -1,0 +1,133 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Payments.CardInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:behaviors="clr-namespace:TelegramClient.Behaviors"
+    xmlns:telegramClient="clr-namespace:TelegramClient"
+    xmlns:cal="http://www.caliburnproject.org"
+    xmlns:payments="clr-namespace:TelegramClient.Views.Payments"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FFE3F4FF"
+    shell:SystemTray.IsVisible="True"
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <i:Interaction.Behaviors>
+            <ec:DataStateBehavior Binding="{Binding IsWorking}" Value="True" TrueState="Working" FalseState="Normal"/>
+        </i:Interaction.Behaviors>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MainGroup">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Working">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="Validate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="SavePaymentInformation">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsHitTestVisible)" Storyboard.TargetName="ContentPanel">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,0">
+            <TextBlock Text="{Binding Resources.PaymentInfo, Converter={StaticResource Uppercase}, Source={StaticResource Strings}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="ContentPanel" Margin="6,0" Visibility="{Binding PaymentInfo.Form.IsNativeProvider, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <StackPanel>
+                    <TextBlock Text="{Binding Resources.PaymentCard, Source={StaticResource Strings}}" FontSize="23" Foreground="{StaticResource TelegramTextAccentBrush}" Margin="12,18,12,0"/>
+                    <controls1:LabeledTextBox x:Name="CardNumberLabel" InputScope="Number" Label="{Binding Resources.CardNumber, Source={StaticResource Strings}}" Text="{Binding CardNumber, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:FocusNextElementOnEnterBehavior NextControl="{Binding ElementName=ExpirationDateLabel}"/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <controls1:LabeledTextBox x:Name="ExpirationDateLabel" InputScope="Number" MaxLength="5" Label="{Binding Resources.MMYY, Source={StaticResource Strings}}" Text="{Binding ExpirationDate, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:FocusNextElementOnEnterBehavior NextControl="{Binding ElementName=CardholderNameLabel}"/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <controls1:LabeledTextBox x:Name="CardholderNameLabel" InputScope="PersonalFullName" Label="{Binding Resources.NameSurname, Source={StaticResource Strings}}" Text="{Binding CardholderName, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:FocusNextElementOnEnterBehavior NextControl="{Binding ElementName=SecurityCodeLabel}"/>
+                        </i:Interaction.Behaviors>
+                    </controls1:LabeledTextBox>
+                    <controls1:LabeledPasswordBox x:Name="SecurityCodeLabel" MaxLength="3" Label="{Binding Resources.SecurityCode, Source={StaticResource Strings}}" Password="{Binding SecurityCode, Mode=TwoWay}" KeyDown="SecurityCodeLabel_OnKeyDown"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="{Binding Resources.BillingAddress, Source={StaticResource Strings}}" FontSize="23" Foreground="{StaticResource TelegramTextAccentBrush}" Margin="12,18,12,0"/>
+                    <Button x:Name="SelectCountry" HorizontalContentAlignment="Stretch" Padding="15,4,15,4" FontSize="23" FontFamily="{StaticResource PhoneFontFamilyNormal}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="1" Data="M0,0 9,9 18,0" Stroke="{StaticResource PhoneForegroundBrush}" StrokeThickness="2" VerticalAlignment="Center"/>
+                            <TextBlock Visibility="{Binding SelectedCountry, Converter={StaticResource ExistsToVisibilityConverter}}" Text="{Binding SelectedCountry.Name}"/>
+                            <TextBlock Visibility="{Binding SelectedCountry, Converter={StaticResource ExistsToVisibilityConverter}, ConverterParameter=invert}" Text="{Binding Resources.Country, Source={StaticResource Strings}}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                        </Grid>
+                    </Button>
+                    <controls1:LabeledTextBox x:Name="PostCodeLabel" Label="{Binding Resources.Postcode, Source={StaticResource Strings}}" Text="{Binding PostCode, Mode=TwoWay}" KeyDown="PostCodeLabel_OnKeyDown"/>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding SavePaymentInformationFormVisibility}">
+                    <CheckBox x:Name="SavePaymentInformation" Margin="0,18,0,0" IsChecked="{Binding SavePaymentInformation, Mode=TwoWay}" IsEnabled="{Binding PaymentInfo.Form.PasswordMissing, Converter={StaticResource InvertBooleanConverter}}" Content="{Binding Resources.SavePaymentInformation, Source={StaticResource Strings}}"/>
+                    <TextBlock Text="{Binding Resources.SavePaymentInformationHint, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <TextBlock Visibility="{Binding PaymentInfo.Form.PasswordMissing, Converter={StaticResource BooleanToVisibilityConverter}}" cal:Message.Attach="[Event Tap] = [Action OpenTwoStepVerification]" payments:CardInfoView.FormattedText="{Binding Resources.TurnOnTwoStepVerification, Source={StaticResource Strings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </StackPanel>
+                <Button x:Name="Validate" Margin="0,38,0,0" Width="204" Content="{Binding Resources.Next, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" HorizontalAlignment="Left"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</views:TelegramViewBase>

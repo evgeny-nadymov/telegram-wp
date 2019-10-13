@@ -1,0 +1,274 @@
+﻿<UserControl x:Class="TelegramClient.Views.Dialogs.InlineBotResultsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:templateSelectors="clr-namespace:TelegramClient.Helpers.TemplateSelectors"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    xmlns:controls="clr-namespace:Telegram.Controls;assembly=Telegram.Controls"
+    xmlns:additional="clr-namespace:TelegramClient.Views.Additional"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:emojiPanel="clr-namespace:Telegram.EmojiPanel"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Opacity="0.0"
+    Loaded="InlineBotResultsView_OnLoaded"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="HintsBorderBrushLight" Color="#FFE7E9EB"/>
+        <SolidColorBrush x:Key="HintsBorderBrushDark" Color="#FF333333"/>
+        <SolidColorBrush x:Key="HintsBackgroundBrushLight" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="HintsBackgroundBrushDark" Color="#FF1F1F1F"/>
+
+        <converters:InlineBotResultToWidthConverter x:Key="InlineBotResultToWidthConverter"/>
+        <converters:InlineBotResultPhotoConverter x:Key="InlineBotResultPhotoConverter"/>
+
+        <DataTemplate x:Key="StickerResultTemplate">
+            <Grid Margin="2,3,1,3">
+                <Image Source="{Binding Self, Converter={StaticResource DefaultPhotoConverter}}" Stretch="UniformToFill" 
+                       Height="{Binding Document, Converter={StaticResource StickerPreviewToDimensionConverter}, ConverterParameter=Height}" 
+                       Width="{Binding Document, Converter={StaticResource StickerPreviewToDimensionConverter}, ConverterParameter=Width}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ContactResultTemplate">
+            <Grid Margin="0,6" MaxWidth="323">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <views:ConversationTileControl Size="64" 
+                    Margin="0" Grid.RowSpan="2" VerticalAlignment="Top"
+                    Source="{Binding SendMessage.User.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                    Fill="{Binding SendMessage.User.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                    Text="{Binding SendMessage.User, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="16,0,0,0" TextWrapping="NoWrap" TextTrimming="WordEllipsis" VerticalAlignment="Bottom" Text="{Binding SendMessage.User.FullName}" FontWeight="SemiBold" FontSize="{Binding DefaultFontSizeSmall, Source={StaticResource ScaledText}}" MaxHeight="27"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="16,0,0,0" TextWrapping="NoWrap" TextTrimming="WordEllipsis" VerticalAlignment="Top" Text="{Binding SendMessage.PhoneNumber, Converter={StaticResource SimplePhoneNumberConverter}}" Opacity="0.6" FontSize="{Binding DefaultFontSizeSmall, Source={StaticResource ScaledText}}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GeoResultTemplate">
+            <Grid Margin="3" Width="100" Height="100">
+                <Border Background="Black" Opacity="0.4"/>
+                <Image Stretch="UniformToFill" Source="{Binding SendMessage.Geo, Converter={StaticResource GeoPointToStaticGoogleMapsConverter}}"/>
+                <Path Fill="#60B0E8" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Data="M14,0 C6.26,0 0,6.26 0,14 C0,24.5 14,40 14,40 C14,40 28,24.5 28,14 C28,6.26 21.74,0 14,0 L14,0 Z M14,19 C11.24,19 9,16.76 9,14 C9,11.24 11.24,9 14,9 C16.76,9 19,11.24 19,14 C19,16.76 16.76,19 14,19 L14,19 Z">
+                    <Path.RenderTransform>
+                        <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="VenueResultTemplate">
+            <Grid Margin="18,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" Opacity="0.4"/>
+                    <Image Source="{Binding SendMessage.Geo, Converter={StaticResource GeoPointToStaticGoogleMapsConverter}}" Stretch="UniformToFill"/>
+                </Grid>
+                <TextBlock Margin="18,0,0,0" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" Text="{Binding SendMessage.Title}" FontSize="{Binding DefaultFontSizeLarge, Source={StaticResource ScaledText}}" MaxHeight="36" TextTrimming="WordEllipsis"/>
+                <TextBlock Margin="18,0,0,0" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SendMessage.Address}" Opacity="0.6" FontSize="{Binding DefaultFontSizeSmall, Source={StaticResource ScaledText}}" MaxHeight="72" TextTrimming="WordEllipsis"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AudioResultTemplate">
+            <Grid Margin="18,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse x:Name="Ellipse" Grid.RowSpan="2" Height="64" Width="64" Fill="{StaticResource TelegramBadgeAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid x:Name="Icon" Grid.RowSpan="2">
+                    <Path x:Name="MusicIcon" Fill="#FFFFFFFF" Data="F1 M0,0 L0,30 L23,15" Margin="7,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <TextBlock Grid.Column="1" Grid.Row="0" Margin="18,0,0,0" Text="{Binding Title}" FontSize="{Binding DefaultFontSizeLarge, Source={StaticResource ScaledText}}" MaxHeight="36" TextTrimming="WordEllipsis"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="18,0,0,0" Text="{Binding Description}" Opacity="0.6" FontSize="{Binding DefaultFontSizeSmall, Source={StaticResource ScaledText}}" MaxHeight="27" TextTrimming="WordEllipsis"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GameResultTemplate">
+            <Grid Margin="18,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" Opacity="0.4"/>
+                    <TextBlock FontSize="{Binding DefaultFontSizeLarge, Source={StaticResource ScaledText}}" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding Converter={StaticResource InlineResultDefaultTextConverter}}"/>
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding Self, Converter={StaticResource InlineBotResultPhotoConverter}}" Stretch="UniformToFill"/>
+                </Grid>
+                <TextBlock Margin="18,0,0,0" Grid.Column="1" Grid.Row="0" Text="{Binding Title}" FontSize="{Binding DefaultFontSizeLarge, Source={StaticResource ScaledText}}" MaxHeight="72" TextTrimming="WordEllipsis"/>
+                <emojiPanel:TelegramRichTextBox Grid.Column="1" Grid.Row="1"
+                    Margin="6,0,0,0"
+                    emojiPanel:BrowserNavigationService.SuppressParsing="True"
+                    Text="{Binding Description}"
+                    MaxHeight="81"
+                    Foreground="{StaticResource PhoneSubtleBrush}"
+                    HorizontalAlignment="Stretch"
+                    FontSize="{Binding DefaultFontSizeSmall, Source={StaticResource ScaledText}}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BotResultTemplate">
+            <Grid Margin="18,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" Opacity="0.4"/>
+                    <TextBlock FontSize="{Binding DefaultFontSizeLarge, Source={StaticResource ScaledText}}" Margin="0,-2,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding Converter={StaticResource InlineResultDefaultTextConverter}}"/>
+                    <Image Source="{Binding ThumbUrlString}" Stretch="UniformToFill"/>
+                </Grid>
+                <TextBlock Margin="18,0,0,0" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" Text="{Binding Title}" FontSize="{Binding DefaultFontSizeLarge, Source={StaticResource ScaledText}}" MaxHeight="72" TextTrimming="WordEllipsis"/>
+                <emojiPanel:TelegramRichTextBox Grid.Column="1" Grid.Row="1"
+                    Margin="6,0,0,0"
+                    emojiPanel:BrowserNavigationService.SuppressParsing="True"
+                    Text="{Binding Description}"
+                    MaxHeight="81"
+                    Foreground="{StaticResource PhoneSubtleBrush}"
+                    HorizontalAlignment="Stretch"
+                    FontSize="{Binding DefaultFontSizeSmall, Source={StaticResource ScaledText}}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PhotoTemplate">
+            <Grid Height="118" Margin="3" Width="{Binding Converter={StaticResource InlineBotResultToWidthConverter}}">
+                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" Opacity="0.4"/>
+                <Image Source="{Binding Self, Converter={StaticResource InlineBotResultPhotoConverter}}" Stretch="UniformToFill"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PhotoResultTemplate">
+            <Grid Height="118" Margin="3" Width="{Binding Converter={StaticResource InlineBotResultToWidthConverter}}">
+                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" Opacity="0.4"/>
+                <Image Source="{Binding ThumbUrlString}" Stretch="UniformToFill"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GifTemplate">
+            <Grid Height="118" Margin="3">
+                <additional:GifPlayerControl
+                    Mode="InlineResult"
+                    Margin="0"
+                    Width="{Binding Converter={StaticResource InlineBotResultToWidthConverter}}" 
+                    Height="118"
+                    SuppressManipulationStarted="False"
+                    Media="{Binding ThumbSelf}"
+                    Progress="{Binding DownloadingProgress}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GifResultTemplate">
+            <Grid Height="118" Margin="3">
+                <additional:GifPlayerControl  
+                    Mode="InlineResult"
+                    Margin="0"
+                    Width="{Binding Converter={StaticResource InlineBotResultToWidthConverter}}" 
+                    Height="118"
+                    SuppressManipulationStarted="False"
+                    Media="{Binding ThumbSelf}"
+                    Progress="{Binding DownloadingProgress}"/>
+            </Grid>
+        </DataTemplate>
+
+        <templateSelectors:InlineBotResultTemplateSelector 
+                x:Key="InlineBotResultTemplateSelector"
+                ResultTemplate="{StaticResource BotResultTemplate}"
+                PhotoTemplate="{StaticResource PhotoTemplate}"
+                PhotoResultTemplate="{StaticResource PhotoResultTemplate}"
+                GifTemplate="{StaticResource GifTemplate}"
+                GifResultTemplate="{StaticResource GifResultTemplate}"
+                GeoResultTemplate="{StaticResource GeoResultTemplate}"
+                VenueResultTemplate="{StaticResource VenueResultTemplate}"
+                ContactResultTemplate="{StaticResource ContactResultTemplate}"
+                StickerResultTemplate="{StaticResource StickerResultTemplate}"
+                AudioResultTemplate="{StaticResource AudioResultTemplate}"
+                GameResultTemplate="{StaticResource GameResultTemplate}"/>
+    </UserControl.Resources>
+    
+    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <Grid x:Name="InlineBotResultsPanel" Visibility="Visible" CacheMode="BitmapCache">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border x:Name="BackgroundBorder" Background="White" Grid.RowSpan="2"/>
+
+            <Border Grid.Row="0" x:Name="CaptionBorder" Visibility="{Binding SwitchPMVisibility}">
+                <ListBoxItem Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" toolkit:TiltEffect.IsTiltEnabled="True" >
+                    <TextBlock Margin="18,0,18,3" VerticalAlignment="Center" TextTrimming="WordEllipsis" Text="{Binding SwitchPMString}" TextAlignment="Center" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="{Binding DefaultFontSize, Source={StaticResource ScaledText}}"/>
+                </ListBoxItem>
+            </Border>
+            
+            <controls:LazyListBox 
+                x:Name="Results"
+                Grid.Row="1"
+                toolkit:TiltEffect.IsTiltEnabled="True" 
+                IsHorizontal="{Binding Gallery}" ItemsSource="{Binding Results}"
+                ScrollingStateChanged="Results_OnScrollingStateChanged"
+                Compression="Results_OnCompression"
+                Clear="Results_OnClear"
+                FirstSliceLoaded="Results_OnFirstSliceLoaded">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl 
+                            Content="{Binding}" 
+                            ContentTemplate="{Binding Converter={StaticResource InlineBotResultTemplateSelector}}"
+                            HorizontalAlignment="Stretch" 
+                            HorizontalContentAlignment="Stretch"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </controls:LazyListBox>
+            
+            <!--<TextBlock x:Name="Debug" Foreground="GreenYellow" Margin="0" IsHitTestVisible="False" VerticalAlignment="Bottom" TextWrapping="Wrap"/>-->
+        </Grid>
+    </Grid>
+</UserControl>

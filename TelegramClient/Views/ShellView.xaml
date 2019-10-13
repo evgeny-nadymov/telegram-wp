@@ -1,0 +1,154 @@
+﻿<views:TelegramViewBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:profiling="clr-namespace:Telegram.Controls.Profiling;assembly=Telegram.Controls"
+    xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    x:Class="TelegramClient.Views.ShellView"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    x:Name="Self"
+    BackKeyPress="ShellView_OnBackKeyPress"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True" 
+    d:DesignHeight="768" d:DesignWidth="480">
+
+    <views:TelegramViewBase.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </views:TelegramViewBase.FontFamily>
+    <views:TelegramViewBase.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </views:TelegramViewBase.FontSize>
+    <views:TelegramViewBase.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </views:TelegramViewBase.Foreground>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding ActiveItem.IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" CacheMode="BitmapCache">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.RenderTransform>
+            <CompositeTransform x:Name="LayoutRootTransform"/>
+        </Grid.RenderTransform>
+        <Grid.Projection>
+            <PlaneProjection x:Name="LayoutRootProjection" CenterOfRotationX="0"/>
+        </Grid.Projection>
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <ListBox x:Name="ItemsHeaders"
+            ItemsSource="{Binding Items}"
+			SelectedItem="{Binding ActiveItem, Mode=TwoWay}"
+            Margin="18,0"
+            VerticalAlignment="Top"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            toolkit:TiltEffect.SuppressTilt="True"
+            ItemContainerStyle="{StaticResource W10MPivotHeaderItemStyle}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName, Converter={StaticResource Uppercase}}" Foreground="White" Margin="0,52,18,30" FontSize="23" FontFamily="Segoe WP Bold"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--<profiling:MemoryCounter Margin="0,32,0,0" IsHitTestVisible="False"/>-->
+
+        <StackPanel x:Name="CaptionButtons" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="18,47,9,0">
+            <controls1:ProxyStatusControl 
+                x:Name="ProxyStatus" 
+                Visibility="{Binding IsProxyEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ConnectionType="{Binding ConnectionType}"
+                IsIndeterminate="{Binding Connecting}" 
+                Tap="ProxyStatus_OnTap"/>
+            <Button Margin="0" Style="{StaticResource HiddenButtonStyle}" toolkit:TiltEffect.SuppressTilt="True" Tap="TogglePasscodeState_OnTap" Visibility="{Binding IsPasscodeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border Width="22" Height="22" Margin="0,0,0,0" Opacity="0" IsHitTestVisible="False" x:Name="PasscodeIcon" Background="{Binding PasscodeImageBrush}">
+                    <Border.OpacityMask>
+                        <ImageBrush Stretch="Uniform" ImageSource="{Binding PasscodeImageSource}" ImageOpened="ImageBrush_OnImageOpened"/>
+                    </Border.OpacityMask>
+                </Border>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <controls:Pivot
+			    x:Name="Items"
+                Visibility="Visible"
+                Grid.Row="1"
+                Margin="0,-10,0,0"
+			    SelectedItem="{Binding ActiveItem, Mode=TwoWay}"
+                SelectionChanged="Items_OnSelectionChanged"
+                Style="{StaticResource W10MPivotStyle}">
+                <controls:Pivot.Title>
+                    <StackPanel Orientation="Horizontal">
+                        <!--<TextBlock Margin="0,0,0,-3" IsHitTestVisible="False" Text="{Binding Resources.AppName, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Style="{StaticResource ApplicationTitleStyle}"/>-->
+                        <!--<profiling:MemoryCounter VerticalAlignment="Top" HorizontalAlignment="Left"/>-->
+                    </StackPanel>
+                </controls:Pivot.Title>
+                <controls:Pivot.HeaderTemplate>
+                    <DataTemplate/>
+                </controls:Pivot.HeaderTemplate>
+            </controls:Pivot>
+            <ContentControl x:Name="LiveLocationBadge" d:IsHidden="True" Grid.Row="0" Margin="0,-6,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Grid>
+
+        <ContentControl x:Name="SearchContentControl" d:IsHidden="True" Grid.Row="0" Grid.RowSpan="3" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        <ContentControl x:Name="LocationPicker" d:IsHidden="True" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+
+        <Border x:Name="MorePanel" Grid.Row="1" Visibility="Collapsed" CacheMode="BitmapCache" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <CompositeTransform/>
+            </Border.RenderTransform>
+            <StackPanel>
+                <ListBoxItem Tap="Test_OnTap" Visibility="Collapsed" Padding="18" Content="Telegram Passport" FontSize="23"/>
+                <ListBoxItem Tap="Test2_OnTap" Visibility="Collapsed" Padding="18" Content="Blocking update" FontSize="23"/>
+                <ListBoxItem Tap="Settings_OnTap" Padding="18" Content="{Binding Resources.Settings, Source={StaticResource Strings}}" FontSize="23"/>
+                <ListBoxItem Tap="About_OnTap" Padding="18" Content="{Binding Resources.AboutApp, Source={StaticResource Strings}}" FontSize="23"/>
+            </StackPanel>
+        </Border>
+        <controls1:TelegramApplicationBar
+            Visibility="Visible"
+            Grid.Row="2"
+            x:Name="AppBarPanel" 
+            VerticalAlignment="Bottom"
+            MorePanel="{Binding ElementName=MorePanel}">
+            <controls1:TelegramApplicationBar.Buttons>
+                <controls1:TelegramAppBarButton
+                    x:Name="SearchButton"
+                    Grid.Column="3" 
+                    Tap="Search_OnTap"
+                    ImageSource="/Images/ApplicationBar/ic_search_2x.png"
+                    Text="{Binding Resources.Search, Source={StaticResource Strings}}"/>
+                <controls1:TelegramAppBarButton
+                    x:Name="AddButton"
+                    Grid.Column="2" 
+                    Tap="Add_OnTap"
+                    ImageSource="/Images/ApplicationBar/ic_plus_2x.png"
+                    Text="{Binding Resources.NewChat, Source={StaticResource Strings}}"/>
+            </controls1:TelegramApplicationBar.Buttons>
+        </controls1:TelegramApplicationBar>
+    </Grid>
+</views:TelegramViewBase>

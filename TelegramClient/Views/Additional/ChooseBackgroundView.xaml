@@ -1,0 +1,146 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.ChooseBackgroundView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:additional="clr-namespace:TelegramClient.Views.Additional"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:converters="clr-namespace:TelegramClient.Converters"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    mc:Ignorable="d"
+    shell:SystemTray.Opacity="0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" Text="{Binding MTProtoService.Message}"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition EndTransition="TelegramNavigationTransition_OnEndTransition">
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition EndTransition="TelegramNavigationOutTransition_OnEndTransition">
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <views:TelegramViewBase.Resources>
+        <converters:BackgroundImageConverter x:Key="BackgroundImageConverter" CreateOptions="DelayCreation"/>
+        <DataTemplate x:Key="ImageBackgroundTemplate">
+            <Grid>
+                <Grid.Resources>
+                    <Storyboard x:Name="FadeInStoryboard">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundImage">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="1" >
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <ExponentialEase EasingMode="EaseOut" Exponent="3"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </Grid.Resources>
+                <Image x:Name="BackgroundImage" Opacity="0" Source="{Binding CurrentBackground, Converter={StaticResource BackgroundImageConverter}, ConverterParameter=480}" Stretch="UniformToFill">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <eim:ControlStoryboardAction Storyboard="{StaticResource FadeInStoryboard}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+        </DataTemplate>
+
+        <converters:DialogDetailsBackgroundConverter 
+                x:Key="DialogDetailsBackgroundConverter"
+                EmptyTemplate="{StaticResource EmptyTemplate}"
+                ImageTemplate="{StaticResource ImageBackgroundTemplate}"
+                AnimatedTemplate="{StaticResource AnimatedBackgroundTemplate}"/>
+    </views:TelegramViewBase.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ContentControl Grid.RowSpan="2" Content="{Binding StateService}" ContentTemplate="{Binding StateService.CurrentBackground, Converter={StaticResource DialogDetailsBackgroundConverter}}"/>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+        <StackPanel Grid.Row="0" Margin="12,49,0,28">
+            <TextBlock Text="{Binding Resources.Background, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ItemsControl x:Name="Static" Margin="-12,0" VerticalAlignment="Bottom">
+                <ItemsControl.RenderTransform>
+                    <TranslateTransform Y="0"/>
+                </ItemsControl.RenderTransform>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Width="100" Height="100" Margin="18" Background="Transparent" DataContext="{Binding GalleryItem}" micro:Message.Attach="[Event Tap] = [Action Choose($DataContext)]">
+                                    <Border Background="{StaticResource TelegramBadgeAccentBrush}" />
+                                    <Image Stretch="UniformToFill" Width="34" Height="34" Source="/Images/W10M/ic_pic_2x.png"/>
+                                    <Border BorderBrush="{StaticResource TelegramBadgeAccentBrush}" BorderThickness="6" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </Grid>
+
+                                <Grid Grid.Column="1" Width="100" Height="100" Margin="-8,18,18,18" Background="Transparent" DataContext="{Binding EmptyItem}" micro:Message.Attach="[Event Tap] = [Action Choose($DataContext)]">
+                                    <Border Background="{StaticResource PhoneChromeBrush}" />
+                                    <Border BorderBrush="{StaticResource TelegramBadgeAccentBrush}" BorderThickness="6" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </Grid>
+
+                                <ItemsPresenter Grid.Column="2" Margin="0"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="100" Height="100" Margin="-8,18,18,18" Background="Transparent" micro:Message.Attach="[Event Tap] = [Action Choose($DataContext)]">
+                            <Border Background="{StaticResource PhoneChromeBrush}" />
+                            <Image Stretch="UniformToFill" Source="{Binding Self, Converter={StaticResource BackgroundImageConverter}, ConverterParameter=480}"/>
+                            <Border BorderBrush="{StaticResource TelegramBadgeAccentBrush}" BorderThickness="6" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </Grid>
+                    </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

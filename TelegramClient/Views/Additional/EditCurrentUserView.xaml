@@ -1,0 +1,159 @@
+﻿<views:TelegramViewBase
+    x:Class="TelegramClient.Views.Additional.EditCurrentUserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:additional="clr-namespace:TelegramClient.Views.Additional"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Controls"
+    xmlns:controls1="clr-namespace:TelegramClient.Views.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    x:Name="Self"
+    mc:Ignorable="d"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.Opacity="0.0"
+    shell:SystemTray.ForegroundColor="#FEFFFFFF"
+    shell:SystemTray.IsVisible="True">
+
+    <controls:TelegramTransitionService.NavigationInTransition>
+        <controls:TelegramNavigationInTransition>
+            <controls:TelegramNavigationInTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardIn" />
+            </controls:TelegramNavigationInTransition.Backward>
+            <controls:TelegramNavigationInTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardIn"/>
+            </controls:TelegramNavigationInTransition.Forward>
+        </controls:TelegramNavigationInTransition>
+    </controls:TelegramTransitionService.NavigationInTransition>
+    <controls:TelegramTransitionService.NavigationOutTransition>
+        <controls:TelegramNavigationOutTransition>
+            <controls:TelegramNavigationOutTransition.Backward>
+                <controls:TelegramTurnstileTransition Mode="BackwardOut"/>
+            </controls:TelegramNavigationOutTransition.Backward>
+            <controls:TelegramNavigationOutTransition.Forward>
+                <controls:TelegramTurnstileTransition Mode="ForwardOut"/>
+            </controls:TelegramNavigationOutTransition.Forward>
+        </controls:TelegramNavigationOutTransition>
+    </controls:TelegramTransitionService.NavigationOutTransition>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="ProgressIndicator" IsIndeterminate="{Binding IsWorking}" IsVisible="True" />
+    </shell:SystemTray.ProgressIndicator>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <i:Interaction.Behaviors>
+            <ec:DataStateBehavior Binding="{Binding IsWorking}" Value="True" TrueState="Working" FalseState="Normal"/>
+        </i:Interaction.Behaviors>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MainGroup">
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(additional:EditCurrentUserView.AppBarState)" Storyboard.TargetName="Self">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Normal"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Working">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="FirstNameLabel">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.IsEnabled)" Storyboard.TargetName="LastNameLabel">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(additional:EditCurrentUserView.AppBarState)" Storyboard.TargetName="Self">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Working"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Caption" Height="104" VerticalAlignment="Top" IsHitTestVisible="False"/>
+        
+        <StackPanel Grid.Row="0" Margin="12,49,0,28">
+            <TextBlock Text="{Binding Resources.EditName, Source={StaticResource Strings}, Converter={StaticResource Uppercase}}" Foreground="White" Style="{StaticResource ApplicationTitleStyle}"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="6,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,24,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <views:ConversationTileControl
+                    micro:Message.Attach="[Event Tap] = [Action SetProfilePhoto]"
+				    Margin="12,0,0,0" 
+                    Size="100"
+                    Fill="{Binding CurrentItem.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                    Text="{Binding CurrentItem, Converter={StaticResource PlaceholderDefaultTextConverter}}"
+                    Source="{Binding CurrentItem.Photo, Converter={StaticResource ProfileSmallPhotoConverter}}"/>
+
+                <Grid Visibility="{Binding CurrentItem.Photo, Converter={StaticResource EmptyPhotoToVisibilityConverter}, ConverterParameter=invert, FallbackValue=Collapsed}" Margin="-6" VerticalAlignment="Top" HorizontalAlignment="Right" micro:Message.Attach="[Event Tap] = [Action DeletePhoto]">
+                    <Border Background="{StaticResource PhoneBackgroundBrush}" Width="34" Height="34" CornerRadius="17"/>
+                    <Border Background="{StaticResource TelegramBadgeAccentBrush}" Width="28" Height="28" CornerRadius="15"/>
+                    <TextBlock FontFamily="Segoe UI Symbol" Text="" FontSize="18" Margin="0,-1,0,0" Foreground="{StaticResource PhoneBackgroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                    <TextBlock Margin="24,13,0,0" Text="{Binding CurrentItem.Phone, StringFormat='+\{0\}'}" FontSize="30" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Margin="24,1,0,0" Text="{Binding Resources.Online, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}" Style="{StaticResource PhoneTextSubtleStyle}" Foreground="{StaticResource TelegramAccentBrush}"/>
+                </StackPanel>
+            </Grid>
+
+            <controls1:LabeledTextBox Grid.Row="1" x:Name="FirstNameLabel" Label="{Binding Resources.FirstName, Source={StaticResource Strings}}" Text="{Binding FirstName, Mode=TwoWay}"/>
+            <controls1:LabeledTextBox Grid.Row="2" x:Name="LastNameLabel" Label="{Binding Resources.LastName, Source={StaticResource Strings}}" Text="{Binding LastName, Mode=TwoWay}"/>
+            
+            
+            
+        </Grid>
+
+        <Border x:Name="MorePanel" Grid.Row="0" Visibility="Collapsed" CacheMode="BitmapCache" VerticalAlignment="Bottom">
+            <Border.RenderTransform>
+                <CompositeTransform/>
+            </Border.RenderTransform>
+        </Border>
+        <Grid x:Name="Bar" Grid.Row="2">
+            <Grid.RenderTransform>
+                <TranslateTransform/>
+            </Grid.RenderTransform>
+            <controls1:TelegramApplicationBar
+                x:Name="AppBar"
+                VerticalAlignment="Bottom"
+                MorePanel="{Binding ElementName=MorePanel}">
+                <controls1:TelegramApplicationBar.Buttons>
+                    <controls1:TelegramAppBarButton
+                        IsEnabled="True"
+                        Grid.Column="3" 
+                        Tap="DoneButton_OnClick"
+                        ImageSource="/Images/W10M/ic_done_2x.png"
+                        Text="{Binding Resources.Done, Source={StaticResource Strings}}"/>
+                </controls1:TelegramApplicationBar.Buttons>
+            </controls1:TelegramApplicationBar>
+        </Grid>
+    </Grid>
+
+</views:TelegramViewBase>

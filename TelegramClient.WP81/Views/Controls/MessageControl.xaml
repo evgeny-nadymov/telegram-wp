@@ -1,0 +1,272 @@
+﻿<UserControl x:Class="TelegramClient.Views.Controls.MessageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:emojiPanel="clr-namespace:Telegram.EmojiPanel"
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+    xmlns:dialogs="clr-namespace:TelegramClient.Views.Dialogs"
+    xmlns:views="clr-namespace:TelegramClient.Views"
+    xmlns:controls="clr-namespace:TelegramClient.Views.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:templateSelectors="clr-namespace:TelegramClient.Helpers.TemplateSelectors"
+    micro:View.ApplyConventions="False"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="FailedMessageBackgroundBrush" Color="#FFFCE4E6"/>
+        <SolidColorBrush x:Key="FailedMessageBorderBrush" Color="#33ED4C59"/>
+        <SolidColorBrush x:Key="FailedMessageForegroundBrush" Color="#FFCD7C83"/>
+        
+        <SolidColorBrush x:Key="ServiceMessageBackgroundBrush" Color="#59597289"/>
+        <SolidColorBrush x:Key="ServiceMessageBorderBrush" Color="#59597289"/>
+        <SolidColorBrush x:Key="ServiceMessageForegroundBrush" Color="#FFFFFFFF"/>
+        
+        <SolidColorBrush x:Key="OutputBackgroundBrushLight" Color="#FFE3F4FF"/>
+        <SolidColorBrush x:Key="OutputBorderBrushLight" Color="#6686A9C9"/>
+        <SolidColorBrush x:Key="OutputSubtleBrushLight" Color="#FF7C9FBA"/>
+        <SolidColorBrush x:Key="OutputForegroundBrushLight" Color="#FF000000"/>
+        <SolidColorBrush x:Key="InputBackgroundBrushLight" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="InputBorderBrushLight" Color="#4D86A9C9"/>
+        <SolidColorBrush x:Key="InputSubtleBrushLight" Color="#FF93989D"/>
+        <SolidColorBrush x:Key="InputForegroundBrushLight" Color="#FF000000"/>
+        <SolidColorBrush x:Key="StickerFooterBackgroundBrushLight" Color="#49496A95"/>
+        <SolidColorBrush x:Key="StickerFooterSubtleBrushLight" Color="#FFFFFFFF"/>
+
+        <SolidColorBrush x:Key="OutputBackgroundBrushDark" Color="#FF2B2B2B"/>
+        <SolidColorBrush x:Key="OutputBorderBrushDark" Color="#0086A9C9"/>
+        <SolidColorBrush x:Key="OutputSubtleBrushDark" Color="#FFA0A0A0"/>
+        <SolidColorBrush x:Key="OutputForegroundBrushDark" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="InputBackgroundBrushDark" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="InputBorderBrushDark" Color="#0086A9C9"/>
+        <SolidColorBrush x:Key="InputSubtleBrushDark" Color="#FF93989D"/>
+        <SolidColorBrush x:Key="InputForegroundBrushDark" Color="#FF000000"/>
+        <SolidColorBrush x:Key="StickerFooterBackgroundDark" Color="#49496A95"/>
+        <SolidColorBrush x:Key="StickerFooterBackgroundBrushDark" Color="#49496A95"/>
+        <SolidColorBrush x:Key="StickerFooterSubtleBrushDark" Color="#FFFFFFFF"/>
+    </UserControl.Resources>
+
+    <Grid x:Name="MainItemGrid2">
+
+        <Grid x:Name="MainItemGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition x:Name="BeforeLastColumn" Width="Auto"/>
+                <ColumnDefinition x:Name="LastColumn" Width="*"/>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <views:ConversationTileControl 
+                x:Name="Tile"
+                Tap="Tile_OnTap"
+                Grid.Column="1" Grid.Row="1"
+                Margin="18,0,4,0" VerticalAlignment="Top"
+                Size="45" LabelFontSize="19"
+                Source="{Binding From.Photo, Converter={StaticResource DefaultPhotoConverter}}"
+                Fill="{Binding From.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                Text="{Binding From, Converter={StaticResource PlaceholderDefaultTextConverter}}"/>
+
+            <Border x:Name="CornerBorder" Grid.Column="2" Grid.Row="1" Margin="0,0,0,6" BorderBrush="{StaticResource InputBorderBrushLight}" BorderThickness="0,0,1,0"/>
+            <Path x:Name="Corner" 
+                  Grid.Column="2" Grid.Row="1" 
+                  HorizontalAlignment="Right" 
+                  Margin="0,12,-1,0" 
+                  VerticalAlignment="Top" 
+                  Data="F1 M12,12 L0,0 L12,0" 
+                  Width="12" Height="12" 
+                  Stretch="Fill" 
+                  Fill="{StaticResource InputBackgroundBrushLight}" 
+                  StrokeThickness="1" 
+                  Stroke="{StaticResource InputBorderBrushLight}"
+                  RenderTransformOrigin="0.5, 0.5">
+                <Path.RenderTransform>
+                    <ScaleTransform x:Name="PathScaleTransform" ScaleX="1"/>
+                </Path.RenderTransform>
+            </Path>
+
+            <Border x:Name="MainBorder" Grid.Column="3" Grid.Row="1" Margin="0,0,0,6" Background="{StaticResource InputBackgroundBrushLight}" BorderBrush="{StaticResource InputBorderBrushLight}" BorderThickness="0,1,1,1">
+                <StackPanel x:Name="Panel">
+                    <Border x:Name="Header" Margin="0,0,0,-6" MaxWidth="335" Background="{StaticResource InputBackgroundBrushLight}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Collapsed">
+                        <StackPanel x:Name="CaptionPanel" Margin="12,6">
+                            <toolkit:WrapPanel x:Name="FromLabelPanel">
+                                <TextBlock x:Name="FromLabel"
+                                    Text="{Binding From.FullName, Converter={StaticResource NonBreakingStringConverter}}"
+                                    Foreground="{Binding From.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                                    MaxWidth="293"
+                                    TextTrimming="WordEllipsis"
+                                    Margin="0,2,0,0"
+                                    Style="{StaticResource ReplyCaptionStyle}"/>
+                            </toolkit:WrapPanel>
+                            
+                            <!--<Grid x:Name="FromLabelPanel" HorizontalAlignment="Stretch" MaxWidth="299">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="FromLabel"
+                                    Text="{Binding From.FullName, Converter={StaticResource NonBreakingStringConverter}}"
+                                    Foreground="{Binding From.Index, Converter={StaticResource PlaceholderBackgroundConverter}}"
+                                    MaxWidth="293"
+                                    TextTrimming="WordEllipsis"
+                                    Margin="0,2,0,0"
+                                    Style="{StaticResource ReplyCaptionStyle}"/>
+                                <TextBlock x:Name="AdminLabel" Grid.Column="1"
+                                    Text="{Binding Resources.Admin, Source={StaticResource Strings}, Converter={StaticResource Lowercase}}"
+                                    MaxWidth="293"
+                                    TextTrimming="WordEllipsis"
+                                    Margin="0,2,0,0"
+                                    Style="{StaticResource ReplyCaptionStyle}"/>
+                            </Grid>-->
+                            <Grid x:Name="FwdFromGrid" Background="Transparent" micro:Message.Attach="[Event Tap] = [Action OpenFwdContactDetails($DataContext)]">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="0" Text="{Binding Resources.ForwardedMessage, Source={StaticResource Strings}, StringFormat='\{0\} '}" FontSize="20" TextWrapping="NoWrap" TextTrimming="WordEllipsis" Foreground="{StaticResource TelegramTextAccentBrush}"/>
+                                <TextBlock Grid.Column="1" x:Name="FwdFromLabel" Text="{Binding FwdFrom.FullName, Converter={StaticResource NonBreakingStringConverter}}" FontWeight="SemiBold" FontSize="20" TextWrapping="NoWrap" TextTrimming="WordEllipsis" Foreground="{StaticResource TelegramTextAccentBrush}"/>
+                            </Grid>
+                            <TextBlock 
+                                x:Name="ViaBotGrid"
+                                Tap="ViaBot_Tap" 
+                                Text="{Binding ViaBot, Converter={StaticResource ViaBotToStringConverter}}" 
+                                Margin="0,-6,0,0" 
+                                Foreground="{StaticResource TelegramTextAccentBrush}" 
+                                FontSize="20"/>
+                            <ContentControl 
+                                x:Name="ReplyContent"
+                                Canvas.ZIndex="2"
+                                micro:Message.Attach="[Event Tap] = [Action OpenReply($DataContext)]" 
+                                Content="{Binding ReplyInfo.Reply}" 
+                                Margin="0"
+                                ContentTemplate="{Binding ReplyInfo, Converter={StaticResource ReplyTemplateSelector}}"
+                                HorizontalContentAlignment="Stretch"/>
+                        </StackPanel>
+                    </Border>
+                    <Grid x:Name="MessageGrid" Canvas.ZIndex="2" Margin="0,6,0,0">
+                        <Grid>
+                            <emojiPanel:TelegramRichTextBox
+                                x:Name="InputMessage"
+                                MaxHeight="1500"
+                                MinWidth="100"
+                                MaxWidth="335"
+                                Entities="{Binding Entities}"
+                                Text="{Binding Message}"
+                                FooterFontSize="{Binding DefaultSystemFontSize, Source={StaticResource ScaledText}}"
+                                emojiPanel:BrowserNavigationService.Message="{Binding}"
+                                TextScaleFactor="{Binding TextScaleFactor, Source={StaticResource ScaledText}}"
+                                MoreElement="{Binding ElementName=MorePanel}"
+                                FontSize="{Binding DefaultFontSize, Source={StaticResource ScaledText}}"
+                                Style="{StaticResource MessageBodyTelegramRichTextStyle}"/>
+                            <Border x:Name="MorePanel" Background="{StaticResource InputBackgroundBrushLight}" VerticalAlignment="Bottom" Canvas.ZIndex="3" Visibility="Collapsed" Tap="MorePanel_OnTap">
+                                <TextBlock Canvas.ZIndex="4"
+                                Text="{Binding Resources.More, Source={StaticResource Strings}, StringFormat='\{0\}...'}" 
+                                TextDecorations="Underline" 
+                                Margin="12,-6,12,0"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                                FontSize="{Binding DefaultFontSize, Source={StaticResource ScaledText}}"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="MediaGrid" Background="Transparent">
+                        <ContentControl
+                            x:Name="MediaContentControl"
+                            MaxHeight="1500"
+                            Background="Transparent"
+                            Tap="MediaContentControl_OnTap"
+                            Margin="12,0,12,0"
+                            Foreground="Red"
+                            HorizontalContentAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Content="{Binding Media}"
+                            ContentTemplate="{Binding Media, Converter={StaticResource MediaTemplateSelector}}"/>
+                    </Grid>
+                    <Border x:Name="Footer"
+                        MaxWidth="335"
+                        Margin="0,-1,0,0" 
+                        Canvas.ZIndex="1" 
+                        VerticalAlignment="Bottom"
+                        Background="{StaticResource InputBackgroundBrushLight}"
+                        IsHitTestVisible="False">
+                        <ContentControl x:Name="FooterContent" HorizontalContentAlignment="Stretch">
+                            <Grid x:Name="FooterContentGrid" Margin="6,2,6,6" HorizontalAlignment="Right">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="AuthorLabel" Grid.Column="2" Margin="0,-1,0,2"
+                                    Text="{Binding Author, Converter={StaticResource NonBreakingStringConverter}}"
+                                    TextAlignment="Right"
+                                    TextTrimming="WordEllipsis" TextWrapping="NoWrap" 
+                                    FontSize="{Binding DefaultSystemFontSize, Source={StaticResource ScaledText}}"/>
+                                <Grid x:Name="ViewsGrid" Grid.Column="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox Height="{Binding DefaultSystemIconSize, Source={StaticResource ScaledText}}">
+                                        <Path x:Name="ViewsIcon" StrokeThickness="1.5" Margin="6,0,0,0" Data="M9.16666667,0 C5,0 1.44166667,2.59166667 0,6.25 C1.44166667,9.90833333 5,12.5 9.16666667,12.5 C13.3333333,12.5 16.8916667,9.90833333 18.3333333,6.25 C16.8916667,2.59166667 13.3333333,0 9.16666667,0 Z M9.16833337,9.58666674 C7.32741335,9.58666674 5.83333333,8.09258673 5.83333333,6.2516667 C5.83333333,4.41074668 7.32741335,2.91666667 9.16833337,2.91666667 C11.0092534,2.91666667 12.5033334,4.41074668 12.5033334,6.2516667 C12.5033334,8.09258673 11.0092534,9.58666674 9.16833337,9.58666674 Z">
+                                            <Path.RenderTransform>
+                                                <TranslateTransform X="0" Y="-1"/>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Viewbox>
+                                    <!--<Image 
+                                        Margin="6,0,0,0" 
+                                        Height="{Binding DefaultSystemIconSize, Source={StaticResource ScaledText}}" 
+                                        Stretch="UniformToFill" 
+                                        Source="/Images/Messages/message.state.views-WXGA.png"/>-->
+                                    <TextBlock x:Name="ViewsLabel" Grid.Column="1" Margin="0,-1,0,2"
+                                        Text="{Binding Views, Converter={StaticResource MessageViewsConverter}, StringFormat=' \{0\},'}"
+                                        FontSize="{Binding DefaultSystemFontSize, Source={StaticResource ScaledText}}"/>
+                                </Grid>
+                                <TextBlock x:Name="EditLabel" Grid.Column="4" Margin="0,2" Visibility="{Binding EditDateVisibility}"
+                                    Text=" "
+                                    FontSize="{Binding DefaultSystemSegoeUISymbolFontSize, Source={StaticResource ScaledText}}"
+                                    FontFamily="Segoe UI Symbol"/>
+                                <TextBlock Grid.Column="5" Margin="0,-1,0,2" 
+                                    Text="{Binding Date, Converter={StaticResource MessageDateTimeConverter}, StringFormat=' \{0\} '}"
+                                    FontSize="{Binding DefaultSystemFontSize, Source={StaticResource ScaledText}}"/>
+                                <Viewbox Grid.Column="6" Height="{Binding DefaultSystemIconSize, Source={StaticResource ScaledText}}">
+                                    <controls:StatusControl
+                                        x:Name="Status"
+                                        Status="{Binding Status}"
+                                        Fill="{StaticResource OutputSubtleBrushLight}"/>
+                                </Viewbox>
+                            </Grid>
+                        </ContentControl>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <dialogs:CommandsControl x:Name="Commands" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" Inline="True" MaxWidth="335" Margin="0,0,0,6" Visibility="Collapsed" ReplyMarkup="{Binding ReplyMarkup}" ButtonClick="CommandsControl_OnButtonClick"/>
+
+            <Button x:Name="ShareButton" Grid.Row="1" Grid.Column="4" Margin="6,0,-6,6"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                Tap="ShareButton_OnTap" Background="{StaticResource ServiceMessageBackgroundBrush}"
+                Style="{StaticResource EmptyButtonStyle}">
+                <Image x:Name="ShereButtonImage" Width="20" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image.RenderTransform>
+                        <TranslateTransform Y="-2"/>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

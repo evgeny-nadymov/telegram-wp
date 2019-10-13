@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5e327850-e16e-4642-957a-fd52bf8d3d02}</ProjectGuid>
+    <RootNamespace>TelegramClient_Opus</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Phone</ApplicationType>
+    <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120_wp81</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;OPUS_EXPORT=__declspec(dllexport);OPUS_BUILD;FIXED_POINT;USE_ALLOCA;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>.\opus\opusfile;.\opus\silk\fixed;.\opus\ogg;.\opus\;.\opus\silk;.\opus\celt;.\opus\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;OPUS_EXPORT=__declspec(dllexport);NDEBUG;OPUS_BUILD;FIXED_POINT;USE_ALLOCA;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>.\opus\opusfile;.\opus\silk\fixed;.\opus\ogg;.\opus\;.\opus\silk;.\opus\celt;.\opus\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;OPUS_EXPORT=__declspec(dllexport);OPUS_BUILD;FIXED_POINT;HAVE_LRINTF;HAVE_LRINT;USE_ALLOCA;DISABLE_FLOAT_API;OP_FIXED_POINT;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>.\opus\opusfile;.\opus\silk\fixed;.\opus\ogg;.\opus\;.\opus\silk;.\opus\celt;.\opus\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>MaxSpeed</Optimization>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;OPUS_EXPORT=__declspec(dllexport);NDEBUG;OPUS_BUILD;FIXED_POINT;USE_ALLOCA;HAVE_LRINTF;HAVE_LRINT;DISABLE_FLOAT_API;OP_FIXED_POINT;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalIncludeDirectories>.\opus\opusfile;.\opus\silk\fixed;.\opus\ogg;.\opus\;.\opus\silk;.\opus\celt;.\opus\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="platform.winmd">
+      <IsWinMDFile>true</IsWinMDFile>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="opus\celt\arch.h" />
+    <ClInclude Include="opus\celt\arm\armcpu.h" />
+    <ClInclude Include="opus\celt\arm\fixed_armv4.h" />
+    <ClInclude Include="opus\celt\arm\fixed_armv5e.h" />
+    <ClInclude Include="opus\celt\arm\kiss_fft_armv4.h" />
+    <ClInclude Include="opus\celt\arm\kiss_fft_armv5e.h" />
+    <ClInclude Include="opus\celt\arm\pitch_arm.h" />
+    <ClInclude Include="opus\celt\bands.h" />
+    <ClInclude Include="opus\celt\celt.h" />
+    <ClInclude Include="opus\celt\celt_lpc.h" />
+    <ClInclude Include="opus\celt\cpu_support.h" />
+    <ClInclude Include="opus\celt\cwrs.h" />
+    <ClInclude Include="opus\celt\ecintrin.h" />
+    <ClInclude Include="opus\celt\entcode.h" />
+    <ClInclude Include="opus\celt\entdec.h" />
+    <ClInclude Include="opus\celt\entenc.h" />
+    <ClInclude Include="opus\celt\fixed_debug.h" />
+    <ClInclude Include="opus\celt\fixed_generic.h" />
+    <ClInclude Include="opus\celt\float_cast.h" />
+    <ClInclude Include="opus\celt\kiss_fft.h" />
+    <ClInclude Include="opus\celt\laplace.h" />
+    <ClInclude Include="opus\celt\mathops.h" />
+    <ClInclude Include="opus\celt\mdct.h" />
+    <ClInclude Include="opus\celt\mfrngcod.h" />
+    <ClInclude Include="opus\celt\modes.h" />
+    <ClInclude Include="opus\celt\os_support.h" />
+    <ClInclude Include="opus\celt\pitch.h" />
+    <ClInclude Include="opus\celt\quant_bands.h" />
+    <ClInclude Include="opus\celt\rate.h" />
+    <ClInclude Include="opus\celt\stack_alloc.h" />
+    <ClInclude Include="opus\celt\static_modes_fixed.h" />
+    <ClInclude Include="opus\celt\static_modes_float.h" />
+    <ClInclude Include="opus\celt\vq.h" />
+    <ClInclude Include="opus\celt\x86\pitch_sse.h" />
+    <ClInclude Include="opus\celt\_kiss_fft_guts.h" />
+    <ClInclude Include="opus\include\opus.h" />
+    <ClInclude Include="opus\include\opus_custom.h" />
+    <ClInclude Include="opus\include\opus_defines.h" />
+    <ClInclude Include="opus\include\opus_multistream.h" />
+    <ClInclude Include="opus\include\opus_types.h" />
+    <ClInclude Include="opus\ogg\ogg.h" />
+    <ClInclude Include="opus\ogg\os_types.h" />
+    <ClInclude Include="opus\opusfile\internal.h" />
+    <ClInclude Include="opus\opusfile\opusfile.h" />
+    <ClInclude Include="opus\silk\API.h" />
+    <ClInclude Include="opus\silk\arm\macros_armv4.h" />
+    <ClInclude Include="opus\silk\arm\macros_armv5e.h" />
+    <ClInclude Include="opus\silk\arm\SigProc_FIX_armv4.h" />
+    <ClInclude Include="opus\silk\arm\SigProc_FIX_armv5e.h" />
+    <ClInclude Include="opus\silk\control.h" />
+    <ClInclude Include="opus\silk\debug.h" />
+    <ClInclude Include="opus\silk\define.h" />
+    <ClInclude Include="opus\silk\errors.h" />
+    <ClInclude Include="opus\silk\fixed\main_FIX.h" />
+    <ClInclude Include="opus\silk\fixed\structs_FIX.h" />
+    <ClInclude Include="opus\silk\Inlines.h" />
+    <ClInclude Include="opus\silk\MacroCount.h" />
+    <ClInclude Include="opus\silk\MacroDebug.h" />
+    <ClInclude Include="opus\silk\macros.h" />
+    <ClInclude Include="opus\silk\main.h" />
+    <ClInclude Include="opus\silk\pitch_est_defines.h" />
+    <ClInclude Include="opus\silk\PLC.h" />
+    <ClInclude Include="opus\silk\resampler_private.h" />
+    <ClInclude Include="opus\silk\resampler_rom.h" />
+    <ClInclude Include="opus\silk\resampler_structs.h" />
+    <ClInclude Include="opus\silk\SigProc_FIX.h" />
+    <ClInclude Include="opus\silk\structs.h" />
+    <ClInclude Include="opus\silk\tables.h" />
+    <ClInclude Include="opus\silk\tuning_parameters.h" />
+    <ClInclude Include="opus\silk\typedef.h" />
+    <ClInclude Include="opus\src\analysis.h" />
+    <ClInclude Include="opus\src\mlp.h" />
+    <ClInclude Include="opus\src\opus_private.h" />
+    <ClInclude Include="opus\src\tansig_table.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="TelegramClient.Opus.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="audio.c" />
+    <ClCompile Include="opus\celt\arm\armcpu.c" />
+    <ClCompile Include="opus\celt\arm\arm_celt_map.c" />
+    <ClCompile Include="opus\celt\bands.c" />
+    <ClCompile Include="opus\celt\celt.c" />
+    <ClCompile Include="opus\celt\celt_decoder.c" />
+    <ClCompile Include="opus\celt\celt_encoder.c" />
+    <ClCompile Include="opus\celt\celt_lpc.c" />
+    <ClCompile Include="opus\celt\cwrs.c" />
+    <ClCompile Include="opus\celt\entcode.c" />
+    <ClCompile Include="opus\celt\entdec.c" />
+    <ClCompile Include="opus\celt\entenc.c" />
+    <ClCompile Include="opus\celt\kiss_fft.c" />
+    <ClCompile Include="opus\celt\laplace.c" />
+    <ClCompile Include="opus\celt\mathops.c" />
+    <ClCompile Include="opus\celt\mdct.c" />
+    <ClCompile Include="opus\celt\modes.c" />
+    <ClCompile Include="opus\celt\pitch.c" />
+    <ClCompile Include="opus\celt\quant_bands.c" />
+    <ClCompile Include="opus\celt\rate.c" />
+    <ClCompile Include="opus\celt\vq.c" />
+    <ClCompile Include="opus\ogg\bitwise.c" />
+    <ClCompile Include="opus\ogg\framing.c" />
+    <ClCompile Include="opus\opusfile\info.c" />
+    <ClCompile Include="opus\opusfile\internal.c" />
+    <ClCompile Include="opus\opusfile\opusfile.c" />
+    <ClCompile Include="opus\opusfile\stream.c" />
+    <ClCompile Include="opus\silk\A2NLSF.c" />
+    <ClCompile Include="opus\silk\ana_filt_bank_1.c" />
+    <ClCompile Include="opus\silk\biquad_alt.c" />
+    <ClCompile Include="opus\silk\bwexpander.c" />
+    <ClCompile Include="opus\silk\bwexpander_32.c" />
+    <ClCompile Include="opus\silk\check_control_input.c" />
+    <ClCompile Include="opus\silk\CNG.c" />
+    <ClCompile Include="opus\silk\code_signs.c" />
+    <ClCompile Include="opus\silk\control_audio_bandwidth.c" />
+    <ClCompile Include="opus\silk\control_codec.c" />
+    <ClCompile Include="opus\silk\control_SNR.c" />
+    <ClCompile Include="opus\silk\debug.c" />
+    <ClCompile Include="opus\silk\decoder_set_fs.c" />
+    <ClCompile Include="opus\silk\decode_core.c" />
+    <ClCompile Include="opus\silk\decode_frame.c" />
+    <ClCompile Include="opus\silk\decode_indices.c" />
+    <ClCompile Include="opus\silk\decode_parameters.c" />
+    <ClCompile Include="opus\silk\decode_pitch.c" />
+    <ClCompile Include="opus\silk\decode_pulses.c" />
+    <ClCompile Include="opus\silk\dec_API.c" />
+    <ClCompile Include="opus\silk\encode_indices.c" />
+    <ClCompile Include="opus\silk\encode_pulses.c" />
+    <ClCompile Include="opus\silk\enc_API.c" />
+    <ClCompile Include="opus\silk\fixed\apply_sine_window_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\autocorr_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\burg_modified_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\corrMatrix_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\encode_frame_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\find_LPC_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\find_LTP_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\find_pitch_lags_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\find_pred_coefs_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\k2a_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\k2a_Q16_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\LTP_analysis_filter_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\LTP_scale_ctrl_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\noise_shape_analysis_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\pitch_analysis_core_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\prefilter_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\process_gains_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\regularize_correlations_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\residual_energy16_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\residual_energy_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\schur64_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\schur_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\solve_LS_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\vector_ops_FIX.c" />
+    <ClCompile Include="opus\silk\fixed\warped_autocorrelation_FIX.c" />
+    <ClCompile Include="opus\silk\gain_quant.c" />
+    <ClCompile Include="opus\silk\HP_variable_cutoff.c" />
+    <ClCompile Include="opus\silk\init_decoder.c" />
+    <ClCompile Include="opus\silk\init_encoder.c" />
+    <ClCompile Include="opus\silk\inner_prod_aligned.c" />
+    <ClCompile Include="opus\silk\interpolate.c" />
+    <ClCompile Include="opus\silk\lin2log.c" />
+    <ClCompile Include="opus\silk\log2lin.c" />
+    <ClCompile Include="opus\silk\LPC_analysis_filter.c" />
+    <ClCompile Include="opus\silk\LPC_inv_pred_gain.c" />
+    <ClCompile Include="opus\silk\LP_variable_cutoff.c" />
+    <ClCompile Include="opus\silk\NLSF2A.c" />
+    <ClCompile Include="opus\silk\NLSF_decode.c" />
+    <ClCompile Include="opus\silk\NLSF_del_dec_quant.c" />
+    <ClCompile Include="opus\silk\NLSF_encode.c" />
+    <ClCompile Include="opus\silk\NLSF_stabilize.c" />
+    <ClCompile Include="opus\silk\NLSF_unpack.c" />
+    <ClCompile Include="opus\silk\NLSF_VQ.c" />
+    <ClCompile Include="opus\silk\NLSF_VQ_weights_laroia.c" />
+    <ClCompile Include="opus\silk\NSQ.c" />
+    <ClCompile Include="opus\silk\NSQ_del_dec.c" />
+    <ClCompile Include="opus\silk\pitch_est_tables.c" />
+    <ClCompile Include="opus\silk\PLC.c" />
+    <ClCompile Include="opus\silk\process_NLSFs.c" />
+    <ClCompile Include="opus\silk\quant_LTP_gains.c" />
+    <ClCompile Include="opus\silk\resampler.c" />
+    <ClCompile Include="opus\silk\resampler_down2.c" />
+    <ClCompile Include="opus\silk\resampler_down2_3.c" />
+    <ClCompile Include="opus\silk\resampler_private_AR2.c" />
+    <ClCompile Include="opus\silk\resampler_private_down_FIR.c" />
+    <ClCompile Include="opus\silk\resampler_private_IIR_FIR.c" />
+    <ClCompile Include="opus\silk\resampler_private_up2_HQ.c" />
+    <ClCompile Include="opus\silk\resampler_rom.c" />
+    <ClCompile Include="opus\silk\shell_coder.c" />
+    <ClCompile Include="opus\silk\sigm_Q15.c" />
+    <ClCompile Include="opus\silk\sort.c" />
+    <ClCompile Include="opus\silk\stereo_decode_pred.c" />
+    <ClCompile Include="opus\silk\stereo_encode_pred.c" />
+    <ClCompile Include="opus\silk\stereo_find_predictor.c" />
+    <ClCompile Include="opus\silk\stereo_LR_to_MS.c" />
+    <ClCompile Include="opus\silk\stereo_MS_to_LR.c" />
+    <ClCompile Include="opus\silk\stereo_quant_pred.c" />
+    <ClCompile Include="opus\silk\sum_sqr_shift.c" />
+    <ClCompile Include="opus\silk\tables_gain.c" />
+    <ClCompile Include="opus\silk\tables_LTP.c" />
+    <ClCompile Include="opus\silk\tables_NLSF_CB_NB_MB.c" />
+    <ClCompile Include="opus\silk\tables_NLSF_CB_WB.c" />
+    <ClCompile Include="opus\silk\tables_other.c" />
+    <ClCompile Include="opus\silk\tables_pitch_lag.c" />
+    <ClCompile Include="opus\silk\tables_pulses_per_block.c" />
+    <ClCompile Include="opus\silk\table_LSF_cos.c" />
+    <ClCompile Include="opus\silk\VAD.c" />
+    <ClCompile Include="opus\silk\VQ_WMat_EC.c" />
+    <ClCompile Include="opus\src\analysis.c" />
+    <ClCompile Include="opus\src\mlp.c" />
+    <ClCompile Include="opus\src\mlp_data.c" />
+    <ClCompile Include="opus\src\opus.c" />
+    <ClCompile Include="opus\src\opus_decoder.c" />
+    <ClCompile Include="opus\src\opus_encoder.c" />
+    <ClCompile Include="opus\src\opus_multistream.c" />
+    <ClCompile Include="opus\src\opus_multistream_decoder.c" />
+    <ClCompile Include="opus\src\opus_multistream_encoder.c" />
+    <ClCompile Include="opus\src\repacketizer.c" />
+    <ClCompile Include="opus\src\repacketizer_demo.c" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="TelegramClient.Opus.cpp">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</CompileAsWinRT>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

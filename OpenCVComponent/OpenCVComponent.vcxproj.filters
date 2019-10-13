@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>5fd0e509-b6ae-4f29-bd2a-4d2cc10f3aa0</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Cascades">
+      <UniqueIdentifier>{9c92a94c-8b61-4fe3-9856-7d35d5216ed6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="OpenCVComponent.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="OpenCVComponent.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(OpenCV_Bin)opencv_core300$(DebugSuffix).dll" />
+    <None Include="$(OpenCV_Bin)opencv_features2d300$(DebugSuffix).dll" />
+    <None Include="$(OpenCV_Bin)opencv_flann300$(DebugSuffix).dll" />
+    <None Include="$(OpenCV_Bin)opencv_imgcodecs300$(DebugSuffix).dll" />
+    <None Include="$(OpenCV_Bin)opencv_imgproc300$(DebugSuffix).dll" />
+    <None Include="$(OpenCV_Bin)opencv_ml300$(DebugSuffix).dll" />
+    <None Include="$(OpenCV_Bin)opencv_objdetect300$(DebugSuffix).dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Assets\haarcascade_mouth.xml">
+      <Filter>Cascades</Filter>
+    </Xml>
+    <Xml Include="Assets\haarcascade_eye.xml">
+      <Filter>Cascades</Filter>
+    </Xml>
+    <Xml Include="Assets\haarcascade_frontalface_alt.xml">
+      <Filter>Cascades</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
